@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Keyboard } from 'react-native'
 import {
-  Text,
   Input,
   Button
 } from 'react-native-elements'
 import {
   Container,
   LoginBox,
-  AvoidingView
+  AvoidingView,
+  Title
 } from './styled'
 import { black } from '../../colorPalette'
 
@@ -19,11 +19,7 @@ export default class Login extends Component {
         <AvoidingView
           behavior='padding'
         >
-          <Text h2
-            style={{marginBottom: 30}}
-          >
-            Nuvote WOMS
-          </Text>
+          <Title h2>Nuvote WOMS</Title>
           <LoginBox>
             <Input
               placeholder='Username'
