@@ -1,0 +1,583 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6A9E923824541DA4A447E1A602F9A31E /* Pods-nuvoteApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D4A305754BD726BDC4F3FBDDD1F200A /* Pods-nuvoteApp-dummy.m */; };
+		79AB93DAA2900F7899C17DFF5A8E8609 /* Pods-nuvoteAppTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 290038995CB05B880A1DA3D26ABAC4EB /* Pods-nuvoteAppTests-dummy.m */; };
+		FE817E6CC2DC72B898A0D8DA6280DBB7 /* Pods-nuvoteApp-tvOSTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D478F27DDD0975CBE4D794826176F4A3 /* Pods-nuvoteApp-tvOSTests-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		280E33D4559213027241D45ADC49FF59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64570C78CD873C8FB759BE4FFF6829F8;
+			remoteInfo = "Pods-nuvoteApp";
+		};
+		86197371F3B675AB6F84A7C14A141754 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64570C78CD873C8FB759BE4FFF6829F8;
+			remoteInfo = "Pods-nuvoteApp";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00683AFC3116D7274B0BB7759A8F2F32 /* Pods-nuvoteApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-nuvoteApp-resources.sh"; sourceTree = "<group>"; };
+		0857FFCF7EF56B7B6FFE7B683F4F6EA8 /* libPods-nuvoteApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-nuvoteApp.a"; path = "libPods-nuvoteApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		12E52A0100F2609BC6C52AED987E067B /* Pods-nuvoteApp-tvOSTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-nuvoteApp-tvOSTests-resources.sh"; sourceTree = "<group>"; };
+		16615F92F4B4835B2CBFD31FB75D1338 /* Pods-nuvoteApp-tvOSTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-nuvoteApp-tvOSTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		1D4A305754BD726BDC4F3FBDDD1F200A /* Pods-nuvoteApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-nuvoteApp-dummy.m"; sourceTree = "<group>"; };
+		290038995CB05B880A1DA3D26ABAC4EB /* Pods-nuvoteAppTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-nuvoteAppTests-dummy.m"; sourceTree = "<group>"; };
+		2AD38568F29E68999E2EC935AD6E3492 /* Pods-nuvoteAppTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-nuvoteAppTests-resources.sh"; sourceTree = "<group>"; };
+		2F9B9150827C46240808D05FD362FA08 /* Pods-nuvoteApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-nuvoteApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		41703731A92689B1B5F12453F0C3F032 /* Pods-nuvoteAppTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-nuvoteAppTests-frameworks.sh"; sourceTree = "<group>"; };
+		4798283D061421D00C0FB5ED8EDFF4A1 /* libPods-nuvoteApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-nuvoteApp-tvOSTests.a"; path = "libPods-nuvoteApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F8762E94FBC3E1483C6A5E2F8493D63 /* Pods-nuvoteApp-tvOSTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-nuvoteApp-tvOSTests-frameworks.sh"; sourceTree = "<group>"; };
+		62D78A956B8CDA2CAD8D578C79810748 /* Pods-nuvoteAppTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-nuvoteAppTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		7E73131DDAC58B87D6A370E93B2A1CFB /* Pods-nuvoteApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-nuvoteApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9A8164016CF762E6C5A3F8A7E2DBD41A /* Pods-nuvoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-nuvoteApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A09832C5192FC3D9C442F190E75E5D44 /* Pods-nuvoteAppTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-nuvoteAppTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		AE1D7A3C83240CD4A140A5958288A809 /* Pods-nuvoteApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-nuvoteApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AE22E26BEBF7B280718748AAADF094B9 /* Pods-nuvoteApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-nuvoteApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C7C0A9BCFB2CC66434CDABB737A2A2ED /* libPods-nuvoteAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-nuvoteAppTests.a"; path = "libPods-nuvoteAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE28755B9640B9F6B257F03B4B408C27 /* Pods-nuvoteApp-tvOSTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-nuvoteApp-tvOSTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CE2AA755D3E51D32703EA13DFBE4E111 /* Pods-nuvoteAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-nuvoteAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D02BCFC46962270A10762C77B746B91C /* Pods-nuvoteApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-nuvoteApp.release.xcconfig"; sourceTree = "<group>"; };
+		D478F27DDD0975CBE4D794826176F4A3 /* Pods-nuvoteApp-tvOSTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-nuvoteApp-tvOSTests-dummy.m"; sourceTree = "<group>"; };
+		F84F568F18FA4DA3046CA511F49895B5 /* Pods-nuvoteAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-nuvoteAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB221A85A3F2235D1386BE1F7284A32F /* Pods-nuvoteApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-nuvoteApp-frameworks.sh"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		570985EB7E46C7DF2270B2AA54C70845 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BF36D488224505C3B452736808FE2FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92E56FCDE684CB4178F117CAD4847CCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F8D2E47FE03D3B91B51069F7C273AF4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				0F8D2E47FE03D3B91B51069F7C273AF4 /* Frameworks */,
+				9A6FEA5D95906769FF979915806D1A44 /* Products */,
+				BCD36246469D89E9D2DC705669B6711D /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8B1602854E4C4979EC69862EFCA4813E /* Pods-nuvoteApp */ = {
+			isa = PBXGroup;
+			children = (
+				AE22E26BEBF7B280718748AAADF094B9 /* Pods-nuvoteApp-acknowledgements.markdown */,
+				7E73131DDAC58B87D6A370E93B2A1CFB /* Pods-nuvoteApp-acknowledgements.plist */,
+				1D4A305754BD726BDC4F3FBDDD1F200A /* Pods-nuvoteApp-dummy.m */,
+				FB221A85A3F2235D1386BE1F7284A32F /* Pods-nuvoteApp-frameworks.sh */,
+				00683AFC3116D7274B0BB7759A8F2F32 /* Pods-nuvoteApp-resources.sh */,
+				9A8164016CF762E6C5A3F8A7E2DBD41A /* Pods-nuvoteApp.debug.xcconfig */,
+				D02BCFC46962270A10762C77B746B91C /* Pods-nuvoteApp.release.xcconfig */,
+			);
+			name = "Pods-nuvoteApp";
+			path = "Target Support Files/Pods-nuvoteApp";
+			sourceTree = "<group>";
+		};
+		9A6FEA5D95906769FF979915806D1A44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0857FFCF7EF56B7B6FFE7B683F4F6EA8 /* libPods-nuvoteApp.a */,
+				4798283D061421D00C0FB5ED8EDFF4A1 /* libPods-nuvoteApp-tvOSTests.a */,
+				C7C0A9BCFB2CC66434CDABB737A2A2ED /* libPods-nuvoteAppTests.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A2658B6DCA2F8F7938937794C6CA4185 /* Pods-nuvoteAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				A09832C5192FC3D9C442F190E75E5D44 /* Pods-nuvoteAppTests-acknowledgements.markdown */,
+				62D78A956B8CDA2CAD8D578C79810748 /* Pods-nuvoteAppTests-acknowledgements.plist */,
+				290038995CB05B880A1DA3D26ABAC4EB /* Pods-nuvoteAppTests-dummy.m */,
+				41703731A92689B1B5F12453F0C3F032 /* Pods-nuvoteAppTests-frameworks.sh */,
+				2AD38568F29E68999E2EC935AD6E3492 /* Pods-nuvoteAppTests-resources.sh */,
+				CE2AA755D3E51D32703EA13DFBE4E111 /* Pods-nuvoteAppTests.debug.xcconfig */,
+				F84F568F18FA4DA3046CA511F49895B5 /* Pods-nuvoteAppTests.release.xcconfig */,
+			);
+			name = "Pods-nuvoteAppTests";
+			path = "Target Support Files/Pods-nuvoteAppTests";
+			sourceTree = "<group>";
+		};
+		AAB15FB3E772AA064E417F88570F7368 /* Pods-nuvoteApp-tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE28755B9640B9F6B257F03B4B408C27 /* Pods-nuvoteApp-tvOSTests-acknowledgements.markdown */,
+				16615F92F4B4835B2CBFD31FB75D1338 /* Pods-nuvoteApp-tvOSTests-acknowledgements.plist */,
+				D478F27DDD0975CBE4D794826176F4A3 /* Pods-nuvoteApp-tvOSTests-dummy.m */,
+				4F8762E94FBC3E1483C6A5E2F8493D63 /* Pods-nuvoteApp-tvOSTests-frameworks.sh */,
+				12E52A0100F2609BC6C52AED987E067B /* Pods-nuvoteApp-tvOSTests-resources.sh */,
+				AE1D7A3C83240CD4A140A5958288A809 /* Pods-nuvoteApp-tvOSTests.debug.xcconfig */,
+				2F9B9150827C46240808D05FD362FA08 /* Pods-nuvoteApp-tvOSTests.release.xcconfig */,
+			);
+			name = "Pods-nuvoteApp-tvOSTests";
+			path = "Target Support Files/Pods-nuvoteApp-tvOSTests";
+			sourceTree = "<group>";
+		};
+		BCD36246469D89E9D2DC705669B6711D /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8B1602854E4C4979EC69862EFCA4813E /* Pods-nuvoteApp */,
+				AAB15FB3E772AA064E417F88570F7368 /* Pods-nuvoteApp-tvOSTests */,
+				A2658B6DCA2F8F7938937794C6CA4185 /* Pods-nuvoteAppTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5806F7CEE0AABB40AD96F2DACC5435EF /* Pods-nuvoteApp-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC8B73018EBA92A12AE2BB8F5022D4B4 /* Build configuration list for PBXNativeTarget "Pods-nuvoteApp-tvOSTests" */;
+			buildPhases = (
+				AFDCC97CBEAD8D84AB8F2465FAA8F17E /* Sources */,
+				92E56FCDE684CB4178F117CAD4847CCB /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD7FE4B6B2AD8CA88A0DCD62B9792597 /* PBXTargetDependency */,
+			);
+			name = "Pods-nuvoteApp-tvOSTests";
+			productName = "Pods-nuvoteApp-tvOSTests";
+			productReference = 4798283D061421D00C0FB5ED8EDFF4A1 /* libPods-nuvoteApp-tvOSTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		64570C78CD873C8FB759BE4FFF6829F8 /* Pods-nuvoteApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C536FA9A66B77A4FA9073695D4D9D87 /* Build configuration list for PBXNativeTarget "Pods-nuvoteApp" */;
+			buildPhases = (
+				E37CCB461359C0E8D4A33174F9F02DBE /* Sources */,
+				6BF36D488224505C3B452736808FE2FC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-nuvoteApp";
+			productName = "Pods-nuvoteApp";
+			productReference = 0857FFCF7EF56B7B6FFE7B683F4F6EA8 /* libPods-nuvoteApp.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		80CE3F480890C4CF5A8330B571FDF4BB /* Pods-nuvoteAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1C18B0198077E40029FB910F90AB088 /* Build configuration list for PBXNativeTarget "Pods-nuvoteAppTests" */;
+			buildPhases = (
+				81EE96619B509DE8A3C64D1865655899 /* Sources */,
+				570985EB7E46C7DF2270B2AA54C70845 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9A9A4B9B4CF4401D25F11D9F1A370393 /* PBXTargetDependency */,
+			);
+			name = "Pods-nuvoteAppTests";
+			productName = "Pods-nuvoteAppTests";
+			productReference = C7C0A9BCFB2CC66434CDABB737A2A2ED /* libPods-nuvoteAppTests.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 9A6FEA5D95906769FF979915806D1A44 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64570C78CD873C8FB759BE4FFF6829F8 /* Pods-nuvoteApp */,
+				5806F7CEE0AABB40AD96F2DACC5435EF /* Pods-nuvoteApp-tvOSTests */,
+				80CE3F480890C4CF5A8330B571FDF4BB /* Pods-nuvoteAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		81EE96619B509DE8A3C64D1865655899 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79AB93DAA2900F7899C17DFF5A8E8609 /* Pods-nuvoteAppTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFDCC97CBEAD8D84AB8F2465FAA8F17E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE817E6CC2DC72B898A0D8DA6280DBB7 /* Pods-nuvoteApp-tvOSTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E37CCB461359C0E8D4A33174F9F02DBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A9E923824541DA4A447E1A602F9A31E /* Pods-nuvoteApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9A9A4B9B4CF4401D25F11D9F1A370393 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-nuvoteApp";
+			target = 64570C78CD873C8FB759BE4FFF6829F8 /* Pods-nuvoteApp */;
+			targetProxy = 86197371F3B675AB6F84A7C14A141754 /* PBXContainerItemProxy */;
+		};
+		CD7FE4B6B2AD8CA88A0DCD62B9792597 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-nuvoteApp";
+			target = 64570C78CD873C8FB759BE4FFF6829F8 /* Pods-nuvoteApp */;
+			targetProxy = 280E33D4559213027241D45ADC49FF59 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		199D972A13F2B4C56847F7A89CCA83BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		3742240F8158939E5C120B75DD30C6D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE1D7A3C83240CD4A140A5958288A809 /* Pods-nuvoteApp-tvOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B2A87080B714022CACF6B4D59B5D1E3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A8164016CF762E6C5A3F8A7E2DBD41A /* Pods-nuvoteApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD3335EAFA20CD675CC7A89F21F4EFE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE2AA755D3E51D32703EA13DFBE4E111 /* Pods-nuvoteAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E54AC3BDD4794A8D8874426F9448781A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F84F568F18FA4DA3046CA511F49895B5 /* Pods-nuvoteAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EE29A14E47DE326C7F8ABEEC9B8E4F34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D02BCFC46962270A10762C77B746B91C /* Pods-nuvoteApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FDB2FC4A1E5891381CD9D922145497F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		FDD42F6BD3CE1A9250254057B7255639 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F9B9150827C46240808D05FD362FA08 /* Pods-nuvoteApp-tvOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				199D972A13F2B4C56847F7A89CCA83BC /* Debug */,
+				FDB2FC4A1E5891381CD9D922145497F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C536FA9A66B77A4FA9073695D4D9D87 /* Build configuration list for PBXNativeTarget "Pods-nuvoteApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2A87080B714022CACF6B4D59B5D1E3E /* Debug */,
+				EE29A14E47DE326C7F8ABEEC9B8E4F34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E1C18B0198077E40029FB910F90AB088 /* Build configuration list for PBXNativeTarget "Pods-nuvoteAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD3335EAFA20CD675CC7A89F21F4EFE9 /* Debug */,
+				E54AC3BDD4794A8D8874426F9448781A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC8B73018EBA92A12AE2BB8F5022D4B4 /* Build configuration list for PBXNativeTarget "Pods-nuvoteApp-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3742240F8158939E5C120B75DD30C6D2 /* Debug */,
+				FDD42F6BD3CE1A9250254057B7255639 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
