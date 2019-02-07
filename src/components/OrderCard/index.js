@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import {
   Container,
@@ -28,6 +29,10 @@ const OrderCard = ({order, ...props}) => {
       </FlexRow>
     </Container>
   )
+}
+
+OrderCard.propTypes = {
+  order: PropTypes.object.isRequired
 }
 
 export default OrderCard
