@@ -1,4 +1,7 @@
 import styled from 'styled-components/native'
+import { Platform } from 'react-native'
+
+const isIOS = Platform.OS === 'ios'
 
 export const Container = styled.View`
   flex: 1;
@@ -23,7 +26,8 @@ export const CircleImage = styled.Image`
   width: 150px;
   height: 150px;
   border-radius: 75px;
-  border: 1px solid #000;
+  ${isIOS && `border-color: #000`};
+  ${isIOS && `border-width: 1px;`};
 `
 
 export const ImageContainer = styled.View`
