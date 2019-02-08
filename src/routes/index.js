@@ -1,6 +1,10 @@
+import React, { Component } from 'react'
+import { View, Text, Button } from 'react-native'
 import {
   createAppContainer,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator,
+  createStackNavigator
 } from 'react-navigation'
 import {
   Orders,
@@ -29,4 +33,35 @@ const TabAppNavigator = createBottomTabNavigator({
   })
 })
 
-export default createAppContainer(TabAppNavigator)
+const StackNavigator = createStackNavigator({
+  Screen: TabAppNavigator
+}, {
+  defaultNavigationOptions: {
+    title: 'Username'
+  }
+})
+
+class Login extends Component {
+  render () {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text>
+          Login
+        </Text>
+        <Button
+          title='TO HOME'
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
+      </View>
+    )
+  }
+}
+
+const SwitchNavigator = createSwitchNavigator({
+  Login: Login,
+  Home: StackNavigator
+}, {
+  initialRouteName: 'Login'
+})
+
+export default createAppContainer(SwitchNavigator)
