@@ -1,18 +1,18 @@
 import styled from 'styled-components/native'
 import { Image } from 'react-native-elements'
 
-export const Container = styled.ScrollView.attrs({
-  bounces: false,
-  contentContainerStyle: {
-    flex: 1
-  }
-})`
+export const Container = styled.View`
   flex: 1;
 `
 
+export const ScrollContainer = styled.ScrollView.attrs({
+  bounces: false
+})`
+`
+
 export const PhotoContainer = styled.View`
-  padding-top: 7%;
-  flex: 2;
+  padding-vertical: 30px;
+  height: 230px;
 `
 
 export const Photo = styled(Image)`
@@ -21,7 +21,6 @@ export const Photo = styled(Image)`
 `
 
 export const InfoContainer = styled.View`
-  flex: 5;
   padding-horizontal: 5%;
 `
 
@@ -33,9 +32,9 @@ export const Label = styled.Text`
 export const FlexRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 3%;
+  margin-bottom: 12px;
 `
 
 export const Row = styled.View`
-  margin-bottom: 3%;
+  margin-bottom: 12px;
 `
