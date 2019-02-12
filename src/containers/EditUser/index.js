@@ -1,24 +1,30 @@
 import React, { Component } from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
   Icon,
   Input,
   Button
 } from 'react-native-elements'
 import {
-  Container,
   Label,
   ImageContainer,
   CircleImage,
   InfoContainer,
   FlexRow,
-  InputContainer
+  InputContainer,
+  styles
 } from './styled'
 
 export default class EditUser extends Component {
   render () {
     const user = true
     return (
-      <Container>
+      <KeyboardAwareScrollView
+        bounces={false}
+        contentContainerStyle={styles.keyboardScrollViewContentStyle}
+        keyboardShouldPersistTaps='always'
+        keyboardDismissMode='on-drag'
+      >
         <ImageContainer>
           {user
             ? <CircleImage
@@ -29,9 +35,7 @@ export default class EditUser extends Component {
               name='user-circle'
               type='font-awesome'
               size={150}
-              containerStyle={{
-                height: 150
-              }}
+              containerStyle={styles.iconContainerStyle}
             />
           }
         </ImageContainer>
@@ -40,50 +44,55 @@ export default class EditUser extends Component {
             <InputContainer width={40}>
               <Label>First Name:</Label>
               <Input
-                containerStyle={{
-                  paddingHorizontal: 0
-                }}
+                containerStyle={styles.containerStyle}
+                autoCorrect={false}
+                autoCapitalize='none'
+                inputStyle={styles.inputStyle}
               />
             </InputContainer>
             <InputContainer width={40}>
               <Label>Last Name:</Label>
               <Input
-                containerStyle={{
-                  paddingHorizontal: 0
-                }}
+                containerStyle={styles.containerStyle}
+                autoCorrect={false}
+                autoCapitalize='none'
+                inputStyle={styles.inputStyle}
               />
             </InputContainer>
           </FlexRow>
           <InputContainer>
             <Label>State:</Label>
             <Input
-              containerStyle={{
-                paddingHorizontal: 0
-              }}
+              containerStyle={styles.containerStyle}
+              autoCorrect={false}
+              autoCapitalize='none'
+              inputStyle={styles.inputStyle}
             />
           </InputContainer>
           <InputContainer>
             <Label>Fake Street, #51:</Label>
             <Input
-              containerStyle={{
-                paddingHorizontal: 0
-              }}
+              containerStyle={styles.containerStyle}
+              autoCorrect={false}
+              autoCapitalize='none'
+              inputStyle={styles.inputStyle}
             />
           </InputContainer>
           <InputContainer>
             <Label>Email:</Label>
             <Input
-              containerStyle={{
-                paddingHorizontal: 0
-              }}
+              containerStyle={styles.containerStyle}
+              autoCorrect={false}
+              autoCapitalize='none'
+              inputStyle={styles.inputStyle}
             />
           </InputContainer>
           <InputContainer>
             <Label>Password:</Label>
             <Input
-              containerStyle={{
-                paddingHorizontal: 0
-              }}
+              containerStyle={styles.containerStyle}
+              secureTextEntry
+              inputStyle={styles.inputStyle}
             />
           </InputContainer>
           <Button
@@ -92,22 +101,12 @@ export default class EditUser extends Component {
               type: 'font-awesome',
               name: 'save'
             }}
-            buttonStyle={{
-              backgroundColor: '#FFF',
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
-            titleStyle={{
-              color: '#000'
-            }}
-            containerStyle={{
-              width: '40%',
-              alignSelf: 'center',
-              marginTop: 'auto'
-            }}
+            buttonStyle={styles.buttonStyle}
+            titleStyle={styles.titleStyle}
+            containerStyle={styles.buttonContainerStyle}
           />
         </InfoContainer>
-      </Container>
+      </KeyboardAwareScrollView>
     )
   }
 }
