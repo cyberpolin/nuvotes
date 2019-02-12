@@ -1,16 +1,16 @@
 import React from 'react'
-import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 import Collapsible from 'react-native-collapsible'
 import {
   Button,
-  Label
+  Label,
+  Container
 } from './styled'
 
 const Collapsable = ({label, isCollapsed, children, ...props}) => {
   return (
-    <View>
+    <Container>
       <Button {...props}>
         <Label>{label}</Label>
         {isCollapsed
@@ -20,7 +20,7 @@ const Collapsable = ({label, isCollapsed, children, ...props}) => {
       <Collapsible collapsed={isCollapsed}>
         {children}
       </Collapsible>
-    </View>
+    </Container>
   )
 }
 
