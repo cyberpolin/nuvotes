@@ -1,6 +1,26 @@
 import styled from 'styled-components/native'
 import { Text } from 'react-native-elements'
-import { white } from '../../colorPalette'
+import { white, black } from '../../colorPalette'
+
+export const styles = {
+  inputContainerStyle: {
+    borderColor: black
+  },
+  containerStyle: {
+    width: '70%',
+    marginBottom: 20
+  },
+  buttonTitle: {
+    color: black
+  },
+  buttonContainer: {
+    width: '60%'
+  },
+  buttonStyle: {
+    borderColor: black,
+    marginTop: 10
+  }
+}
 
 export const Container = styled.View`
   display: flex;
