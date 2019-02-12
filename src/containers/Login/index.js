@@ -8,9 +8,9 @@ import {
   Container,
   LoginBox,
   AvoidingView,
-  Title
+  Title,
+  styles
 } from './styled'
-import { black } from '../../colorPalette'
 
 export default class Login extends Component {
   render () {
@@ -23,26 +23,16 @@ export default class Login extends Component {
           <LoginBox>
             <Input
               placeholder='Username'
-              inputContainerStyle={{
-                borderColor: black
-              }}
-              containerStyle={{
-                width: '70%',
-                marginBottom: 20
-              }}
+              inputContainerStyle={styles.inputContainerStyle}
+              containerStyle={styles.containerStyle}
               onSubmitEditing={() => this.passwordRef.input.focus()}
               autoCorrect={false}
               autoCapitalize='none'
             />
             <Input
               placeholder='Password'
-              inputContainerStyle={{
-                borderColor: black
-              }}
-              containerStyle={{
-                width: '70%',
-                marginBottom: 30
-              }}
+              inputContainerStyle={styles.inputContainerStyle}
+              containerStyle={styles.containerStyle}
               ref={refs => {
                 this.passwordRef = refs
               }}
@@ -52,15 +42,9 @@ export default class Login extends Component {
             <Button
               title='Sign In'
               type='outline'
-              titleStyle={{
-                color: black
-              }}
-              containerStyle={{
-                width: '60%'
-              }}
-              buttonStyle={{
-                borderColor: black
-              }}
+              titleStyle={styles.buttonTitle}
+              containerStyle={styles.buttonContainer}
+              buttonStyle={styles.buttonStyle}
             />
           </LoginBox>
         </AvoidingView>
