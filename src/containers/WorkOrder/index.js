@@ -4,6 +4,7 @@ import {
   Text,
   ActivityIndicator
 } from 'react-native'
+import { Button } from 'react-native-elements'
 import { Collapsable } from '../../components'
 import {
   Container,
@@ -13,7 +14,8 @@ import {
   InfoContainer,
   FlexRow,
   Row,
-  ScrollContainer
+  ScrollContainer,
+  styles
 } from './styled'
 
 export default class WorkOrder extends Component {
@@ -77,6 +79,18 @@ export default class WorkOrder extends Component {
             >
               <Text>Collapsed</Text>
             </Collapsable>
+            <Button
+              title='Upload Photos'
+              type='outline'
+              titleStyle={styles.buttonTitle}
+              buttonStyle={styles.buttonStyle}
+            />
+            <Button
+              title='Upload Files'
+              type='outline'
+              titleStyle={styles.buttonTitle}
+              buttonStyle={styles.buttonStyle}
+            />
           </InfoContainer>
         </ScrollContainer>
       </Container>
