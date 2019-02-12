@@ -1,6 +1,19 @@
 import styled from 'styled-components/native'
 import { Image } from 'react-native-elements'
 
+export const styles = {
+  buttonTitle: {
+    color: '#000'
+  },
+  buttonStyle: {
+    borderColor: '#000',
+    alignSelf: 'center',
+    width: '65%',
+    height: 50,
+    marginBottom: 20
+  }
+}
+
 export const Container = styled.View`
   flex: 1;
 `
