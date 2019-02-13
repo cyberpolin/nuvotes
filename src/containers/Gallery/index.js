@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
 import ImageBrowser from 'react-native-interactive-image-gallery'
+import {
+  Container
+} from './styled'
 
 const imageArray = [
   {id: '1234', URI: 'https://cdn.houseplans.com/product/q5qkhirat4bcjrr4rpg9fk3q94/w800x533.jpg?v=8', thumbnail: 'https://cdn.houseplans.com/product/q5qkhirat4bcjrr4rpg9fk3q94/w800x533.jpg?v=8'},
@@ -10,12 +12,15 @@ const imageArray = [
 
 export default class Gallery extends Component {
   render () {
+    const { navigation } = this.props
+    const galleryType = navigation.getParam('galleryType', '')
+    const orderId = navigation.getParam('orderId', '')
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Container>
         <ImageBrowser
           images={imageArray}
         />
-      </View>
+      </Container>
     )
   }
 }
