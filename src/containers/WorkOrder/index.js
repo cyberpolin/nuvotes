@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native'
 import { Button } from 'react-native-elements'
 import { Collapsable } from '../../components'
@@ -27,6 +28,8 @@ export default class WorkOrder extends Component {
   }
   render () {
     const { isCollapsed } = this.state
+    const { navigation } = this.props
+    const orderId = navigation.getParam('id', 'NO-ID')
     return (
       <Container>
         <ScrollContainer>
@@ -77,7 +80,9 @@ export default class WorkOrder extends Component {
               isCollapsed={isCollapsed}
               onPress={() => this.handleCollapse()}
             >
-              <Text>Collapsed</Text>
+              <TouchableOpacity onPress={() => navigation.navigate('Gallery')}>
+                <Text>Gallery</Text>
+              </TouchableOpacity>
             </Collapsable>
             <Button
               title='Upload Photos'
