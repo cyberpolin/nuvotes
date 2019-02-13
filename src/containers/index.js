@@ -1,5 +1,7 @@
 import WorkOrder from './WorkOrder'
+import Gallery from './Gallery'
 
 export {
-  WorkOrder
+  WorkOrder,
+  Gallery
 }
