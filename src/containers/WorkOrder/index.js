@@ -137,6 +137,9 @@ export default class WorkOrder extends Component {
           windowBackgroundColor='rgba(0, 0, 0, .4)'
           overlayBackgroundColor='#FFF'
           onBackdropPress={() => this.setState({ isVisible: false })}
+          animationType='fade'
+          overlayStyle={styles.overlayStyle}
+          height='50%'
         >
           <UploadPhotos />
         </Overlay>
@@ -147,6 +150,9 @@ export default class WorkOrder extends Component {
         windowBackgroundColor='rgba(0, 0, 0, .4)'
         overlayBackgroundColor='#FFF'
         onBackdropPress={() => this.setState({ isVisible: false })}
+        animationType='fade'
+        overlayStyle={styles.overlayStyle}
+        height='50%'
       >
         <UploadFiles />
       </Overlay>
