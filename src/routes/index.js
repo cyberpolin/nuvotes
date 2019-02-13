@@ -33,7 +33,10 @@ const StackNavigator = createStackNavigator({
     screen: Home
   },
   WorkOrder: {
-    screen: WorkOrder
+    screen: WorkOrder,
+    navigationOptions: ({ navigation }) => {
+      return { title: navigation.getParam('title', 'Work Order') }
+    }
   },
   Gallery: {
     screen: Gallery
