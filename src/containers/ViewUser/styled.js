@@ -1,5 +1,6 @@
-import styled from 'styled-components/native'
 import { Platform } from 'react-native'
+import { Image } from 'react-native-elements'
+import styled from 'styled-components/native'
 
 const isIOS = Platform.OS === 'ios'
 
@@ -19,10 +20,10 @@ export const Label = styled.Text`
 `
 
 export const Text = styled.Text`
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 `
 
-export const CircleImage = styled.Image`
+export const CircleImage = styled(Image)`
   width: 150px;
   height: 150px;
   border-radius: 75px;
@@ -31,5 +32,5 @@ export const CircleImage = styled.Image`
 `
 
 export const ImageContainer = styled.View`
-  padding-top: 10%;
+  padding-top: 30px;
 `
