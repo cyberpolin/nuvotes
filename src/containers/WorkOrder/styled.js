@@ -14,6 +14,9 @@ export const styles = {
   },
   iconContainerStyle: {
     marginLeft: 10
+  },
+  overlayStyle: {
+    padding: 25
   }
 }
 
