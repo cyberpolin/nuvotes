@@ -72,3 +72,8 @@ export const InputContainer = styled.View`
   width: ${({width}) => width ? `${width}%` : '60%'};
   margin-bottom: 5%;
 `
+
+export const SelectImage = styled.TouchableOpacity`
+  align-self: center;
+  padding: 5px;
+`
