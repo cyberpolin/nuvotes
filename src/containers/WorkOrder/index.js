@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  ActivityIndicator,
-  TouchableOpacity
+  ActivityIndicator
 } from 'react-native'
-import { Button } from 'react-native-elements'
+import {
+  Button,
+  Icon
+} from 'react-native-elements'
 import { Collapsable } from '../../components'
 import {
   Container,
@@ -16,6 +18,7 @@ import {
   FlexRow,
   Row,
   ScrollContainer,
+  GalleryButton,
   styles
 } from './styled'
 
@@ -25,11 +28,20 @@ export default class WorkOrder extends Component {
     this.state = {
       isCollapsed: true
     }
+    this.willFocusSubscription = props.navigation.addListener(
+      'willFocus',
+      payload => {
+        props.navigation.setParams({ title: '12345' })
+      }
+    )
+  }
+  componentWillUnmount () {
+    this.willFocusSubscription.remove()
   }
   render () {
     const { isCollapsed } = this.state
     const { navigation } = this.props
-    const orderId = navigation.getParam('id', 'NO-ID')
+    const orderId = navigation.getParam('id', '')
     return (
       <Container>
         <ScrollContainer>
@@ -80,9 +92,7 @@ export default class WorkOrder extends Component {
               isCollapsed={isCollapsed}
               onPress={() => this.handleCollapse()}
             >
-              <TouchableOpacity onPress={() => navigation.navigate('Gallery')}>
-                <Text>Gallery</Text>
-              </TouchableOpacity>
+              {this.renderGalleryTypes('inspection', orderId)}
             </Collapsable>
             <Button
               title='Upload Photos'
@@ -105,5 +115,54 @@ export default class WorkOrder extends Component {
   handleCollapse () {
     const { isCollapsed } = this.state
     this.setState({isCollapsed: !isCollapsed})
+  }
+
+  renderGalleryTypes (orderType, orderId) {
+    const { navigate } = this.props.navigation
+    const galleryTypes = {
+      insurance: [{
+        label: 'Property Before Photos',
+        galleryType: 'before'
+      }, {
+        label: 'Property In Progress Photos',
+        galleryType: 'in_progress'
+      }, {
+        label: 'Property After Photos',
+        galleryType: 'after'
+      }]
+    }
+    if (orderType === 'inspection') {
+      return (
+        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', orderId })}>
+          <Text>Property Photos</Text>
+          <Icon
+            name='angle-right'
+            type='font-awesome'
+            containerStyle={styles.iconContainerStyle}
+          />
+        </GalleryButton>
+      )
+    } else if (orderType === 'insurance' || orderType === 'other_repair') {
+      return (
+        <View>
+          {galleryTypes.insurance.map((gallery, index) => {
+            const { label, galleryType } = gallery
+            return (
+              <GalleryButton
+                onPress={() => navigate('Gallery', { galleryType, orderId })}
+                key={index}
+              >
+                <Text>{label}</Text>
+                <Icon
+                  name='angle-right'
+                  type='font-awesome'
+                  containerStyle={styles.iconContainerStyle}
+                />
+              </GalleryButton>
+            )
+          })}
+        </View>
+      )
+    }
   }
 }
