@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import {
+  View,
+  ActivityIndicator
+} from 'react-native'
 import {
   Icon
 } from 'react-native-elements'
@@ -14,14 +17,15 @@ import {
 
 export default class ViewUser extends Component {
   render () {
-    const user = true
+    const user = {}
     return (
       <Container>
         <ImageContainer>
-          {user
+          {user.avatar
             ? <CircleImage
-              source={{uri: 'https://scienceoxford.com/wp-content/uploads/2018/03/avatar-male.jpg'}}
+              source={{uri: user.avatar}}
               resizeMode='contain'
+              PlaceholderContent={<ActivityIndicator />}
             />
             : <Icon name='user-circle' type='font-awesome' size={150} />
           }
