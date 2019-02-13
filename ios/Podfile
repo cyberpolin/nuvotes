@@ -12,6 +12,8 @@ target 'nuvoteApp' do
     # Pods for testing
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+    pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   end
 
   target 'nuvoteAppTests' do
