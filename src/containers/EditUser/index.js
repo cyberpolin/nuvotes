@@ -17,7 +17,7 @@ import {
 
 export default class EditUser extends Component {
   render () {
-    const user = true
+    const user = {}
     return (
       <KeyboardAwareScrollView
         bounces={false}
@@ -26,10 +26,10 @@ export default class EditUser extends Component {
         keyboardDismissMode='on-drag'
       >
         <ImageContainer>
-          {user
+          {user.avatar
             ? <CircleImage
               resizeMode='contain'
-              source={{uri: 'https://scienceoxford.com/wp-content/uploads/2018/03/avatar-male.jpg'}}
+              source={{uri: user.avatar}}
             />
             : <Icon
               name='user-circle'
