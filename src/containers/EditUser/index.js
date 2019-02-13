@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Text } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import ImagePicker from 'react-native-image-picker'
 import {
   Icon,
   Input,
@@ -12,12 +14,18 @@ import {
   InfoContainer,
   FlexRow,
   InputContainer,
+  SelectImage,
   styles
 } from './styled'
 
 export default class EditUser extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      image: ''
+    }
+  }
   render () {
-    const user = {}
     return (
       <KeyboardAwareScrollView
         bounces={false}
@@ -26,18 +34,10 @@ export default class EditUser extends Component {
         keyboardDismissMode='on-drag'
       >
         <ImageContainer>
-          {user.avatar
-            ? <CircleImage
-              resizeMode='contain'
-              source={{uri: user.avatar}}
-            />
-            : <Icon
-              name='user-circle'
-              type='font-awesome'
-              size={150}
-              containerStyle={styles.iconContainerStyle}
-            />
-          }
+          {this.renderAvatar()}
+          <SelectImage onPress={() => this.showImagePicker()}>
+            <Text>Change Image</Text>
+          </SelectImage>
         </ImageContainer>
         <InfoContainer>
           <FlexRow>
@@ -108,5 +108,41 @@ export default class EditUser extends Component {
         </InfoContainer>
       </KeyboardAwareScrollView>
     )
+  }
+
+  renderAvatar () {
+    const { image } = this.state
+    const user = {}
+    if (image !== '') {
+      return <CircleImage source={{uri: image}} />
+    }
+    if (user.avatar) {
+      return <CircleImage
+        resizeMode='contain'
+        source={{uri: user.avatar}}
+      />
+    }
+    return <Icon
+      name='user-circle'
+      type='font-awesome'
+      size={150}
+      containerStyle={styles.iconContainerStyle}
+    />
+  }
+
+  showImagePicker () {
+    const options = {
+      title: 'Select Avatar'
+    }
+    ImagePicker.showImagePicker(options, (response) => {
+      if (response.didCancel) {
+        console.log('USER cancalled')
+      } else if (response.error) {
+        console.log('An error has ocurred')
+      } else {
+        const { uri } = response
+        this.setState({image: uri})
+      }
+    })
   }
 }
