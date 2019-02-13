@@ -6,8 +6,13 @@ import {
 } from 'react-native'
 import {
   Button,
-  Icon
+  Icon,
+  Overlay
 } from 'react-native-elements'
+import {
+  UploadFiles,
+  UploadPhotos
+} from '../../containers'
 import { Collapsable } from '../../components'
 import {
   Container,
@@ -26,7 +31,9 @@ export default class WorkOrder extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isCollapsed: true
+      isCollapsed: true,
+      isVisible: false,
+      selectedModal: ''
     }
     this.willFocusSubscription = props.navigation.addListener(
       'willFocus',
@@ -99,16 +106,50 @@ export default class WorkOrder extends Component {
               type='outline'
               titleStyle={styles.buttonTitle}
               buttonStyle={styles.buttonStyle}
+              onPress={() => this.showModal('photos')}
             />
             <Button
               title='Upload Files'
               type='outline'
               titleStyle={styles.buttonTitle}
               buttonStyle={styles.buttonStyle}
+              onPress={() => this.showModal('files')}
             />
+            {this.renderModal()}
           </InfoContainer>
         </ScrollContainer>
       </Container>
+    )
+  }
+  showModal (modal) {
+    let { isVisible } = this.state
+    let { selectedModal } = this.state
+    selectedModal = modal
+    this.setState({isVisible: !isVisible, selectedModal})
+  }
+
+  renderModal () {
+    const { isVisible, selectedModal } = this.state
+    if (selectedModal === 'photos') {
+      return (
+        <Overlay
+          isVisible={isVisible}
+          windowBackgroundColor='rgba(0, 0, 0, .4)'
+          overlayBackgroundColor='#FFF'
+          onBackdropPress={() => this.setState({ isVisible: false })}
+        >
+          <UploadPhotos />
+        </Overlay>
+      )
+    } return (
+      <Overlay
+        isVisible={isVisible}
+        windowBackgroundColor='rgba(0, 0, 0, .4)'
+        overlayBackgroundColor='#FFF'
+        onBackdropPress={() => this.setState({ isVisible: false })}
+      >
+        <UploadFiles />
+      </Overlay>
     )
   }
 
