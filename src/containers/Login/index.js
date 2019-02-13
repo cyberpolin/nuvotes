@@ -14,6 +14,7 @@ import {
 
 export default class Login extends Component {
   render () {
+    const { navigation } = this.props
     return (
       <Container>
         <AvoidingView
@@ -45,6 +46,7 @@ export default class Login extends Component {
               titleStyle={styles.buttonTitle}
               containerStyle={styles.buttonContainer}
               buttonStyle={styles.buttonStyle}
+              onPress={() => navigation.navigate('Home')}
             />
           </LoginBox>
         </AvoidingView>
