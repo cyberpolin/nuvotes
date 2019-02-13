@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -7,31 +7,36 @@ import {
   createStackNavigator
 } from 'react-navigation'
 import {
+  Orders,
+  Overdue,
+  InProgress,
   WorkOrder,
   Gallery
 } from '../containers'
-import {
-  OrderCard
-} from '../components'
+import { TabNav } from '../components'
 
-class Home extends Component {
-  render () {
-    const { navigate } = this.props.navigation
-    return (
-      <View style={{backgroundColor: 'olive', alignItems: 'center', justifyContent: 'center', flex: 1}}>
-        <OrderCard
-          order={{id: '#1234', endDate: '12/12/12', name: 'Repairs'}}
-          onPress={() => navigate('WorkOrder', {id: '1234'})}
-        />
-      </View>
-    )
+const TabAppNavigator = createBottomTabNavigator({
+  Orders: {
+    screen: Orders
+  },
+  InProgress: {
+    screen: InProgress
+  },
+  Overdue: {
+    screen: Overdue
   }
-}
+}, {
+  tabBarOptions: {
+    activeTintColor: 'red',
+    inactiveTintColor: '#5E5E5E'
+  },
+  defaultNavigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ tintColor }) => TabNav(navigation, tintColor)
+  })
+})
 
 const StackNavigator = createStackNavigator({
-  Home: {
-    screen: Home
-  },
+  Screen: TabAppNavigator,
   WorkOrder: {
     screen: WorkOrder,
     navigationOptions: ({ navigation }) => {
@@ -40,6 +45,10 @@ const StackNavigator = createStackNavigator({
   },
   Gallery: {
     screen: Gallery
+  }
+}, {
+  defaultNavigationOptions: {
+    title: 'Username'
   }
 })
 
@@ -51,10 +60,27 @@ StackNavigator.navigationOptions = ({ navigation }) => {
   return { tabBarVisible }
 }
 
-const TabNavigator = createBottomTabNavigator({
-  Home: {
-    screen: StackNavigator
+class Login extends Component {
+  render () {
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text>
+          Login
+        </Text>
+        <Button
+          title='TO HOME'
+          onPress={() => this.props.navigation.navigate('Home')}
+        />
+      </View>
+    )
   }
+}
+
+const SwitchNavigator = createSwitchNavigator({
+  Login: Login,
+  Home: StackNavigator
+}, {
+  initialRouteName: 'Login'
 })
 
-export default createAppContainer(TabNavigator)
+export default createAppContainer(SwitchNavigator)
