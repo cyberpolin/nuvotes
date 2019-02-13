@@ -11,6 +11,9 @@ export const styles = {
     width: '65%',
     height: 50,
     marginBottom: 20
+  },
+  iconContainerStyle: {
+    marginLeft: 10
   }
 }
 
@@ -50,4 +53,12 @@ export const FlexRow = styled.View`
 
 export const Row = styled.View`
   margin-bottom: 12px;
+`
+
+export const GalleryButton = styled.TouchableOpacity`
+  align-self: flex-start;
+  padding: 5px 10px 5px 0;
+  margin-vertical: 5px;
+  flex-direction: row;
+  align-items: center;
 `
