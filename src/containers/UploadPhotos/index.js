@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
-import {View, Text} from 'react-native'
+import {
+  Text,
+  Icon,
+  Button
+} from 'react-native-elements'
+import {
+  Container,
+  FlexRow
+} from './styled'
 
 export default class UploadPhotos extends Component {
   render () {
     return (
-      <View>
-        <Text>UPLOAD PHOTOS</Text>
-      </View>
+      <Container>
+        <Text h4>Photos</Text>
+        <FlexRow>
+          <Button
+            title='Cancel'
+          />
+          <Button
+            title='Save'
+          />
+        </FlexRow>
+      </Container>
     )
   }
 }
