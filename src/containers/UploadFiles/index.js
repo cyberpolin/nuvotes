@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { DocumentPicker } from 'react-native-document-picker'
 import {
   Button,
   Text
@@ -25,6 +26,7 @@ export default class UploadFiles extends Component {
           titleStyle={styles.buttonTitle}
           type='outline'
           title='Select a File...'
+          onPress={() => this.selectFile()}
         />
         <FlexRow>
           <Button
@@ -43,6 +45,14 @@ export default class UploadFiles extends Component {
         </FlexRow>
       </Container>
     )
+  }
+
+  selectFile () {
+    DocumentPicker.show({
+    }, (error, res) => {
+      console.log(error)
+      console.log(res)
+    })
   }
 
   handleClose () {
