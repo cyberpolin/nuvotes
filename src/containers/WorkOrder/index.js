@@ -139,7 +139,7 @@ export default class WorkOrder extends Component {
           onBackdropPress={() => this.setState({ isVisible: false })}
           animationType='fade'
           overlayStyle={styles.overlayStyle}
-          height='50%'
+          height='65%'
         >
           <UploadPhotos />
         </Overlay>
