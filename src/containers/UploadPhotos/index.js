@@ -9,14 +9,14 @@ import ImagePicker from 'react-native-image-crop-picker'
 import {
   Text,
   Icon,
-  Button,
-  Image
+  Button
 } from 'react-native-elements'
 import {
   Container,
   FlexRow,
   ButtonsContainer,
   ImagesContainer,
+  Thumbnail,
   styles
 } from './styled'
 
@@ -24,7 +24,8 @@ export default class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      photos: []
+      photos: [],
+      isVisible: props.isVisible
     }
   }
   render () {
@@ -64,6 +65,7 @@ export default class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title='Cancel'
+            onPress={() => this.handleClose()}
           />
           <Button
             buttonStyle={styles.buttonStyle}
@@ -76,6 +78,12 @@ export default class UploadPhotos extends Component {
     )
   }
 
+  handleClose () {
+    const { changeVisibility } = this.props
+    const { isVisible } = this.state
+    changeVisibility(!isVisible)
+  }
+
   renderImages () {
     const { photos } = this.state
     const isAndroid = Platform.OS === 'android'
@@ -83,9 +91,8 @@ export default class UploadPhotos extends Component {
       const { sourceURL, path } = photo
       return (
         <View key={index}>
-          <Image
+          <Thumbnail
             source={{uri: isAndroid ? path : sourceURL}}
-            style={styles.image}
             PlaceholderContent={<ActivityIndicator />}
           />
           <Icon
