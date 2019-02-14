@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { Image } from 'react-native-elements'
 
 export const styles = {
   buttonTitle: {
@@ -8,15 +9,10 @@ export const styles = {
   buttonStyle: {
     borderColor: '#000',
     alignSelf: 'center',
-    height: 35
+    height: 36
   },
   marginButton: {
     marginBottom: 15
-  },
-  image: {
-    height: 70,
-    width: 70,
-    marginBottom: 7
   },
   scrollViewContainer: {
     flexDirection: 'row'
@@ -51,4 +47,10 @@ export const ImagesContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+`
+
+export const Thumbnail = styled(Image)`
+  height: 70px;
+  width: 70px;
+  margin-bottom: 7px;
 `
