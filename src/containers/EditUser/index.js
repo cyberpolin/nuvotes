@@ -14,7 +14,6 @@ import {
   InfoContainer,
   FlexRow,
   InputContainer,
-  SelectImage,
   styles
 } from './styled'
 
@@ -33,11 +32,9 @@ export default class EditUser extends Component {
         keyboardShouldPersistTaps='always'
         keyboardDismissMode='on-drag'
       >
-        <ImageContainer>
+        <ImageContainer onPress={() => this.showImagePicker()}>
           {this.renderAvatar()}
-          <SelectImage onPress={() => this.showImagePicker()}>
-            <Text>Change Image</Text>
-          </SelectImage>
+          <Text>Change Image</Text>
         </ImageContainer>
         <InfoContainer>
           <FlexRow>
