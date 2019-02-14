@@ -8,7 +8,7 @@ export const styles = {
   buttonStyle: {
     borderColor: '#000',
     alignSelf: 'center',
-    width: '65%',
+    width: '100%',
     height: 50,
     marginBottom: 20
   },
@@ -64,4 +64,9 @@ export const GalleryButton = styled.TouchableOpacity`
   margin-vertical: 5px;
   flex-direction: row;
   align-items: center;
+`
+
+export const ButtonContainer = styled.View`
+  width: 65%;
+  align-self: center;
 `
