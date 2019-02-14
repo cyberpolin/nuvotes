@@ -58,9 +58,10 @@ export const CircleImage = styled.Image`
   ${isIOS && 'border-width: 1px'};
 `
 
-export const ImageContainer = styled.View`
+export const ImageContainer = styled.TouchableOpacity`
   padding-top: 10%;
   ${isBigScreen && 'margin-bottom: 20px'};
+  align-items: center;
 `
 
 export const FlexRow = styled.View`
@@ -71,9 +72,4 @@ export const FlexRow = styled.View`
 export const InputContainer = styled.View`
   width: ${({width}) => width ? `${width}%` : '60%'};
   margin-bottom: 5%;
-`
-
-export const SelectImage = styled.TouchableOpacity`
-  align-self: center;
-  padding: 5px;
 `
