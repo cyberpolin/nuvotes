@@ -24,6 +24,7 @@ import {
   Row,
   ScrollContainer,
   GalleryButton,
+  ButtonContainer,
   styles
 } from './styled'
 
@@ -101,20 +102,24 @@ export default class WorkOrder extends Component {
             >
               {this.renderGalleryTypes('inspection', orderId)}
             </Collapsable>
-            <Button
-              title='Upload Photos'
-              type='outline'
-              titleStyle={styles.buttonTitle}
-              buttonStyle={styles.buttonStyle}
-              onPress={() => this.showModal('photos')}
-            />
-            <Button
-              title='Upload Files'
-              type='outline'
-              titleStyle={styles.buttonTitle}
-              buttonStyle={styles.buttonStyle}
-              onPress={() => this.showModal('files')}
-            />
+            <ButtonContainer>
+              <Button
+                title='Upload Photos'
+                type='outline'
+                titleStyle={styles.buttonTitle}
+                buttonStyle={styles.buttonStyle}
+                onPress={() => this.showModal('photos')}
+              />
+            </ButtonContainer>
+            <ButtonContainer>
+              <Button
+                title='Upload Files'
+                type='outline'
+                titleStyle={styles.buttonTitle}
+                buttonStyle={styles.buttonStyle}
+                onPress={() => this.showModal('files')}
+              />
+            </ButtonContainer>
             {this.renderModal()}
           </InfoContainer>
         </ScrollContainer>
@@ -141,7 +146,10 @@ export default class WorkOrder extends Component {
           overlayStyle={styles.overlayStyle}
           height='65%'
         >
-          <UploadPhotos />
+          <UploadPhotos
+            isVisible={isVisible}
+            changeVisibility={(visibility) => this.changeVisibility(visibility)}
+          />
         </Overlay>
       )
     } return (
@@ -152,11 +160,18 @@ export default class WorkOrder extends Component {
         onBackdropPress={() => this.setState({ isVisible: false })}
         animationType='fade'
         overlayStyle={styles.overlayStyle}
-        height='50%'
+        height='65%'
       >
-        <UploadFiles />
+        <UploadFiles
+          isVisible={isVisible}
+          changeVisibility={(visibility) => this.changeVisibility(visibility)}
+        />
       </Overlay>
     )
+  }
+
+  changeVisibility (visibility) {
+    this.setState({isVisible: visibility})
   }
 
   handleCollapse () {
