@@ -10,7 +10,6 @@ import {
 
 export default class Drawer extends Component {
   render () {
-    const { navigation } = this.props
     return (
       <Container>
         <DrawerTop>
@@ -32,7 +31,7 @@ export default class Drawer extends Component {
             />
             <ItemText>Change Language</ItemText>
           </DrawerItem>
-          <DrawerItem onPress={() => navigation.navigate('Login')}>
+          <DrawerItem onPress={() => this.logout()}>
             <Icon
               type='font-awesome'
               name='sign-out'
@@ -43,5 +42,10 @@ export default class Drawer extends Component {
         </DrawerBottom>
       </Container>
     )
+  }
+
+  logout () {
+    const { navigation } = this.props
+    navigation.navigate('Login')
   }
 }
