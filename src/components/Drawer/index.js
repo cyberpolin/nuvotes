@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Alert } from 'react-native'
 import { Icon } from 'react-native-elements'
 import {
   Container,
@@ -10,10 +11,11 @@ import {
 
 export default class Drawer extends Component {
   render () {
+    const { navigation } = this.props
     return (
       <Container>
         <DrawerTop>
-          <DrawerItem noFlex>
+          <DrawerItem noFlex onPress={() => navigation.navigate('Profile')}>
             <Icon
               type='font-awesome'
               name='user-circle'
@@ -23,7 +25,7 @@ export default class Drawer extends Component {
           </DrawerItem>
         </DrawerTop>
         <DrawerBottom>
-          <DrawerItem>
+          <DrawerItem onPress={() => this.changeLanguage()}>
             <Icon
               type='font-awesome'
               name='language'
@@ -47,5 +49,17 @@ export default class Drawer extends Component {
   logout () {
     const { navigation } = this.props
     navigation.navigate('Login')
+  }
+
+  changeLanguage () {
+    Alert.alert(
+      'Change Language',
+      'Do you want to change the language to spanish?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+        {text: 'OK', onPress: () => console.log('OK Pressed')}
+      ],
+      {cancelable: false}
+    )
   }
 }
