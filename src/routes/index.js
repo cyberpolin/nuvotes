@@ -10,7 +10,8 @@ import {
   InProgress,
   WorkOrder,
   Gallery,
-  Login
+  Login,
+  DocumentsScreen
 } from '../containers'
 import { TabNav } from '../components'
 
@@ -44,6 +45,12 @@ const StackNavigator = createStackNavigator({
   },
   Gallery: {
     screen: Gallery
+  },
+  Documents: {
+    screen: DocumentsScreen,
+    navigationOptions: {
+      title: 'Documents'
+    }
   }
 })
 
