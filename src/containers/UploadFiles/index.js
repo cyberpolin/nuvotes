@@ -65,6 +65,7 @@ export default class UploadFiles extends Component {
                 leftIcon={{name: 'file', type: 'font-awesome'}}
                 title={fileName}
                 rightElement={this.deleteButton(index)}
+                bottomDivider
               />
             )
           })}
