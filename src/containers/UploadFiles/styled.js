@@ -32,21 +32,12 @@ export const FlexRow = styled.View`
   width: 100%;
 `
 
-export const IconsContainer = styled.View`
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-`
-
 export const FilesContainer = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    flexDirection: 'row'
-  },
   bounces: false,
   showsVerticalScrollIndicator: false
 })`
   max-height: 50%;
+  width: 100%;
 `
 
 export const FileName = styled.Text`
