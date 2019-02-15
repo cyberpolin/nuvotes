@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-import { View, Text, Button } from 'react-native'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -9,7 +7,8 @@ import {
 import {
   Orders,
   Overdue,
-  InProgress
+  InProgress,
+  Login
 } from '../containers'
 import { TabNav } from '../components'
 
@@ -40,22 +39,6 @@ const StackNavigator = createStackNavigator({
     title: 'Username'
   }
 })
-
-class Login extends Component {
-  render () {
-    return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>
-          Login
-        </Text>
-        <Button
-          title='TO HOME'
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-      </View>
-    )
-  }
-}
 
 const SwitchNavigator = createSwitchNavigator({
   Login: Login,
