@@ -88,16 +88,6 @@ export default class UploadFiles extends Component {
     this.setState({files})
   }
 
-  reduceFileName (fileName) {
-    const extension = fileName.split('.')[1]
-    let name = fileName.split('.')[0]
-    if (name.length > 14) {
-      name = name.substr(0, 12)
-      return `${name}...${extension}`
-    }
-    return `${name}.${extension}`
-  }
-
   selectFile () {
     DocumentPicker.show({
       filetype: [DocumentPickerUtil.pdf()]
