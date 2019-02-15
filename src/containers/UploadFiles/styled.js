@@ -13,9 +13,6 @@ export const styles = {
   marginButton: {
     marginBottom: 15
   },
-  scrollViewContainer: {
-    flexDirection: 'row'
-  },
   deleteIcon: {
     position: 'absolute',
     right: 0,
@@ -39,5 +36,27 @@ export const IconsContainer = styled.View`
   width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+`
+
+export const FilesContainer = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    flexDirection: 'row'
+  },
+  bounces: false,
+  showsVerticalScrollIndicator: false
+})`
+  max-height: 50%;
+`
+
+export const FileName = styled.Text`
+  align-self: center;
+  margin-left: 8px
+`
+
+export const FileBox = styled.View`
+  flex-direction: row;
+  margin-bottom: 10px;
+  margin-right: 15px;
+  flex-basis: 100%;
 `
