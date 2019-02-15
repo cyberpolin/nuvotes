@@ -5,17 +5,27 @@ import { styles } from './styled'
 
 export default class Orders extends Component {
   render () {
-    const { navigation } = this.props
     return (
       <ScrollView
         bounces={false}
         contentContainerStyle={styles.containerStyle}
       >
-        <OrderCard
-          order={{id: '12345', endDate: '12/12/2018', name: 'Repair'}}
-          onPress={() => navigation.navigate('WorkOrder')}
-        />
+        {this.renderOrders()}
       </ScrollView>
     )
+  }
+
+  renderOrders () {
+    const { navigation } = this.props
+    const orders = [{name: 'Repair', endDate: '08/10/2018', id: '12345'}]
+    return orders.map((order, index) => {
+      return (
+        <OrderCard
+          key={index}
+          order={order}
+          onPress={() => navigation.navigate('WorkOrder')}
+        />
+      )
+    })
   }
 }
