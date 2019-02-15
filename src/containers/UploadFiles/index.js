@@ -3,15 +3,13 @@ import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker
 import {
   Button,
   Text,
+  ListItem,
   Icon
 } from 'react-native-elements'
 import {
   Container,
   FlexRow,
-  IconsContainer,
   FilesContainer,
-  FileName,
-  FileBox,
   styles
 } from './styled'
 
@@ -59,30 +57,28 @@ export default class UploadFiles extends Component {
     if (files.length > 0) {
       return (
         <FilesContainer>
-          <IconsContainer>
-            {files.map((file, index) => {
-              const { fileName } = file
-              return (
-                <FileBox key={index}>
-                  <Icon
-                    type='font-awesome'
-                    name='file'
-                    size={30}
-                  />
-                  <FileName>{this.reduceFileName(fileName)}</FileName>
-                  <Icon
-                    type='font-awesome'
-                    name='times'
-                    containerStyle={{marginLeft: 'auto'}}
-                    onPress={() => this.deleteFile(index)}
-                  />
-                </FileBox>
-              )
-            })}
-          </IconsContainer>
+          {files.map((file, index) => {
+            const { fileName } = file
+            return (
+              <ListItem
+                key={index}
+                leftIcon={{name: 'file', type: 'font-awesome'}}
+                title={fileName}
+                rightElement={this.deleteButton(index)}
+              />
+            )
+          })}
         </FilesContainer>
       )
     }
+  }
+
+  deleteButton (index) {
+    return <Icon
+      name='times'
+      type='font-awesome'
+      onPress={() => this.deleteFile(index)}
+    />
   }
 
   deleteFile (index) {
