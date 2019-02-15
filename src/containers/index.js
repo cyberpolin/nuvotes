@@ -7,6 +7,7 @@ import Login from './Login'
 import Orders from './Orders'
 import InProgress from './InProgress'
 import Overdue from './Overdue'
+import DocumentsScreen from './DocumentsScreen'
 
 export {
   WorkOrder,
@@ -17,5 +18,6 @@ export {
   Login,
   Orders,
   InProgress,
-  Overdue
+  Overdue,
+  DocumentsScreen
 }
