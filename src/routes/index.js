@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-import { View, Text, Button } from 'react-native'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -11,7 +9,8 @@ import {
   Overdue,
   InProgress,
   WorkOrder,
-  Gallery
+  Gallery,
+  Login
 } from '../containers'
 import { TabNav } from '../components'
 
@@ -51,30 +50,6 @@ const StackNavigator = createStackNavigator({
     title: 'Username'
   }
 })
-
-StackNavigator.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = true
-  if (navigation.state.index > 0) {
-    tabBarVisible = false
-  }
-  return { tabBarVisible }
-}
-
-class Login extends Component {
-  render () {
-    return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>
-          Login
-        </Text>
-        <Button
-          title='TO HOME'
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-      </View>
-    )
-  }
-}
 
 const SwitchNavigator = createSwitchNavigator({
   Login: Login,
