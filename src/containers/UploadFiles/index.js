@@ -1,8 +1,4 @@
 import React, { Component } from 'react'
-import {
-  View,
-  ScrollView
-} from 'react-native'
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
 import {
   Button,
@@ -13,6 +9,9 @@ import {
   Container,
   FlexRow,
   IconsContainer,
+  FilesContainer,
+  FileName,
+  FileBox,
   styles
 } from './styled'
 
@@ -59,29 +58,56 @@ export default class UploadFiles extends Component {
     const { files } = this.state
     if (files.length > 0) {
       return (
-        <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        <FilesContainer>
           <IconsContainer>
             {files.map((file, index) => {
+              const { fileName } = file
               return (
-                <View key={index}>
+                <FileBox key={index}>
                   <Icon
                     type='font-awesome'
                     name='file'
+                    size={30}
                   />
-                </View>
+                  <FileName>{this.reduceFileName(fileName)}</FileName>
+                  <Icon
+                    type='font-awesome'
+                    name='times'
+                    containerStyle={{marginLeft: 'auto'}}
+                    onPress={() => this.deleteFile(index)}
+                  />
+                </FileBox>
               )
             })}
           </IconsContainer>
-        </ScrollView>
+        </FilesContainer>
       )
     }
+  }
+
+  deleteFile (index) {
+    let { files } = this.state
+    files.splice(index, 1)
+    this.setState({files})
+  }
+
+  reduceFileName (fileName) {
+    const extension = fileName.split('.')[1]
+    let name = fileName.split('.')[0]
+    if (name.length > 14) {
+      name = name.substr(0, 12)
+      return `${name}...${extension}`
+    }
+    return `${name}.${extension}`
   }
 
   selectFile () {
     DocumentPicker.show({
       filetype: [DocumentPickerUtil.pdf()]
     }, (error, res) => {
-      console.log(error)
+      if (error) {
+        console.log(error)
+      }
       if (res) {
         const { files } = this.state
         const newFilesArray = [...files, res]
