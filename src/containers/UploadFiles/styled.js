@@ -34,3 +34,10 @@ export const FlexRow = styled.View`
   justify-content: space-between;
   width: 100%;
 `
+
+export const IconsContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
