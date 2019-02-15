@@ -45,10 +45,6 @@ const StackNavigator = createStackNavigator({
   Gallery: {
     screen: Gallery
   }
-}, {
-  defaultNavigationOptions: {
-    title: 'Username'
-  }
 })
 
 const SwitchNavigator = createSwitchNavigator({
