@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
-import { Button } from 'react-native'
-import {
-  Container,
-  Text
-} from './styled'
+import { ScrollView } from 'react-native'
+import { OrderCard } from '../../components'
+import { styles } from './styled'
 
 export default class InProgress extends Component {
   render () {
     return (
-      <Container>
-        <Text>IN PROGRESS SCREEN</Text>
-        <Button
-          title='CLICK!'
-          onPress={() => this.props.navigation.navigate('Overdue')}
-        />
-      </Container>
+      <ScrollView
+        bounces={false}
+        contentContainerStyle={styles.containerStyle}
+      >
+        {this.renderOrders()}
+      </ScrollView>
     )
+  }
+
+  renderOrders () {
+    const { navigation } = this.props
+    const orders = [{name: 'Small House Repair', endDate: '03/30/2019', id: '97413'}]
+    return orders.map((order, index) => {
+      return (
+        <OrderCard
+          key={index}
+          order={order}
+          onPress={() => navigation.navigate('WorkOrder')}
+        />
+      )
+    })
   }
 }

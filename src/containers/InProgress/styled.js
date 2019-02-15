@@ -1,11 +1,7 @@
-import styled from 'styled-components/native'
-
-export const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: olive;
-`
-
-export const Text = styled.Text`
-`
+export const styles = {
+  containerStyle: {
+    alignItems: 'center',
+    paddingVertical: 15,
+    flex: 1
+  }
+}
