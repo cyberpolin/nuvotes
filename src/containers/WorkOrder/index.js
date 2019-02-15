@@ -100,7 +100,19 @@ export default class WorkOrder extends Component {
               isCollapsed={isCollapsed}
               onPress={() => this.handleCollapse()}
             >
-              {this.renderGalleryTypes('inspection', orderId)}
+              <View>
+                {this.renderGalleryTypes('inspection', orderId)}
+                <GalleryButton
+                  onPress={() => navigation.navigate('Documents', {orderId})}
+                >
+                  <Text>Property Documents</Text>
+                  <Icon
+                    name='angle-right'
+                    type='font-awesome'
+                    containerStyle={styles.iconContainerStyle}
+                  />
+                </GalleryButton>
+              </View>
             </Collapsable>
             <ButtonContainer>
               <Button
