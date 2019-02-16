@@ -44,7 +44,10 @@ const StackNavigator = createStackNavigator({
     }
   },
   Gallery: {
-    screen: Gallery
+    screen: Gallery,
+    navigationOptions: {
+      title: 'Photos'
+    }
   },
   Documents: {
     screen: DocumentsScreen,
