@@ -39,15 +39,3 @@ export const FilesContainer = styled.ScrollView.attrs({
   max-height: 50%;
   width: 100%;
 `
-
-export const FileName = styled.Text`
-  align-self: center;
-  margin-left: 8px
-`
-
-export const FileBox = styled.View`
-  flex-direction: row;
-  margin-bottom: 10px;
-  margin-right: 15px;
-  flex-basis: 100%;
-`
