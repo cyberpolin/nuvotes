@@ -20,6 +20,8 @@ export default class UploadFiles extends Component {
       isVisible: props.isVisible,
       files: []
     }
+    this.selectFile = this.selectFile.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
   render () {
     return (
@@ -31,7 +33,7 @@ export default class UploadFiles extends Component {
           titleStyle={styles.buttonTitle}
           type='outline'
           title='Select a File...'
-          onPress={() => this.selectFile()}
+          onPress={this.selectFile}
         />
         <FlexRow>
           <Button
@@ -39,7 +41,7 @@ export default class UploadFiles extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title='Cancel'
-            onPress={() => this.handleClose()}
+            onPress={this.handleClose}
           />
           <Button
             buttonStyle={styles.buttonStyle}
