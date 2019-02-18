@@ -4,6 +4,7 @@ import {
   Input,
   Button
 } from 'react-native-elements'
+import { translate } from '../../helpers/localization'
 import {
   Container,
   LoginBox,
@@ -23,7 +24,7 @@ export default class Login extends Component {
           <Title h2>Nuvote WOMS</Title>
           <LoginBox>
             <Input
-              placeholder='Username'
+              placeholder={translate.userName}
               inputContainerStyle={styles.inputContainerStyle}
               containerStyle={styles.containerStyle}
               onSubmitEditing={() => this.passwordRef.input.focus()}
@@ -31,7 +32,7 @@ export default class Login extends Component {
               autoCapitalize='none'
             />
             <Input
-              placeholder='Password'
+              placeholder={translate.password}
               inputContainerStyle={styles.inputContainerStyle}
               containerStyle={styles.containerStyle}
               ref={refs => {
@@ -41,16 +42,30 @@ export default class Login extends Component {
               secureTextEntry
             />
             <Button
-              title='Sign In'
+              title={translate.signIn}
               type='outline'
               titleStyle={styles.buttonTitle}
               containerStyle={styles.buttonContainer}
               buttonStyle={styles.buttonStyle}
               onPress={() => navigation.navigate('Home')}
             />
+            <Button
+              title={translate.changeLanguage}
+              type='outline'
+              titleStyle={styles.buttonTitle}
+              containerStyle={styles.buttonContainer}
+              buttonStyle={styles.buttonStyle}
+              onPress={() => this.aMethod()}
+            />
           </LoginBox>
         </AvoidingView>
       </Container>
     )
+  }
+
+  aMethod () {
+    const currentLanguage = translate.getLanguage()
+    currentLanguage === 'es' ? translate.setLanguage('en') : translate.setLanguage('es')
+    this.setState({})
   }
 }
