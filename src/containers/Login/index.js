@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Keyboard } from 'react-native'
+import { connect } from 'react-redux'
 import {
   Input,
   Button
@@ -13,7 +14,7 @@ import {
   styles
 } from './styled'
 
-export default class Login extends Component {
+class Login extends Component {
   render () {
     const { navigation } = this.props
     return (
@@ -49,23 +50,15 @@ export default class Login extends Component {
               buttonStyle={styles.buttonStyle}
               onPress={() => navigation.navigate('Home')}
             />
-            <Button
-              title={translate.changeLanguage}
-              type='outline'
-              titleStyle={styles.buttonTitle}
-              containerStyle={styles.buttonContainer}
-              buttonStyle={styles.buttonStyle}
-              onPress={() => this.aMethod()}
-            />
           </LoginBox>
         </AvoidingView>
       </Container>
     )
   }
-
-  aMethod () {
-    const currentLanguage = translate.getLanguage()
-    currentLanguage === 'es' ? translate.setLanguage('en') : translate.setLanguage('es')
-    this.setState({})
-  }
 }
+
+const mapStateToProps = ({language}) => ({
+  language
+})
+
+export default connect(mapStateToProps, null)(Login)
