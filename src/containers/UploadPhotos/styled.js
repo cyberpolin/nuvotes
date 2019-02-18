@@ -19,7 +19,7 @@ export const styles = {
   },
   deleteIcon: {
     position: 'absolute',
-    right: 0,
+    right: 16,
     top: -3
   }
 }
@@ -38,19 +38,23 @@ export const FlexRow = styled.View`
 
 export const ButtonsContainer = styled.View`
   justify-content: flex-end;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   margin-top: 20px;
 `
 
 export const ImagesContainer = styled.View`
-  width: 100%;
+  width: 107%;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
 `
 
 export const Thumbnail = styled(Image)`
   height: 70px;
   width: 70px;
   margin-bottom: 7px;
+`
+
+export const ImageBox = styled.View`
+  flex-basis: 33%;
 `
