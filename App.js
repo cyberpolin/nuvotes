@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import Routes from './src/routes'
-import { EditUser } from './src/containers'
+import { ViewUser } from './src/containers'
 
 export default class App extends Component {
   render () {
-    return <EditUser />
+    return <ViewUser />
   }
 }

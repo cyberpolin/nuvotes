@@ -8,7 +8,8 @@ import {
   Orders,
   Overdue,
   InProgress,
-  Login
+  Login,
+  ViewUser
 } from '../containers'
 import { TabNav } from '../components'
 
@@ -33,7 +34,8 @@ const TabAppNavigator = createBottomTabNavigator({
 })
 
 const StackNavigator = createStackNavigator({
-  Screen: TabAppNavigator
+  Screen: TabAppNavigator,
+  Profile: ViewUser
 }, {
   defaultNavigationOptions: {
     title: 'Username'
