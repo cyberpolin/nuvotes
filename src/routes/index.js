@@ -31,7 +31,8 @@ const TabAppNavigator = createBottomTabNavigator({
     inactiveTintColor: '#5E5E5E'
   },
   defaultNavigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ tintColor }) => TabNav(navigation, tintColor)
+    tabBarIcon: ({ tintColor }) => TabNav(navigation, tintColor),
+    title: navigation.state.routeName === 'InProgress' && 'In Progress'
   })
 })
 
