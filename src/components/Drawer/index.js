@@ -25,7 +25,7 @@ export default class Drawer extends Component {
           </DrawerItem>
         </DrawerTop>
         <DrawerBottom>
-          <DrawerItem onPress={() => this.changeLanguage()}>
+          <DrawerItem onPress={this.changeLanguage}>
             <Icon
               type='font-awesome'
               name='language'
