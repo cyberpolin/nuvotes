@@ -18,7 +18,11 @@ To run the project in your local machine:
 1. `$ npm install`
 2. `$ npm start`
 3. `$ react-native run-ios` or `$ react-native run-android`
-3.  Alternately, for ios, open xcworkspace from ios folder and run. Or android studio selecting android folder
+
+**Note for 3rd point**:
+
+(Alternately, for ios, open xcworkspace from ios folder and run. Or android studio selecting android folder, then build the project and run)
+
 
 # Components
 
