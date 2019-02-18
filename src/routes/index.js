@@ -11,7 +11,7 @@ import {
   WorkOrder,
   Gallery,
   Login,
-  DocumentsScreen,
+  Documents,
   ViewUser
 } from '../containers'
 import { TabNav } from '../components'
@@ -53,7 +53,7 @@ const StackNavigator = createStackNavigator({
     }
   },
   Documents: {
-    screen: DocumentsScreen,
+    screen: Documents,
     navigationOptions: {
       title: 'Documents'
     }

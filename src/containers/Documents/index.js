@@ -11,7 +11,7 @@ import {
   styles
 } from './styled'
 
-export default class DocumentsScreen extends Component {
+export default class Documents extends Component {
   render () {
     const files = []
     return (
