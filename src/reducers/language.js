@@ -2,10 +2,13 @@ const initialState = {
   selectedLanguage: 'en'
 }
 
-const language = (state = initialState, action) => {
-  switch (action.type) {
+const language = (state = initialState, { type, payload }) => {
+  switch (type) {
     case 'CHANGE_LANGUAGE':
-      return action.lang
+      return {
+        ...state,
+        selectedLanguage: payload
+      }
     default:
       return state
   }
