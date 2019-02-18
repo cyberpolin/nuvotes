@@ -147,6 +147,7 @@ export default class WorkOrder extends Component {
 
   renderModal () {
     const { isVisible, selectedModal } = this.state
+    const orderType = 'inspection'
     if (selectedModal === 'photos') {
       return (
         <Overlay
@@ -157,6 +158,7 @@ export default class WorkOrder extends Component {
           animationType='fade'
           overlayStyle={styles.overlayStyle}
           height='65%'
+          orderType={orderType}
         >
           <UploadPhotos
             isVisible={isVisible}
