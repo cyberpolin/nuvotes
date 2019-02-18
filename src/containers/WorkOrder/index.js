@@ -36,12 +36,6 @@ export default class WorkOrder extends Component {
       isVisible: false,
       selectedModal: ''
     }
-    this.willFocusSubscription = props.navigation.addListener(
-      'willFocus',
-      payload => {
-        props.navigation.setParams({ title: '12345' })
-      }
-    )
     this.handleCollapse = this.handleCollapse.bind(this)
   }
   componentWillUnmount () {
