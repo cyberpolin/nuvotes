@@ -3,7 +3,8 @@ import {
   ScrollView,
   ActivityIndicator,
   View,
-  Platform
+  Platform,
+  Alert
 } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import {
@@ -99,7 +100,6 @@ export default class UploadPhotos extends Component {
             type='font-awesome'
             name='times'
             containerStyle={styles.deleteIcon}
-            color='red'
             onPress={() => this.deletePhoto(index)}
             underlayColor='transparent'
           />
@@ -108,13 +108,30 @@ export default class UploadPhotos extends Component {
     })
   }
 
+  savePhoto (images, type) {
+    const { photos } = this.state
+    const newPhotosArray = [...photos, ...images]
+    this.setState({photos: newPhotosArray})
+  }
+
   selectFromGallery () {
     ImagePicker.openPicker({
       multiple: true
     }).then(images => {
-      const { photos } = this.state
-      const newPhotosArray = [...photos, ...images]
-      this.setState({photos: newPhotosArray})
+      const { orderType } = this.props
+      if (orderType !== 'inspection') {
+        Alert.alert(
+          'Save photos as...',
+          'Choose a type to save the photos',
+          [
+            {text: 'Before', onPress: () => this.savePhoto(images, 'before')},
+            {text: 'In Progress', onPress: () => this.savePhoto(images, 'in_progress')},
+            {text: 'After', onPress: () => this.savePhoto(images, 'after')}
+          ], {cancelable: false}
+        )
+      } else {
+        this.savePhoto(images, 'property')
+      }
     })
   }
 
