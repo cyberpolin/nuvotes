@@ -42,6 +42,7 @@ export default class WorkOrder extends Component {
         props.navigation.setParams({ title: '12345' })
       }
     )
+    this.handleCollapse = this.handleCollapse.bind(this)
   }
   componentWillUnmount () {
     this.willFocusSubscription.remove()
@@ -50,20 +51,22 @@ export default class WorkOrder extends Component {
     const { isCollapsed } = this.state
     const { navigation } = this.props
     const orderId = navigation.getParam('id', '')
+    const orderType = 'inspection'
+    const orderPhoto = ''
     return (
       <Container>
         <ScrollContainer>
           <PhotoContainer>
             <Photo
               resizeMode='contain'
-              source={{uri: 'https://cdn.houseplans.com/product/q5qkhirat4bcjrr4rpg9fk3q94/w800x533.jpg?v=8'}}
+              source={{uri: orderPhoto || 'https://s3-us-west-1.amazonaws.com/nuvote-wo/static/admin/placeholder_feature.png'}}
               PlaceholderContent={<ActivityIndicator />}
             />
           </PhotoContainer>
           <InfoContainer>
             <Row>
               <Label>Type:</Label>
-              <Text>Inspección</Text>
+              <Text>Inspection</Text>
             </Row>
             <Row>
               <Label>Status:</Label>
@@ -98,10 +101,10 @@ export default class WorkOrder extends Component {
             <Collapsable
               label='Attachments'
               isCollapsed={isCollapsed}
-              onPress={() => this.handleCollapse()}
+              onPress={this.handleCollapse}
             >
               <View>
-                {this.renderGalleryTypes('inspection', orderId)}
+                {this.renderGalleryTypes(orderType, orderId)}
                 <GalleryButton
                   onPress={() => navigation.navigate('Documents', {orderId})}
                 >
@@ -132,7 +135,7 @@ export default class WorkOrder extends Component {
                 onPress={() => this.showModal('files')}
               />
             </ButtonContainer>
-            {this.renderModal()}
+            {this.renderModal(orderType)}
           </InfoContainer>
         </ScrollContainer>
       </Container>
@@ -145,24 +148,23 @@ export default class WorkOrder extends Component {
     this.setState({isVisible: !isVisible, selectedModal})
   }
 
-  renderModal () {
+  renderModal (orderType) {
     const { isVisible, selectedModal } = this.state
-    const orderType = 'inspection'
     if (selectedModal === 'photos') {
       return (
         <Overlay
           isVisible={isVisible}
           windowBackgroundColor='rgba(0, 0, 0, .4)'
           overlayBackgroundColor='#FFF'
-          onBackdropPress={() => this.setState({ isVisible: false })}
+          onBackdropPress={() => this.changeVisibility(false)}
           animationType='fade'
           overlayStyle={styles.overlayStyle}
           height='65%'
-          orderType={orderType}
         >
           <UploadPhotos
             isVisible={isVisible}
             changeVisibility={(visibility) => this.changeVisibility(visibility)}
+            orderType={orderType}
           />
         </Overlay>
       )
@@ -171,7 +173,7 @@ export default class WorkOrder extends Component {
         isVisible={isVisible}
         windowBackgroundColor='rgba(0, 0, 0, .4)'
         overlayBackgroundColor='#FFF'
-        onBackdropPress={() => this.setState({ isVisible: false })}
+        onBackdropPress={() => this.changeVisibility(false)}
         animationType='fade'
         overlayStyle={styles.overlayStyle}
         height='65%'
@@ -195,8 +197,8 @@ export default class WorkOrder extends Component {
 
   renderGalleryTypes (orderType, orderId) {
     const { navigate } = this.props.navigation
-    const galleryTypes = {
-      insurance: [{
+    const galleryTypes = [
+      {
         label: 'Property Before Photos',
         galleryType: 'before'
       }, {
@@ -205,8 +207,8 @@ export default class WorkOrder extends Component {
       }, {
         label: 'Property After Photos',
         galleryType: 'after'
-      }]
-    }
+      }
+    ]
     if (orderType === 'inspection') {
       return (
         <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', orderId })}>
@@ -218,10 +220,10 @@ export default class WorkOrder extends Component {
           />
         </GalleryButton>
       )
-    } else if (orderType === 'insurance' || orderType === 'other_repair') {
+    } else {
       return (
         <View>
-          {galleryTypes.insurance.map((gallery, index) => {
+          {galleryTypes.map((gallery, index) => {
             const { label, galleryType } = gallery
             return (
               <GalleryButton
