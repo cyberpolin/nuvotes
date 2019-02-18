@@ -34,7 +34,6 @@ export default class UploadPhotos extends Component {
   }
   render () {
     const { photos } = this.state
-    console.log(photos)
     return (
       <Container>
         <Text h4>Photos</Text>
