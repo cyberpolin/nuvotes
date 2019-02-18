@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   ScrollView,
   ActivityIndicator,
-  View,
   Platform,
   Alert
 } from 'react-native'
@@ -18,6 +17,7 @@ import {
   ButtonsContainer,
   ImagesContainer,
   Thumbnail,
+  ImageBox,
   styles
 } from './styled'
 
@@ -28,9 +28,13 @@ export default class UploadPhotos extends Component {
       photos: [],
       isVisible: props.isVisible
     }
+    this.handleClose = this.handleClose.bind(this)
+    this.selectFromCamera = this.selectFromCamera.bind(this)
+    this.selectFromGallery = this.selectFromGallery.bind(this)
   }
   render () {
     const { photos } = this.state
+    console.log(photos)
     return (
       <Container>
         <Text h4>Photos</Text>
@@ -50,14 +54,14 @@ export default class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title='Take a photo...'
-            onPress={() => this.selectFromCamera()}
+            onPress={this.selectFromCamera}
           />
           <Button
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
             type='outline'
             title='Choose from the gallery...'
-            onPress={() => this.selectFromGallery()}
+            onPress={this.selectFromGallery}
           />
         </ButtonsContainer>
         <FlexRow>
@@ -66,7 +70,7 @@ export default class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title='Cancel'
-            onPress={() => this.handleClose()}
+            onPress={this.handleClose}
           />
           <Button
             buttonStyle={styles.buttonStyle}
@@ -91,7 +95,7 @@ export default class UploadPhotos extends Component {
     return photos.map((photo, index) => {
       const { sourceURL, path } = photo
       return (
-        <View key={index}>
+        <ImageBox key={index}>
           <Thumbnail
             source={{uri: isAndroid ? path : sourceURL}}
             PlaceholderContent={<ActivityIndicator />}
@@ -103,13 +107,17 @@ export default class UploadPhotos extends Component {
             onPress={() => this.deletePhoto(index)}
             underlayColor='transparent'
           />
-        </View>
+        </ImageBox>
       )
     })
   }
 
   savePhoto (images, type) {
     const { photos } = this.state
+    images = images.map(image => {
+      image.type = type
+      return image
+    })
     const newPhotosArray = [...photos, ...images]
     this.setState({photos: newPhotosArray})
   }
@@ -138,9 +146,20 @@ export default class UploadPhotos extends Component {
   selectFromCamera () {
     ImagePicker.openCamera({
     }).then(image => {
-      const { photos } = this.state
-      const newPhotosArray = [...photos, image]
-      this.setState({photos: newPhotosArray})
+      const { orderType } = this.props
+      if (orderType !== 'inspection') {
+        Alert.alert(
+          'Save photos as...',
+          'Choose a type to save the photos',
+          [
+            {text: 'Before', onPress: () => this.savePhoto(image, 'before')},
+            {text: 'In Progress', onPress: () => this.savePhoto(image, 'in_progress')},
+            {text: 'After', onPress: () => this.savePhoto(image, 'after')}
+          ], {cancelable: false}
+        )
+      } else {
+        this.savePhoto(image, 'property')
+      }
     })
   }
 
