@@ -9,7 +9,8 @@ import {
   Orders,
   Overdue,
   InProgress,
-  Login
+  Login,
+  ViewUser
 } from '../containers'
 import {
   Drawer,
@@ -49,6 +50,9 @@ const StackNavigator = createStackNavigator({
     navigationOptions: (navigation) => ({
       headerLeft: DrawerIcon(navigation)
     })
+  },
+  Profile: {
+    screen: ViewUser
   }
 })
 

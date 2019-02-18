@@ -11,8 +11,8 @@ export default class Orders extends Component {
       <Container>
         <Text>ORDERS SCREEN</Text>
         <Button
-          title='TO LOGIN'
-          onPress={() => this.props.navigation.navigate('Login')}
+          title='TO PROFILE'
+          onPress={() => this.props.navigation.navigate('Profile')}
         />
       </Container>
     )
