@@ -12,6 +12,10 @@ import {
 } from './styled'
 
 export default class Login extends Component {
+  constructor (props) {
+    super(props)
+    this.handleLogin = this.handleLogin.bind(this)
+  }
   render () {
     return (
       <Container>
@@ -35,7 +39,7 @@ export default class Login extends Component {
               ref={refs => {
                 this.passwordRef = refs
               }}
-              onSubmitEditing={() => this.handleLogin()}
+              onSubmitEditing={this.handleLogin}
               secureTextEntry
             />
             <Button
@@ -44,7 +48,7 @@ export default class Login extends Component {
               titleStyle={styles.buttonTitle}
               containerStyle={styles.buttonContainer}
               buttonStyle={styles.buttonStyle}
-              onPress={() => this.handleLogin()}
+              onPress={this.handleLogin}
             />
           </LoginBox>
         </AvoidingView>
