@@ -13,10 +13,10 @@ import {
 
 export default class Documents extends Component {
   render () {
-    const files = []
+    const { files } = this.props
     return (
       <Container>
-        {files.length > 0
+        {files && files.length > 0
           ? <ScrollContainer>{this.renderFiles(files)}</ScrollContainer>
           : <Text>There are no files to show.</Text>}
       </Container>
