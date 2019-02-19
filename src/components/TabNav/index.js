@@ -1,7 +1,9 @@
 import React from 'react'
 import { Icon } from 'react-native-elements'
+import { translate } from '../../helpers/localization'
+import { Title } from './styled'
 
-const TabNav = (navigation, tintColor) => {
+export const TabIcons = (navigation, tintColor) => {
   const { routeName } = navigation.state
   const iconName = routeName === 'Orders' ? 'briefcase'
     : routeName === 'InProgress' ? 'wrench'
@@ -15,4 +17,12 @@ const TabNav = (navigation, tintColor) => {
   )
 }
 
-export default TabNav
+export const TabTitle = (navigation, tintColor) => {
+  const { routeName } = navigation.state
+  const title = routeName === 'Orders' ? translate.orders
+    : routeName === 'InProgress' ? translate.inProgress
+      : translate.overdue
+  return (
+    <Title color={tintColor}>{title}</Title>
+  )
+}
