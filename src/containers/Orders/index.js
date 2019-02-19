@@ -1,31 +1,38 @@
 import React, { Component } from 'react'
-import { ScrollView } from 'react-native'
+import { Text } from 'react-native'
 import { OrderCard } from '../../components'
-import { styles } from './styled'
+import {
+  Container,
+  TextContainer
+} from './styled'
 
 export default class Orders extends Component {
   render () {
     return (
-      <ScrollView
-        bounces={false}
-        contentContainerStyle={styles.containerStyle}
-      >
+      <Container>
         {this.renderOrders()}
-      </ScrollView>
+      </Container>
     )
   }
 
   renderOrders () {
-    const { navigation } = this.props
-    const orders = [{name: 'Repair', endDate: '08/10/2018', id: '12345'}]
-    return orders.map((order, index) => {
-      return (
-        <OrderCard
-          key={index}
-          order={order}
-          onPress={() => navigation.navigate('WorkOrder')}
-        />
-      )
-    })
+    let { navigation, orders } = this.props
+    orders = [{name: 'Repair', endDate: '08/10/2018', id: '12345'}]
+    if (orders && orders.length > 0) {
+      return orders.map((order, index) => {
+        return (
+          <OrderCard
+            key={index}
+            order={order}
+            onPress={() => navigation.navigate('WorkOrder')}
+          />
+        )
+      })
+    }
+    return (
+      <TextContainer>
+        <Text>There are no orders to show.</Text>
+      </TextContainer>
+    )
   }
 }
