@@ -10,6 +10,10 @@ import {
 } from './styled'
 
 export default class Drawer extends Component {
+  constructor (props) {
+    super(props)
+    this.handleLogout = this.handleLogout.bind(this)
+  }
   render () {
     const { navigation } = this.props
     return (
@@ -33,7 +37,7 @@ export default class Drawer extends Component {
             />
             <ItemText>Change Language</ItemText>
           </DrawerItem>
-          <DrawerItem onPress={() => this.logout()}>
+          <DrawerItem onPress={this.handleLogout}>
             <Icon
               type='font-awesome'
               name='sign-out'
@@ -46,7 +50,7 @@ export default class Drawer extends Component {
     )
   }
 
-  logout () {
+  handleLogout () {
     const { navigation } = this.props
     navigation.navigate('Login')
   }
