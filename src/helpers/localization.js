@@ -27,5 +27,5 @@ export const translate = new LocalizedStrings({
 
 export const getLanguageToChange = (language) => {
   const languageToChange = language === 'es' ? 'en' : 'es'
-  translate.setLanguage(languageToChange)
+  return translate.setLanguage(languageToChange)
 }
