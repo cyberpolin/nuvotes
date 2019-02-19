@@ -24,3 +24,8 @@ export const translate = new LocalizedStrings({
     email: 'Correo Electrónico'
   }
 })
+
+export const getLanguageToChange = (language) => {
+  const languageToChange = language === 'es' ? 'en' : 'es'
+  translate.setLanguage(languageToChange)
+}
