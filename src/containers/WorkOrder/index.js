@@ -38,9 +38,6 @@ export default class WorkOrder extends Component {
     }
     this.handleCollapse = this.handleCollapse.bind(this)
   }
-  componentWillUnmount () {
-    this.willFocusSubscription.remove()
-  }
   render () {
     const { isCollapsed } = this.state
     const { navigation } = this.props
