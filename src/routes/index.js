@@ -15,7 +15,8 @@ import {
 import {
   Drawer,
   DrawerIcon,
-  TabNav
+  TabIcons,
+  TabTitle
 } from '../components'
 
 const TabAppNavigator = createBottomTabNavigator({
@@ -34,7 +35,8 @@ const TabAppNavigator = createBottomTabNavigator({
     inactiveTintColor: '#5E5E5E'
   },
   defaultNavigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ tintColor }) => TabNav(navigation, tintColor)
+    tabBarIcon: ({ tintColor }) => TabIcons(navigation, tintColor),
+    tabBarLabel: ({ tintColor }) => TabTitle(navigation, tintColor)
   })
 })
 
@@ -45,7 +47,7 @@ const DrawerNavigator = createDrawerNavigator({
 })
 
 const StackNavigator = createStackNavigator({
-  Screen: {
+  DrawerScreen: {
     screen: DrawerNavigator,
     navigationOptions: (navigation) => ({
       headerLeft: DrawerIcon(navigation)
