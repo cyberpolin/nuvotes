@@ -2,7 +2,8 @@ import {
   createAppContainer,
   createBottomTabNavigator,
   createSwitchNavigator,
-  createStackNavigator
+  createStackNavigator,
+  createDrawerNavigator
 } from 'react-navigation'
 import {
   Orders,
@@ -14,7 +15,11 @@ import {
   Documents,
   ViewUser
 } from '../containers'
-import { TabNav } from '../components'
+import {
+  Drawer,
+  DrawerIcon,
+  TabNav
+} from '../components'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -37,9 +42,22 @@ const TabAppNavigator = createBottomTabNavigator({
   })
 })
 
+const DrawerNavigator = createDrawerNavigator({
+  MainScreen: TabAppNavigator
+}, {
+  contentComponent: Drawer
+})
+
 const StackNavigator = createStackNavigator({
-  Screen: TabAppNavigator,
-  Profile: ViewUser,
+  Screen: {
+    screen: DrawerNavigator,
+    navigationOptions: (navigation) => ({
+      headerLeft: DrawerIcon(navigation)
+    })
+  },
+  Profile: {
+    screen: ViewUser
+  },
   WorkOrder: {
     screen: WorkOrder,
     navigationOptions: ({ navigation }) => {
