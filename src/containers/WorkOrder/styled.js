@@ -16,7 +16,7 @@ export const styles = {
     marginLeft: 10
   },
   overlayStyle: {
-    padding: 25
+    padding: 26
   }
 }
 
