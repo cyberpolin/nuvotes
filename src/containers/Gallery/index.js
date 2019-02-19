@@ -7,10 +7,10 @@ import {
 
 export default class Gallery extends Component {
   render () {
-    const photos = []
+    const { photos } = this.props
     return (
       <Container>
-        {photos.length > 0
+        {photos && photos.length > 0
           ? <ImageBrowser images={photos} />
           : <Text>There are no photos to show.</Text>}
       </Container>
