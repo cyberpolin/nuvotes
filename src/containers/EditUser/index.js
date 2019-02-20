@@ -24,6 +24,7 @@ export default class EditUser extends Component {
     this.state = {
       image: ''
     }
+    this.showImagePicker = this.showImagePicker.bind(this)
   }
   render () {
     return (
@@ -33,7 +34,7 @@ export default class EditUser extends Component {
         keyboardShouldPersistTaps='always'
         keyboardDismissMode='on-drag'
       >
-        <ImageContainer onPress={() => this.showImagePicker()}>
+        <ImageContainer onPress={this.showImagePicker}>
           {this.renderAvatar()}
           <Icon
             type='font-awesome'
@@ -51,6 +52,7 @@ export default class EditUser extends Component {
                 autoCapitalize='none'
                 inputStyle={styles.inputStyle}
                 blurOnSubmit={false}
+                onSubmitEditing={() => this.lastName.input.focus()}
               />
             </InputContainer>
             <InputContainer width={40}>
@@ -61,6 +63,10 @@ export default class EditUser extends Component {
                 autoCapitalize='none'
                 inputStyle={styles.inputStyle}
                 blurOnSubmit={false}
+                ref={refs => {
+                  this.lastName = refs
+                }}
+                onSubmitEditing={() => this.stateInput.input.focus()}
               />
             </InputContainer>
           </FlexRow>
@@ -72,6 +78,10 @@ export default class EditUser extends Component {
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
               blurOnSubmit={false}
+              ref={refs => {
+                this.stateInput = refs
+              }}
+              onSubmitEditing={() => this.address.input.focus()}
             />
           </InputContainer>
           <InputContainer>
@@ -82,6 +92,10 @@ export default class EditUser extends Component {
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
               blurOnSubmit={false}
+              ref={refs => {
+                this.address = refs
+              }}
+              onSubmitEditing={() => this.email.input.focus()}
             />
           </InputContainer>
           <InputContainer>
@@ -92,6 +106,10 @@ export default class EditUser extends Component {
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
               blurOnSubmit={false}
+              ref={refs => {
+                this.email = refs
+              }}
+              onSubmitEditing={() => this.password.input.focus()}
             />
           </InputContainer>
           <InputContainer>
@@ -101,6 +119,9 @@ export default class EditUser extends Component {
               secureTextEntry
               inputStyle={styles.inputStyle}
               onSubmitEditing={Keyboard.dismiss}
+              ref={refs => {
+                this.password = refs
+              }}
             />
           </InputContainer>
           <Button
