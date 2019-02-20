@@ -19,9 +19,9 @@ export const DrawerIcon = (navigation) => {
   )
 }
 
-export const EditButton = (navigation) => {
+export const EditButton = (navigation, routeName) => {
   return (
-    <ButtonContainer onPress={() => navigation.navigate('EditProfile')}>
+    <ButtonContainer onPress={() => navigation.navigate(routeName)}>
       <EditTitle>{translate.edit}</EditTitle>
     </ButtonContainer>
   )
