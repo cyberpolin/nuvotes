@@ -44,7 +44,8 @@ const es = {
   after: 'Después',
   property: 'Propiedad',
   edit: 'Editar',
-  changeImage: 'Cambiar Imagen'
+  changeImage: 'Cambiar Imagen',
+  selectAvatar: 'Seleccionar Avatar'
 }
 
 export default es

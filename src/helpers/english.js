@@ -43,7 +43,8 @@ const en = {
   after: 'After',
   property: 'Property',
   edit: 'Edit',
-  changeImage: 'Change Image'
+  changeImage: 'Change Image',
+  selectAvatar: 'Select Avatar'
 }
 
 export default en
