@@ -10,14 +10,17 @@ import {
   Overdue,
   InProgress,
   Login,
-  ViewUser
+  ViewUser,
+  EditUser
 } from '../containers'
 import {
   Drawer,
   DrawerIcon,
   TabIcons,
-  TabTitle
+  TabTitle,
+  EditButton
 } from '../components'
+import palette from '../colorPalette'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -54,7 +57,18 @@ const StackNavigator = createStackNavigator({
     })
   },
   Profile: {
-    screen: ViewUser
+    screen: ViewUser,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: EditButton(navigation)
+    })
+  },
+  EditProfile: {
+    screen: EditUser
+  }
+}, {
+  headerBackTitleVisible: false,
+  defaultNavigationOptions: {
+    headerTintColor: palette.black
   }
 })
 
