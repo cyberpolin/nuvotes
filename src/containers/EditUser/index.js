@@ -161,7 +161,10 @@ export default class EditUser extends Component {
 
   showImagePicker () {
     const options = {
-      title: 'Select Avatar'
+      title: 'Select Avatar',
+      takePhotoButtonTitle: `${translate.takePhoto}...`,
+      chooseFromLibraryButtonTitle: `${translate.chooseGallery}...`,
+      cancelButtonTitle: translate.cancel
     }
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
