@@ -1,5 +1,8 @@
 import Drawer from './Drawer'
-import { DrawerIcon } from './Header'
+import {
+  DrawerIcon,
+  EditButton
+} from './Header'
 import {
   TabIcons,
   TabTitle
@@ -11,5 +14,6 @@ export {
   DrawerIcon,
   TabIcons,
   TabTitle,
-  OrderCard
+  OrderCard,
+  EditButton
 }
