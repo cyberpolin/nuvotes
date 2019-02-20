@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
+import { Keyboard } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ImagePicker from 'react-native-image-picker'
 import {
@@ -16,6 +16,7 @@ import {
   InputContainer,
   styles
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class EditUser extends Component {
   constructor (props) {
@@ -34,66 +35,76 @@ export default class EditUser extends Component {
       >
         <ImageContainer onPress={() => this.showImagePicker()}>
           {this.renderAvatar()}
-          <Text>Change Image</Text>
+          <Icon
+            type='font-awesome'
+            name='edit'
+            containerStyle={styles.editIconStyle}
+          />
         </ImageContainer>
         <InfoContainer>
           <FlexRow>
             <InputContainer width={40}>
-              <Label>First Name:</Label>
+              <Label>{translate.firstName}:</Label>
               <Input
                 containerStyle={styles.containerStyle}
                 autoCorrect={false}
                 autoCapitalize='none'
                 inputStyle={styles.inputStyle}
+                blurOnSubmit={false}
               />
             </InputContainer>
             <InputContainer width={40}>
-              <Label>Last Name:</Label>
+              <Label >{translate.lastName}:</Label>
               <Input
                 containerStyle={styles.containerStyle}
                 autoCorrect={false}
                 autoCapitalize='none'
                 inputStyle={styles.inputStyle}
+                blurOnSubmit={false}
               />
             </InputContainer>
           </FlexRow>
           <InputContainer>
-            <Label>State:</Label>
+            <Label>{translate.state}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               autoCorrect={false}
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
+              blurOnSubmit={false}
             />
           </InputContainer>
           <InputContainer>
-            <Label>Fake Street, #51:</Label>
+            <Label>{translate.address}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               autoCorrect={false}
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
+              blurOnSubmit={false}
             />
           </InputContainer>
           <InputContainer>
-            <Label>Email:</Label>
+            <Label>{translate.email}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               autoCorrect={false}
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
+              blurOnSubmit={false}
             />
           </InputContainer>
           <InputContainer>
-            <Label>Password:</Label>
+            <Label>{translate.password}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               secureTextEntry
               inputStyle={styles.inputStyle}
+              onSubmitEditing={Keyboard.dismiss}
             />
           </InputContainer>
           <Button
-            title='Save'
+            title={translate.save}
             icon={{
               type: 'font-awesome',
               name: 'save'
@@ -109,11 +120,11 @@ export default class EditUser extends Component {
 
   renderAvatar () {
     const { image } = this.state
-    const user = {}
+    const { user } = this.props
     if (image !== '') {
       return <CircleImage source={{uri: image}} />
     }
-    if (user.avatar) {
+    if (user && user.avatar) {
       return <CircleImage
         resizeMode='contain'
         source={{uri: user.avatar}}
@@ -122,7 +133,7 @@ export default class EditUser extends Component {
     return <Icon
       name='user-circle'
       type='font-awesome'
-      size={150}
+      size={120}
       containerStyle={styles.iconContainerStyle}
     />
   }
