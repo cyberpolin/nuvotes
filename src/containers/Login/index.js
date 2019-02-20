@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Keyboard } from 'react-native'
-import { connect } from 'react-redux'
 import {
   Input,
   Button
@@ -14,14 +13,12 @@ import {
   styles
 } from './styled'
 
-class Login extends Component {
+export default class Login extends Component {
   render () {
     const { navigation } = this.props
     return (
       <Container>
-        <AvoidingView
-          behavior='padding'
-        >
+        <AvoidingView behavior='padding'>
           <Title h2>Nuvote WOMS</Title>
           <LoginBox>
             <Input
@@ -39,7 +36,7 @@ class Login extends Component {
               ref={refs => {
                 this.passwordRef = refs
               }}
-              onSubmitEditing={() => Keyboard.dismiss()}
+              onSubmitEditing={Keyboard.dismiss}
               secureTextEntry
             />
             <Button
@@ -56,9 +53,3 @@ class Login extends Component {
     )
   }
 }
-
-const mapStateToProps = ({language}) => ({
-  language
-})
-
-export default connect(mapStateToProps, null)(Login)
