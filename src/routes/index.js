@@ -59,7 +59,7 @@ const StackNavigator = createStackNavigator({
   Profile: {
     screen: ViewUser,
     navigationOptions: ({ navigation }) => ({
-      headerRight: EditButton(navigation)
+      headerRight: EditButton(navigation, 'EditProfile')
     })
   },
   EditProfile: {
