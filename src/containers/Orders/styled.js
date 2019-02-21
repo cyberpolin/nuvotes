@@ -4,8 +4,7 @@ export const Container = styled.ScrollView.attrs({
   bounces: false,
   contentContainerStyle: {
     alignItems: 'center',
-    paddingVertical: 15,
-    flex: 1
+    paddingVertical: 15
   }
 })`
 `
