@@ -21,7 +21,9 @@ export const styles = {
   searchInput: {
     borderWidth: 0.5,
     borderRadius: 20,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    paddingVertical: 0,
+    marginTop: !isIOS ? 5 : 0
   },
   searchInputContainer: {
     backgroundColor: 'transparent'
