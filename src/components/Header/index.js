@@ -11,18 +11,7 @@ import {
   styles
 } from './styled'
 
-export const DrawerIcon = ({...props}) => {
-  return (
-    <DrawerIconButton {...props}>
-      <Icon
-        type='font-awesome'
-        name='bars'
-      />
-    </DrawerIconButton>
-  )
-}
-
-export class Header extends Component {
+export default class Header extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -30,24 +19,40 @@ export class Header extends Component {
       search: ''
     }
     this.toggleInput = this.toggleInput.bind(this)
-    this.handleSearchText = this.handleSearchText.bind(this)
+    this.onChangeText = this.onChangeText.bind(this)
+    this.handleOnSearch = this.handleOnSearch.bind(this)
   }
   render () {
     const { isVisible, search } = this.state
     const { navigation, title } = this.props
     return (
       <HeaderContainer>
-        <DrawerIcon onPress={navigation.toggleDrawer} />
+        <DrawerIconButton onPress={navigation.toggleDrawer}>
+          <Icon
+            type='font-awesome'
+            name='bars'
+          />
+        </DrawerIconButton>
         {isVisible
           ? <SearchBar
             placeholder='Search'
-            platform='android'
-            onChangeText={this.handleSearchText}
+            onChangeText={this.onChangeText}
             containerStyle={styles.searchContainer}
             inputStyle={styles.searchInput}
+            inputContainerStyle={styles.searchInputContainer}
             value={search}
+            lightTheme
+            onSubmitEditing={this.handleOnSearch}
+            autoCapitalize='none'
+            autoCorrect={false}
+            searchIcon={<Icon
+              name='search'
+              type='font-awesome'
+              size={20}
+              onPress={this.handleOnSearch}
+            />}
           />
-          : <HeaderTitle>Title</HeaderTitle>}
+          : <HeaderTitle>{title || 'Username'}</HeaderTitle>}
         <SearchButton onPress={this.toggleInput}>
           <Icon
             type='font-awesome'
@@ -64,7 +69,10 @@ export class Header extends Component {
     )
   }
 
-  handleSearchText (search) {
+  handleOnSearch () {
+  }
+
+  onChangeText (search) {
     this.setState({ search })
   }
 
