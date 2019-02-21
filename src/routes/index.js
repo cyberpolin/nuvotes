@@ -7,8 +7,6 @@ import {
 } from 'react-navigation'
 import {
   Orders,
-  Overdue,
-  InProgress,
   WorkOrder,
   Gallery,
   Login,
@@ -26,10 +24,10 @@ const TabAppNavigator = createBottomTabNavigator({
     screen: Orders
   },
   InProgress: {
-    screen: InProgress
+    screen: Orders
   },
   Overdue: {
-    screen: Overdue
+    screen: Orders
   }
 }, {
   tabBarOptions: {
