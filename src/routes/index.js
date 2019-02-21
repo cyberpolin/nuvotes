@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -14,8 +15,8 @@ import {
 } from '../containers'
 import {
   Drawer,
-  DrawerIcon,
-  TabNav
+  TabNav,
+  Header
 } from '../components'
 
 const TabAppNavigator = createBottomTabNavigator({
@@ -47,8 +48,8 @@ const DrawerNavigator = createDrawerNavigator({
 const StackNavigator = createStackNavigator({
   Screen: {
     screen: DrawerNavigator,
-    navigationOptions: (navigation) => ({
-      headerLeft: DrawerIcon(navigation)
+    navigationOptions: ({navigation}) => ({
+      header: <Header navigation={navigation} />
     })
   },
   Profile: {
