@@ -5,6 +5,7 @@ import {
   Container,
   TextContainer
 } from './styled'
+import { filterOrders } from '../../helpers/orders'
 
 export default class Orders extends Component {
   render () {
@@ -16,15 +17,16 @@ export default class Orders extends Component {
   }
 
   renderOrders () {
-    let { navigation, orders } = this.props
-    orders = [{name: 'Repair', endDate: '08/10/2018', id: '12345'}]
+    const { navigation } = this.props
+    const orderType = navigation.state.routeName
+    const orders = filterOrders(orderType)
     if (orders && orders.length > 0) {
       return orders.map((order, index) => {
         return (
           <OrderCard
             key={index}
             order={order}
-            onPress={() => navigation.navigate('WorkOrder')}
+            onPress={() => navigation.navigate('WorkOrder', {order})}
           />
         )
       })
