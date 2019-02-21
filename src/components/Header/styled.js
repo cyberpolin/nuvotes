@@ -10,8 +10,6 @@ export const styles = {
     marginRight: 3
   },
   searchContainer: {
-    width: '70%',
-    height: '100%',
     alignItems: 'center',
     paddingTop: 4,
     paddingBottom: 0,
