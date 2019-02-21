@@ -125,8 +125,8 @@ export default class UploadPhotos extends Component {
     ImagePicker.openPicker({
       multiple: true
     }).then(images => {
-      const { orderType } = this.props
-      if (orderType !== 'inspection') {
+      const { descriptionJob } = this.props
+      if (descriptionJob !== 'inspection') {
         Alert.alert(
           'Save photos as...',
           'Choose a type to save the photos',
@@ -145,8 +145,8 @@ export default class UploadPhotos extends Component {
   selectFromCamera () {
     ImagePicker.openCamera({
     }).then(image => {
-      const { orderType } = this.props
-      if (orderType !== 'inspection') {
+      const { descriptionJob } = this.props
+      if (descriptionJob !== 'inspection') {
         Alert.alert(
           'Save photos as...',
           'Choose a type to save the photos',
