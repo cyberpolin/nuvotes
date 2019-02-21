@@ -10,16 +10,21 @@ export const styles = {
     marginRight: 3
   },
   searchContainer: {
-    width: '60%',
+    width: '70%',
     height: '100%',
     alignItems: 'center',
     paddingTop: 4,
-    paddingBottom: 0
+    paddingBottom: 0,
+    backgroundColor: 'transparent',
+    borderTopWidth: 0
   },
   searchInput: {
     borderWidth: 0.5,
     borderRadius: 20,
     paddingHorizontal: 10
+  },
+  searchInputContainer: {
+    backgroundColor: 'transparent'
   }
 }
 
