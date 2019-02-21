@@ -14,7 +14,7 @@ const OrderCard = ({order, ...props}) => {
   return (
     <Container {...props}>
       <FlexRow>
-        <Text marginRight>{id || ''}</Text>
+        <Text marginRight>#{id || ''}</Text>
         <Text>{name || ''}</Text>
       </FlexRow>
       <MiddleBox>
