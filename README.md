@@ -31,3 +31,9 @@ To run the project in your local machine:
 ![OrderCard](./src/components/OrderCard/img/OrderCard.png)
 
 [OrderCard Docs](./src/components/OrderCard/docs.md)
+
+## Header
+
+![Header](./src/components/Header/img/Header.png)
+
+[Header](./src/components/Header/docs.md)
