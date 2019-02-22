@@ -9,9 +9,11 @@ import {
   Container,
   LoginBox,
   AvoidingView,
-  Title,
+  LogoContainer,
+  Logo,
   styles
 } from './styled'
+import Assets from '../../assets/img'
 
 export default class Login extends Component {
   render () {
@@ -19,7 +21,12 @@ export default class Login extends Component {
     return (
       <Container>
         <AvoidingView behavior='padding'>
-          <Title h2>Nuvote WOMS</Title>
+          <LogoContainer>
+            <Logo
+              resizeMode='contain'
+              source={Assets.logo}
+            />
+          </LogoContainer>
           <LoginBox>
             <Input
               placeholder={translate.userName}
