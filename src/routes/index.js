@@ -10,13 +10,17 @@ import {
   Overdue,
   InProgress,
   Login,
-  ViewUser
+  ViewUser,
+  EditUser
 } from '../containers'
 import {
   Drawer,
   DrawerIcon,
-  TabNav
+  TabIcons,
+  TabTitle,
+  EditButton
 } from '../components'
+import palette from '../colorPalette'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -34,7 +38,8 @@ const TabAppNavigator = createBottomTabNavigator({
     inactiveTintColor: '#5E5E5E'
   },
   defaultNavigationOptions: ({ navigation }) => ({
-    tabBarIcon: ({ tintColor }) => TabNav(navigation, tintColor)
+    tabBarIcon: ({ tintColor }) => TabIcons(navigation, tintColor),
+    tabBarLabel: ({ tintColor }) => TabTitle(navigation, tintColor)
   })
 })
 
@@ -45,14 +50,25 @@ const DrawerNavigator = createDrawerNavigator({
 })
 
 const StackNavigator = createStackNavigator({
-  Screen: {
+  DrawerScreen: {
     screen: DrawerNavigator,
     navigationOptions: (navigation) => ({
       headerLeft: DrawerIcon(navigation)
     })
   },
   Profile: {
-    screen: ViewUser
+    screen: ViewUser,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: EditButton(navigation, 'EditProfile')
+    })
+  },
+  EditProfile: {
+    screen: EditUser
+  }
+}, {
+  headerBackTitleVisible: false,
+  defaultNavigationOptions: {
+    headerTintColor: palette.black
   }
 })
 

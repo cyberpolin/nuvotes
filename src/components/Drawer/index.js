@@ -1,6 +1,16 @@
 import React, { Component } from 'react'
 import { Alert } from 'react-native'
+import { connect } from 'react-redux'
+import {
+  StackActions,
+  NavigationActions
+} from 'react-navigation'
 import { Icon } from 'react-native-elements'
+import { changeLanguage } from '../../actions/language'
+import {
+  translate,
+  setLanguage
+} from '../../helpers/localization'
 import {
   Container,
   DrawerItem,
@@ -9,7 +19,14 @@ import {
   ItemText
 } from './styled'
 
-export default class Drawer extends Component {
+class Drawer extends Component {
+  constructor (props) {
+    super(props)
+    this.logout = this.logout.bind(this)
+    this.languageAlert = this.languageAlert.bind(this)
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
+    this.resetNavigation = this.resetNavigation.bind(this)
+  }
   render () {
     const { navigation } = this.props
     return (
@@ -21,29 +38,38 @@ export default class Drawer extends Component {
               name='user-circle'
               size={45}
             />
-            <ItemText>Profile</ItemText>
+            <ItemText>{translate.profile}</ItemText>
           </DrawerItem>
         </DrawerTop>
         <DrawerBottom>
-          <DrawerItem onPress={this.changeLanguage}>
+          <DrawerItem onPress={this.languageAlert}>
             <Icon
               type='font-awesome'
               name='language'
               size={45}
             />
-            <ItemText>Change Language</ItemText>
+            <ItemText>{translate.changeLanguage}</ItemText>
           </DrawerItem>
-          <DrawerItem onPress={() => this.logout()}>
+          <DrawerItem onPress={this.logout}>
             <Icon
               type='font-awesome'
               name='sign-out'
               size={45}
             />
-            <ItemText>Sign Out</ItemText>
+            <ItemText>{translate.signOut}</ItemText>
           </DrawerItem>
         </DrawerBottom>
       </Container>
     )
+  }
+
+  resetNavigation () {
+    const { navigation } = this.props
+    const resetAction = StackActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'DrawerScreen' })]
+    })
+    navigation.dispatch(resetAction)
   }
 
   logout () {
@@ -51,15 +77,30 @@ export default class Drawer extends Component {
     navigation.navigate('Login')
   }
 
-  changeLanguage () {
+  handleLanguageChange () {
+    const { changeLanguage } = this.props
+    const languageToChange = setLanguage()
+    changeLanguage(languageToChange)
+    this.resetNavigation()
+  }
+
+  languageAlert () {
     Alert.alert(
-      'Change Language',
-      'Do you want to change the language to spanish?',
+      translate.languageAlertTitle,
+      translate.languageAlertDescription,
       [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
-        {text: 'OK', onPress: () => console.log('OK Pressed')}
+        {text: 'No'},
+        {text: translate.yes, onPress: this.handleLanguageChange}
       ],
       {cancelable: false}
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  changeLanguage: language => {
+    dispatch(changeLanguage(language))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(Drawer)

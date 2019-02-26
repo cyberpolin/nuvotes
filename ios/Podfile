@@ -16,6 +16,8 @@ target 'nuvoteApp' do
 
     pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+    pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'
+
   end
 
   target 'nuvoteAppTests' do

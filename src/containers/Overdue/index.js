@@ -12,7 +12,7 @@ export default class Overdue extends Component {
         <Text>OVERDUE SCREEN</Text>
         <Button
           title='CLICK!'
-          onPress={() => this.props.navigation.navigate('Orders')}
+          onPress={() => this.props.navigation.navigate('Login')}
         />
       </Container>
     )

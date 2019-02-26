@@ -4,26 +4,32 @@ import {
   Input,
   Button
 } from 'react-native-elements'
+import { translate } from '../../helpers/localization'
 import {
   Container,
   LoginBox,
   AvoidingView,
-  Title,
+  LogoContainer,
+  Logo,
   styles
 } from './styled'
+import Assets from '../../assets/img'
 
 export default class Login extends Component {
   render () {
     const { navigation } = this.props
     return (
       <Container>
-        <AvoidingView
-          behavior='padding'
-        >
-          <Title h2>Nuvote WOMS</Title>
+        <AvoidingView behavior='padding'>
+          <LogoContainer>
+            <Logo
+              resizeMode='contain'
+              source={Assets.logo}
+            />
+          </LogoContainer>
           <LoginBox>
             <Input
-              placeholder='Username'
+              placeholder={translate.userName}
               inputContainerStyle={styles.inputContainerStyle}
               containerStyle={styles.containerStyle}
               onSubmitEditing={() => this.passwordRef.input.focus()}
@@ -31,17 +37,17 @@ export default class Login extends Component {
               autoCapitalize='none'
             />
             <Input
-              placeholder='Password'
+              placeholder={translate.password}
               inputContainerStyle={styles.inputContainerStyle}
               containerStyle={styles.containerStyle}
               ref={refs => {
                 this.passwordRef = refs
               }}
-              onSubmitEditing={() => Keyboard.dismiss()}
+              onSubmitEditing={Keyboard.dismiss}
               secureTextEntry
             />
             <Button
-              title='Sign In'
+              title={translate.signIn}
               type='outline'
               titleStyle={styles.buttonTitle}
               containerStyle={styles.buttonContainer}
