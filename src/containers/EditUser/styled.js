@@ -1,4 +1,4 @@
-import { Platform, Dimensions } from 'react-native'
+import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { black, white } from '../../colorPalette'
 
@@ -25,20 +25,20 @@ export const styles = {
     marginTop: 'auto'
   },
   iconContainerStyle: {
-    height: 150
+    height: 120
   },
   keyboardScrollViewContentStyle: {
     flex: 1,
     alignItems: 'center'
+  },
+  editIconStyle: {
+    position: 'absolute',
+    right: -10,
+    top: 12
   }
 }
 
 const isIOS = Platform.OS === 'ios'
-const isBigScreen = Dimensions.get('window').height > 680
-
-export const Text = styled.Text`
-  margin-bottom: 5%;
-`
 
 export const Label = styled.Text`
   font-size: 18px;
@@ -47,7 +47,8 @@ export const Label = styled.Text`
 export const InfoContainer = styled.View`
   flex: 1;
   width: 100%;
-  padding: 5%;
+  padding-horizontal: 20px;
+  padding-vertical: 15px;
 `
 
 export const CircleImage = styled.Image`
@@ -59,8 +60,7 @@ export const CircleImage = styled.Image`
 `
 
 export const ImageContainer = styled.TouchableOpacity`
-  padding-top: 10%;
-  ${isBigScreen && 'margin-bottom: 20px'};
+  padding-top: 15;
   align-items: center;
 `
 
@@ -71,5 +71,5 @@ export const FlexRow = styled.View`
 
 export const InputContainer = styled.View`
   width: ${({width}) => width ? `${width}%` : '60%'};
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 `

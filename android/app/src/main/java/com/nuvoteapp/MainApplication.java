@@ -5,6 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ReactNativeDocumentPicker(),
             new PickerPackage(),
+            new ReactNativeLocalizationPackage(),
             new ImagePickerPackage(),
             new RNGestureHandlerPackage(),
             new VectorIconsPackage()

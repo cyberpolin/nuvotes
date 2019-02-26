@@ -1,13 +1,21 @@
 import Drawer from './Drawer'
-import { DrawerIcon } from './Header'
-import TabNav from './TabNav'
+import {
+  DrawerIcon,
+  EditButton
+} from './Header'
+import {
+  TabIcons,
+  TabTitle
+} from './TabNav'
 import OrderCard from './OrderCard'
 import Collapsable from './Collapsable'
 
 export {
   Drawer,
   DrawerIcon,
-  TabNav,
   OrderCard,
-  Collapsable
+  Collapsable,
+  TabIcons,
+  TabTitle,
+  EditButton
 }

@@ -27,13 +27,14 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: steelblue;
+  background-color: ${white}
 `
 
 export const LoginBox = styled.View`
   background-color: ${white};
   height: 250px;
   border-radius: 20px;
+  border-width: 1;
   align-items: center;
   justify-content: center;
 `
@@ -49,4 +50,14 @@ export const AvoidingView = styled.KeyboardAvoidingView`
 export const Title = styled(Text)`
   margin-bottom: 30px;
   align-self: center;
+`
+
+export const LogoContainer = styled.View`
+ height: 100px;
+ margin-bottom: 25px;
+`
+
+export const Logo = styled.Image`
+  width: 100%;
+  height: 100%;
 `

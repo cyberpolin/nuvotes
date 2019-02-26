@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
+import { Keyboard } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ImagePicker from 'react-native-image-picker'
 import {
@@ -16,6 +16,7 @@ import {
   InputContainer,
   styles
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class EditUser extends Component {
   constructor (props) {
@@ -23,6 +24,7 @@ export default class EditUser extends Component {
     this.state = {
       image: ''
     }
+    this.showImagePicker = this.showImagePicker.bind(this)
   }
   render () {
     return (
@@ -32,68 +34,98 @@ export default class EditUser extends Component {
         keyboardShouldPersistTaps='always'
         keyboardDismissMode='on-drag'
       >
-        <ImageContainer onPress={() => this.showImagePicker()}>
+        <ImageContainer onPress={this.showImagePicker}>
           {this.renderAvatar()}
-          <Text>Change Image</Text>
+          <Icon
+            type='font-awesome'
+            name='edit'
+            containerStyle={styles.editIconStyle}
+          />
         </ImageContainer>
         <InfoContainer>
           <FlexRow>
             <InputContainer width={40}>
-              <Label>First Name:</Label>
+              <Label>{translate.firstName}:</Label>
               <Input
                 containerStyle={styles.containerStyle}
                 autoCorrect={false}
                 autoCapitalize='none'
                 inputStyle={styles.inputStyle}
+                blurOnSubmit={false}
+                onSubmitEditing={() => this.lastName.input.focus()}
               />
             </InputContainer>
             <InputContainer width={40}>
-              <Label>Last Name:</Label>
+              <Label >{translate.lastName}:</Label>
               <Input
                 containerStyle={styles.containerStyle}
                 autoCorrect={false}
                 autoCapitalize='none'
                 inputStyle={styles.inputStyle}
+                blurOnSubmit={false}
+                ref={refs => {
+                  this.lastName = refs
+                }}
+                onSubmitEditing={() => this.stateInput.input.focus()}
               />
             </InputContainer>
           </FlexRow>
           <InputContainer>
-            <Label>State:</Label>
+            <Label>{translate.state}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               autoCorrect={false}
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
+              blurOnSubmit={false}
+              ref={refs => {
+                this.stateInput = refs
+              }}
+              onSubmitEditing={() => this.address.input.focus()}
             />
           </InputContainer>
           <InputContainer>
-            <Label>Fake Street, #51:</Label>
+            <Label>{translate.address}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               autoCorrect={false}
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
+              blurOnSubmit={false}
+              ref={refs => {
+                this.address = refs
+              }}
+              onSubmitEditing={() => this.email.input.focus()}
             />
           </InputContainer>
           <InputContainer>
-            <Label>Email:</Label>
+            <Label>{translate.email}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               autoCorrect={false}
               autoCapitalize='none'
               inputStyle={styles.inputStyle}
+              blurOnSubmit={false}
+              ref={refs => {
+                this.email = refs
+              }}
+              onSubmitEditing={() => this.password.input.focus()}
             />
           </InputContainer>
           <InputContainer>
-            <Label>Password:</Label>
+            <Label>{translate.password}:</Label>
             <Input
               containerStyle={styles.containerStyle}
               secureTextEntry
               inputStyle={styles.inputStyle}
+              onSubmitEditing={Keyboard.dismiss}
+              ref={refs => {
+                this.password = refs
+              }}
             />
           </InputContainer>
           <Button
-            title='Save'
+            title={translate.save}
             icon={{
               type: 'font-awesome',
               name: 'save'
@@ -109,11 +141,11 @@ export default class EditUser extends Component {
 
   renderAvatar () {
     const { image } = this.state
-    const user = {}
+    const { user } = this.props
     if (image !== '') {
       return <CircleImage source={{uri: image}} />
     }
-    if (user.avatar) {
+    if (user && user.avatar) {
       return <CircleImage
         resizeMode='contain'
         source={{uri: user.avatar}}
@@ -122,14 +154,17 @@ export default class EditUser extends Component {
     return <Icon
       name='user-circle'
       type='font-awesome'
-      size={150}
+      size={120}
       containerStyle={styles.iconContainerStyle}
     />
   }
 
   showImagePicker () {
     const options = {
-      title: 'Select Avatar'
+      title: translate.selectAvatar,
+      takePhotoButtonTitle: `${translate.takePhoto}...`,
+      chooseFromLibraryButtonTitle: `${translate.chooseGallery}...`,
+      cancelButtonTitle: translate.cancel
     }
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
