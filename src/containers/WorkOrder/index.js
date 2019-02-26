@@ -27,6 +27,7 @@ import {
   ButtonContainer,
   styles
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class WorkOrder extends Component {
   constructor (props) {
@@ -55,41 +56,41 @@ export default class WorkOrder extends Component {
           </PhotoContainer>
           <InfoContainer>
             <Row>
-              <Label>Type:</Label>
+              <Label>{translate.type}:</Label>
               <Text>{descriptionJob}</Text>
             </Row>
             <Row>
-              <Label>Status:</Label>
+              <Label>{translate.state}:</Label>
               <Text>{status}</Text>
             </Row>
             <Row>
-              <Label>Address:</Label>
+              <Label>{translate.address}:</Label>
               <Text>California, fake street #24</Text>
             </Row>
             <Row>
-              <Label>Vendor:</Label>
+              <Label>{translate.vendor}:</Label>
               <Text>Vendor Name</Text>
             </Row>
             <Row>
-              <Label>Coordinator:</Label>
+              <Label>{translate.coordinator}:</Label>
               <Text>Coordinator Name</Text>
             </Row>
             <FlexRow>
               <View>
-                <Label>Start Date:</Label>
+                <Label>{translate.startDate}:</Label>
                 <Text>07/09/2018</Text>
               </View>
               <View>
-                <Label>End Date:</Label>
+                <Label>{translate.endDate}:</Label>
                 <Text>{endDate}</Text>
               </View>
             </FlexRow>
             <Row>
-              <Label>Vendor Bill: </Label>
+              <Label>{translate.vendorBill}: </Label>
               <Text>$ 100.00</Text>
             </Row>
             <Collapsable
-              label='Attachments'
+              label={translate.attachments}
               isCollapsed={isCollapsed}
               onPress={this.handleCollapse}
             >
@@ -98,7 +99,7 @@ export default class WorkOrder extends Component {
                 <GalleryButton
                   onPress={() => navigation.navigate('Documents', {id})}
                 >
-                  <Text>Property Documents</Text>
+                  <Text>{translate.propertyDocuments}</Text>
                   <Icon
                     name='angle-right'
                     type='font-awesome'
@@ -109,7 +110,7 @@ export default class WorkOrder extends Component {
             </Collapsable>
             <ButtonContainer>
               <Button
-                title='Upload Photos'
+                title={translate.uploadPhotos}
                 type='outline'
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
@@ -118,7 +119,7 @@ export default class WorkOrder extends Component {
             </ButtonContainer>
             <ButtonContainer>
               <Button
-                title='Upload Files'
+                title={translate.uploadFiles}
                 type='outline'
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
@@ -187,20 +188,20 @@ export default class WorkOrder extends Component {
     const { navigate } = this.props.navigation
     const galleryTypes = [
       {
-        label: 'Property Before Photos',
+        label: translate.propertyBeforePhotos,
         galleryType: 'before'
       }, {
-        label: 'Property In Progress Photos',
+        label: translate.propertyInProgressPhotos,
         galleryType: 'in_progress'
       }, {
-        label: 'Property After Photos',
+        label: translate.propertyAfterPhotos,
         galleryType: 'after'
       }
     ]
     if (descriptionJob === 'inspection') {
       return (
         <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', orderId })}>
-          <Text>Property Photos</Text>
+          <Text>{translate.propertyPhotos}</Text>
           <Icon
             name='angle-right'
             type='font-awesome'
