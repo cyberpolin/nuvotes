@@ -8,6 +8,7 @@ import {
   SmallText,
   Text
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 const OrderCard = ({order, ...props}) => {
   const { id, name, endDate } = order
@@ -24,7 +25,7 @@ const OrderCard = ({order, ...props}) => {
         />
       </MiddleBox>
       <FlexRow>
-        <SmallText marginRight>Vendor End Date:</SmallText>
+        <SmallText marginRight>{translate.vendorEndDate}:</SmallText>
         <SmallText>{endDate || ''}</SmallText>
       </FlexRow>
     </Container>
