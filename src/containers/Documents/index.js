@@ -10,6 +10,7 @@ import {
   FlexRow,
   styles
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class Documents extends Component {
   render () {
@@ -18,7 +19,7 @@ export default class Documents extends Component {
       <Container>
         {files && files.length > 0
           ? <ScrollContainer>{this.renderFiles(files)}</ScrollContainer>
-          : <Text>There are no files to show.</Text>}
+          : <Text>{translate.noFiles}</Text>}
       </Container>
     )
   }
