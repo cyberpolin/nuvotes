@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { Alert } from 'react-native'
 import { connect } from 'react-redux'
-import { StackActions, NavigationActions } from 'react-navigation'
+import {
+  StackActions,
+  NavigationActions
+} from 'react-navigation'
 import { Icon } from 'react-native-elements'
 import { changeLanguage } from '../../actions/language'
 import {
