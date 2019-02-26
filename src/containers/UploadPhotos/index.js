@@ -20,6 +20,7 @@ import {
   ImageBox,
   styles
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class UploadPhotos extends Component {
   constructor (props) {
@@ -36,7 +37,7 @@ export default class UploadPhotos extends Component {
     const { photos } = this.state
     return (
       <Container>
-        <Text h4>Photos</Text>
+        <Text h4>{translate.photos}</Text>
         {photos.length > 0 &&
           <ScrollView
             bounces={false}
@@ -52,14 +53,14 @@ export default class UploadPhotos extends Component {
             buttonStyle={{...styles.buttonStyle, ...styles.marginButton}}
             titleStyle={styles.buttonTitle}
             type='outline'
-            title='Take a photo...'
+            title={`${translate.takePhoto}...`}
             onPress={this.selectFromCamera}
           />
           <Button
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
             type='outline'
-            title='Choose from the gallery...'
+            title={`${translate.chooseGallery}...`}
             onPress={this.selectFromGallery}
           />
         </ButtonsContainer>
@@ -68,14 +69,14 @@ export default class UploadPhotos extends Component {
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
             type='outline'
-            title='Cancel'
+            title={translate.cancel}
             onPress={this.handleClose}
           />
           <Button
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
             type='outline'
-            title='Save'
+            title={translate.save}
           />
         </FlexRow>
       </Container>
@@ -128,12 +129,12 @@ export default class UploadPhotos extends Component {
       const { descriptionJob } = this.props
       if (descriptionJob !== 'inspection') {
         Alert.alert(
-          'Save photos as...',
-          'Choose a type to save the photos',
+          translate.savePhotoAlertTitle,
+          translate.savePhotoAlertMessage,
           [
-            {text: 'Before', onPress: () => this.savePhoto(images, 'before')},
-            {text: 'In Progress', onPress: () => this.savePhoto(images, 'in_progress')},
-            {text: 'After', onPress: () => this.savePhoto(images, 'after')}
+            {text: translate.before, onPress: () => this.savePhoto(images, 'before')},
+            {text: translate.inProgress, onPress: () => this.savePhoto(images, 'in_progress')},
+            {text: translate.after, onPress: () => this.savePhoto(images, 'after')}
           ], {cancelable: false}
         )
       } else {
@@ -148,12 +149,12 @@ export default class UploadPhotos extends Component {
       const { descriptionJob } = this.props
       if (descriptionJob !== 'inspection') {
         Alert.alert(
-          'Save photos as...',
-          'Choose a type to save the photos',
+          translate.savePhotoAlertTitle,
+          translate.savePhotoAlertMessage,
           [
-            {text: 'Before', onPress: () => this.savePhoto(image, 'before')},
-            {text: 'In Progress', onPress: () => this.savePhoto(image, 'in_progress')},
-            {text: 'After', onPress: () => this.savePhoto(image, 'after')}
+            {text: translate.before, onPress: () => this.savePhoto(image, 'before')},
+            {text: translate.inProgress, onPress: () => this.savePhoto(image, 'in_progress')},
+            {text: translate.after, onPress: () => this.savePhoto(image, 'after')}
           ], {cancelable: false}
         )
       } else {

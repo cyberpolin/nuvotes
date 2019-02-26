@@ -12,6 +12,7 @@ import {
   FilesContainer,
   styles
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class UploadFiles extends Component {
   constructor (props) {
@@ -26,13 +27,13 @@ export default class UploadFiles extends Component {
   render () {
     return (
       <Container>
-        <Text h4>Files</Text>
+        <Text h4>{translate.files}</Text>
         {this.renderFiles()}
         <Button
           buttonStyle={styles.buttonStyle}
           titleStyle={styles.buttonTitle}
           type='outline'
-          title='Select a File...'
+          title={`${translate.selectFile}...`}
           onPress={this.selectFile}
         />
         <FlexRow>
@@ -40,14 +41,14 @@ export default class UploadFiles extends Component {
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
             type='outline'
-            title='Cancel'
+            title={translate.cancel}
             onPress={this.handleClose}
           />
           <Button
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
             type='outline'
-            title='Save'
+            title={translate.save}
           />
         </FlexRow>
       </Container>
