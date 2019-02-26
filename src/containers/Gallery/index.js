@@ -4,6 +4,7 @@ import { Text } from 'react-native-elements'
 import {
   Container
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class Gallery extends Component {
   render () {
@@ -12,7 +13,7 @@ export default class Gallery extends Component {
       <Container>
         {photos && photos.length > 0
           ? <ImageBrowser images={photos} />
-          : <Text>There are no photos to show.</Text>}
+          : <Text>{translate.noPhotos}</Text>}
       </Container>
     )
   }
