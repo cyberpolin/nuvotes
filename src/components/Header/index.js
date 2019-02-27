@@ -3,6 +3,7 @@ import {
   Animated,
   Dimensions
 } from 'react-native'
+import { connect } from 'react-redux'
 import {
   Icon,
   SearchBar
@@ -17,8 +18,9 @@ import {
   EditTitle
 } from './styled'
 import { translate } from '../../helpers/localization'
+import { getSearch } from '../../actions/search'
 
-export default class Header extends Component {
+class Header extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -28,6 +30,7 @@ export default class Header extends Component {
     this.toggleInput = this.toggleInput.bind(this)
     this.onChangeText = this.onChangeText.bind(this)
     this.renderSearchInput = this.renderSearchInput.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
     this.width = new Animated.Value(0)
   }
   render () {
@@ -62,10 +65,11 @@ export default class Header extends Component {
 
   renderSearchInput () {
     const { search } = this.state
+    const { getSearch } = this.props
     return (
       <Animated.View style={{width: this.width}}>
         <SearchBar
-          placeholder='Search'
+          placeholder={translate.search}
           onChangeText={this.onChangeText}
           containerStyle={styles.searchContainer}
           inputStyle={styles.searchInput}
@@ -74,14 +78,23 @@ export default class Header extends Component {
           lightTheme
           autoCapitalize='none'
           autoCorrect={false}
+          onSubmitEditing={this.handleSearch}
+          onClear={() => getSearch('')}
           searchIcon={<Icon
             name='search'
             type='font-awesome'
             size={20}
+            onPress={this.handleSearch}
           />}
         />
       </Animated.View>
     )
+  }
+
+  handleSearch () {
+    const { search } = this.state
+    const { getSearch } = this.props
+    getSearch(search)
   }
 
   onChangeText (search) {
@@ -115,3 +128,11 @@ export const EditButton = (navigation, routeName) => {
     </ButtonContainer>
   )
 }
+
+const mapDispatchToProps = dispatch => ({
+  getSearch: search => {
+    dispatch(getSearch(search))
+  }
+})
+
+export default connect(null, mapDispatchToProps)(Header)
