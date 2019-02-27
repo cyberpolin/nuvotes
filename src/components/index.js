@@ -1,11 +1,16 @@
 import Drawer from './Drawer'
-import Header from './Header'
-import TabNav from './TabNav'
+import Header, { EditButton } from './Header'
+import {
+  TabIcons,
+  TabTitle
+} from './TabNav'
 import OrderCard from './OrderCard'
 
 export {
   Drawer,
-  TabNav,
+  Header,
+  TabIcons,
+  TabTitle,
   OrderCard,
-  Header
+  EditButton
 }

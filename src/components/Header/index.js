@@ -12,8 +12,11 @@ import {
   HeaderContainer,
   HeaderTitle,
   SearchButton,
-  styles
+  styles,
+  ButtonContainer,
+  EditTitle
 } from './styled'
+import { translate } from '../../helpers/localization'
 
 export default class Header extends Component {
   constructor (props) {
@@ -103,4 +106,12 @@ export default class Header extends Component {
       }).start(() => this.setState({isVisible: !isVisible, search: ''}))
     }
   }
+}
+
+export const EditButton = (navigation, routeName) => {
+  return (
+    <ButtonContainer onPress={() => navigation.navigate(routeName)}>
+      <EditTitle>{translate.edit}</EditTitle>
+    </ButtonContainer>
+  )
 }

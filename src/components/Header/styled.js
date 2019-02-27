@@ -57,3 +57,12 @@ export const SearchButton = styled(DrawerIconButton)`
   flex-direction: row;
   align-items: center;
 `
+
+export const ButtonContainer = styled.TouchableOpacity`
+  padding: 10px 15px 10px 10px;
+`
+
+export const EditTitle = styled.Text`
+  font-size: 18px;
+  font-weight: 600;
+`

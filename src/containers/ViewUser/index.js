@@ -3,9 +3,8 @@ import {
   View,
   ActivityIndicator
 } from 'react-native'
-import {
-  Icon
-} from 'react-native-elements'
+import { Icon } from 'react-native-elements'
+import { translate } from '../../helpers/localization'
 import {
   Container,
   Label,
@@ -32,27 +31,27 @@ export default class ViewUser extends Component {
         </ImageContainer>
         <InfoContainer>
           <View>
-            <Label>Username:</Label>
+            <Label>{translate.userName}:</Label>
             <Text>John_Jhonson</Text>
           </View>
           <View>
-            <Label>First Name:</Label>
+            <Label>{translate.firstName}:</Label>
             <Text>John</Text>
           </View>
           <View>
-            <Label>Last Name:</Label>
+            <Label>{translate.lastName}:</Label>
             <Text>Jhonson</Text>
           </View>
           <View>
-            <Label>State:</Label>
+            <Label>{translate.state}:</Label>
             <Text>California</Text>
           </View>
           <View>
-            <Label>Address:</Label>
+            <Label>{translate.address}:</Label>
             <Text>Fake Street, #51</Text>
           </View>
           <View>
-            <Label>Email:</Label>
+            <Label>{translate.email}:</Label>
             <Text>john@jhonson.com</Text>
           </View>
         </InfoContainer>
