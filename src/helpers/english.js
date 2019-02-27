@@ -44,7 +44,8 @@ const en = {
   property: 'Property',
   edit: 'Edit',
   changeImage: 'Change Image',
-  selectAvatar: 'Select Avatar'
+  selectAvatar: 'Select Avatar',
+  search: 'Search'
 }
 
 export default en
