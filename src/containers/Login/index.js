@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Keyboard } from 'react-native'
 import {
   Input,
   Button
@@ -16,8 +15,11 @@ import {
 import Assets from '../../assets/img'
 
 export default class Login extends Component {
+  constructor (props) {
+    super(props)
+    this.handleLogin = this.handleLogin.bind(this)
+  }
   render () {
-    const { navigation } = this.props
     return (
       <Container>
         <AvoidingView behavior='padding'>
@@ -43,7 +45,7 @@ export default class Login extends Component {
               ref={refs => {
                 this.passwordRef = refs
               }}
-              onSubmitEditing={Keyboard.dismiss}
+              onSubmitEditing={this.handleLogin}
               secureTextEntry
             />
             <Button
@@ -52,11 +54,16 @@ export default class Login extends Component {
               titleStyle={styles.buttonTitle}
               containerStyle={styles.buttonContainer}
               buttonStyle={styles.buttonStyle}
-              onPress={() => navigation.navigate('Home')}
+              onPress={this.handleLogin}
             />
           </LoginBox>
         </AvoidingView>
       </Container>
     )
+  }
+
+  handleLogin () {
+    const { navigation } = this.props
+    navigation.navigate('Home')
   }
 }

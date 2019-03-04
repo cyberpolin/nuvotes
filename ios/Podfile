@@ -11,9 +11,9 @@ target 'nuvoteApp' do
     inherit! :search_paths
     # Pods for testing
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
     pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
-
+    pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+    pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker'
     pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
     pod 'ReactNativeLocalization', :path => '../node_modules/react-native-localization'

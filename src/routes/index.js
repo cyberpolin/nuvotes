@@ -7,9 +7,10 @@ import {
 } from 'react-navigation'
 import {
   Orders,
-  Overdue,
-  InProgress,
+  WorkOrder,
+  Gallery,
   Login,
+  Documents,
   ViewUser,
   EditUser
 } from '../containers'
@@ -27,10 +28,10 @@ const TabAppNavigator = createBottomTabNavigator({
     screen: Orders
   },
   InProgress: {
-    screen: InProgress
+    screen: Orders
   },
   Overdue: {
-    screen: Overdue
+    screen: Orders
   }
 }, {
   tabBarOptions: {
@@ -38,6 +39,7 @@ const TabAppNavigator = createBottomTabNavigator({
     inactiveTintColor: '#5E5E5E'
   },
   defaultNavigationOptions: ({ navigation }) => ({
+    title: navigation.state.routeName === 'InProgress' && 'In Progress',
     tabBarIcon: ({ tintColor }) => TabIcons(navigation, tintColor),
     tabBarLabel: ({ tintColor }) => TabTitle(navigation, tintColor)
   })
@@ -64,6 +66,24 @@ const StackNavigator = createStackNavigator({
   },
   EditProfile: {
     screen: EditUser
+  },
+  WorkOrder: {
+    screen: WorkOrder,
+    navigationOptions: ({ navigation }) => {
+      return { title: navigation.getParam('title', 'Work Order') }
+    }
+  },
+  Gallery: {
+    screen: Gallery,
+    navigationOptions: {
+      title: 'Photos'
+    }
+  },
+  Documents: {
+    screen: Documents,
+    navigationOptions: {
+      title: 'Documents'
+    }
   }
 }, {
   headerBackTitleVisible: false,

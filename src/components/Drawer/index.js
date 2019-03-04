@@ -22,7 +22,7 @@ import {
 class Drawer extends Component {
   constructor (props) {
     super(props)
-    this.logout = this.logout.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
     this.languageAlert = this.languageAlert.bind(this)
     this.handleLanguageChange = this.handleLanguageChange.bind(this)
     this.resetNavigation = this.resetNavigation.bind(this)
@@ -50,7 +50,7 @@ class Drawer extends Component {
             />
             <ItemText>{translate.changeLanguage}</ItemText>
           </DrawerItem>
-          <DrawerItem onPress={this.logout}>
+          <DrawerItem onPress={this.handleLogout}>
             <Icon
               type='font-awesome'
               name='sign-out'
@@ -72,7 +72,7 @@ class Drawer extends Component {
     navigation.dispatch(resetAction)
   }
 
-  logout () {
+  handleLogout () {
     const { navigation } = this.props
     navigation.navigate('Login')
   }
