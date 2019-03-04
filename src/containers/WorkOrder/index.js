@@ -38,6 +38,7 @@ export default class WorkOrder extends Component {
       selectedModal: ''
     }
     this.handleCollapse = this.handleCollapse.bind(this)
+    this.changeVisibility = this.changeVisibility.bind(this)
   }
   render () {
     const { isCollapsed } = this.state
@@ -152,12 +153,13 @@ export default class WorkOrder extends Component {
         >
           <UploadPhotos
             isVisible={isVisible}
-            changeVisibility={(visibility) => this.changeVisibility(visibility)}
+            changeVisibility={this.changeVisibility}
             descriptionJob={descriptionJob}
           />
         </Overlay>
       )
-    } return (
+    }
+    return (
       <Overlay
         isVisible={isVisible}
         windowBackgroundColor='rgba(0, 0, 0, .4)'
@@ -169,7 +171,7 @@ export default class WorkOrder extends Component {
       >
         <UploadFiles
           isVisible={isVisible}
-          changeVisibility={(visibility) => this.changeVisibility(visibility)}
+          changeVisibility={this.changeVisibility}
         />
       </Overlay>
     )
