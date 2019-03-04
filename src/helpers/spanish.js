@@ -55,7 +55,8 @@ const es = {
   documents: 'Documentos',
   propertyBeforePhotos: 'Fotos de la propiedad Antes',
   propertyInProgressPhotos: 'Fotos de la propiedad En proceso',
-  propertyAfterPhotos: 'Fotos de la propiedad Después'
+  propertyAfterPhotos: 'Fotos de la propiedad Después',
+  uploadError: 'Ha ocurrido un error.'
 }
 
 export default es
