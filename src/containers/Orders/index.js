@@ -6,6 +6,7 @@ import {
   TextContainer
 } from './styled'
 import { filterOrders } from '../../helpers/orders'
+import _ from 'lodash'
 
 export default class Orders extends Component {
   render () {
@@ -20,7 +21,7 @@ export default class Orders extends Component {
     const { navigation } = this.props
     const orderType = navigation.state.routeName
     const orders = filterOrders(orderType)
-    if (orders && orders.length > 0) {
+    if (orders && !_.isEmpty(orders)) {
       return orders.map((order, index) => {
         return (
           <OrderCard

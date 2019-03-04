@@ -11,13 +11,14 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
+import _ from 'lodash'
 
 export default class Documents extends Component {
   render () {
     const { files } = this.props
     return (
       <Container>
-        {files && files.length > 0
+        {files && !_.isEmpty(files)
           ? <ScrollContainer>{this.renderFiles(files)}</ScrollContainer>
           : <Text>{translate.noFiles}</Text>}
       </Container>

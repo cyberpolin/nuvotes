@@ -46,7 +46,6 @@ export const ImagesContainer = styled.View`
   width: 107%;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
 `
 
 export const Thumbnail = styled(Image)`

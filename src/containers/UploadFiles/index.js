@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker'
+import { Alert } from 'react-native'
+import {
+  DocumentPicker,
+  DocumentPickerUtil
+} from 'react-native-document-picker'
 import {
   Button,
   Text,
@@ -13,6 +17,7 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
+import _ from 'lodash'
 
 export default class UploadFiles extends Component {
   constructor (props) {
@@ -57,7 +62,7 @@ export default class UploadFiles extends Component {
 
   renderFiles () {
     const { files } = this.state
-    if (files.length > 0) {
+    if (!_.isEmpty(files)) {
       return (
         <FilesContainer>
           {files.map((file, index) => {
@@ -96,7 +101,7 @@ export default class UploadFiles extends Component {
       filetype: [DocumentPickerUtil.pdf()]
     }, (error, res) => {
       if (error) {
-        console.log(error)
+        Alert.alert(translate.uploadError)
       }
       if (res) {
         const { files } = this.state

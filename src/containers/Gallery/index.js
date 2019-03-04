@@ -5,13 +5,14 @@ import {
   Container
 } from './styled'
 import { translate } from '../../helpers/localization'
+import _ from 'lodash'
 
 export default class Gallery extends Component {
   render () {
     const { photos } = this.props
     return (
       <Container>
-        {photos && photos.length > 0
+        {photos && !_.isEmpty(photos)
           ? <ImageBrowser images={photos} />
           : <Text>{translate.noPhotos}</Text>}
       </Container>
