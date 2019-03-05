@@ -21,7 +21,7 @@ import {
   TabTitle,
   EditButton
 } from '../components'
-import palette from '../colorPalette'
+import { black, primary } from '../colorPalette'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -35,8 +35,8 @@ const TabAppNavigator = createBottomTabNavigator({
   }
 }, {
   tabBarOptions: {
-    activeTintColor: 'red',
-    inactiveTintColor: '#5E5E5E'
+    activeTintColor: primary,
+    inactiveTintColor: black
   },
   defaultNavigationOptions: ({ navigation }) => ({
     title: navigation.state.routeName === 'InProgress' && 'In Progress',
@@ -88,7 +88,7 @@ const StackNavigator = createStackNavigator({
 }, {
   headerBackTitleVisible: false,
   defaultNavigationOptions: {
-    headerTintColor: palette.black
+    headerTintColor: black
   }
 })
 
