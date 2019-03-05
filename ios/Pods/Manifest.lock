@@ -1,3 +1,77 @@
-PODFILE CHECKSUM: db60067d5cedc7a6792b8675288f76d5ace95af9
+PODS:
+  - AppCenter/Analytics (1.13.2):
+    - AppCenter/Core
+  - AppCenter/Core (1.13.2)
+  - AppCenter/Crashes (1.13.2):
+    - AppCenter/Core
+  - AppCenterReactNativeShared (1.12.2):
+    - AppCenter/Core (= 1.13.2)
+  - QBImagePickerController (3.4.0)
+  - React (0.11.0):
+    - React/Core (= 0.11.0)
+  - react-native-document-picker (2.2.0):
+    - React
+  - react-native-image-picker (0.28.0):
+    - React
+  - React/Core (0.11.0)
+  - ReactNativeLocalization (2.0.3):
+    - React
+  - RNGestureHandler (1.0.15):
+    - React
+  - RNImageCropPicker (0.22.0):
+    - QBImagePickerController
+    - React/Core
+    - RSKImageCropper
+  - RNVectorIcons (6.2.0):
+    - React
+  - RSKImageCropper (2.2.1)
+
+DEPENDENCIES:
+  - AppCenter/Analytics (~> 1.13.2)
+  - AppCenter/Crashes (~> 1.13.2)
+  - AppCenterReactNativeShared (~> 1.12.2)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - ReactNativeLocalization (from `../node_modules/react-native-localization`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AppCenter
+    - AppCenterReactNativeShared
+    - QBImagePickerController
+    - React
+    - RSKImageCropper
+
+EXTERNAL SOURCES:
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
+  ReactNativeLocalization:
+    :path: "../node_modules/react-native-localization"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
+  RNVectorIcons:
+    :path: "../node_modules/react-native-vector-icons"
+
+SPEC CHECKSUMS:
+  AppCenter: bce7fe1098e8e8aeb70aaae1898600534069f549
+  AppCenterReactNativeShared: 6c0750b874f3242c47cb64083e23b835975c6aa2
+  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
+  React: ab1a2e21deb34965c38328d5ec40cc7d12c6050a
+  react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
+  react-native-image-picker: f42de90075c5b1af53417af927631d909a1a746e
+  ReactNativeLocalization: 6d2bb9596736f692becd996d126d5230327db1a5
+  RNGestureHandler: afde2addc517e85cc97a25bfe119acbee779a7ce
+  RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
+  RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
+  RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
+
+PODFILE CHECKSUM: 948f451af33d2407ccc99b5a4104f518d12dc9bf
 
 COCOAPODS: 1.5.3
