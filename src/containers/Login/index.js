@@ -10,6 +10,7 @@ import {
   AvoidingView,
   LogoContainer,
   Logo,
+  Background,
   styles
 } from './styled'
 import Assets from '../../assets/img'
@@ -23,40 +24,41 @@ export default class Login extends Component {
     return (
       <Container>
         <AvoidingView behavior='padding'>
-          <LogoContainer>
-            <Logo
-              resizeMode='contain'
-              source={Assets.logo}
-            />
-          </LogoContainer>
-          <LoginBox>
-            <Input
-              placeholder={translate.userName}
-              inputContainerStyle={styles.inputContainerStyle}
-              containerStyle={styles.containerStyle}
-              onSubmitEditing={() => this.passwordRef.input.focus()}
-              autoCorrect={false}
-              autoCapitalize='none'
-            />
-            <Input
-              placeholder={translate.password}
-              inputContainerStyle={styles.inputContainerStyle}
-              containerStyle={styles.containerStyle}
-              ref={refs => {
-                this.passwordRef = refs
-              }}
-              onSubmitEditing={this.handleLogin}
-              secureTextEntry
-            />
-            <Button
-              title={translate.signIn}
-              type='outline'
-              titleStyle={styles.buttonTitle}
-              containerStyle={styles.buttonContainer}
-              buttonStyle={styles.buttonStyle}
-              onPress={this.handleLogin}
-            />
-          </LoginBox>
+          <Background source={Assets.tools}>
+            <LogoContainer>
+              <Logo
+                resizeMode='contain'
+                source={Assets.logo}
+              />
+            </LogoContainer>
+            <LoginBox>
+              <Input
+                placeholder={translate.userName}
+                inputContainerStyle={styles.inputContainer}
+                containerStyle={styles.inputStyle}
+                onSubmitEditing={() => this.passwordRef.input.focus()}
+                autoCorrect={false}
+                autoCapitalize='none'
+              />
+              <Input
+                placeholder={translate.password}
+                inputContainerStyle={styles.inputContainer}
+                containerStyle={styles.inputStyle}
+                ref={refs => {
+                  this.passwordRef = refs
+                }}
+                onSubmitEditing={this.handleLogin}
+                secureTextEntry
+              />
+              <Button
+                title={translate.signIn}
+                titleStyle={styles.buttonTitle}
+                containerStyle={styles.buttonContainer}
+                buttonStyle={styles.buttonStyle}
+                onPress={this.handleLogin}
+              />
+            </LoginBox>
+          </Background>
         </AvoidingView>
       </Container>
     )
