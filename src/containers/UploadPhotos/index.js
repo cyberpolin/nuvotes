@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
-  ActivityIndicator,
   Platform,
   Alert
 } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import {
   Text,
-  Icon,
-  Button
+  Button,
+  Avatar,
+  Badge,
+  Icon
 } from 'react-native-elements'
 import {
   Container,
   FlexRow,
   ButtonsContainer,
   ImagesContainer,
-  Thumbnail,
   ImageBox,
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
+import { white } from '../../colorPalette'
 
 export default class UploadPhotos extends Component {
   constructor (props) {
@@ -96,16 +97,23 @@ export default class UploadPhotos extends Component {
       const { sourceURL, path } = photo
       return (
         <ImageBox key={index}>
-          <Thumbnail
+          <Avatar
             source={{uri: isAndroid ? path : sourceURL}}
-            PlaceholderContent={<ActivityIndicator />}
+            size='large'
+            containerStyle={styles.avatarContainer}
           />
-          <Icon
-            type='font-awesome'
-            name='times'
-            containerStyle={styles.deleteIcon}
+          <Badge
+            value={
+              <Icon
+                type='font-awesome'
+                name='times'
+                size={12}
+                color={white}
+              />
+            }
+            containerStyle={styles.badgeStyle}
+            status='error'
             onPress={() => this.deletePhoto(index)}
-            underlayColor='transparent'
           />
         </ImageBox>
       )
