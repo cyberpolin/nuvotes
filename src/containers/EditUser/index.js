@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { Keyboard } from 'react-native'
+import {
+  Keyboard,
+  Alert
+} from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ImagePicker from 'react-native-image-picker'
 import {
@@ -167,10 +170,8 @@ export default class EditUser extends Component {
       cancelButtonTitle: translate.cancel
     }
     ImagePicker.showImagePicker(options, (response) => {
-      if (response.didCancel) {
-        console.log('USER cancalled')
-      } else if (response.error) {
-        console.log('An error has ocurred')
+      if (response.error) {
+        Alert.alert(translate.uploadError)
       } else {
         const { uri } = response
         this.setState({image: uri})
