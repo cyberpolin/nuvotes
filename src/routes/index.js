@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -16,7 +17,7 @@ import {
 } from '../containers'
 import {
   Drawer,
-  DrawerIcon,
+  Header,
   TabIcons,
   TabTitle,
   EditButton
@@ -54,8 +55,8 @@ const DrawerNavigator = createDrawerNavigator({
 const StackNavigator = createStackNavigator({
   DrawerScreen: {
     screen: DrawerNavigator,
-    navigationOptions: (navigation) => ({
-      headerLeft: DrawerIcon(navigation)
+    navigationOptions: ({navigation}) => ({
+      header: <Header navigation={navigation} />
     })
   },
   Profile: {
