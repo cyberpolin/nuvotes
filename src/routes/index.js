@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -16,12 +17,12 @@ import {
 } from '../containers'
 import {
   Drawer,
-  DrawerIcon,
+  Header,
   TabIcons,
   TabTitle,
   EditButton
 } from '../components'
-import palette from '../colorPalette'
+import { black, primary } from '../colorPalette'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -35,8 +36,8 @@ const TabAppNavigator = createBottomTabNavigator({
   }
 }, {
   tabBarOptions: {
-    activeTintColor: 'red',
-    inactiveTintColor: '#5E5E5E'
+    activeTintColor: primary,
+    inactiveTintColor: black
   },
   defaultNavigationOptions: ({ navigation }) => ({
     title: navigation.state.routeName === 'InProgress' && 'In Progress',
@@ -54,8 +55,8 @@ const DrawerNavigator = createDrawerNavigator({
 const StackNavigator = createStackNavigator({
   DrawerScreen: {
     screen: DrawerNavigator,
-    navigationOptions: (navigation) => ({
-      headerLeft: DrawerIcon(navigation)
+    navigationOptions: ({navigation}) => ({
+      header: <Header navigation={navigation} />
     })
   },
   Profile: {
@@ -88,7 +89,7 @@ const StackNavigator = createStackNavigator({
 }, {
   headerBackTitleVisible: false,
   defaultNavigationOptions: {
-    headerTintColor: palette.black
+    headerTintColor: black
   }
 })
 

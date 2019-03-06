@@ -1,3 +1,4 @@
 export default {
-  logo: require('./logo.jpg')
+  logo: require('./logo.png'),
+  tools: require('./tools.jpg')
 }

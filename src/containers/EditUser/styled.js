@@ -1,6 +1,8 @@
 import { Platform } from 'react-native'
 import styled from 'styled-components/native'
-import { black, white } from '../../colorPalette'
+import { black, primary } from '../../colorPalette'
+
+const isIOS = Platform.OS === 'ios'
 
 export const styles = {
   inputStyle: {
@@ -12,17 +14,20 @@ export const styles = {
     paddingHorizontal: 0
   },
   buttonStyle: {
-    backgroundColor: white,
-    borderWidth: 1,
-    borderColor: black
+    borderColor: black,
+    marginTop: 10,
+    backgroundColor: primary,
+    borderRadius: 10
   },
   titleStyle: {
     color: black
   },
   buttonContainerStyle: {
-    width: '40%',
+    width: '60%',
     alignSelf: 'center',
-    marginTop: 'auto'
+    marginTop: 'auto',
+    backgroundColor: !isIOS ? 'transparent' : undefined,
+    paddingBottom: 10
   },
   iconContainerStyle: {
     height: 120
@@ -37,8 +42,6 @@ export const styles = {
     top: 12
   }
 }
-
-const isIOS = Platform.OS === 'ios'
 
 export const Label = styled.Text`
   font-size: 18px;

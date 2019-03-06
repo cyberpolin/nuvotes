@@ -55,7 +55,8 @@ const en = {
   propertyBeforePhotos: 'Property Before Photos',
   propertyInProgressPhotos: 'Property In Progress Photos',
   propertyAfterPhotos: 'Property After Photos',
-  uploadError: 'An error has ocurred.'
+  uploadError: 'An error has ocurred.',
+  search: 'Search'
 }
 
 export default en

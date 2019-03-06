@@ -26,14 +26,13 @@ To run the project in your local machine:
 
 # Components
 
-## OrderCard
-
-![OrderCard](./src/components/OrderCard/img/OrderCard.png)
-
-[OrderCard Docs](./src/components/OrderCard/docs.md)
-
 ## Collapsable
 
 ![Collapsable](./src/components/Collapsable/img/Collapsable.png)
 
 [Collapsable](./src/components/Collapsable/docs.md)
+## Header
+
+![Header](./src/components/Header/img/Header.png)
+
+[Header](./src/components/Header/docs.md)

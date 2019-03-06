@@ -72,7 +72,13 @@ export default class UploadFiles extends Component {
                 key={index}
                 leftIcon={{name: 'file', type: 'font-awesome'}}
                 title={fileName}
-                rightElement={this.deleteButton(index)}
+                rightElement={
+                  <Icon
+                    name='times'
+                    type='font-awesome'
+                    onPress={() => this.deleteFile(index)}
+                  />
+                }
                 bottomDivider
               />
             )
@@ -80,14 +86,6 @@ export default class UploadFiles extends Component {
         </FilesContainer>
       )
     }
-  }
-
-  deleteButton (index) {
-    return <Icon
-      name='times'
-      type='font-awesome'
-      onPress={() => this.deleteFile(index)}
-    />
   }
 
   deleteFile (index) {

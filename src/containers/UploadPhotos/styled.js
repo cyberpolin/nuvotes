@@ -1,26 +1,30 @@
 import styled from 'styled-components/native'
-import { Image } from 'react-native-elements'
+import { black } from '../../colorPalette'
 
 export const styles = {
-  buttonTitle: {
-    color: '#000',
-    fontSize: 15
+  avatarContainer: {
+    marginBottom: 5
   },
   buttonStyle: {
-    borderColor: '#000',
+    borderColor: black,
     alignSelf: 'center',
     height: 36
+  },
+  buttonTitle: {
+    color: black,
+    fontSize: 15
   },
   marginButton: {
     marginBottom: 15
   },
   scrollViewContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flex: 1
   },
-  deleteIcon: {
+  badgeStyle: {
     position: 'absolute',
-    right: 16,
-    top: -3
+    right: 4,
+    top: 0
   }
 }
 
@@ -43,17 +47,11 @@ export const ButtonsContainer = styled.View`
 `
 
 export const ImagesContainer = styled.View`
-  width: 107%;
+  width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
 `
 
-export const Thumbnail = styled(Image)`
-  height: 70px;
-  width: 70px;
-  margin-bottom: 7px;
-`
-
 export const ImageBox = styled.View`
-  flex-basis: 33%;
+  flex-basis: 33.3%;
 `
