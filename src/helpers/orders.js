@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import Orders from '../../orders'
 
 export const filterOrders = (orderType) => {
@@ -11,4 +12,14 @@ export const filterOrders = (orderType) => {
     })
   }
   return Orders
+}
+
+export const filterOrderBySearch = (orders, search) => {
+  return orders.filter(order => {
+    if (!isNaN(search) && _.includes(order.id.toString(), search)) {
+      return order
+    } else if (_.includes(order.name, search)) {
+      return order
+    }
+  })
 }

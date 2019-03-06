@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import { Text } from 'react-native'
+import { connect } from 'react-redux'
 import { ListItem } from 'react-native-elements'
 import {
   Container,
   TextContainer,
   ListItemContainer
 } from './styled'
-import { filterOrders } from '../../helpers/orders'
+import {
+  filterOrders,
+  filterOrderBySearch
+} from '../../helpers/orders'
 import _ from 'lodash'
 
-export default class Orders extends Component {
+class Orders extends Component {
   render () {
     return (
       <Container>
@@ -19,9 +23,12 @@ export default class Orders extends Component {
   }
 
   renderOrders () {
-    const { navigation } = this.props
+    const { navigation, search } = this.props
     const orderType = navigation.state.routeName
-    const orders = filterOrders(orderType)
+    let orders = filterOrders(orderType)
+    if (search !== '') {
+      orders = filterOrderBySearch(orders, search)
+    }
     if (orders && !_.isEmpty(orders)) {
       return orders.map((order, index) => {
         const { name, endDate, id } = order
@@ -45,3 +52,9 @@ export default class Orders extends Component {
     )
   }
 }
+
+const mapStateToProps = ({ search }) => ({
+  search: search
+})
+
+export default connect(mapStateToProps, null)(Orders)
