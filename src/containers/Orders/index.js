@@ -9,9 +9,12 @@ import {
 } from './styled'
 import {
   filterOrders,
-  filterOrderBySearch
+  filterOrderBySearch,
+  getDateDiff,
+  ordersByDate
 } from '../../helpers/orders'
 import _ from 'lodash'
+import { primary, red, orange } from '../../colorPalette'
 
 class Orders extends Component {
   render () {
@@ -32,13 +35,18 @@ class Orders extends Component {
     if (orders && !_.isEmpty(orders)) {
       return orders.map((order, index) => {
         const { name, endDate, id } = order
+        const daysToDueDate = getDateDiff(endDate)
         return (
           <ListItem
             key={index}
             chevron
             title={`#${id} - ${name}`}
-            subtitle={`Vendor End Date: ${endDate}`}
-            containerStyle={ListItemContainer}
+            subtitle={`Vendor Due Date: ${endDate}`}
+            containerStyle={{...ListItemContainer}}
+            titleStyle={{
+              color: daysToDueDate < 3 ? red
+                : daysToDueDate < 16 ? orange : primary
+            }}
             onPress={() => navigation.navigate('WorkOrder', {order})}
             bottomDivider
           />
