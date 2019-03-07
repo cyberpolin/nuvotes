@@ -1,4 +1,14 @@
 import styled from 'styled-components/native'
+import responsiveFont from '../../utils/responsiveFont'
+
+export const styles = {
+  titleStyle: {
+    fontSize: responsiveFont(2.6)
+  },
+  subtitleStyle: {
+    fontSize: responsiveFont(2.3)
+  }
+}
 
 export const Container = styled.ScrollView.attrs({
   bounces: false,
