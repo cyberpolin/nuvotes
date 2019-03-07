@@ -46,9 +46,9 @@ export const DrawerIconButton = styled.TouchableOpacity`
 `
 
 export const HeaderContainer = styled.View`
-  height: ${isIphoneX ? Header.HEIGHT + 24 : Header.HEIGHT};
+  height: ${isIOS && isIphoneX ? Header.HEIGHT + 24 : Header.HEIGHT};
   background-color: ${white};
-  ${isIphoneX ? 'padding-top: 40px' : isIOS && 'padding-top: 18px'};
+  ${isIphoneX && isIOS ? 'padding-top: 40px' : isIOS && 'padding-top: 18px'};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -56,7 +56,7 @@ export const HeaderContainer = styled.View`
   shadow-offset: 0 0;
   shadow-color: ${black};
   shadow-radius: 1px;
-  elevation: 1;
+  elevation: 3;
 `
 
 export const HeaderTitle = styled.Text`
