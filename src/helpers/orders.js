@@ -2,11 +2,11 @@ import _ from 'lodash'
 import Orders from '../../orders'
 
 export const filterOrders = (orderType) => {
-  if (orderType === 'Overdue') {
+  if (orderType === 'Search') {
     return Orders.filter(order => {
       return order.status === 'overdue'
     })
-  } else if (orderType === 'InProgress') {
+  } else if (orderType === 'Pending') {
     return Orders.filter(order => {
       return order.status === 'inProgress'
     })
