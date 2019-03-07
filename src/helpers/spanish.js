@@ -15,6 +15,7 @@ const es = {
   yes: 'Sí',
   orders: 'Órdenes',
   inProgress: 'En Proceso',
+  pending: 'Pendiente de Completar',
   overdue: 'Atrasados',
   inspection: 'Inspección',
   insurance: 'Seguro',
