@@ -4,7 +4,8 @@ export const Container = styled.ScrollView.attrs({
   bounces: false,
   contentContainerStyle: {
     alignItems: 'center'
-  }
+  },
+  showsVerticalScrollIndicator: false
 })`
   width: 100%;
 `
