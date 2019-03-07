@@ -9,10 +9,7 @@ import {
   Icon,
   Overlay
 } from 'react-native-elements'
-import {
-  UploadFiles,
-  UploadPhotos
-} from '../../containers'
+import { UploadPhotos } from '../../containers'
 import { Collapsable } from '../../components'
 import {
   Container,
@@ -34,17 +31,19 @@ export default class WorkOrder extends Component {
     super(props)
     this.state = {
       isCollapsed: true,
-      isVisible: false,
-      selectedModal: ''
+      isVisible: false
     }
     this.handleCollapse = this.handleCollapse.bind(this)
+    this.changeVisibility = this.changeVisibility.bind(this)
+    this.showModal = this.showModal.bind(this)
     this.changeVisibility = this.changeVisibility.bind(this)
   }
   render () {
     const { isCollapsed } = this.state
     const { navigation } = this.props
     const order = navigation.getParam('order', {})
-    const { id, status, endDate, descriptionJob } = order
+    const { id, status, endDate, descriptionJob, state, address } = order
+    const formattedAddress = address && state ? `${address || ''}, ${state || ''}` : ''
     return (
       <Container>
         <ScrollContainer>
@@ -66,7 +65,7 @@ export default class WorkOrder extends Component {
             </Row>
             <Row>
               <Label>{translate.address}:</Label>
-              <Text>California, fake street #24</Text>
+              <Text>{formattedAddress}</Text>
             </Row>
             <Row>
               <Label>{translate.vendor}:</Label>
@@ -115,16 +114,7 @@ export default class WorkOrder extends Component {
                 type='outline'
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
-                onPress={() => this.showModal('photos')}
-              />
-            </ButtonContainer>
-            <ButtonContainer>
-              <Button
-                title={translate.uploadFiles}
-                type='outline'
-                titleStyle={styles.buttonTitle}
-                buttonStyle={styles.buttonStyle}
-                onPress={() => this.showModal('files')}
+                onPress={this.showModal}
               />
             </ButtonContainer>
             {this.renderModal(descriptionJob)}
@@ -133,52 +123,35 @@ export default class WorkOrder extends Component {
       </Container>
     )
   }
-  showModal (selectedModal) {
+  showModal () {
     const { isVisible } = this.state
-    this.setState({isVisible: !isVisible, selectedModal})
+    this.setState({isVisible: !isVisible})
   }
 
   renderModal (descriptionJob) {
-    const { isVisible, selectedModal } = this.state
-    if (selectedModal === 'photos') {
-      return (
-        <Overlay
-          isVisible={isVisible}
-          windowBackgroundColor='rgba(0, 0, 0, .4)'
-          overlayBackgroundColor='#FFF'
-          onBackdropPress={() => this.changeVisibility(false)}
-          animationType='fade'
-          overlayStyle={styles.overlayStyle}
-          height='65%'
-        >
-          <UploadPhotos
-            isVisible={isVisible}
-            changeVisibility={this.changeVisibility}
-            descriptionJob={descriptionJob}
-          />
-        </Overlay>
-      )
-    }
+    const { isVisible } = this.state
     return (
       <Overlay
         isVisible={isVisible}
         windowBackgroundColor='rgba(0, 0, 0, .4)'
         overlayBackgroundColor='#FFF'
-        onBackdropPress={() => this.changeVisibility(false)}
+        onBackdropPress={this.changeVisibility}
         animationType='fade'
         overlayStyle={styles.overlayStyle}
         height='65%'
       >
-        <UploadFiles
+        <UploadPhotos
           isVisible={isVisible}
           changeVisibility={this.changeVisibility}
+          descriptionJob={descriptionJob}
         />
       </Overlay>
     )
   }
 
-  changeVisibility (visibility) {
-    this.setState({isVisible: visibility})
+  changeVisibility () {
+    const { isVisible } = this.state
+    this.setState({isVisible: !isVisible})
   }
 
   handleCollapse () {

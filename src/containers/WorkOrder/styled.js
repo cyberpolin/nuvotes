@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { Image } from 'react-native-elements'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 
 export const styles = {
   buttonTitle: {
@@ -10,7 +11,7 @@ export const styles = {
     alignSelf: 'center',
     width: '100%',
     height: 50,
-    marginBottom: 20
+    marginBottom: isIphoneX ? 40 : 20
   },
   iconContainerStyle: {
     marginLeft: 10
