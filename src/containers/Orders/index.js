@@ -5,7 +5,6 @@ import { ListItem } from 'react-native-elements'
 import {
   Container,
   TextContainer,
-  ListItemContainer,
   styles
 } from './styled'
 import {
@@ -14,7 +13,11 @@ import {
   getDateDiff
 } from '../../helpers/orders'
 import _ from 'lodash'
-import { primary, red, orange } from '../../colorPalette'
+import {
+  primary,
+  red,
+  orange
+} from '../../colorPalette'
 
 class Orders extends Component {
   render () {
@@ -42,7 +45,7 @@ class Orders extends Component {
             chevron
             title={`#${id} - ${name}`}
             subtitle={`Vendor Due Date: ${endDate}`}
-            containerStyle={{...ListItemContainer}}
+            containerStyle={styles.listItemContainer}
             titleStyle={{
               ...styles.titleStyle,
               color: daysToDueDate < 3 ? red

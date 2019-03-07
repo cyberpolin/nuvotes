@@ -7,6 +7,10 @@ export const styles = {
   },
   subtitleStyle: {
     fontSize: responsiveFont(2.3)
+  },
+  listItemContainer: {
+    width: '100%',
+    paddingVertical: 25
   }
 }
 
@@ -25,8 +29,3 @@ export const TextContainer = styled.View`
   align-items: center;
   justify-content: center;
 `
-
-export const ListItemContainer = {
-  width: '100%',
-  paddingVertical: 25
-}
