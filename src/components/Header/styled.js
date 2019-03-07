@@ -5,6 +5,11 @@ import {
   white,
   black
 } from '../../colorPalette'
+import {
+  heightPercentageToDP as hp
+} from '../../utils/layout'
+import responsiveFont from '../../utils/responsiveFont'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 
 const isIOS = Platform.OS === 'ios'
 
@@ -14,19 +19,22 @@ export const styles = {
   },
   searchContainer: {
     alignItems: 'center',
-    paddingTop: 4,
+    paddingTop: isIOS ? 4 : 0,
     paddingBottom: 0,
     borderTopWidth: 0,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    borderBottomColor: 'transparent'
   },
   searchInput: {
     borderWidth: 0.5,
     borderRadius: 20,
     paddingRight: 10,
     paddingLeft: 20,
-    marginTop: !isIOS ? 5 : 0,
-    fontSize: 15,
-    minHeight: 30
+    marginTop: 0,
+    fontSize: responsiveFont(2),
+    minHeight: hp(4),
+    height: !isIOS ? hp(4) : undefined,
+    paddingVertical: 0
   },
   searchInputContainer: {
     backgroundColor: 'transparent'
@@ -38,9 +46,9 @@ export const DrawerIconButton = styled.TouchableOpacity`
 `
 
 export const HeaderContainer = styled.View`
-  height: ${Header.HEIGHT};
+  height: ${isIphoneX ? Header.HEIGHT + 24 : Header.HEIGHT};
   background-color: ${white};
-  ${isIOS && 'padding-top: 18px'};
+  ${isIphoneX ? 'padding-top: 40px' : isIOS && 'padding-top: 18px'};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -48,6 +56,7 @@ export const HeaderContainer = styled.View`
   shadow-offset: 0 0;
   shadow-color: ${black};
   shadow-radius: 1px;
+  elevation: 1;
 `
 
 export const HeaderTitle = styled.Text`
