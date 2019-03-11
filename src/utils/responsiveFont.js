@@ -3,15 +3,14 @@ import {
   Platform,
   StatusBar
 } from 'react-native'
-import { HEIGHT } from './constants'
+import { DEVICE_HEIGHT } from './constants'
 
 export default function responsiveFont (percent) {
   const deviceHeight = isIphoneX()
-    ? HEIGHT - 78 // iPhone X style SafeAreaView size in portrait
+    ? DEVICE_HEIGHT - 78 // iPhone X style SafeAreaView size in portrait
     : Platform.OS === 'android'
-      ? HEIGHT - StatusBar.currentHeight
-      : HEIGHT
-
+      ? DEVICE_HEIGHT - StatusBar.currentHeight
+      : DEVICE_HEIGHT
   const heightPercent = (percent * deviceHeight) / 100
   return Math.round(heightPercent)
 }
