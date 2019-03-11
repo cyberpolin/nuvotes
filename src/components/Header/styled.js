@@ -46,9 +46,9 @@ export const DrawerIconButton = styled.TouchableOpacity`
 `
 
 export const HeaderContainer = styled.View`
-  height: ${isIOS && isIphoneX ? Header.HEIGHT + 24 : Header.HEIGHT};
+  height: ${isIOS && isIphoneX() ? Header.HEIGHT + 24 : Header.HEIGHT};
   background-color: ${white};
-  ${isIphoneX && isIOS ? 'padding-top: 40px' : isIOS && 'padding-top: 18px'};
+  ${isIphoneX() ? 'padding-top: 40px' : isIOS && 'padding-top: 18px'};
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
