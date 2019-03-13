@@ -1,9 +1,14 @@
 import styled from 'styled-components/native'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from '../../utils/layout'
+import responsiveFont from '../../utils/responsiveFont'
 
 export const Container = styled.View`
   flex: 1;
-  padding-horizontal: 8%;
-  padding-top: 5%;
+  padding-horizontal: ${wp(8)};
+  padding-top: ${hp(2)};
 `
 
 export const DrawerItem = styled.TouchableOpacity`
@@ -21,6 +26,6 @@ export const DrawerBottom = styled.View`
 `
 
 export const ItemText = styled.Text`
-  font-size: 18px;
-  margin-left: 10px;
+  font-size: ${responsiveFont(2.7)};
+  margin-left: ${wp(3)};
 `

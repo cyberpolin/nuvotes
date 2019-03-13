@@ -15,6 +15,7 @@ const en = {
   yes: 'Yes',
   orders: 'Orders',
   inProgress: 'In Progress',
+  pending: 'Pending Completion',
   overdue: 'Overdue',
   inspection: 'Inspection',
   insurance: 'Insurance',

@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Animated,
-  Dimensions
-} from 'react-native'
+import { Animated } from 'react-native'
 import { connect } from 'react-redux'
 import {
   Icon,
@@ -19,6 +16,7 @@ import {
 } from './styled'
 import { translate } from '../../helpers/localization'
 import { getSearch } from '../../actions/search'
+import { widthPercentageToDP as wp } from '../../utils/layout'
 
 class Header extends Component {
   constructor (props) {
@@ -103,7 +101,7 @@ class Header extends Component {
 
   toggleInput () {
     const { isVisible } = this.state
-    const inputWidth = Dimensions.get('window').width * 0.7
+    const inputWidth = wp(70)
     if (!isVisible) {
       this.setState({isVisible: !isVisible})
       const toValue = inputWidth
