@@ -58,7 +58,11 @@ const es = {
   propertyInProgressPhotos: 'Fotos de la propiedad En proceso',
   propertyAfterPhotos: 'Fotos de la propiedad Después',
   uploadError: 'Ha ocurrido un error.',
-  search: 'Buscar'
+  search: 'Buscar',
+  emptyFieldsMessage: 'Campos vacíos',
+  emptyFieldsDescription: 'Favor de rellenar todos los campos.',
+  loginErrorMessage: 'Error al iniciar de sesión',
+  loginErrorDescription: 'Verifique su usuario y contraseña.'
 }
 
 export default es

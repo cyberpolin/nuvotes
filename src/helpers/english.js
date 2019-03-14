@@ -57,7 +57,11 @@ const en = {
   propertyInProgressPhotos: 'Property In Progress Photos',
   propertyAfterPhotos: 'Property After Photos',
   uploadError: 'An error has ocurred.',
-  search: 'Search'
+  search: 'Search',
+  emptyFieldsMessage: 'Empty fields',
+  emptyFieldsDescription: 'Please fill all fields to proceed.',
+  loginErrorMessage: 'Login error',
+  loginErrorDescription: 'Verify your username or password.'
 }
 
 export default en
