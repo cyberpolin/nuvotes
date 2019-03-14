@@ -28,10 +28,10 @@ const TabAppNavigator = createBottomTabNavigator({
   Orders: {
     screen: Orders
   },
-  InProgress: {
+  Pending: {
     screen: Orders
   },
-  Overdue: {
+  Search: {
     screen: Orders
   }
 }, {
@@ -40,7 +40,6 @@ const TabAppNavigator = createBottomTabNavigator({
     inactiveTintColor: black
   },
   defaultNavigationOptions: ({ navigation }) => ({
-    title: navigation.state.routeName === 'InProgress' && 'In Progress',
     tabBarIcon: ({ tintColor }) => TabIcons(navigation, tintColor),
     tabBarLabel: ({ tintColor }) => TabTitle(navigation, tintColor)
   })

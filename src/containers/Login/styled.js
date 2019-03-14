@@ -1,11 +1,14 @@
 import { Platform } from 'react-native'
 import styled from 'styled-components/native'
-import { Text } from 'react-native-elements'
 import {
   white,
   black,
   primary
 } from '../../colorPalette'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from '../../utils/layout'
 
 const isAndroid = Platform.OS === 'android'
 
@@ -13,10 +16,10 @@ export const styles = {
   inputContainer: {
     backgroundColor: 'rgba(255,255,255, .7)',
     borderRadius: 15,
-    paddingHorizontal: '5%'
+    paddingHorizontal: wp(5)
   },
   inputStyle: {
-    marginBottom: 20
+    marginBottom: hp(3)
   },
   buttonTitle: {
     color: black
@@ -28,7 +31,7 @@ export const styles = {
   },
   buttonStyle: {
     borderColor: black,
-    marginTop: 10,
+    marginTop: hp(3),
     backgroundColor: primary,
     borderRadius: 10
   }
@@ -43,10 +46,10 @@ export const Container = styled.View`
 `
 
 export const LoginBox = styled.View`
-  height: 250px;
+  height: ${wp(75)};
   align-items: center;
   justify-content: center;
-  padding-horizontal: 8%;
+  padding-horizontal: ${wp(8)};
 `
 
 export const AvoidingView = styled.KeyboardAvoidingView`
@@ -56,16 +59,11 @@ export const AvoidingView = styled.KeyboardAvoidingView`
   justify-content: center;
 `
 
-export const Title = styled(Text)`
-  margin-bottom: 30px;
-  align-self: center;
-`
-
 export const LogoContainer = styled.View`
  height: 100px;
  width: 80%;
  align-self: center;
- margin-bottom: 25px;
+ margin-bottom: ${hp(3)};
  background-color: rgba(255,255,255, .7);
  border-radius: 15px;
 `
@@ -78,5 +76,5 @@ export const Logo = styled.Image`
 export const Background = styled.ImageBackground`
   height: 100%;
   width: 100%;
-  justify-content: center;ß
+  justify-content: center;
 `

@@ -1,5 +1,7 @@
 {
   "black": "#000",
   "white": "#FFF",
-  "primary": "#8AAF30"
+  "primary": "#8AAF30",
+  "red": "#E52C1B",
+  "orange": "#E5911B"
 }

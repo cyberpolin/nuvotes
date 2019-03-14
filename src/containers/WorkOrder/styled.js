@@ -2,6 +2,11 @@ import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { Image } from 'react-native-elements'
 import { isIphoneX } from 'react-native-iphone-x-helper'
+import responsiveFont from '../../utils/responsiveFont'
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp
+} from '../../utils/layout'
 
 const isIOS = Platform.OS === 'ios'
 
@@ -14,13 +19,14 @@ export const styles = {
     alignSelf: 'center',
     width: '100%',
     height: 50,
-    marginBottom: isIphoneX && isIOS ? 40 : 20
+    marginBottom: isIphoneX() && isIOS ? 40 : 20
   },
   iconContainerStyle: {
     marginLeft: 10
   },
   overlayStyle: {
-    padding: 26
+    padding: 26,
+    borderRadius: 20
   }
 }
 
@@ -34,8 +40,8 @@ export const ScrollContainer = styled.ScrollView.attrs({
 `
 
 export const PhotoContainer = styled.View`
-  padding-vertical: 30px;
-  height: 230px;
+  padding-vertical: ${hp(3)};
+  height: ${hp(28)};
 `
 
 export const Photo = styled(Image)`
@@ -44,22 +50,22 @@ export const Photo = styled(Image)`
 `
 
 export const InfoContainer = styled.View`
-  padding-horizontal: 5%;
+  padding-horizontal: ${wp(5)};
 `
 
 export const Label = styled.Text`
-  font-size: 17px;
-  margin-bottom: 5px;
+  font-size: ${responsiveFont(2.5)};
+  margin-bottom: ${hp(0.7)};
 `
 
 export const FlexRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: ${hp(2)};
 `
 
 export const Row = styled.View`
-  margin-bottom: 12px;
+  margin-bottom: ${hp(2)};
 `
 
 export const GalleryButton = styled.TouchableOpacity`

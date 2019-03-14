@@ -18,6 +18,7 @@ import {
   DrawerTop,
   ItemText
 } from './styled'
+import responsiveFont from '../../utils/responsiveFont'
 
 class Drawer extends Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class Drawer extends Component {
             <Icon
               type='font-awesome'
               name='user-circle'
-              size={45}
+              size={responsiveFont(7)}
             />
             <ItemText>{translate.profile}</ItemText>
           </DrawerItem>
@@ -46,7 +47,7 @@ class Drawer extends Component {
             <Icon
               type='font-awesome'
               name='language'
-              size={45}
+              size={responsiveFont(7)}
             />
             <ItemText>{translate.changeLanguage}</ItemText>
           </DrawerItem>
@@ -54,7 +55,7 @@ class Drawer extends Component {
             <Icon
               type='font-awesome'
               name='sign-out'
-              size={45}
+              size={responsiveFont(7)}
             />
             <ItemText>{translate.signOut}</ItemText>
           </DrawerItem>

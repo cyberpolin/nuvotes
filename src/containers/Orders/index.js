@@ -5,13 +5,19 @@ import { ListItem } from 'react-native-elements'
 import {
   Container,
   TextContainer,
-  ListItemContainer
+  styles
 } from './styled'
 import {
   filterOrders,
-  filterOrderBySearch
+  filterOrderBySearch,
+  getDateDiff
 } from '../../helpers/orders'
 import _ from 'lodash'
+import {
+  primary,
+  red,
+  orange
+} from '../../colorPalette'
 
 class Orders extends Component {
   render () {
@@ -32,13 +38,20 @@ class Orders extends Component {
     if (orders && !_.isEmpty(orders)) {
       return orders.map((order, index) => {
         const { name, endDate, id } = order
+        const daysToDueDate = getDateDiff(endDate)
         return (
           <ListItem
             key={index}
             chevron
             title={`#${id} - ${name}`}
-            subtitle={`Vendor End Date: ${endDate}`}
-            containerStyle={ListItemContainer}
+            subtitle={`Vendor Due Date: ${endDate}`}
+            containerStyle={styles.listItemContainer}
+            titleStyle={{
+              ...styles.titleStyle,
+              color: daysToDueDate < 3 ? red
+                : daysToDueDate < 16 ? orange : primary
+            }}
+            subtitleStyle={styles.subtitleStyle}
             onPress={() => navigation.navigate('WorkOrder', {order})}
             bottomDivider
           />
