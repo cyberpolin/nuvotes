@@ -11,6 +11,7 @@ import {
   translate,
   setLanguage
 } from '../../helpers/localization'
+import { logout } from '../../actions/user'
 import {
   Container,
   DrawerItem,
@@ -74,7 +75,8 @@ class Drawer extends Component {
   }
 
   handleLogout () {
-    const { navigation } = this.props
+    const { navigation, logout } = this.props
+    logout()
     navigation.navigate('Login')
   }
 
@@ -101,6 +103,9 @@ class Drawer extends Component {
 const mapDispatchToProps = dispatch => ({
   changeLanguage: language => {
     dispatch(changeLanguage(language))
+  },
+  logout: () => {
+    dispatch(logout())
   }
 })
 
