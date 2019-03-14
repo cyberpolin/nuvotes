@@ -54,6 +54,9 @@ export const getLogin = (username, password, navigation) => {
       })
       .catch(error => {
         console.log('ERROR', error)
+        dispatch({ type: 'CHANGE_LOADING', payload: false })
+        const message = getMessage('CONNECTION_ERROR')
+        showMessage(message)
       })
   }
 }

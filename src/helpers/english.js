@@ -61,7 +61,9 @@ const en = {
   emptyFieldsMessage: 'Empty fields',
   emptyFieldsDescription: 'Please fill all fields to proceed.',
   loginErrorMessage: 'Login error',
-  loginErrorDescription: 'Verify your username or password.'
+  loginErrorDescription: 'Verify your username or password.',
+  errorMessage: 'Error',
+  errorDescription: 'An error has ocurred.'
 }
 
 export default en

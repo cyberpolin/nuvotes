@@ -62,7 +62,9 @@ const es = {
   emptyFieldsMessage: 'Campos vacíos',
   emptyFieldsDescription: 'Favor de rellenar todos los campos.',
   loginErrorMessage: 'Error al iniciar de sesión',
-  loginErrorDescription: 'Verifique su usuario y contraseña.'
+  loginErrorDescription: 'Verifique su usuario y contraseña.',
+  errorMessage: 'Error',
+  errorDescription: 'Ha ocurrido un error.'
 }
 
 export default es
