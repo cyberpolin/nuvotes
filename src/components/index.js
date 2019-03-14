@@ -5,6 +5,7 @@ import {
   TabTitle
 } from './TabNav'
 import Collapsable from './Collapsable'
+import Loading from './Loading'
 
 export {
   Drawer,
@@ -12,5 +13,6 @@ export {
   Header,
   TabIcons,
   TabTitle,
-  EditButton
+  EditButton,
+  Loading
 }
