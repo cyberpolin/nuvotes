@@ -3,7 +3,13 @@ import {
   Input,
   Button
 } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { showMessage } from 'react-native-flash-message'
+import _ from 'lodash'
+import { Loading } from '../../components'
 import { translate } from '../../helpers/localization'
+import { getLogin } from '../../helpers/user'
+import { getMessage } from '../../helpers/messages'
 import {
   Container,
   LoginBox,
@@ -15,12 +21,26 @@ import {
 } from './styled'
 import Assets from '../../assets/img'
 
-export default class Login extends Component {
+class Login extends Component {
   constructor (props) {
     super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
     this.handleLogin = this.handleLogin.bind(this)
+    this.onChangeText = this.onChangeText.bind(this)
   }
+
+  componentWillMount () {
+    const { user, navigation } = this.props
+    if (!_.isEmpty(user)) {
+      navigation.navigate('Home')
+    }
+  }
+
   render () {
+    const { isLoading } = this.props.settings
     return (
       <Container>
         <AvoidingView behavior='padding'>
@@ -39,6 +59,8 @@ export default class Login extends Component {
                 onSubmitEditing={() => this.passwordRef.input.focus()}
                 autoCorrect={false}
                 autoCapitalize='none'
+                onChangeText={(value) => this.onChangeText(value, 'username')}
+                blurOnSubmit={false}
               />
               <Input
                 placeholder={translate.password}
@@ -49,6 +71,7 @@ export default class Login extends Component {
                 }}
                 onSubmitEditing={this.handleLogin}
                 secureTextEntry
+                onChangeText={(value) => this.onChangeText(value, 'password')}
               />
               <Button
                 title={translate.signIn}
@@ -59,13 +82,39 @@ export default class Login extends Component {
               />
             </LoginBox>
           </Background>
+          {isLoading && <Loading />}
         </AvoidingView>
       </Container>
     )
   }
 
+  onChangeText (value, field) {
+    const { state } = this
+    state[field] = value
+    this.setState(state)
+  }
+
   handleLogin () {
-    const { navigation } = this.props
-    navigation.navigate('Home')
+    const { navigation, getLogin } = this.props
+    const { username, password } = this.state
+    if (username === '' || password === '') {
+      const message = getMessage('EMPTY_FIELDS')
+      showMessage(message)
+    } else {
+      getLogin(username, password, navigation)
+    }
   }
 }
+
+const mapStateToProps = ({ settings, user }) => ({
+  settings,
+  user
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
