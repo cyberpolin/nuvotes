@@ -135,7 +135,7 @@ export default class UploadPhotos extends Component {
       multiple: true
     }).then(images => {
       const { descriptionJob } = this.props
-      if (descriptionJob !== 'inspection') {
+      if (descriptionJob !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
           translate.savePhotoAlertMessage,
@@ -155,7 +155,7 @@ export default class UploadPhotos extends Component {
     ImagePicker.openCamera({
     }).then(image => {
       const { descriptionJob } = this.props
-      if (descriptionJob !== 'inspection') {
+      if (descriptionJob !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
           translate.savePhotoAlertMessage,
