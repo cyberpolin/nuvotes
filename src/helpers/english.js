@@ -62,9 +62,11 @@ const en = {
   emptyFieldsDescription: 'Please fill all fields to proceed.',
   loginErrorMessage: 'Login error',
   loginErrorDescription: 'Verify your username or password.',
-  errorMessage: 'Error',
-  errorDescription: 'An error has ocurred.',
-  otherRepair: 'Other Repair'
+  genericErrorMessage: 'Error',
+  genericErrorDescription: 'An error has ocurred.',
+  otherRepair: 'Other Repair',
+  connectionErrorMessage: 'Connection error',
+  connectionErrorDescription: 'Please check your network.'
 }
 
 export default en

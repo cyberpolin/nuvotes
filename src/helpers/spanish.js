@@ -65,7 +65,9 @@ const es = {
   loginErrorDescription: 'Verifique su usuario y contraseña.',
   errorMessage: 'Error',
   errorDescription: 'Ha ocurrido un error.',
-  otherRepair: 'Otras Reparaciones'
+  otherRepair: 'Otras Reparaciones',
+  connectionErrorMessage: 'Error de conexión',
+  connectionErrorDescription: 'Favor de verificar su red.'
 }
 
 export default es
