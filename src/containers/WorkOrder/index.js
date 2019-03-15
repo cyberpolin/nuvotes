@@ -9,6 +9,8 @@ import {
   Icon,
   Overlay
 } from 'react-native-elements'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 import {
   UploadFiles,
   UploadPhotos
@@ -28,8 +30,9 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
+import { sortPhotos } from '../../helpers/orders'
 
-export default class WorkOrder extends Component {
+class WorkOrder extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -42,53 +45,62 @@ export default class WorkOrder extends Component {
   }
   render () {
     const { isCollapsed } = this.state
-    const { navigation } = this.props
+    const { navigation, user } = this.props
     const order = navigation.getParam('order', {})
-    const { id, status, endDate, descriptionJob } = order
+    const { id, status, avatar, address, coordinator } = order
+    const formattedAddress = `${_.capitalize(address.state.description)}, ${address.address}`
+    const formattedCoordinator = `${_.capitalize(coordinator['first_name'])} ${_.capitalize(coordinator['last_name'])}`
+    const formattedDescriptonJob = order['description_job'].description === 'Other Repair'
+      ? translate.otherRepair : order['description_job'].description === 'Inspection'
+        ? translate.inspection : translate.insurance
+    const formattedStatus = status.description === 'Pending Completion'
+      ? translate.pending : status.description === 'In Progress'
+        ? translate.inProgress : status.description
+    const formattedVendor = `${_.capitalize(user['first_name'])} ${_.capitalize(user['last_name'])}`
     return (
       <Container>
         <ScrollContainer>
           <PhotoContainer>
             <Photo
               resizeMode='contain'
-              source={{uri: order.orderPhoto || 'https://s3-us-west-1.amazonaws.com/nuvote-wo/static/admin/placeholder_feature.png'}}
+              source={{uri: avatar || 'https://s3-us-west-1.amazonaws.com/nuvote-wo/static/admin/placeholder_feature.png'}}
               PlaceholderContent={<ActivityIndicator />}
             />
           </PhotoContainer>
           <InfoContainer>
             <Row>
               <Label>{translate.type}:</Label>
-              <Text>{descriptionJob}</Text>
+              <Text>{formattedDescriptonJob}</Text>
             </Row>
             <Row>
               <Label>{translate.state}:</Label>
-              <Text>{status}</Text>
+              <Text>{formattedStatus}</Text>
             </Row>
             <Row>
               <Label>{translate.address}:</Label>
-              <Text>California, fake street #24</Text>
+              <Text>{formattedAddress}</Text>
             </Row>
             <Row>
               <Label>{translate.vendor}:</Label>
-              <Text>Vendor Name</Text>
+              <Text>{formattedVendor}</Text>
             </Row>
             <Row>
               <Label>{translate.coordinator}:</Label>
-              <Text>Coordinator Name</Text>
+              <Text>{formattedCoordinator}</Text>
             </Row>
             <FlexRow>
               <View>
                 <Label>{translate.startDate}:</Label>
-                <Text>07/09/2018</Text>
+                <Text>{order['start_date']}</Text>
               </View>
               <View>
                 <Label>{translate.endDate}:</Label>
-                <Text>{endDate}</Text>
+                <Text>{order['end_date']}</Text>
               </View>
             </FlexRow>
             <Row>
               <Label>{translate.vendorBill}: </Label>
-              <Text>$ 100.00</Text>
+              <Text>$ {order['vendor_sub_out']}</Text>
             </Row>
             <Collapsable
               label={translate.attachments}
@@ -96,7 +108,7 @@ export default class WorkOrder extends Component {
               onPress={this.handleCollapse}
             >
               <View>
-                {this.renderGalleryTypes(descriptionJob, id)}
+                {this.renderGalleryTypes(order['description_job'], order.photos)}
                 <GalleryButton
                   onPress={() => navigation.navigate('Documents', {id})}
                 >
@@ -127,7 +139,7 @@ export default class WorkOrder extends Component {
                 onPress={() => this.showModal('files')}
               />
             </ButtonContainer>
-            {this.renderModal(descriptionJob)}
+            {this.renderModal(order['description_job'])}
           </InfoContainer>
         </ScrollContainer>
       </Container>
@@ -140,6 +152,7 @@ export default class WorkOrder extends Component {
 
   renderModal (descriptionJob) {
     const { isVisible, selectedModal } = this.state
+    const { description } = descriptionJob
     if (selectedModal === 'photos') {
       return (
         <Overlay
@@ -154,7 +167,7 @@ export default class WorkOrder extends Component {
           <UploadPhotos
             isVisible={isVisible}
             changeVisibility={this.changeVisibility}
-            descriptionJob={descriptionJob}
+            descriptionJob={description}
           />
         </Overlay>
       )
@@ -186,23 +199,23 @@ export default class WorkOrder extends Component {
     this.setState({isCollapsed: !isCollapsed})
   }
 
-  renderGalleryTypes (descriptionJob, orderId) {
+  renderGalleryTypes (descriptionJob, photos) {
     const { navigate } = this.props.navigation
     const galleryTypes = [
       {
         label: translate.propertyBeforePhotos,
-        galleryType: 'before'
+        galleryType: 'Before'
       }, {
         label: translate.propertyInProgressPhotos,
-        galleryType: 'in_progress'
+        galleryType: 'In Progress'
       }, {
         label: translate.propertyAfterPhotos,
-        galleryType: 'after'
+        galleryType: 'After'
       }
     ]
-    if (descriptionJob === 'inspection') {
+    if (descriptionJob.description === 'Inspection') {
       return (
-        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', orderId })}>
+        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', photos })}>
           <Text>{translate.propertyPhotos}</Text>
           <Icon
             name='angle-right'
@@ -216,9 +229,10 @@ export default class WorkOrder extends Component {
         <View>
           {galleryTypes.map((gallery, index) => {
             const { label, galleryType } = gallery
+            const sortedPhotos = sortPhotos(photos, galleryType)
             return (
               <GalleryButton
-                onPress={() => navigate('Gallery', { galleryType, orderId })}
+                onPress={() => navigate('Gallery', { galleryType, sortedPhotos })}
                 key={index}
               >
                 <Text>{label}</Text>
@@ -235,3 +249,9 @@ export default class WorkOrder extends Component {
     }
   }
 }
+
+const mapStateToProps = ({ user }) => ({
+  user
+})
+
+export default connect(mapStateToProps, null)(WorkOrder)
