@@ -1,8 +1,9 @@
 import { showMessage } from 'react-native-flash-message'
 import { getMessage } from './messages'
+import { URL } from '../setup'
 
 const getUserData = (token, username) => {
-  return fetch('http://127.0.0.1:8000/api/login/', {
+  return fetch(`${URL}login/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -26,7 +27,7 @@ const getUserData = (token, username) => {
 export const getLogin = (username, password, navigation) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_LOADING', payload: true })
-    return fetch('http://127.0.0.1:8000/api/token-auth/', {
+    return fetch(`${URL}token-auth/`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
