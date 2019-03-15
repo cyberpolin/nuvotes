@@ -72,6 +72,7 @@ class Login extends Component {
                 onSubmitEditing={this.handleLogin}
                 secureTextEntry
                 onChangeText={(value) => this.onChangeText(value, 'password')}
+                autoCapitalize='none'
               />
               <Button
                 title={translate.signIn}
