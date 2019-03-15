@@ -1,25 +1,15 @@
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
-import { Overlay } from 'react-native-elements'
+import { Container } from './styled'
 import { primary } from '../../colorPalette'
 
-const overlayStyle = {
-  alignItems: 'center',
-  justifyContent: 'center'
-}
-
 const Loading = () => (
-  <Overlay
-    isVisible
-    windowBackgroundColor='rgba(0, 0, 0, .4)'
-    overlayBackgroundColor='transparent'
-    overlayStyle={overlayStyle}
-  >
+  <Container>
     <ActivityIndicator
       size='large'
       color={primary}
     />
-  </Overlay>
+  </Container>
 )
 
 export default Loading
