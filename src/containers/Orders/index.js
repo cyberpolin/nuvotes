@@ -2,17 +2,20 @@ import React, { Component } from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
 import { ListItem } from 'react-native-elements'
+import _ from 'lodash'
+import { Loading } from '../../components'
 import {
   Container,
+  ScrollViewContainer,
   TextContainer,
   styles
 } from './styled'
 import {
   filterOrders,
   filterOrderBySearch,
-  getDateDiff
+  getDateDiff,
+  getOrders
 } from '../../helpers/orders'
-import _ from 'lodash'
 import {
   primary,
   red,
@@ -20,31 +23,40 @@ import {
 } from '../../colorPalette'
 
 class Orders extends Component {
+  componentDidMount () {
+    const { user: { id, token }, getOrders } = this.props
+    getOrders(token, id)
+  }
+
   render () {
+    const { isLoading } = this.props.settings
     return (
       <Container>
-        {this.renderOrders()}
+        <ScrollViewContainer>
+          {this.renderOrders()}
+        </ScrollViewContainer>
+        {isLoading && <Loading />}
       </Container>
     )
   }
 
   renderOrders () {
-    const { navigation, search } = this.props
+    const { navigation, search, orders } = this.props
     const orderType = navigation.state.routeName
-    let orders = filterOrders(orderType)
-    if (search !== '') {
-      orders = filterOrderBySearch(orders, search)
-    }
     if (orders && !_.isEmpty(orders)) {
-      return orders.map((order, index) => {
-        const { name, endDate, id } = order
-        const daysToDueDate = getDateDiff(endDate)
+      let filteredOrders = filterOrders(orders, orderType)
+      if (search !== '') {
+        filteredOrders = filterOrderBySearch(orders, search)
+      }
+      return filteredOrders.map((order, index) => {
+        const { number, id } = order
+        const daysToDueDate = getDateDiff(order['end_date'])
         return (
           <ListItem
             key={index}
             chevron
-            title={`#${id} - ${name}`}
-            subtitle={`Vendor Due Date: ${endDate}`}
+            title={`#${id} - ${number}`}
+            subtitle={`Vendor Due Date: ${order['end_date']}`}
             containerStyle={styles.listItemContainer}
             titleStyle={{
               ...styles.titleStyle,
@@ -66,8 +78,17 @@ class Orders extends Component {
   }
 }
 
-const mapStateToProps = ({ search }) => ({
-  search: search
+const mapStateToProps = ({ search, user, orders, settings }) => ({
+  search,
+  user,
+  orders,
+  settings
 })
 
-export default connect(mapStateToProps, null)(Orders)
+const mapDispatchToProps = dispatch => {
+  return {
+    getOrders: (token, userId) => dispatch(getOrders(token, userId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders)
