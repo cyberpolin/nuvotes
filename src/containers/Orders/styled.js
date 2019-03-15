@@ -14,7 +14,12 @@ export const styles = {
   }
 }
 
-export const Container = styled.ScrollView.attrs({
+export const Container = styled.View`
+  flex: 1;
+  width: 100%;
+`
+
+export const ScrollViewContainer = styled.ScrollView.attrs({
   bounces: false,
   contentContainerStyle: {
     alignItems: 'center'
