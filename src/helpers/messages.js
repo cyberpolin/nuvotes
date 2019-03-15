@@ -26,5 +26,13 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
+    case 'ERROR':
+      return {
+        message: translate.errorMessage,
+        description: translate.errorDescription,
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
   }
 }
