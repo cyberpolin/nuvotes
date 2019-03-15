@@ -9,7 +9,7 @@ export default class Gallery extends Component {
   render () {
     const { navigation } = this.props
     const photos = navigation.getParam('sortedPhotos', {})
-    const photosURL = this.getPhotoURL(photos)
+    const photosURL = !_.isEmpty(photos) ? this.getPhotoURL(photos) : []
     return (
       <Container>
         {photos && !_.isEmpty(photos)
