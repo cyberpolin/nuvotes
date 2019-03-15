@@ -2,17 +2,14 @@ import { showMessage } from 'react-native-flash-message'
 import { getMessage } from './messages'
 import { URL } from '../setup'
 
-const getUserData = (token, username) => {
+const getUserData = (token) => {
   return fetch(`${URL}login/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
       Authorization: `Token ${token}`
-    },
-    body: JSON.stringify({
-      username
-    })
+    }
   })
     .then(response => {
       if (response.ok) {
@@ -42,10 +39,15 @@ export const getLogin = (username, password, navigation) => {
       .then(responseJson => {
         if (responseJson['token']) {
           const token = responseJson.token
-          getUserData(token, username).then(response => {
+          getUserData(token).then(response => {
             dispatch({ type: 'POPULATE_USER', payload: {...response, token} })
             navigation.navigate('Home')
             dispatch({ type: 'CHANGE_LOADING', payload: false })
+          }).catch(error => {
+            console.log('ERROR', error)
+            dispatch({ type: 'CHANGE_LOADING', payload: false })
+            const message = getMessage('ERROR')
+            showMessage(message)
           })
         } else {
           dispatch({ type: 'CHANGE_LOADING', payload: false })
@@ -56,7 +58,7 @@ export const getLogin = (username, password, navigation) => {
       .catch(error => {
         console.log('ERROR', error)
         dispatch({ type: 'CHANGE_LOADING', payload: false })
-        const message = getMessage('CONNECTION_ERROR')
+        const message = getMessage('ERROR')
         showMessage(message)
       })
   }
