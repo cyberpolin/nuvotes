@@ -12,6 +12,7 @@ import {
   setLanguage
 } from '../../helpers/localization'
 import { logout } from '../../actions/user'
+import { emptyOrders } from '../../actions/orders'
 import {
   Container,
   DrawerItem,
@@ -75,8 +76,9 @@ class Drawer extends Component {
   }
 
   handleLogout () {
-    const { navigation, logout } = this.props
+    const { navigation, logout, emptyOrders } = this.props
     logout()
+    emptyOrders()
     navigation.navigate('Login')
   }
 
@@ -106,6 +108,9 @@ const mapDispatchToProps = dispatch => ({
   },
   logout: () => {
     dispatch(logout())
+  },
+  emptyOrders: () => {
+    dispatch(emptyOrders())
   }
 })
 
