@@ -1,5 +1,7 @@
 import _ from 'lodash'
 import moment from 'moment'
+import { showMessage } from 'react-native-flash-message'
+import { getMessage } from './messages'
 import { URL } from '../setup'
 
 const ordersByDate = orders => {
@@ -69,6 +71,8 @@ export const getOrders = (token, userId) => {
       .catch(error => {
         console.log(error)
         dispatch({ type: 'CHANGE_LOADING', payload: false })
+        const message = getMessage('CONNECTION_ERROR')
+        showMessage(message)
       })
   }
 }
