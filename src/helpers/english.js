@@ -63,7 +63,8 @@ const en = {
   loginErrorMessage: 'Login error',
   loginErrorDescription: 'Verify your username or password.',
   errorMessage: 'Error',
-  errorDescription: 'An error has ocurred.'
+  errorDescription: 'An error has ocurred.',
+  otherRepair: 'Other Repair'
 }
 
 export default en

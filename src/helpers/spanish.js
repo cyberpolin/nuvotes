@@ -64,7 +64,8 @@ const es = {
   loginErrorMessage: 'Error al iniciar de sesión',
   loginErrorDescription: 'Verifique su usuario y contraseña.',
   errorMessage: 'Error',
-  errorDescription: 'Ha ocurrido un error.'
+  errorDescription: 'Ha ocurrido un error.',
+  otherRepair: 'Otras Reparaciones'
 }
 
 export default es
