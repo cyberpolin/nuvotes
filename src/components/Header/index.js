@@ -23,7 +23,7 @@ class Header extends Component {
     super(props)
     this.state = {
       isVisible: false,
-      search: ''
+      search: props.search
     }
     this.toggleInput = this.toggleInput.bind(this)
     this.onChangeText = this.onChangeText.bind(this)
@@ -127,10 +127,15 @@ export const EditButton = (navigation, routeName) => {
   )
 }
 
+const mapStateToProps = ({ user, search }) => ({
+  user,
+  search
+})
+
 const mapDispatchToProps = dispatch => ({
   getSearch: search => {
     dispatch(getSearch(search))
   }
 })
 
-export default connect(null, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
