@@ -33,7 +33,7 @@ class ViewUser extends Component {
         <InfoContainer>
           <View>
             <Label>{translate.userName}:</Label>
-            <Text>John_Jhonson</Text>
+            <Text>{user['user_system'].username}</Text>
           </View>
           <View>
             <Label>{translate.firstName}:</Label>
@@ -45,11 +45,11 @@ class ViewUser extends Component {
           </View>
           <View>
             <Label>{translate.state}:</Label>
-            <Text>California</Text>
+            <Text>{user.state}</Text>
           </View>
           <View>
             <Label>{translate.address}:</Label>
-            <Text>Fake Street, #51</Text>
+            <Text>{user.address}</Text>
           </View>
           <View>
             <Label>{translate.email}:</Label>
