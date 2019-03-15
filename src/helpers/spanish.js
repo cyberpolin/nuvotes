@@ -67,7 +67,8 @@ const es = {
   errorDescription: 'Ha ocurrido un error.',
   otherRepair: 'Otras Reparaciones',
   connectionErrorMessage: 'Error de conexión',
-  connectionErrorDescription: 'Favor de verificar su red.'
+  connectionErrorDescription: 'Favor de verificar su red.',
+  noOrders: 'No hay ordenes para mostrar.'
 }
 
 export default es

@@ -66,7 +66,8 @@ const en = {
   genericErrorDescription: 'An error has ocurred.',
   otherRepair: 'Other Repair',
   connectionErrorMessage: 'Connection error',
-  connectionErrorDescription: 'Please check your network.'
+  connectionErrorDescription: 'Please check your network.',
+  noOrders: 'There are no orders to show.'
 }
 
 export default en
