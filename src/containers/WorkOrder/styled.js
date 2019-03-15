@@ -1,10 +1,14 @@
+import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 import { Image } from 'react-native-elements'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 import responsiveFont from '../../utils/responsiveFont'
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp
 } from '../../utils/layout'
+
+const isIOS = Platform.OS === 'ios'
 
 export const styles = {
   buttonTitle: {
@@ -15,7 +19,7 @@ export const styles = {
     alignSelf: 'center',
     width: '100%',
     height: 50,
-    marginBottom: 20
+    marginBottom: isIphoneX() && isIOS ? 40 : 20
   },
   iconContainerStyle: {
     marginLeft: 10

@@ -12,7 +12,6 @@ import {
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import {
-  UploadFiles,
   UploadPhotos
 } from '../../containers'
 import { Collapsable } from '../../components'
@@ -37,10 +36,11 @@ class WorkOrder extends Component {
     super(props)
     this.state = {
       isCollapsed: true,
-      isVisible: false,
-      selectedModal: ''
+      isVisible: false
     }
     this.handleCollapse = this.handleCollapse.bind(this)
+    this.changeVisibility = this.changeVisibility.bind(this)
+    this.showModal = this.showModal.bind(this)
     this.changeVisibility = this.changeVisibility.bind(this)
   }
   render () {
@@ -127,16 +127,7 @@ class WorkOrder extends Component {
                 type='outline'
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
-                onPress={() => this.showModal('photos')}
-              />
-            </ButtonContainer>
-            <ButtonContainer>
-              <Button
-                title={translate.uploadFiles}
-                type='outline'
-                titleStyle={styles.buttonTitle}
-                buttonStyle={styles.buttonStyle}
-                onPress={() => this.showModal('files')}
+                onPress={this.showModal}
               />
             </ButtonContainer>
             {this.renderModal(order['description_job'])}
@@ -145,53 +136,35 @@ class WorkOrder extends Component {
       </Container>
     )
   }
-  showModal (selectedModal) {
+  showModal () {
     const { isVisible } = this.state
-    this.setState({isVisible: !isVisible, selectedModal})
+    this.setState({isVisible: !isVisible})
   }
 
   renderModal (descriptionJob) {
-    const { isVisible, selectedModal } = this.state
-    const { description } = descriptionJob
-    if (selectedModal === 'photos') {
-      return (
-        <Overlay
-          isVisible={isVisible}
-          windowBackgroundColor='rgba(0, 0, 0, .4)'
-          overlayBackgroundColor='#FFF'
-          onBackdropPress={() => this.changeVisibility(false)}
-          animationType='fade'
-          overlayStyle={styles.overlayStyle}
-          height='65%'
-        >
-          <UploadPhotos
-            isVisible={isVisible}
-            changeVisibility={this.changeVisibility}
-            descriptionJob={description}
-          />
-        </Overlay>
-      )
-    }
+    const { isVisible } = this.state
     return (
       <Overlay
         isVisible={isVisible}
         windowBackgroundColor='rgba(0, 0, 0, .4)'
         overlayBackgroundColor='#FFF'
-        onBackdropPress={() => this.changeVisibility(false)}
+        onBackdropPress={this.changeVisibility}
         animationType='fade'
         overlayStyle={styles.overlayStyle}
         height='65%'
       >
-        <UploadFiles
+        <UploadPhotos
           isVisible={isVisible}
           changeVisibility={this.changeVisibility}
+          descriptionJob={descriptionJob}
         />
       </Overlay>
     )
   }
 
-  changeVisibility (visibility) {
-    this.setState({isVisible: visibility})
+  changeVisibility () {
+    const { isVisible } = this.state
+    this.setState({isVisible: !isVisible})
   }
 
   handleCollapse () {
