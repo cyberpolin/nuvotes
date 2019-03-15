@@ -4,6 +4,7 @@ import {
   ActivityIndicator
 } from 'react-native'
 import { Icon } from 'react-native-elements'
+import { connect } from 'react-redux'
 import { translate } from '../../helpers/localization'
 import {
   Container,
@@ -14,15 +15,15 @@ import {
   InfoContainer
 } from './styled'
 
-export default class ViewUser extends Component {
+class ViewUser extends Component {
   render () {
-    const user = {}
+    const { user } = this.props
     return (
       <Container>
         <ImageContainer>
           {user.avatar
             ? <CircleImage
-              source={{uri: user.avatar}}
+              source={{uri: user}}
               resizeMode='contain'
               PlaceholderContent={<ActivityIndicator />}
             />
@@ -36,11 +37,11 @@ export default class ViewUser extends Component {
           </View>
           <View>
             <Label>{translate.firstName}:</Label>
-            <Text>John</Text>
+            <Text>{user['first_name']}</Text>
           </View>
           <View>
             <Label>{translate.lastName}:</Label>
-            <Text>Jhonson</Text>
+            <Text>{user['last_name']}</Text>
           </View>
           <View>
             <Label>{translate.state}:</Label>
@@ -52,10 +53,16 @@ export default class ViewUser extends Component {
           </View>
           <View>
             <Label>{translate.email}:</Label>
-            <Text>john@jhonson.com</Text>
+            <Text>{user.email}</Text>
           </View>
         </InfoContainer>
       </Container>
     )
   }
 }
+
+const mapStateToProps = ({ user }) => ({
+  user
+})
+
+export default connect(mapStateToProps, null)(ViewUser)
