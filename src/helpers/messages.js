@@ -20,8 +20,8 @@ export const getMessage = type => {
       }
     case 'CONNECTION_ERROR':
       return {
-        message: translate.errorMessage,
-        description: translate.errorDescription,
+        message: translate.connectionErrorMessage,
+        description: translate.connectionErrorDescription,
         type: 'danger',
         icon: 'danger',
         duration: 2000
