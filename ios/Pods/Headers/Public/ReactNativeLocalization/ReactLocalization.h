@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-localization/ReactLocalization.h

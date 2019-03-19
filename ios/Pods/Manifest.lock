@@ -6,26 +6,12 @@ PODS:
     - AppCenter/Core
   - AppCenterReactNativeShared (1.12.2):
     - AppCenter/Core (= 1.13.2)
-  - QBImagePickerController (3.4.0)
   - React (0.57.1):
     - React/Core (= 0.57.1)
-  - react-native-document-picker (2.2.0):
-    - React
-  - react-native-image-picker (0.28.0):
-    - React
   - React/Core (0.57.1):
     - yoga (= 0.57.1.React)
-  - ReactNativeLocalization (2.0.3):
-    - React
-  - RNGestureHandler (1.0.15):
-    - React
-  - RNImageCropPicker (0.22.0):
-    - QBImagePickerController
-    - React/Core
-    - RSKImageCropper
   - RNVectorIcons (6.2.0):
     - React
-  - RSKImageCropper (2.2.1)
   - yoga (0.57.1.React)
 
 DEPENDENCIES:
@@ -33,11 +19,6 @@ DEPENDENCIES:
   - AppCenter/Crashes (~> 1.13.2)
   - AppCenterReactNativeShared (~> 1.12.2)
   - React (from `../node_modules/react-native`)
-  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
-  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - ReactNativeLocalization (from `../node_modules/react-native-localization`)
-  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -45,22 +26,10 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AppCenter
     - AppCenterReactNativeShared
-    - QBImagePickerController
-    - RSKImageCropper
 
 EXTERNAL SOURCES:
   React:
     :path: "../node_modules/react-native"
-  react-native-document-picker:
-    :path: "../node_modules/react-native-document-picker"
-  react-native-image-picker:
-    :path: "../node_modules/react-native-image-picker"
-  ReactNativeLocalization:
-    :path: "../node_modules/react-native-localization"
-  RNGestureHandler:
-    :path: "../node_modules/react-native-gesture-handler"
-  RNImageCropPicker:
-    :path: "../node_modules/react-native-image-crop-picker"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   yoga:
@@ -69,17 +38,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppCenter: bce7fe1098e8e8aeb70aaae1898600534069f549
   AppCenterReactNativeShared: 6c0750b874f3242c47cb64083e23b835975c6aa2
-  QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
-  react-native-image-picker: f42de90075c5b1af53417af927631d909a1a746e
-  ReactNativeLocalization: 6d2bb9596736f692becd996d126d5230327db1a5
-  RNGestureHandler: afde2addc517e85cc97a25bfe119acbee779a7ce
-  RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
   RNVectorIcons: 8c52e1e8da1153613fdef44748e865c25556cb9c
-  RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 12b94f38a5f9c2a30c460ddebd884af349c9fcd3
+PODFILE CHECKSUM: 8125aef53514ceb93febb4986258c8998c3fae17
 
 COCOAPODS: 1.5.3
