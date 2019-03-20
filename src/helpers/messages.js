@@ -34,5 +34,21 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
+    case 'SHORT_PASSWORD':
+      return {
+        message: translate.shortPasswordMessage,
+        description: translate.shortPasswordDescrption,
+        type: 'warning',
+        icon: 'warning',
+        duration: 2000
+      }
+    case 'NUMERIC_PASSWORD':
+      return {
+        message: translate.numberPasswordMessage,
+        description: translate.numberPasswordDescription,
+        type: 'warning',
+        icon: 'warning',
+        duration: 2000
+      }
   }
 }
