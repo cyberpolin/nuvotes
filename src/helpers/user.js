@@ -63,3 +63,37 @@ export const getLogin = (username, password, navigation) => {
       })
   }
 }
+
+export const editUserData = (token, updates, navigation) => {
+  return dispatch => {
+    dispatch({ type: 'CHANGE_LOADING', payload: true })
+    return fetch(`${URL}modify-user/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify(updates)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .then(responseJSON => {
+        dispatch({ type: 'CHANGE_LOADING', payload: false })
+        dispatch({ type: 'POPULATE_USER', payload: responseJSON.user })
+        navigation.goBack()
+      })
+      .catch(error => {
+        console.log('ERROR', error)
+        dispatch({ type: 'CHANGE_LOADING', payload: false })
+      })
+  }
+}
+
+export const invalidPassword = password => {
+  const regex = new RegExp('^[0-9]*$')
+  return regex.test(password)
+}
