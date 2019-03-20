@@ -3,6 +3,8 @@ import {
   Keyboard,
   Alert
 } from 'react-native'
+import { connect } from 'react-redux'
+import { showMessage } from 'react-native-flash-message'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ImagePicker from 'react-native-image-picker'
 import {
@@ -10,6 +12,8 @@ import {
   Input,
   Button
 } from 'react-native-elements'
+import _ from 'lodash'
+import { Loading } from '../../components'
 import {
   Label,
   ImageContainer,
@@ -20,16 +24,30 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
+import { editUserData, invalidPassword } from '../../helpers/user'
+import { getMessage } from '../../helpers/messages'
 
-export default class EditUser extends Component {
+class EditUser extends Component {
   constructor (props) {
     super(props)
+    const { address, first_name: firstName, last_name: lastName, email, state } = props.user
     this.state = {
-      image: ''
+      image: '',
+      firstName,
+      lastName,
+      address,
+      email,
+      state,
+      password: '',
+      updates: {}
     }
     this.showImagePicker = this.showImagePicker.bind(this)
+    this.onChangeText = this.onChangeText.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
   render () {
+    const { firstName, lastName, state, address, email, password } = this.state
+    const { isLoading } = this.props.settings
     return (
       <KeyboardAwareScrollView
         bounces={false}
@@ -56,6 +74,8 @@ export default class EditUser extends Component {
                 inputStyle={styles.inputStyle}
                 blurOnSubmit={false}
                 onSubmitEditing={() => this.lastName.input.focus()}
+                value={firstName}
+                onChangeText={value => this.onChangeText(value, 'firstName')}
               />
             </InputContainer>
             <InputContainer width={40}>
@@ -70,6 +90,8 @@ export default class EditUser extends Component {
                   this.lastName = refs
                 }}
                 onSubmitEditing={() => this.stateInput.input.focus()}
+                value={lastName}
+                onChangeText={value => this.onChangeText(value, 'lastName')}
               />
             </InputContainer>
           </FlexRow>
@@ -85,6 +107,8 @@ export default class EditUser extends Component {
                 this.stateInput = refs
               }}
               onSubmitEditing={() => this.address.input.focus()}
+              value={state}
+              onChangeText={value => this.onChangeText(value, 'state')}
             />
           </InputContainer>
           <InputContainer>
@@ -99,6 +123,8 @@ export default class EditUser extends Component {
                 this.address = refs
               }}
               onSubmitEditing={() => this.email.input.focus()}
+              value={address}
+              onChangeText={value => this.onChangeText(value, 'address')}
             />
           </InputContainer>
           <InputContainer>
@@ -113,6 +139,8 @@ export default class EditUser extends Component {
                 this.email = refs
               }}
               onSubmitEditing={() => this.password.input.focus()}
+              value={email}
+              onChangeText={value => this.onChangeText(value, 'email')}
             />
           </InputContainer>
           <InputContainer>
@@ -125,6 +153,8 @@ export default class EditUser extends Component {
               ref={refs => {
                 this.password = refs
               }}
+              value={password}
+              onChangeText={value => this.onChangeText(value, 'password')}
             />
           </InputContainer>
           <Button
@@ -136,8 +166,10 @@ export default class EditUser extends Component {
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.titleStyle}
             containerStyle={styles.buttonContainerStyle}
+            onPress={this.handleSave}
           />
         </InfoContainer>
+        {isLoading && <Loading />}
       </KeyboardAwareScrollView>
     )
   }
@@ -162,6 +194,33 @@ export default class EditUser extends Component {
     />
   }
 
+  onChangeText (value, field) {
+    const { state } = this
+    const { updates } = this.state
+    state[field] = value
+    updates[field] = value
+    this.setState({...state, updates})
+  }
+
+  handleSave () {
+    let { updates } = this.state
+    const { editUserData, user, navigation } = this.props
+    if (!_.isEmpty(updates)) {
+      if (updates.password && updates.password.length < 8) {
+        const message = getMessage('SHORT_PASSWORD')
+        showMessage(message)
+      } else if (updates.password && invalidPassword(updates.password)) {
+        const message = getMessage('NUMERIC_PASSWORD')
+        showMessage(message)
+      } else {
+        if (updates.password && updates.password === '') {
+          updates = _.omit(updates, ['password'])
+        }
+        editUserData(user.token, updates, navigation)
+      }
+    }
+  }
+
   showImagePicker () {
     const options = {
       title: translate.selectAvatar,
@@ -179,3 +238,14 @@ export default class EditUser extends Component {
     })
   }
 }
+
+const mapStateToProps = ({ user, settings }) => ({
+  user,
+  settings
+})
+
+const mapDispatchToProps = dispatch => ({
+  editUserData: (token, updates, navigation) => dispatch(editUserData(token, updates, navigation))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditUser)
