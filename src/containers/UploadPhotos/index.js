@@ -4,6 +4,7 @@ import {
   Platform,
   Alert
 } from 'react-native'
+import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-crop-picker'
 import {
   Text,
@@ -12,6 +13,7 @@ import {
   Badge,
   Icon
 } from 'react-native-elements'
+import { Loading } from '../../components'
 import {
   Container,
   FlexRow,
@@ -21,9 +23,10 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
+import { uploadPhotos } from '../../helpers/orders'
 import { white } from '../../colorPalette'
 
-export default class UploadPhotos extends Component {
+class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -33,9 +36,11 @@ export default class UploadPhotos extends Component {
     this.handleClose = this.handleClose.bind(this)
     this.selectFromCamera = this.selectFromCamera.bind(this)
     this.selectFromGallery = this.selectFromGallery.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
   render () {
     const { photos } = this.state
+    const { isLoading } = this.props.settings
     return (
       <Container>
         <Text h4>{translate.photos}</Text>
@@ -78,10 +83,18 @@ export default class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title={translate.save}
+            onPress={this.handleSave}
           />
         </FlexRow>
+        {isLoading && <Loading />}
       </Container>
     )
+  }
+
+  handleSave () {
+    const { photos } = this.state
+    const { user, uploadPhotos } = this.props
+    uploadPhotos(user.token, photos)
   }
 
   handleClose () {
@@ -177,3 +190,14 @@ export default class UploadPhotos extends Component {
     this.setState({photos})
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  uploadPhotos: (token, photos) => dispatch(uploadPhotos(token, photos))
+})
+
+const mapStateToProp = ({ user, settings }) => ({
+  user,
+  settings
+})
+
+export default connect(mapStateToProp, mapDispatchToProps)(UploadPhotos)
