@@ -68,7 +68,8 @@ const es = {
   otherRepair: 'Otras Reparaciones',
   connectionErrorMessage: 'Error de conexión',
   connectionErrorDescription: 'Favor de verificar su red.',
-  noOrders: 'No hay ordenes para mostrar.'
+  noOrders: 'No hay ordenes para mostrar.',
+  successUploadMessage: 'Carga exitosa'
 }
 
 export default es

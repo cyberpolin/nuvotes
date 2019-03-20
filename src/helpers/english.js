@@ -67,7 +67,8 @@ const en = {
   otherRepair: 'Other Repair',
   connectionErrorMessage: 'Connection error',
   connectionErrorDescription: 'Please check your network.',
-  noOrders: 'There are no orders to show.'
+  noOrders: 'There are no orders to show.',
+  successUploadMessage: 'Successful upload'
 }
 
 export default en
