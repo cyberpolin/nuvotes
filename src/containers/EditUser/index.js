@@ -24,7 +24,11 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
-import { editUserData, invalidPassword } from '../../helpers/user'
+import {
+  editUserData,
+  invalidPassword,
+  validEmail
+} from '../../helpers/user'
 import { getMessage } from '../../helpers/messages'
 
 class EditUser extends Component {
@@ -205,16 +209,23 @@ class EditUser extends Component {
   handleSave () {
     let { updates } = this.state
     const { editUserData, user, navigation } = this.props
+    const { password, email } = updates
     if (!_.isEmpty(updates)) {
-      if (updates.password && updates.password.length < 8) {
+      if (password && password.length < 8) {
         const message = getMessage('SHORT_PASSWORD')
         showMessage(message)
-      } else if (updates.password && invalidPassword(updates.password)) {
+      } else if (password && invalidPassword(password)) {
         const message = getMessage('NUMERIC_PASSWORD')
         showMessage(message)
+      } else if (email && !validEmail(email)) {
+        const message = getMessage('INVALID_EMAIL')
+        showMessage(message)
       } else {
-        if (updates.password && updates.password === '') {
+        if (password === '') {
           updates = _.omit(updates, ['password'])
+        }
+        if (email === '') {
+          updates = _.omit(updates, ['email'])
         }
         editUserData(user.token, updates, navigation)
       }
