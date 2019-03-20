@@ -67,7 +67,11 @@ const en = {
   otherRepair: 'Other Repair',
   connectionErrorMessage: 'Connection error',
   connectionErrorDescription: 'Please check your network.',
-  noOrders: 'There are no orders to show.'
+  noOrders: 'There are no orders to show.',
+  shortPasswordMessage: 'Too short password',
+  shortPasswordDescrption: 'Your password must contain at least 8 characters.',
+  numberPasswordMessage: 'Not valid password',
+  numberPasswordDescription: "Your password can't be entirely numeric."
 }
 
 export default en

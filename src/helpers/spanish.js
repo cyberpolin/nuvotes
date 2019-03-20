@@ -68,7 +68,11 @@ const es = {
   otherRepair: 'Otras Reparaciones',
   connectionErrorMessage: 'Error de conexión',
   connectionErrorDescription: 'Favor de verificar su red.',
-  noOrders: 'No hay ordenes para mostrar.'
+  noOrders: 'No hay ordenes para mostrar.',
+  shortPasswordMessage: 'Contraseña muy corta',
+  shortPasswordDescrption: 'Su contraseña debe contener al menos 8 caracteres.',
+  numberPasswordMessage: 'Contraseña no válida',
+  numberPasswordDescription: 'Su contraseña no puede ser totalmente numérica.'
 }
 
 export default es
