@@ -1,8 +1,11 @@
+import { Platform } from 'react-native'
 import _ from 'lodash'
 import moment from 'moment'
 import { showMessage } from 'react-native-flash-message'
 import { getMessage } from './messages'
 import { URL } from '../setup'
+
+const isIOS = Platform.OS === 'ios'
 
 const ordersByDate = orders => {
   const sortedOrders = _.orderBy(orders, ['end_date'], ['asc'])
@@ -74,5 +77,40 @@ export const getOrders = (token, userId) => {
         const message = getMessage('CONNECTION_ERROR')
         showMessage(message)
       })
+  }
+}
+
+const photoFormData = (photos) => {
+  const data = new FormData()
+  photos.map((photo, index) => {
+    data.append(`photo${index}`, {
+      uri: isIOS ? photo.sourceURL : photo.path,
+      type: photo.mime,
+      name: photo.filename,
+      status: photo.type
+    })
+  })
+  return data
+}
+
+export const uploadPhotos = (token, photos) => {
+  return dispatch => {
+    dispatch({ type: 'CHANGE_LOADING', payload: true })
+    const data = photoFormData(photos)
+    return fetch(`${URL}upload-photo/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      body: data
+    })
+      .then(response => {
+        if (response.ok) {
+          dispatch({ type: 'CHANGE_LOADING', payload: false })
+          const message = getMessage('SUCCESS_UPLOAD')
+          showMessage(message)
+        }
+      })
+      .catch(error => console.log(error))
   }
 }
