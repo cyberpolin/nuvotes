@@ -72,7 +72,10 @@ const es = {
   shortPasswordMessage: 'Contraseña muy corta',
   shortPasswordDescrption: 'Su contraseña debe contener al menos 8 caracteres.',
   numberPasswordMessage: 'Contraseña no válida',
-  numberPasswordDescription: 'Su contraseña no puede ser totalmente numérica.'
+  numberPasswordDescription: 'Su contraseña no puede ser totalmente numérica.',
+  invalidEmailMessage: 'Correo no válido',
+  invalidEmailDescription: 'Favor de usar un correo válido',
+  successModify: 'Datos actualizados'
 }
 
 export default es
