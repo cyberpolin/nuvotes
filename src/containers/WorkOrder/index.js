@@ -130,7 +130,7 @@ class WorkOrder extends Component {
                 onPress={this.showModal}
               />
             </ButtonContainer>
-            {this.renderModal(order['description_job'])}
+            {this.renderModal(order['description_job'], order.id)}
           </InfoContainer>
         </ScrollContainer>
       </Container>
@@ -141,7 +141,7 @@ class WorkOrder extends Component {
     this.setState({isVisible: !isVisible})
   }
 
-  renderModal (descriptionJob) {
+  renderModal (descriptionJob, orderId) {
     const { isVisible } = this.state
     return (
       <Overlay
@@ -157,6 +157,7 @@ class WorkOrder extends Component {
           isVisible={isVisible}
           changeVisibility={this.changeVisibility}
           descriptionJob={descriptionJob}
+          orderId={orderId}
         />
       </Overlay>
     )
