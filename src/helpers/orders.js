@@ -80,23 +80,34 @@ export const getOrders = (token, userId) => {
   }
 }
 
-const photoFormData = (photos) => {
+const photoFormData = (photos, orderId) => {
   const data = new FormData()
+  let before = []
+  let inProgress = []
+  let after = []
   photos.map((photo, index) => {
+    const { type, filename } = photo
+    type === 'before' ? before.push(filename)
+      : type === 'in_progress' ? inProgress.push(filename)
+        : type === 'after' && after.push(filename)
     data.append(`photo${index}`, {
       uri: isIOS ? photo.sourceURL : photo.path,
       type: photo.mime,
-      name: photo.filename,
-      status: photo.type
+      name: filename
     })
   })
+  data.append('before', JSON.stringify(before))
+  data.append('in_progress', JSON.stringify(inProgress))
+  data.append('after', JSON.stringify(after))
+  data.append('count', photos.length)
+  data.append('order_id', orderId)
   return data
 }
 
-export const uploadPhotos = (token, photos) => {
+export const uploadPhotos = (token, photos, orderId) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_LOADING', payload: true })
-    const data = photoFormData(photos)
+    const data = photoFormData(photos, orderId)
     return fetch(`${URL}upload-photo/`, {
       method: 'POST',
       headers: {
