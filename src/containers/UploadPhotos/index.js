@@ -93,8 +93,8 @@ class UploadPhotos extends Component {
 
   handleSave () {
     const { photos } = this.state
-    const { user, uploadPhotos } = this.props
-    uploadPhotos(user.token, photos)
+    const { user, uploadPhotos, orderId } = this.props
+    uploadPhotos(user.token, photos, orderId)
   }
 
   handleClose () {
@@ -148,7 +148,7 @@ class UploadPhotos extends Component {
       multiple: true
     }).then(images => {
       const { descriptionJob } = this.props
-      if (descriptionJob !== 'Inspection') {
+      if (descriptionJob.description !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
           translate.savePhotoAlertMessage,
@@ -168,7 +168,7 @@ class UploadPhotos extends Component {
     ImagePicker.openCamera({
     }).then(image => {
       const { descriptionJob } = this.props
-      if (descriptionJob !== 'Inspection') {
+      if (descriptionJob.description !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
           translate.savePhotoAlertMessage,
@@ -192,7 +192,7 @@ class UploadPhotos extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  uploadPhotos: (token, photos) => dispatch(uploadPhotos(token, photos))
+  uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId))
 })
 
 const mapStateToProp = ({ user, settings }) => ({
