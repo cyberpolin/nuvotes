@@ -193,7 +193,7 @@ class WorkOrder extends Component {
     ]
     if (descriptionJob.description === 'Inspection') {
       return (
-        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', photos })}>
+        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', sortedPhotos: photos })}>
           <Text>{translate.propertyPhotos}</Text>
           <Icon
             name='angle-right'
