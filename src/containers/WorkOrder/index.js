@@ -30,6 +30,7 @@ import {
 } from './styled'
 import { translate } from '../../helpers/localization'
 import { sortPhotos } from '../../helpers/orders'
+import { primary } from '../../colorPalette'
 
 class WorkOrder extends Component {
   constructor (props) {
@@ -45,7 +46,7 @@ class WorkOrder extends Component {
   }
   render () {
     const { isCollapsed } = this.state
-    const { navigation, user } = this.props
+    const { navigation, user, settings } = this.props
     const order = navigation.getParam('order', {})
     const { id, status, avatar, address, coordinator } = order
     const formattedAddress = `${_.capitalize(address.state.description)}, ${address.address}`
@@ -128,6 +129,9 @@ class WorkOrder extends Component {
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
                 onPress={this.showModal}
+                disabled={settings.isUploading}
+                loading={settings.isUploading}
+                loadingProps={{color: primary}}
               />
             </ButtonContainer>
             {this.renderModal(order['description_job'], order.id)}
@@ -224,8 +228,9 @@ class WorkOrder extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  user
+const mapStateToProps = ({ user, settings }) => ({
+  user,
+  settings
 })
 
 export default connect(mapStateToProps, null)(WorkOrder)
