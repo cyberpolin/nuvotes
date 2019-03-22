@@ -13,7 +13,6 @@ import {
   Badge,
   Icon
 } from 'react-native-elements'
-import { Loading } from '../../components'
 import {
   Container,
   FlexRow,
@@ -24,7 +23,8 @@ import {
 } from './styled'
 import { translate } from '../../helpers/localization'
 import { uploadPhotos } from '../../helpers/orders'
-import { white } from '../../colorPalette'
+import { changeUploading } from '../../actions/settings'
+import { white, primary } from '../../colorPalette'
 
 class UploadPhotos extends Component {
   constructor (props) {
@@ -40,7 +40,7 @@ class UploadPhotos extends Component {
   }
   render () {
     const { photos } = this.state
-    const { isLoading } = this.props.settings
+    const { isUploading } = this.props.settings
     return (
       <Container>
         <Text h4>{translate.photos}</Text>
@@ -84,17 +84,23 @@ class UploadPhotos extends Component {
             type='outline'
             title={translate.save}
             onPress={this.handleSave}
+            disabled={isUploading || photos.length < 1}
+            loading={isUploading}
+            loadingProps={{color: primary}}
           />
         </FlexRow>
-        {isLoading && <Loading />}
       </Container>
     )
   }
 
   handleSave () {
-    const { photos } = this.state
-    const { user, uploadPhotos, orderId } = this.props
-    uploadPhotos(user.token, photos, orderId)
+    const { photos, isVisible } = this.state
+    const { user, uploadPhotos, orderId, changeVisibility, changeUploading } = this.props
+    changeUploading(true)
+    setTimeout(() => {
+      changeVisibility(!isVisible)
+      uploadPhotos(user.token, photos, orderId)
+    }, 1000)
   }
 
   handleClose () {
@@ -192,7 +198,8 @@ class UploadPhotos extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId))
+  uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId)),
+  changeUploading: isUploading => dispatch(changeUploading(isUploading))
 })
 
 const mapStateToProp = ({ user, settings }) => ({
