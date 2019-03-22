@@ -41,5 +41,21 @@ export const getMessage = type => {
         icon: 'success',
         duration: 2000
       }
+    case 'START_UPLOAD':
+      return {
+        message: translate.startUploadMessage,
+        description: translate.startUploadDescription,
+        type: 'info',
+        icon: 'info',
+        duration: 2000
+      }
+    case 'UPLOAD_ERROR':
+      return {
+        message: translate.uploadError,
+        description: translate.uploadErrorDescription,
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
   }
 }
