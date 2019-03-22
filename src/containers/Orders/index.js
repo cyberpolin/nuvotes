@@ -13,8 +13,7 @@ import {
 import {
   filterOrders,
   filterOrderBySearch,
-  getDateDiff,
-  getOrders
+  getDateDiff
 } from '../../helpers/orders'
 import {
   primary,
@@ -24,11 +23,6 @@ import {
 import { translate } from '../../helpers/localization'
 
 class Orders extends Component {
-  componentDidMount () {
-    const { user: { id, token }, getOrders } = this.props
-    getOrders(token, id)
-  }
-
   render () {
     const { isLoading } = this.props.settings
     return (
@@ -88,10 +82,4 @@ const mapStateToProps = ({ search, user, orders, settings }) => ({
   settings
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getOrders: (token, userId) => dispatch(getOrders(token, userId))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Orders)
+export default connect(mapStateToProps, null)(Orders)
