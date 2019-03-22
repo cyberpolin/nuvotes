@@ -42,8 +42,8 @@ export const getDateDiff = date => {
 
 export const sortPhotos = (photos, type) => {
   return photos.filter(photo => {
-    const { status } = photo
-    return status.description === type
+    const { description } = photo.status
+    return description === type
   })
 }
 
@@ -80,13 +80,16 @@ export const getOrders = (token, userId) => {
   }
 }
 
+const getPhotoName = path => path.split('crop-picker/')[1]
+
 const photoFormData = (photos, orderId) => {
   const data = new FormData()
   let before = []
   let inProgress = []
   let after = []
   photos.map((photo, index) => {
-    const { type, filename } = photo
+    const { type } = photo
+    const filename = isIOS ? photo.filename : getPhotoName(photo.path)
     type === 'before' ? before.push(filename)
       : type === 'in_progress' ? inProgress.push(filename)
         : type === 'after' && after.push(filename)
@@ -127,6 +130,8 @@ export const uploadPhotos = (token, photos, orderId) => {
           const message = getMessage(jsonResponse.error)
           showMessage(message)
         } else {
+          const { photos } = jsonResponse
+          dispatch({ type: 'UPDATE_PHOTOS', payload: { orderId, photos } })
           dispatch({ type: 'CHANGE_UPLOAD', payload: false })
           const message = getMessage('SUCCESS_UPLOAD')
           showMessage(message)
@@ -137,4 +142,10 @@ export const uploadPhotos = (token, photos, orderId) => {
         dispatch({ type: 'CHANGE_UPLOAD', payload: false })
       })
   }
+}
+
+export const updateOrderPhotos = (orders, orderId, newPhotos) => {
+  const orderIndex = _.findIndex(orders, { 'id': orderId })
+  orders[orderIndex].photos.push(...newPhotos)
+  return orders
 }
