@@ -57,7 +57,8 @@ const es = {
   propertyBeforePhotos: 'Fotos de la propiedad Antes',
   propertyInProgressPhotos: 'Fotos de la propiedad En proceso',
   propertyAfterPhotos: 'Fotos de la propiedad Después',
-  uploadError: 'Ha ocurrido un error.',
+  uploadError: 'Error al cargar las fotos',
+  uploadErrorDescription: 'Algo ha salido mal.',
   search: 'Buscar',
   emptyFieldsMessage: 'Campos vacíos',
   emptyFieldsDescription: 'Favor de rellenar todos los campos.',
@@ -69,7 +70,9 @@ const es = {
   connectionErrorMessage: 'Error de conexión',
   connectionErrorDescription: 'Favor de verificar su red.',
   noOrders: 'No hay ordenes para mostrar.',
-  successUploadMessage: 'Carga exitosa'
+  successUploadMessage: 'Carga exitosa',
+  startUploadMessage: 'Carga iniciada',
+  startUploadDescription: 'Esto puede tomar un tiempo.'
 }
 
 export default es

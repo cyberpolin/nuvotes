@@ -56,7 +56,8 @@ const en = {
   propertyBeforePhotos: 'Property Before Photos',
   propertyInProgressPhotos: 'Property In Progress Photos',
   propertyAfterPhotos: 'Property After Photos',
-  uploadError: 'An error has ocurred.',
+  uploadError: 'Upload error',
+  uploadErrorDescription: 'Something went wrong.',
   search: 'Search',
   emptyFieldsMessage: 'Empty fields',
   emptyFieldsDescription: 'Please fill all fields to proceed.',
@@ -68,7 +69,9 @@ const en = {
   connectionErrorMessage: 'Connection error',
   connectionErrorDescription: 'Please check your network.',
   noOrders: 'There are no orders to show.',
-  successUploadMessage: 'Successful upload'
+  successUploadMessage: 'Successful upload',
+  startUploadMessage: 'Upload started',
+  startUploadDescription: 'This may take a while.'
 }
 
 export default en
