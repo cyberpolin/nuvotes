@@ -106,7 +106,8 @@ const photoFormData = (photos, orderId) => {
 
 export const uploadPhotos = (token, photos, orderId) => {
   return dispatch => {
-    dispatch({ type: 'CHANGE_LOADING', payload: true })
+    const message = getMessage('START_UPLOAD')
+    showMessage(message)
     const data = photoFormData(photos, orderId)
     return fetch(`${URL}upload-photo/`, {
       method: 'POST',
@@ -117,11 +118,23 @@ export const uploadPhotos = (token, photos, orderId) => {
     })
       .then(response => {
         if (response.ok) {
-          dispatch({ type: 'CHANGE_LOADING', payload: false })
+          return response.json()
+        }
+      })
+      .then(jsonResponse => {
+        if (jsonResponse.error) {
+          dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+          const message = getMessage(jsonResponse.error)
+          showMessage(message)
+        } else {
+          dispatch({ type: 'CHANGE_UPLOAD', payload: false })
           const message = getMessage('SUCCESS_UPLOAD')
           showMessage(message)
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+      })
   }
 }
