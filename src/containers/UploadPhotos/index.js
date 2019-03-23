@@ -13,6 +13,7 @@ import {
   Badge,
   Icon
 } from 'react-native-elements'
+import _ from 'lodash'
 import {
   Container,
   FlexRow,
@@ -141,12 +142,18 @@ class UploadPhotos extends Component {
 
   savePhoto (images, type) {
     const { photos } = this.state
-    images = images.map(image => {
-      image.type = type
-      return image
-    })
-    const newPhotosArray = [...photos, ...images]
-    this.setState({photos: newPhotosArray})
+    if (_.isArray(images)) {
+      images = images.map(image => {
+        image.type = type
+        return image
+      })
+      const newPhotosArray = [...photos, ...images]
+      this.setState({photos: newPhotosArray})
+    } else {
+      images['type'] = type
+      const newPhotosArray = [...photos, images]
+      this.setState({photos: newPhotosArray})
+    }
   }
 
   selectFromGallery () {
