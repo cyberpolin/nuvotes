@@ -72,7 +72,9 @@ const es = {
   noOrders: 'No hay ordenes para mostrar.',
   successUploadMessage: 'Carga exitosa',
   startUploadMessage: 'Carga iniciada',
-  startUploadDescription: 'Esto puede tomar un tiempo.'
+  startUploadDescription: 'Esto puede tomar un tiempo.',
+  genericErrorMessage: 'Error',
+  genericErrorDescription: 'Ha ocurrido un error.'
 }
 
 export default es
