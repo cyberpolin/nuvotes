@@ -72,15 +72,17 @@ export const getOrders = (token, userId) => {
         dispatch({ type: 'CHANGE_LOADING', payload: false })
       })
       .catch(error => {
-        console.log(error)
         dispatch({ type: 'CHANGE_LOADING', payload: false })
-        const message = getMessage('CONNECTION_ERROR')
+        const message = getMessage(`${error}`)
         showMessage(message)
       })
   }
 }
 
-const getPhotoName = path => path.split('crop-picker/')[1]
+const getPhotoName = path => {
+  const splitted = path.split('/')
+  return splitted[splitted.length - 1]
+}
 
 const photoFormData = (photos, orderId) => {
   const data = new FormData()
@@ -125,21 +127,22 @@ export const uploadPhotos = (token, photos, orderId) => {
         }
       })
       .then(jsonResponse => {
-        if (jsonResponse.error) {
-          dispatch({ type: 'CHANGE_UPLOAD', payload: false })
-          const message = getMessage(jsonResponse.error)
-          showMessage(message)
-        } else {
+        if (jsonResponse.photos) {
           const { photos } = jsonResponse
           dispatch({ type: 'UPDATE_PHOTOS', payload: { orderId, photos } })
           dispatch({ type: 'CHANGE_UPLOAD', payload: false })
           const message = getMessage('SUCCESS_UPLOAD')
           showMessage(message)
+        } else {
+          dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+          const message = getMessage(jsonResponse.error)
+          showMessage(message)
         }
       })
       .catch(error => {
-        console.log(error)
         dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+        const message = getMessage(`${error}`)
+        showMessage(message)
       })
   }
 }
