@@ -45,11 +45,6 @@ export const getLogin = (username, password, navigation) => {
             dispatch({ type: 'POPULATE_USER', payload: {...response, token} })
             navigation.navigate('Home')
             dispatch(getOrders(token, id))
-          }).catch(error => {
-            console.log('ERROR', error)
-            dispatch({ type: 'CHANGE_LOADING', payload: false })
-            const message = getMessage('ERROR')
-            showMessage(message)
           })
         } else {
           dispatch({ type: 'CHANGE_LOADING', payload: false })
@@ -58,9 +53,8 @@ export const getLogin = (username, password, navigation) => {
         }
       })
       .catch(error => {
-        console.log('ERROR', error)
         dispatch({ type: 'CHANGE_LOADING', payload: false })
-        const message = getMessage('ERROR')
+        const message = getMessage(`${error}`)
         showMessage(message)
       })
   }
