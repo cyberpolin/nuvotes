@@ -18,7 +18,7 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
-    case 'CONNECTION_ERROR':
+    case 'TypeError: Network request failed':
       return {
         message: translate.connectionErrorMessage,
         description: translate.connectionErrorDescription,
@@ -28,8 +28,8 @@ export const getMessage = type => {
       }
     case 'ERROR':
       return {
-        message: translate.errorMessage,
-        description: translate.errorDescription,
+        message: translate.genericErrorMessage,
+        description: translate.genericErrorDescription,
         type: 'danger',
         icon: 'danger',
         duration: 2000
