@@ -17,10 +17,10 @@ export const styles = {
 export const Container = styled.View`
   flex: 1;
   width: 100%;
+  justify-content: center;
 `
 
 export const ScrollViewContainer = styled.ScrollView.attrs({
-  bounces: false,
   contentContainerStyle: {
     alignItems: 'center'
   },
@@ -33,4 +33,8 @@ export const TextContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+`
+
+export const Text = styled.Text`
+  align-self: center;
 `
