@@ -11,10 +11,7 @@ const orders = (state = initialState, { type, payload }) => {
     case 'UPDATE_PHOTOS':
       const { orderId, photos } = payload
       const orders = updateOrderPhotos(state, orderId, photos)
-      return {
-        ...state,
-        ...orders
-      }
+      return orders
     default:
       return state
   }
