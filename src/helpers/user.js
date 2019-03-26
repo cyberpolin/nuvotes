@@ -18,7 +18,7 @@ const getUserData = (token) => {
       }
     })
     .then(jsonResponse => {
-      return jsonResponse.user
+      return jsonResponse
     })
 }
 
@@ -41,10 +41,17 @@ export const getLogin = (username, password, navigation) => {
         if (responseJson['token']) {
           const { token } = responseJson
           getUserData(token).then(response => {
-            const { id } = response
-            dispatch({ type: 'POPULATE_USER', payload: {...response, token} })
-            navigation.navigate('Home')
-            dispatch(getOrders(token, id))
+            if (response) {
+              const { user } = response
+              const { id } = user
+              dispatch({ type: 'POPULATE_USER', payload: {...user, token} })
+              navigation.navigate('Home')
+              dispatch(getOrders(token, id))
+            } else {
+              dispatch({ type: 'CHANGE_LOADING', payload: false })
+              const message = getMessage('ERROR')
+              showMessage(message)
+            }
           })
         } else {
           dispatch({ type: 'CHANGE_LOADING', payload: false })
