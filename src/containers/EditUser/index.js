@@ -34,11 +34,11 @@ import { getMessage } from '../../helpers/messages'
 class EditUser extends Component {
   constructor (props) {
     super(props)
-    const { address, first_name: firstName, last_name: lastName, email, state } = props.user
+    const { address, first_name, last_name, email, state } = props.user
     this.state = {
       image: '',
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       address,
       email,
       state,
@@ -50,7 +50,7 @@ class EditUser extends Component {
     this.handleSave = this.handleSave.bind(this)
   }
   render () {
-    const { firstName, lastName, state, address, email, password } = this.state
+    const { first_name, last_name, state, address, email, password, updates } = this.state
     const { isLoading } = this.props.settings
     return (
       <KeyboardAwareScrollView
@@ -59,14 +59,14 @@ class EditUser extends Component {
         keyboardShouldPersistTaps='always'
         keyboardDismissMode='on-drag'
       >
-        <ImageContainer onPress={this.showImagePicker}>
+        {/* <ImageContainer onPress={this.showImagePicker}>
           {this.renderAvatar()}
           <Icon
             type='font-awesome'
             name='edit'
             containerStyle={styles.editIconStyle}
           />
-        </ImageContainer>
+        </ImageContainer> */}
         <InfoContainer>
           <FlexRow>
             <InputContainer width={40}>
@@ -78,8 +78,8 @@ class EditUser extends Component {
                 inputStyle={styles.inputStyle}
                 blurOnSubmit={false}
                 onSubmitEditing={() => this.lastName.input.focus()}
-                value={firstName}
-                onChangeText={value => this.onChangeText(value, 'firstName')}
+                value={first_name}
+                onChangeText={value => this.onChangeText(value, 'first_name')}
               />
             </InputContainer>
             <InputContainer width={40}>
@@ -94,8 +94,8 @@ class EditUser extends Component {
                   this.lastName = refs
                 }}
                 onSubmitEditing={() => this.stateInput.input.focus()}
-                value={lastName}
-                onChangeText={value => this.onChangeText(value, 'lastName')}
+                value={last_name}
+                onChangeText={value => this.onChangeText(value, 'last_name')}
               />
             </InputContainer>
           </FlexRow>
@@ -171,6 +171,7 @@ class EditUser extends Component {
             titleStyle={styles.titleStyle}
             containerStyle={styles.buttonContainerStyle}
             onPress={this.handleSave}
+            disabled={_.isEmpty(updates)}
           />
         </InfoContainer>
         {isLoading && <Loading />}
@@ -210,25 +211,22 @@ class EditUser extends Component {
     let { updates } = this.state
     const { editUserData, user, navigation } = this.props
     const { password, email } = updates
-    if (!_.isEmpty(updates)) {
-      if (password && password.length < 8) {
-        const message = getMessage('SHORT_PASSWORD')
-        showMessage(message)
-      } else if (password && invalidPassword(password)) {
-        const message = getMessage('NUMERIC_PASSWORD')
-        showMessage(message)
-      } else if (email && !validEmail(email)) {
-        const message = getMessage('INVALID_EMAIL')
-        showMessage(message)
-      } else {
-        if (password === '') {
-          updates = _.omit(updates, ['password'])
-        }
-        if (email === '') {
-          updates = _.omit(updates, ['email'])
-        }
-        editUserData(user.token, updates, navigation)
+    Object.keys(updates).map(field => {
+      if (updates[field] === '' || updates[field] === user[field]) {
+        updates = _.omit(updates, [field])
       }
+    })
+    if (password && password.length < 8) {
+      const message = getMessage('SHORT_PASSWORD')
+      showMessage(message)
+    } else if (password && invalidPassword(password)) {
+      const message = getMessage('NUMERIC_PASSWORD')
+      showMessage(message)
+    } else if (email && !validEmail(email)) {
+      const message = getMessage('INVALID_EMAIL')
+      showMessage(message)
+    } else {
+      editUserData(user.token, updates, navigation)
     }
   }
 
