@@ -23,12 +23,12 @@ export default class Gallery extends Component {
     return photos.map((photo, index) => {
       const splitted = photo.photo.photo.split('.')
       splitted.splice(splitted.length - 1, 0, 'thumbnail')
-      console.log(splitted)
+      const thumbnail = splitted.join('.')
       return {
         URI: photo.photo.photo,
         id: `${index}`,
         description: photo.status.description,
-        thumbnail: photo.photo.photo
+        thumbnail
       }
     })
   }
