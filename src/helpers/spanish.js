@@ -81,7 +81,11 @@ const es = {
   startUploadMessage: 'Carga iniciada',
   startUploadDescription: 'Esto puede tomar un tiempo.',
   genericErrorMessage: 'Error',
-  genericErrorDescription: 'Ha ocurrido un error.'
+  genericErrorDescription: 'Ha ocurrido un error.',
+  usedMailMessage: 'Correo en uso',
+  usedMailDescription: 'Escoga otro correo para registrar.',
+  usedUsernameMessage: 'Usuario en uso',
+  usedUsernameDescription: 'Escoga otro usuario para registrar'
 }
 
 export default es
