@@ -34,10 +34,6 @@ class Orders extends Component {
     this.renderList = this.renderList.bind(this)
     this.onRefresh = this.onRefresh.bind(this)
   }
-  componentDidMount () {
-    const { user: { id, token }, getOrders } = this.props
-    getOrders(token, id)
-  }
 
   render () {
     const { orders } = this.props
@@ -111,10 +107,8 @@ const mapStateToProps = ({ search, user, orders, settings }) => ({
   settings
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getOrders: (token, userId) => dispatch(getOrders(token, userId))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getOrders: (token, userId) => dispatch(getOrders(token, userId))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders)
