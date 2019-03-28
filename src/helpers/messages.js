@@ -18,7 +18,7 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
-    case 'CONNECTION_ERROR':
+    case 'TypeError: Network request failed':
       return {
         message: translate.connectionErrorMessage,
         description: translate.connectionErrorDescription,
@@ -28,8 +28,31 @@ export const getMessage = type => {
       }
     case 'ERROR':
       return {
-        message: translate.errorMessage,
-        description: translate.errorDescription,
+        message: translate.genericErrorMessage,
+        description: translate.genericErrorDescription,
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
+    case 'SUCCESS_UPLOAD':
+      return {
+        message: translate.successUploadMessage,
+        type: 'success',
+        icon: 'success',
+        duration: 2000
+      }
+    case 'START_UPLOAD':
+      return {
+        message: translate.startUploadMessage,
+        description: translate.startUploadDescription,
+        type: 'info',
+        icon: 'info',
+        duration: 2000
+      }
+    case 'UPLOAD_ERROR':
+      return {
+        message: translate.uploadError,
+        description: translate.uploadErrorDescription,
         type: 'danger',
         icon: 'danger',
         duration: 2000

@@ -1,8 +1,11 @@
+import { Platform } from 'react-native'
 import _ from 'lodash'
 import moment from 'moment'
 import { showMessage } from 'react-native-flash-message'
 import { getMessage } from './messages'
 import { URL } from '../setup'
+
+const isIOS = Platform.OS === 'ios'
 
 const ordersByDate = orders => {
   const sortedOrders = _.orderBy(orders, ['end_date'], ['asc'])
@@ -39,8 +42,8 @@ export const getDateDiff = date => {
 
 export const sortPhotos = (photos, type) => {
   return photos.filter(photo => {
-    const { status } = photo
-    return status.description === type
+    const { description } = photo.status
+    return description === type
   })
 }
 
@@ -69,10 +72,83 @@ export const getOrders = (token, userId) => {
         dispatch({ type: 'CHANGE_LOADING', payload: false })
       })
       .catch(error => {
-        console.log(error)
         dispatch({ type: 'CHANGE_LOADING', payload: false })
-        const message = getMessage('CONNECTION_ERROR')
+        const message = getMessage(`${error}`)
         showMessage(message)
       })
   }
+}
+
+const getPhotoName = path => {
+  const splitted = path.split('/')
+  return splitted[splitted.length - 1]
+}
+
+const photoFormData = (photos, orderId) => {
+  const data = new FormData()
+  let before = []
+  let inProgress = []
+  let after = []
+  photos.map((photo, index) => {
+    const { type } = photo
+    const filename = isIOS ? photo.filename : getPhotoName(photo.path)
+    type === 'before' ? before.push(filename)
+      : type === 'in_progress' ? inProgress.push(filename)
+        : type === 'after' && after.push(filename)
+    data.append(`photo${index}`, {
+      uri: isIOS ? photo.sourceURL : photo.path,
+      type: photo.mime,
+      name: filename
+    })
+  })
+  data.append('before', JSON.stringify(before))
+  data.append('in_progress', JSON.stringify(inProgress))
+  data.append('after', JSON.stringify(after))
+  data.append('count', photos.length)
+  data.append('order_id', orderId)
+  return data
+}
+
+export const uploadPhotos = (token, photos, orderId) => {
+  return dispatch => {
+    const message = getMessage('START_UPLOAD')
+    showMessage(message)
+    const data = photoFormData(photos, orderId)
+    return fetch(`${URL}upload-photo/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`
+      },
+      body: data
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .then(jsonResponse => {
+        if (jsonResponse.photos) {
+          const { photos } = jsonResponse
+          dispatch({ type: 'UPDATE_PHOTOS', payload: { orderId, photos } })
+          dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+          const message = getMessage('SUCCESS_UPLOAD')
+          showMessage(message)
+        } else {
+          dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+          const message = getMessage(jsonResponse.error)
+          showMessage(message)
+        }
+      })
+      .catch(error => {
+        dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+        const message = getMessage(`${error}`)
+        showMessage(message)
+      })
+  }
+}
+
+export const updateOrderPhotos = (orders, orderId, newPhotos) => {
+  const orderIndex = _.findIndex(orders, { 'id': orderId })
+  orders[orderIndex].photos.push(...newPhotos)
+  return orders
 }

@@ -4,6 +4,7 @@ import {
   Platform,
   Alert
 } from 'react-native'
+import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-crop-picker'
 import {
   Text,
@@ -12,6 +13,7 @@ import {
   Badge,
   Icon
 } from 'react-native-elements'
+import _ from 'lodash'
 import {
   Container,
   FlexRow,
@@ -21,9 +23,11 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
-import { white } from '../../colorPalette'
+import { uploadPhotos } from '../../helpers/orders'
+import { changeUploading } from '../../actions/settings'
+import { white, primary } from '../../colorPalette'
 
-export default class UploadPhotos extends Component {
+class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -33,9 +37,11 @@ export default class UploadPhotos extends Component {
     this.handleClose = this.handleClose.bind(this)
     this.selectFromCamera = this.selectFromCamera.bind(this)
     this.selectFromGallery = this.selectFromGallery.bind(this)
+    this.handleSave = this.handleSave.bind(this)
   }
   render () {
     const { photos } = this.state
+    const { isUploading } = this.props.settings
     return (
       <Container>
         <Text h4>{translate.photos}</Text>
@@ -78,10 +84,24 @@ export default class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title={translate.save}
+            onPress={this.handleSave}
+            disabled={isUploading || photos.length < 1}
+            loading={isUploading}
+            loadingProps={{color: primary}}
           />
         </FlexRow>
       </Container>
     )
+  }
+
+  handleSave () {
+    const { photos, isVisible } = this.state
+    const { user, uploadPhotos, orderId, changeVisibility, changeUploading } = this.props
+    changeUploading(true)
+    setTimeout(() => {
+      changeVisibility(!isVisible)
+      uploadPhotos(user.token, photos, orderId)
+    }, 1000)
   }
 
   handleClose () {
@@ -122,12 +142,18 @@ export default class UploadPhotos extends Component {
 
   savePhoto (images, type) {
     const { photos } = this.state
-    images = images.map(image => {
-      image.type = type
-      return image
-    })
-    const newPhotosArray = [...photos, ...images]
-    this.setState({photos: newPhotosArray})
+    if (_.isArray(images)) {
+      images = images.map(image => {
+        image.type = type
+        return image
+      })
+      const newPhotosArray = [...photos, ...images]
+      this.setState({photos: newPhotosArray})
+    } else {
+      images['type'] = type
+      const newPhotosArray = [...photos, images]
+      this.setState({photos: newPhotosArray})
+    }
   }
 
   selectFromGallery () {
@@ -135,7 +161,7 @@ export default class UploadPhotos extends Component {
       multiple: true
     }).then(images => {
       const { descriptionJob } = this.props
-      if (descriptionJob !== 'Inspection') {
+      if (descriptionJob.description !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
           translate.savePhotoAlertMessage,
@@ -155,7 +181,7 @@ export default class UploadPhotos extends Component {
     ImagePicker.openCamera({
     }).then(image => {
       const { descriptionJob } = this.props
-      if (descriptionJob !== 'Inspection') {
+      if (descriptionJob.description !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
           translate.savePhotoAlertMessage,
@@ -177,3 +203,15 @@ export default class UploadPhotos extends Component {
     this.setState({photos})
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId)),
+  changeUploading: isUploading => dispatch(changeUploading(isUploading))
+})
+
+const mapStateToProp = ({ user, settings }) => ({
+  user,
+  settings
+})
+
+export default connect(mapStateToProp, mapDispatchToProps)(UploadPhotos)

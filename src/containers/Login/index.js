@@ -34,7 +34,7 @@ class Login extends Component {
   }
 
   componentWillMount () {
-    const { user, navigation } = this.props
+    const { user, navigation, getOrders } = this.props
     if (!_.isEmpty(user)) {
       const { id, token } = user
       navigation.navigate('Home')

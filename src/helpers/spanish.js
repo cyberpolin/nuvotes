@@ -57,7 +57,8 @@ const es = {
   propertyBeforePhotos: 'Fotos de la propiedad Antes',
   propertyInProgressPhotos: 'Fotos de la propiedad En proceso',
   propertyAfterPhotos: 'Fotos de la propiedad Después',
-  uploadError: 'Ha ocurrido un error.',
+  uploadError: 'Error al cargar las fotos',
+  uploadErrorDescription: 'Algo ha salido mal.',
   search: 'Buscar',
   emptyFieldsMessage: 'Campos vacíos',
   emptyFieldsDescription: 'Favor de rellenar todos los campos.',
@@ -75,7 +76,12 @@ const es = {
   numberPasswordDescription: 'Su contraseña no puede ser totalmente numérica.',
   invalidEmailMessage: 'Correo no válido',
   invalidEmailDescription: 'Favor de usar un correo válido',
-  successModify: 'Datos actualizados'
+  successModify: 'Datos actualizados',
+  successUploadMessage: 'Carga exitosa',
+  startUploadMessage: 'Carga iniciada',
+  startUploadDescription: 'Esto puede tomar un tiempo.',
+  genericErrorMessage: 'Error',
+  genericErrorDescription: 'Ha ocurrido un error.'
 }
 
 export default es

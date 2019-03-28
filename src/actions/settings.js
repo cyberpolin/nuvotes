@@ -4,3 +4,10 @@ export function changeLoading (isLoading) {
     payload: isLoading
   }
 }
+
+export function changeUploading (isUploading) {
+  return {
+    type: 'CHANGE_UPLOAD',
+    payload: isUploading
+  }
+}

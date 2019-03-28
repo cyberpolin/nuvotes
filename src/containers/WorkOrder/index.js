@@ -30,6 +30,7 @@ import {
 } from './styled'
 import { translate } from '../../helpers/localization'
 import { sortPhotos } from '../../helpers/orders'
+import { primary } from '../../colorPalette'
 
 class WorkOrder extends Component {
   constructor (props) {
@@ -45,7 +46,7 @@ class WorkOrder extends Component {
   }
   render () {
     const { isCollapsed } = this.state
-    const { navigation, user } = this.props
+    const { navigation, user, settings } = this.props
     const order = navigation.getParam('order', {})
     const { id, status, avatar, address, coordinator } = order
     const formattedAddress = `${_.capitalize(address.state.description)}, ${address.address}`
@@ -128,9 +129,12 @@ class WorkOrder extends Component {
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
                 onPress={this.showModal}
+                disabled={settings.isUploading}
+                loading={settings.isUploading}
+                loadingProps={{color: primary}}
               />
             </ButtonContainer>
-            {this.renderModal(order['description_job'])}
+            {this.renderModal(order['description_job'], order.id)}
           </InfoContainer>
         </ScrollContainer>
       </Container>
@@ -141,7 +145,7 @@ class WorkOrder extends Component {
     this.setState({isVisible: !isVisible})
   }
 
-  renderModal (descriptionJob) {
+  renderModal (descriptionJob, orderId) {
     const { isVisible } = this.state
     return (
       <Overlay
@@ -157,6 +161,7 @@ class WorkOrder extends Component {
           isVisible={isVisible}
           changeVisibility={this.changeVisibility}
           descriptionJob={descriptionJob}
+          orderId={orderId}
         />
       </Overlay>
     )
@@ -188,7 +193,7 @@ class WorkOrder extends Component {
     ]
     if (descriptionJob.description === 'Inspection') {
       return (
-        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', photos })}>
+        <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', sortedPhotos: photos })}>
           <Text>{translate.propertyPhotos}</Text>
           <Icon
             name='angle-right'
@@ -223,8 +228,9 @@ class WorkOrder extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  user
+const mapStateToProps = ({ user, settings }) => ({
+  user,
+  settings
 })
 
 export default connect(mapStateToProps, null)(WorkOrder)

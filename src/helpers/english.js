@@ -56,7 +56,8 @@ const en = {
   propertyBeforePhotos: 'Property Before Photos',
   propertyInProgressPhotos: 'Property In Progress Photos',
   propertyAfterPhotos: 'Property After Photos',
-  uploadError: 'An error has ocurred.',
+  uploadError: 'Upload error',
+  uploadErrorDescription: 'Something went wrong.',
   search: 'Search',
   emptyFieldsMessage: 'Empty fields',
   emptyFieldsDescription: 'Please fill all fields to proceed.',
@@ -78,7 +79,10 @@ const en = {
   usedMailDescription: 'Enter another email to register.',
   usedUsernameMessage: 'Username already used',
   usedUsernameDescription: 'Enter another username to register.',
-  successModify: 'Successful update'
+  successModify: 'Successful update',
+  successUploadMessage: 'Successful upload',
+  startUploadMessage: 'Upload started',
+  startUploadDescription: 'This may take a while.'
 }
 
 export default en
