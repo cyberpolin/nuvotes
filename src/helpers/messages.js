@@ -34,5 +34,52 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
+    case 'SHORT_PASSWORD':
+      return {
+        message: translate.shortPasswordMessage,
+        description: translate.shortPasswordDescrption,
+        type: 'warning',
+        icon: 'warning',
+        duration: 2000
+      }
+    case 'NUMERIC_PASSWORD':
+      return {
+        message: translate.numberPasswordMessage,
+        description: translate.numberPasswordDescription,
+        type: 'warning',
+        icon: 'warning',
+        duration: 2000
+      }
+    case 'INVALID_EMAIL':
+      return {
+        message: translate.invalidEmailMessage,
+        description: translate.invalidEmailDescription,
+        type: 'warning',
+        icon: 'warning',
+        duration: 2000
+      }
+    case 'USED_EMAIL':
+      return {
+        message: translate.usedMailMessage,
+        description: translate.usedMailDescription,
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
+    case 'USED_USERNAME':
+      return {
+        message: translate.usedUsernameMessage,
+        description: translate.usedUsernameDescription,
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
+    case 'SUCCESS_UPDATE':
+      return {
+        message: translate.successModify,
+        type: 'success',
+        icon: 'success',
+        duration: 2000
+      }
   }
 }

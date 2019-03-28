@@ -67,3 +67,53 @@ export const getLogin = (username, password, navigation) => {
       })
   }
 }
+
+export const editUserData = (token, updates, navigation) => {
+  return dispatch => {
+    dispatch({ type: 'CHANGE_LOADING', payload: true })
+    return fetch(`${URL}modify-user/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`
+      },
+      body: JSON.stringify(updates)
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .then(responseJSON => {
+        if (responseJSON.error) {
+          dispatch({ type: 'CHANGE_LOADING', payload: false })
+          const error = responseJSON.error
+          const message = getMessage(error)
+          showMessage(message)
+        } else {
+          dispatch({ type: 'CHANGE_LOADING', payload: false })
+          dispatch({ type: 'POPULATE_USER', payload: responseJSON.user })
+          navigation.goBack()
+          const message = getMessage('SUCCESS_UPDATE')
+          showMessage(message)
+        }
+      })
+      .catch(error => {
+        console.log('ERROR', error)
+        dispatch({ type: 'CHANGE_LOADING', payload: false })
+        const message = getMessage('ERROR')
+        showMessage(message)
+      })
+  }
+}
+
+export const invalidPassword = password => {
+  const regex = new RegExp('^[0-9]*$')
+  return regex.test(password)
+}
+
+export const validEmail = email => {
+  const regex = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/
+  return regex.test(email)
+}
