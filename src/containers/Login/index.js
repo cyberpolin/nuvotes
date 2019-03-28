@@ -47,11 +47,11 @@ class Login extends Component {
     return (
       <Container>
         <AvoidingView behavior='padding'>
-          <Background source={Assets.tools}>
+          <Background source={Assets.tools3}>
             <LogoContainer>
               <Logo
                 resizeMode='contain'
-                source={Assets.logo}
+                source={Assets.logo2}
               />
             </LogoContainer>
             <LoginBox>
