@@ -1,6 +1,8 @@
 import { showMessage } from 'react-native-flash-message'
 import { getMessage } from './messages'
 import { URL } from '../setup'
+import { getOrders } from './orders'
+
 
 const getUserData = (token) => {
   return fetch(`${URL}login/`, {
@@ -40,14 +42,16 @@ export const getLogin = (username, password, navigation) => {
         if (responseJson['token']) {
           const token = responseJson.token
           getUserData(token).then(response => {
-            dispatch({ type: 'POPULATE_USER', payload: {...response, token} })
-            navigation.navigate('Home')
-            dispatch({ type: 'CHANGE_LOADING', payload: false })
-          }).catch(error => {
-            console.log('ERROR', error)
-            dispatch({ type: 'CHANGE_LOADING', payload: false })
-            const message = getMessage('ERROR')
-            showMessage(message)
+            if (response) {
+              const { id } = response
+              dispatch({ type: 'POPULATE_USER', payload: {...response, token} })
+              navigation.navigate('Home')
+              dispatch(getOrders(token, id))
+            } else {
+              dispatch({ type: 'CHANGE_LOADING', payload: false })
+              const message = getMessage('ERROR')
+              showMessage(message)
+            }
           })
         } else {
           dispatch({ type: 'CHANGE_LOADING', payload: false })
