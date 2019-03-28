@@ -93,7 +93,7 @@ class Orders extends Component {
         refreshControl={<RefreshControl
           refreshing={isRefresing}
           onRefresh={this.onRefresh}
-          colors={primary}
+          colors={[primary]}
         />}
       />
     )
