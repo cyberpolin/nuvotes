@@ -10,6 +10,7 @@ import { Loading } from '../../components'
 import { translate } from '../../helpers/localization'
 import { getLogin } from '../../helpers/user'
 import { getMessage } from '../../helpers/messages'
+import { getOrders } from '../../helpers/orders'
 import {
   Container,
   LoginBox,
@@ -35,7 +36,9 @@ class Login extends Component {
   componentWillMount () {
     const { user, navigation } = this.props
     if (!_.isEmpty(user)) {
+      const { id, token } = user
       navigation.navigate('Home')
+      getOrders(token, id)
     }
   }
 
@@ -114,7 +117,8 @@ const mapStateToProps = ({ settings, user }) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation))
+    getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation)),
+    getOrders: (token, userId) => dispatch(getOrders(token, userId))
   }
 }
 
