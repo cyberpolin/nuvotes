@@ -58,9 +58,10 @@ class Orders extends Component {
 
   renderListItem (order) {
     const { navigation } = this.props
-    const { number, id } = order
+    const { number, id, status } = order
     const daysToDueDate = getDateDiff(order['end_date'])
-    const color = daysToDueDate < 3 ? red : daysToDueDate < 16 ? orange : primary
+    const isCompleted = status.description === 'Completed'
+    const color = isCompleted ? primary : daysToDueDate < 3 ? red : daysToDueDate < 16 ? orange : primary
     return (
       <ListItem
         key={id}
