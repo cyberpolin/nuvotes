@@ -19,11 +19,42 @@ export const filterOrders = (orders, orderType) => {
       return description === 'Pending Completion'
     })
     return ordersByDate(filteredOrders)
+  } else if (orderType === 'Orders') {
+    const filteredOrders = orders.filter(order => {
+      const { description } = order.status
+      return description !== 'Pending Completition' && description !== 'Completed'
+    })
+    return ordersByDate(filteredOrders)
   }
   return ordersByDate(orders)
 }
 
-export const filterOrderBySearch = (orders, search) => {
+export const filterOrderBySearch = (orders, search, orderType) => {
+  if (orderType === 'Pending') {
+    const filteredOrders = orders.filter(order => {
+      const { description } = order.status
+      return description === 'Pending Completion'
+    })
+    return filteredOrders.filter(order => {
+      if (!isNaN(search) && _.includes(order.id.toString(), search)) {
+        return order
+      } else if (_.includes(order.number, search)) {
+        return order
+      }
+    })
+  } else if (orderType === 'Orders') {
+    const filteredOrders = orders.filter(order => {
+      const { description } = order.status
+      return description !== 'Pending Completion' && description !== 'Completed'
+    })
+    return filteredOrders.filter(order => {
+      if (!isNaN(search) && _.includes(order.id.toString(), search)) {
+        return order
+      } else if (_.includes(order.number, search)) {
+        return order
+      }
+    })
+  }
   return orders.filter(order => {
     if (!isNaN(search) && _.includes(order.id.toString(), search)) {
       return order
