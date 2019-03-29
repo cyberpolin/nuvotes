@@ -59,6 +59,7 @@ const en = {
   uploadError: 'Upload error',
   uploadErrorDescription: 'Something went wrong.',
   search: 'Search',
+  searchInput: 'Search ID or order',
   emptyFieldsMessage: 'Empty fields',
   emptyFieldsDescription: 'Please fill all fields to proceed.',
   loginErrorMessage: 'Login error',
