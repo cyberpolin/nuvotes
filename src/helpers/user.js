@@ -70,7 +70,7 @@ export const editUserData = (token, updates, navigation) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_LOADING', payload: true })
     return fetch(`${URL}modify-user/`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
