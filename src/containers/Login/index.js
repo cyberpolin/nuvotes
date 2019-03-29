@@ -11,6 +11,7 @@ import { translate } from '../../helpers/localization'
 import { getLogin } from '../../helpers/user'
 import { getMessage } from '../../helpers/messages'
 import { getOrders } from '../../helpers/orders'
+import { getSearch } from '../../actions/search'
 import {
   Container,
   LoginBox,
@@ -34,10 +35,11 @@ class Login extends Component {
   }
 
   componentWillMount () {
-    const { user, navigation, getOrders } = this.props
+    const { user, navigation, getOrders, getSearch } = this.props
     if (!_.isEmpty(user)) {
       const { id, token } = user
       navigation.navigate('Home')
+      getSearch('')
       getOrders(token, id)
     }
   }
@@ -118,7 +120,8 @@ const mapStateToProps = ({ settings, user }) => ({
 const mapDispatchToProps = dispatch => {
   return {
     getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation)),
-    getOrders: (token, userId) => dispatch(getOrders(token, userId))
+    getOrders: (token, userId) => dispatch(getOrders(token, userId)),
+    getSearch: search => dispatch(getSearch(search))
   }
 }
 
