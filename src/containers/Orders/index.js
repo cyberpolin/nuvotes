@@ -82,7 +82,7 @@ class Orders extends Component {
     const orderType = navigation.state.routeName
     let filteredOrders = filterOrders(orders, orderType)
     if (search !== '') {
-      filteredOrders = filterOrderBySearch(orders, search)
+      filteredOrders = filterOrderBySearch(orders, search, orderType)
     }
     return (
       <FlatList
