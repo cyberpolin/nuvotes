@@ -60,6 +60,7 @@ const es = {
   uploadError: 'Error al cargar las fotos',
   uploadErrorDescription: 'Algo ha salido mal.',
   search: 'Buscar',
+  searchInput: 'Buscar ID u orden',
   emptyFieldsMessage: 'Campos vacíos',
   emptyFieldsDescription: 'Favor de rellenar todos los campos.',
   loginErrorMessage: 'Error al iniciar de sesión',
@@ -81,7 +82,11 @@ const es = {
   startUploadMessage: 'Carga iniciada',
   startUploadDescription: 'Esto puede tomar un tiempo.',
   genericErrorMessage: 'Error',
-  genericErrorDescription: 'Ha ocurrido un error.'
+  genericErrorDescription: 'Ha ocurrido un error.',
+  usedMailMessage: 'Correo en uso',
+  usedMailDescription: 'Escoga otro correo para registrar.',
+  usedUsernameMessage: 'Usuario en uso',
+  usedUsernameDescription: 'Escoga otro usuario para registrar'
 }
 
 export default es

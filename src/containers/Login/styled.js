@@ -14,9 +14,10 @@ const isAndroid = Platform.OS === 'android'
 
 export const styles = {
   inputContainer: {
-    backgroundColor: 'rgba(255,255,255, .7)',
+    backgroundColor: 'rgba(255,255,255, .9)',
     borderRadius: 15,
-    paddingHorizontal: wp(5)
+    paddingHorizontal: wp(5),
+    borderColor: 'transparent'
   },
   inputStyle: {
     marginBottom: hp(3)
@@ -63,9 +64,6 @@ export const LogoContainer = styled.View`
  height: 100px;
  width: 80%;
  align-self: center;
- margin-bottom: ${hp(3)};
- background-color: rgba(255,255,255, .7);
- border-radius: 15px;
 `
 
 export const Logo = styled.Image`

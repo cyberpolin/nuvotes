@@ -85,6 +85,9 @@ class Orders extends Component {
     if (search !== '') {
       filteredOrders = filterOrderBySearch(orders, search, orderType)
     }
+    if (_.isEmpty(filteredOrders)) {
+      return <Text>{translate.noOrders}</Text>
+    }
     return (
       <FlatList
         data={filteredOrders}
@@ -95,6 +98,7 @@ class Orders extends Component {
           refreshing={isRefresing}
           onRefresh={this.onRefresh}
           colors={[primary]}
+          tintColor={primary}
         />}
       />
     )

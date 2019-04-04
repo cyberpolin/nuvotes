@@ -33,7 +33,9 @@ class Header extends Component {
   }
   render () {
     const { isVisible } = this.state
-    const { navigation, title } = this.props
+    const { navigation } = this.props
+    const { first_name: firstName, last_name: lastName } = this.props.user
+    const formattedName = `${firstName}  ${lastName}`
     return (
       <HeaderContainer>
         <DrawerIconButton onPress={navigation.toggleDrawer}>
@@ -44,7 +46,7 @@ class Header extends Component {
         </DrawerIconButton>
         {isVisible
           ? this.renderSearchInput()
-          : <HeaderTitle>{title || ''}</HeaderTitle>}
+          : <HeaderTitle>{formattedName || ''}</HeaderTitle>}
         <SearchButton onPress={this.toggleInput}>
           <Icon
             type='font-awesome'
@@ -67,7 +69,7 @@ class Header extends Component {
     return (
       <Animated.View style={{width: this.width}}>
         <SearchBar
-          placeholder={translate.search}
+          placeholder={translate.searchInput}
           onChangeText={this.onChangeText}
           containerStyle={styles.searchContainer}
           inputStyle={styles.searchInput}
@@ -114,7 +116,7 @@ class Header extends Component {
       this.width.setValue(inputWidth)
       Animated.timing(this.width, {
         toValue
-      }).start(() => this.setState({isVisible: !isVisible, search: ''}))
+      }).start(() => this.setState({isVisible: !isVisible}))
     }
   }
 }
