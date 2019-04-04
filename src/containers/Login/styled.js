@@ -47,7 +47,7 @@ export const Container = styled.View`
 `
 
 export const LoginBox = styled.View`
-  height: ${wp(75)};
+  height: ${hp(38)};
   align-items: center;
   justify-content: center;
   padding-horizontal: ${wp(8)};
