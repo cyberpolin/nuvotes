@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
   RefreshControl,
-  FlatList
+  FlatList,
+  Keyboard
 } from 'react-native'
 import { connect } from 'react-redux'
 import { ListItem } from 'react-native-elements'
@@ -94,6 +95,7 @@ class Orders extends Component {
         renderItem={({item}) => this.renderListItem(item)}
         initialNumToRender={8}
         keyExtractor={(item, index) => index.toString()}
+        onScroll={Keyboard.dismiss}
         refreshControl={<RefreshControl
           refreshing={isRefresing}
           onRefresh={this.onRefresh}
