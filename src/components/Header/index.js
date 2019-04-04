@@ -79,13 +79,8 @@ class Header extends Component {
           autoCapitalize='none'
           autoCorrect={false}
           onSubmitEditing={this.handleSearch}
+          searchIcon={false}
           onClear={() => getSearch('')}
-          searchIcon={<Icon
-            name='search'
-            type='font-awesome'
-            size={20}
-            onPress={this.handleSearch}
-          />}
         />
       </Animated.View>
     )
