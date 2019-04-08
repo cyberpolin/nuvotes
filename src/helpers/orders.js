@@ -3,6 +3,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import { showMessage } from 'react-native-flash-message'
 import Config from 'react-native-config'
+import RNFetchBlob from 'rn-fetch-blob'
 import { getMessage } from './messages'
 
 const { URL } = Config
@@ -184,4 +185,29 @@ export const updateOrderPhotos = (orders, orderId, newPhotos) => {
   const orderIndex = _.findIndex(orders, { 'id': orderId })
   orders[orderIndex].photos.push(...newPhotos)
   return orders
+}
+
+export const downloadFile = (url, filename) => {
+  const dirs = RNFetchBlob.fs.dirs
+  return RNFetchBlob
+    .config({
+      addAndroidDownloads: {
+        useDownloadManager: true,
+        description: 'File downloaded by download manager',
+        notification: true,
+        mediaScannable: true,
+        path: dirs.DownloadDir + '/' + filename
+      },
+      fileCache: true
+    })
+    .fetch('GET', url)
+    .then((res) => {
+      const status = res.info().status
+      if (status === 200) {
+        console.log('SAVE', res.path())
+      }
+    }).catch((error, status) => {
+      console.log('ERROR', error)
+      console.log('STATUS', status)
+    })
 }
