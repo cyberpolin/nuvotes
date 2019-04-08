@@ -21,6 +21,7 @@ import {
   ItemText
 } from './styled'
 import responsiveFont from '../../utils/responsiveFont'
+import { gray } from '../../colorPalette'
 
 class Drawer extends Component {
   constructor (props) {
@@ -40,6 +41,7 @@ class Drawer extends Component {
               type='font-awesome'
               name='user-circle'
               size={responsiveFont(7)}
+              color={gray}
             />
             <ItemText>{translate.profile}</ItemText>
           </DrawerItem>
@@ -50,6 +52,7 @@ class Drawer extends Component {
               type='font-awesome'
               name='language'
               size={responsiveFont(7)}
+              color={gray}
             />
             <ItemText>{translate.changeLanguage}</ItemText>
           </DrawerItem>
@@ -58,6 +61,7 @@ class Drawer extends Component {
               type='font-awesome'
               name='sign-out'
               size={responsiveFont(7)}
+              color={gray}
             />
             <ItemText>{translate.signOut}</ItemText>
           </DrawerItem>
