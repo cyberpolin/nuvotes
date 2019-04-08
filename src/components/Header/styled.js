@@ -3,7 +3,8 @@ import { Header } from 'react-navigation'
 import styled from 'styled-components/native'
 import {
   white,
-  black
+  black,
+  gray
 } from '../../colorPalette'
 import {
   heightPercentageToDP as hp
@@ -62,7 +63,7 @@ export const HeaderContainer = styled.View`
 export const HeaderTitle = styled.Text`
   font-size: ${isIOS ? '17px' : '20px'};
   font-weight: ${isIOS ? '600' : '500'};
-  color: ${black};
+  color: ${gray};
   text-align: center;
 `
 

@@ -17,6 +17,7 @@ import {
 import { translate } from '../../helpers/localization'
 import { getSearch } from '../../actions/search'
 import { widthPercentageToDP as wp } from '../../utils/layout'
+import { gray } from '../../colorPalette'
 
 class Header extends Component {
   constructor (props) {
@@ -42,6 +43,7 @@ class Header extends Component {
           <Icon
             type='font-awesome'
             name='bars'
+            color={gray}
           />
         </DrawerIconButton>
         {isVisible
@@ -53,10 +55,12 @@ class Header extends Component {
             name='caret-left'
             size={15}
             containerStyle={styles.iconMargin}
+            color={gray}
           />
           <Icon
             type='font-awesome'
             name='search'
+            color={gray}
           />
         </SearchButton>
       </HeaderContainer>
