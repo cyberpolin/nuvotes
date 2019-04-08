@@ -4,6 +4,7 @@ import {
   Text,
   Icon
 } from 'react-native-elements'
+import _ from 'lodash'
 import {
   Container,
   ScrollContainer,
@@ -11,11 +12,12 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
-import _ from 'lodash'
+import { getFilename } from '../../helpers/orders'
 
 export default class Documents extends Component {
   render () {
-    const { files } = this.props
+    const { navigation } = this.props
+    const files = navigation.getParam('documents', [])
     return (
       <Container>
         {files && !_.isEmpty(files)
@@ -27,15 +29,15 @@ export default class Documents extends Component {
 
   renderFiles (files) {
     return files.map((file, index) => {
-      const { fileName } = file
+      const fileURL = file.document.document
+      const filename = getFilename(fileURL)
       return (
         <ListItem
           key={index}
           leftIcon={{name: 'file', type: 'font-awesome'}}
           rightElement={this.renderRightItem()}
-          title={fileName}
+          title={filename}
           bottomDivider
-          rightSubtitle='File size: 200kb'
         />
       )
     })
@@ -48,10 +50,7 @@ export default class Documents extends Component {
           name='download'
           type='font-awesome'
           containerStyle={styles.marginRight}
-        />
-        <Icon
-          name='times'
-          type='font-awesome'
+          onPress={() => console.log('DOWNLOAD')}
         />
       </FlexRow>
     )
