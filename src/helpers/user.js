@@ -1,7 +1,9 @@
 import { showMessage } from 'react-native-flash-message'
+import Config from 'react-native-config'
 import { getMessage } from './messages'
-import { URL } from '../setup'
 import { getOrders } from './orders'
+
+const { URL } = Config
 
 const getUserData = (token) => {
   return fetch(`${URL}login/`, {

@@ -2,8 +2,10 @@ import { Platform } from 'react-native'
 import _ from 'lodash'
 import moment from 'moment'
 import { showMessage } from 'react-native-flash-message'
+import Config from 'react-native-config'
 import { getMessage } from './messages'
-import { URL } from '../setup'
+
+const { URL } = Config
 
 const isIOS = Platform.OS === 'ios'
 
