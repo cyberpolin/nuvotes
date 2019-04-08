@@ -3,5 +3,7 @@
   "white": "#FFF",
   "primary": "#8AAF30",
   "red": "#E52C1B",
-  "orange": "#E5911B"
+  "orange": "#E5911B",
+  "secondary": "#4625A9",
+  "gray": "#474747"
 }
