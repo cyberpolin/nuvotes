@@ -112,7 +112,7 @@ export const getOrders = (token, userId) => {
   }
 }
 
-const getPhotoName = path => {
+export const getFilename = path => {
   const splitted = path.split('/')
   return splitted[splitted.length - 1]
 }
@@ -124,7 +124,7 @@ const photoFormData = (photos, orderId) => {
   let after = []
   photos.map((photo, index) => {
     const { type } = photo
-    const filename = isIOS ? photo.filename : getPhotoName(photo.path)
+    const filename = isIOS ? photo.filename : getFilename(photo.path)
     type === 'before' ? before.push(filename)
       : type === 'in_progress' ? inProgress.push(filename)
         : type === 'after' && after.push(filename)
