@@ -24,10 +24,11 @@ export default class Gallery extends Component {
       const splitted = photo.photo.photo.split('.')
       splitted.splice(splitted.length - 1, 0, 'thumbnail')
       const thumbnail = splitted.join('.')
+      const description = photo.status ? photo.status.description : ''
       return {
         URI: photo.photo.photo,
         id: `${index}`,
-        description: photo.status.description,
+        description: description,
         thumbnail
       }
     })
