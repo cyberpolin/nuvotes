@@ -22,7 +22,7 @@ import {
   TabTitle,
   EditButton
 } from '../components'
-import { black, primary } from '../colorPalette'
+import { black, primary, gray } from '../colorPalette'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -37,7 +37,7 @@ const TabAppNavigator = createBottomTabNavigator({
 }, {
   tabBarOptions: {
     activeTintColor: primary,
-    inactiveTintColor: black
+    inactiveTintColor: gray
   },
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ tintColor }) => TabIcons(navigation, tintColor),
@@ -88,7 +88,7 @@ const StackNavigator = createStackNavigator({
 }, {
   headerBackTitleVisible: false,
   defaultNavigationOptions: {
-    headerTintColor: black
+    headerTintColor: gray
   }
 })
 
