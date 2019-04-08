@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   View,
-  Text,
   ActivityIndicator
 } from 'react-native'
 import {
@@ -26,11 +25,12 @@ import {
   ScrollContainer,
   GalleryButton,
   ButtonContainer,
-  styles
+  styles,
+  Text
 } from './styled'
 import { translate } from '../../helpers/localization'
 import { sortPhotos } from '../../helpers/orders'
-import { primary } from '../../colorPalette'
+import { secondary } from '../../colorPalette'
 
 class WorkOrder extends Component {
   constructor (props) {
@@ -110,14 +110,13 @@ class WorkOrder extends Component {
             >
               <View>
                 {this.renderGalleryTypes(order['description_job'], order.photos)}
-                <GalleryButton
-                  onPress={() => navigation.navigate('Documents', {id})}
-                >
-                  <Text>{translate.propertyDocuments}</Text>
+                <GalleryButton onPress={() => navigation.navigate('Documents', {documents: order.documents})}>
+                  <Text color>{translate.propertyDocuments}</Text>
                   <Icon
                     name='angle-right'
                     type='font-awesome'
                     containerStyle={styles.iconContainerStyle}
+                    color={secondary}
                   />
                 </GalleryButton>
               </View>
@@ -125,13 +124,12 @@ class WorkOrder extends Component {
             <ButtonContainer>
               <Button
                 title={translate.uploadPhotos}
-                type='outline'
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
                 onPress={this.showModal}
                 disabled={settings.isUploading}
                 loading={settings.isUploading}
-                loadingProps={{color: primary}}
+                loadingProps={{color: secondary}}
               />
             </ButtonContainer>
             {this.renderModal(order['description_job'], order.id)}
@@ -194,11 +192,12 @@ class WorkOrder extends Component {
     if (descriptionJob.description === 'Inspection') {
       return (
         <GalleryButton onPress={() => navigate('Gallery', { galleryType: 'property', sortedPhotos: photos })}>
-          <Text>{translate.propertyPhotos}</Text>
+          <Text color>{translate.propertyPhotos}</Text>
           <Icon
             name='angle-right'
             type='font-awesome'
             containerStyle={styles.iconContainerStyle}
+            color={secondary}
           />
         </GalleryButton>
       )
@@ -213,11 +212,12 @@ class WorkOrder extends Component {
                 onPress={() => navigate('Gallery', { galleryType, sortedPhotos })}
                 key={index}
               >
-                <Text>{label}</Text>
+                <Text color>{label}</Text>
                 <Icon
                   name='angle-right'
                   type='font-awesome'
                   containerStyle={styles.iconContainerStyle}
+                  color={secondary}
                 />
               </GalleryButton>
             )

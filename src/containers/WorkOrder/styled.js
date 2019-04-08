@@ -7,6 +7,11 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp
 } from '../../utils/layout'
+import {
+  primary,
+  secondary,
+  black
+} from '../../colorPalette'
 
 const isIOS = Platform.OS === 'ios'
 
@@ -19,7 +24,9 @@ export const styles = {
     alignSelf: 'center',
     width: '100%',
     height: 50,
-    marginBottom: isIphoneX() && isIOS ? 40 : 20
+    marginBottom: isIphoneX() && isIOS ? 40 : 20,
+    backgroundColor: primary,
+    borderRadius: 25
   },
   iconContainerStyle: {
     marginLeft: 10
@@ -79,4 +86,8 @@ export const GalleryButton = styled.TouchableOpacity`
 export const ButtonContainer = styled.View`
   width: 65%;
   align-self: center;
+`
+
+export const Text = styled.Text`
+  color: ${({color}) => color ? secondary : black};
 `
