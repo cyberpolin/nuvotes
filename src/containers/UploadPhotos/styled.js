@@ -1,14 +1,20 @@
 import styled from 'styled-components/native'
-import { black } from '../../colorPalette'
+import {
+  black,
+  primary
+} from '../../colorPalette'
 
 export const styles = {
   avatarContainer: {
     marginBottom: 5
   },
   buttonStyle: {
-    borderColor: black,
     alignSelf: 'center',
-    height: 36
+    height: 36,
+    backgroundColor: primary,
+    borderWidth: 0,
+    borderRadius: 13,
+    paddingHorizontal: 15
   },
   buttonTitle: {
     color: black,

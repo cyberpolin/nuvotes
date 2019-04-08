@@ -25,7 +25,11 @@ import {
 import { translate } from '../../helpers/localization'
 import { uploadPhotos } from '../../helpers/orders'
 import { changeUploading } from '../../actions/settings'
-import { white, primary } from '../../colorPalette'
+import {
+  white,
+  primary,
+  secondary
+} from '../../colorPalette'
 
 class UploadPhotos extends Component {
   constructor (props) {
@@ -87,7 +91,7 @@ class UploadPhotos extends Component {
             onPress={this.handleSave}
             disabled={isUploading || photos.length < 1}
             loading={isUploading}
-            loadingProps={{color: primary}}
+            loadingProps={{color: secondary}}
           />
         </FlexRow>
       </Container>
