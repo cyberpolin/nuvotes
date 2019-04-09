@@ -104,5 +104,13 @@ export const getMessage = type => {
         icon: 'success',
         duration: 2000
       }
+    case 'FILE_ERROR':
+      return {
+        message: translate.fileErrorMessage,
+        description: translate.fileErrorDescription,
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
   }
 }
