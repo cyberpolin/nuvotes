@@ -86,7 +86,9 @@ const es = {
   usedMailMessage: 'Correo en uso',
   usedMailDescription: 'Escoga otro correo para registrar.',
   usedUsernameMessage: 'Usuario en uso',
-  usedUsernameDescription: 'Escoga otro usuario para registrar'
+  usedUsernameDescription: 'Escoga otro usuario para registrar',
+  fileErrorMessage: 'Error de archivo',
+  fileErrorDescription: 'Ha ocurrido un error al abrir el archivo.'
 }
 
 export default es

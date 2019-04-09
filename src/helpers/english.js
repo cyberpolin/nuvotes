@@ -83,7 +83,9 @@ const en = {
   successModify: 'Successful update',
   successUploadMessage: 'Successful upload',
   startUploadMessage: 'Upload started',
-  startUploadDescription: 'This may take a while.'
+  startUploadDescription: 'This may take a while.',
+  fileErrorMessage: 'File error',
+  fileErrorDescription: 'An error has ocurred when opening the file.'
 }
 
 export default en
