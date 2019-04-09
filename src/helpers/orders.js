@@ -5,6 +5,7 @@ import { showMessage } from 'react-native-flash-message'
 import Config from 'react-native-config'
 import RNFetchBlob from 'rn-fetch-blob'
 import { getMessage } from './messages'
+import FileViewer from 'react-native-file-viewer'
 
 const { URL } = Config
 
@@ -198,13 +199,26 @@ export const downloadFile = (url, filename) => {
         mediaScannable: true,
         path: dirs.DownloadDir + '/' + filename
       },
-      fileCache: true
+      fileCache: true,
+      path: dirs.DocumentDir + '/' + filename
     })
     .fetch('GET', url)
+    .progress({interval: 10}, (received, total) => {
+      console.log('PROGRESS', received, '/', total)
+    })
     .then((res) => {
       const status = res.info().status
       if (status === 200) {
-        console.log('SAVE', res.path())
+        if (isIOS) {
+          const path = res.path()
+          FileViewer.open(path, { showOpenWithDialog: true })
+            .then(() => {
+            })
+            .catch(() => {
+              const message = getMessage('FILE_ERROR')
+              showMessage(message)
+            })
+        }
       }
     }).catch((error, status) => {
       console.log('ERROR', error)
