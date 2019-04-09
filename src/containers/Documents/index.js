@@ -12,7 +12,11 @@ import {
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
-import { getFilename, downloadFile } from '../../helpers/orders'
+import {
+  getFilename,
+  downloadFile
+} from '../../helpers/orders'
+import { primary } from '../../colorPalette'
 
 export default class Documents extends Component {
   render () {
@@ -34,7 +38,7 @@ export default class Documents extends Component {
       return (
         <ListItem
           key={index}
-          leftIcon={{name: 'file', type: 'font-awesome'}}
+          leftIcon={{name: 'file-o', type: 'font-awesome'}}
           rightElement={this.renderRightItem(fileURL, filename)}
           title={filename}
           bottomDivider
@@ -49,8 +53,9 @@ export default class Documents extends Component {
         <Icon
           name='download'
           type='font-awesome'
-          containerStyle={styles.marginRight}
+          iconStyle={styles.iconStyle}
           onPress={() => downloadFile(fileURL, filename)}
+          color={primary}
         />
       </FlexRow>
     )

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 export const styles = {
-  marginRight: {
-    marginRight: 20
+  iconStyle: {
+    padding: 10
   }
 }
 
