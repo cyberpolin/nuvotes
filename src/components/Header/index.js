@@ -5,6 +5,7 @@ import {
   Icon,
   SearchBar
 } from 'react-native-elements'
+import _ from 'lodash'
 import {
   DrawerIconButton,
   HeaderContainer,
@@ -36,7 +37,7 @@ class Header extends Component {
     const { isVisible } = this.state
     const { navigation } = this.props
     const { first_name: firstName, last_name: lastName } = this.props.user
-    const formattedName = `${firstName}  ${lastName}`
+    const formattedName = `${_.capitalize(firstName)}  ${_.capitalize(lastName)}`
     return (
       <HeaderContainer>
         <DrawerIconButton onPress={navigation.toggleDrawer}>
