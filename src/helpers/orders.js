@@ -26,7 +26,7 @@ export const filterOrders = (orders, orderType) => {
   } else if (orderType === 'Orders') {
     const filteredOrders = orders.filter(order => {
       const { description } = order.status
-      return description !== 'Pending Completition' && description !== 'Completed'
+      return description !== 'Pending Completion' && description !== 'Completed'
     })
     return ordersByDate(filteredOrders)
   }
