@@ -5,6 +5,7 @@ import {
   Icon
 } from 'react-native-elements'
 import _ from 'lodash'
+import { Download } from '../../components'
 import {
   Container,
   ScrollContainer,
@@ -39,7 +40,7 @@ export default class Documents extends Component {
         <ListItem
           key={index}
           leftIcon={{name: 'file-o', type: 'font-awesome'}}
-          rightElement={this.renderRightItem(fileURL, filename)}
+          rightElement={<Download url={fileURL} filename={filename} />}
           title={filename}
           bottomDivider
         />
