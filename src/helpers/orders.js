@@ -3,9 +3,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import { showMessage } from 'react-native-flash-message'
 import Config from 'react-native-config'
-import RNFetchBlob from 'rn-fetch-blob'
 import { getMessage } from './messages'
-import FileViewer from 'react-native-file-viewer'
 
 const { URL } = Config
 
@@ -186,42 +184,4 @@ export const updateOrderPhotos = (orders, orderId, newPhotos) => {
   const orderIndex = _.findIndex(orders, { 'id': orderId })
   orders[orderIndex].photos.push(...newPhotos)
   return orders
-}
-
-export const downloadFile = (url, filename) => {
-  const dirs = RNFetchBlob.fs.dirs
-  return RNFetchBlob
-    .config({
-      addAndroidDownloads: {
-        useDownloadManager: true,
-        description: 'File downloaded by download manager',
-        notification: true,
-        mediaScannable: true,
-        path: dirs.DownloadDir + '/' + filename
-      },
-      fileCache: true,
-      path: dirs.DocumentDir + '/' + filename
-    })
-    .fetch('GET', url)
-    .progress({interval: 10}, (received, total) => {
-      console.log('PROGRESS', received, '/', total)
-    })
-    .then((res) => {
-      const status = res.info().status
-      if (status === 200) {
-        if (isIOS) {
-          const path = res.path()
-          FileViewer.open(path, { showOpenWithDialog: true })
-            .then(() => {
-            })
-            .catch(() => {
-              const message = getMessage('FILE_ERROR')
-              showMessage(message)
-            })
-        }
-      }
-    }).catch((error, status) => {
-      console.log('ERROR', error)
-      console.log('STATUS', status)
-    })
 }
