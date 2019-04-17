@@ -11,3 +11,10 @@ export function changeUploading (isUploading) {
     payload: isUploading
   }
 }
+
+export function changeDownload (isDownloading) {
+  return {
+    type: 'CHANGE_DOWNLOAD',
+    payload: isDownloading
+  }
+}
