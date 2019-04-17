@@ -1,6 +1,7 @@
 const initialState = {
   isLoading: false,
-  isUploading: false
+  isUploading: false,
+  isDownloading: false
 }
 
 const settings = (state = initialState, { type, payload }) => {
@@ -14,6 +15,11 @@ const settings = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isUploading: payload
+      }
+    case 'CHANGE_DOWNLOAD':
+      return {
+        ...state,
+        isDownloading: payload
       }
     default:
       return state
