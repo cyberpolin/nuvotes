@@ -61,7 +61,7 @@ class Download extends Component {
           : <Icon
             name='download'
             type='font-awesome'
-            color={isDownloading ? 'B4B4B4' : primary}
+            color={isDownloading ? '#B4B4B4' : primary}
             iconStyle={styles.iconStyle}
             containerStyle={{marginRight: 8}}
           />
@@ -73,8 +73,10 @@ class Download extends Component {
   handleDownload () {
     const { url, filename } = this.props
     const { changeDownload } = this.props
-    this.setState({ didDownload: true })
-    changeDownload(true)
+    if (isIOS) {
+      this.setState({ didDownload: true })
+      changeDownload(true)
+    }
     this.downloadFile(url, filename).then()
   }
 
@@ -95,16 +97,18 @@ class Download extends Component {
       })
       .fetch('GET', url)
       .progress({interval: 5}, (received, total) => {
-        var progress = Math.round((received / total) * 100)
-        this.setState({ progress })
-        if (progress === 100) {
-          this.setState({ progress: 0 })
-          this.setState({ downloadSuccess: true })
-          changeDownload(false)
-          setTimeout(() => {
-            this.setState({ didDownload: false })
-            this.setState({ downloadSuccess: false })
-          }, 4000)
+        if (isIOS) {
+          var progress = Math.round((received / total) * 100)
+          this.setState({ progress })
+          if (progress >= 99) {
+            this.setState({ progress: 0 })
+            this.setState({ downloadSuccess: true })
+            changeDownload(false)
+            setTimeout(() => {
+              this.setState({ didDownload: false })
+              this.setState({ downloadSuccess: false })
+            }, 2000)
+          }
         }
       })
       .then((res) => {
