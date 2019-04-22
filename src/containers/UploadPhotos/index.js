@@ -122,7 +122,7 @@ class UploadPhotos extends Component {
       return (
         <ImageBox key={index}>
           <Avatar
-            source={{uri: isAndroid ? path : sourceURL}}
+            source={{uri: isAndroid ? path : sourceURL || path}}
             size='large'
             containerStyle={styles.avatarContainer}
           />
@@ -185,6 +185,9 @@ class UploadPhotos extends Component {
     ImagePicker.openCamera({
     }).then(image => {
       const { descriptionJob } = this.props
+      const splitted_url = image.path.split('/')
+      const filename = splitted_url[splitted_url.length - 1]
+      image['filename'] = filename
       if (descriptionJob.description !== 'Inspection') {
         Alert.alert(
           translate.savePhotoAlertTitle,
