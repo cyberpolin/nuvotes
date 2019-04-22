@@ -129,7 +129,7 @@ const photoFormData = (photos, orderId) => {
       : type === 'in_progress' ? inProgress.push(filename)
         : type === 'after' && after.push(filename)
     data.append(`photo${index}`, {
-      uri: isIOS ? photo.sourceURL : photo.path,
+      uri: !isIOS ? photo.path : photo.sourceURL || photo.path,
       type: photo.mime,
       name: filename
     })
