@@ -1,7 +1,8 @@
 const initialState = {
   isLoading: false,
   isUploading: false,
-  isDownloading: false
+  isDownloading: false,
+  cameraOpen: false
 }
 
 const settings = (state = initialState, { type, payload }) => {
@@ -20,6 +21,11 @@ const settings = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isDownloading: payload
+      }
+    case 'CHANGE_CAMERA':
+      return {
+        ...state,
+        cameraOpen: payload
       }
     default:
       return state
