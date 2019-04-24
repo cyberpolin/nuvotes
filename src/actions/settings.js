@@ -18,3 +18,10 @@ export function changeDownload (isDownloading) {
     payload: isDownloading
   }
 }
+
+export function changeCamera (isOpen) {
+  return {
+    type: 'CHANGE_CAMERA',
+    payload: isOpen
+  }
+}
