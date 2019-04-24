@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
-  Platform,
-  Alert
+  Platform
 } from 'react-native'
 import { connect } from 'react-redux'
-import ImagePicker from 'react-native-image-crop-picker'
 import {
   Text,
   Button,
@@ -22,12 +20,15 @@ import {
   ImageBox,
   styles
 } from './styled'
+import { Camera } from '../index'
 import { translate } from '../../helpers/localization'
 import { uploadPhotos } from '../../helpers/orders'
-import { changeUploading } from '../../actions/settings'
+import {
+  changeUploading,
+  changeCamera
+} from '../../actions/settings'
 import {
   white,
-  primary,
   secondary
 } from '../../colorPalette'
 
@@ -40,7 +41,6 @@ class UploadPhotos extends Component {
     }
     this.handleClose = this.handleClose.bind(this)
     this.selectFromCamera = this.selectFromCamera.bind(this)
-    this.selectFromGallery = this.selectFromGallery.bind(this)
     this.handleSave = this.handleSave.bind(this)
   }
   render () {
@@ -67,13 +67,6 @@ class UploadPhotos extends Component {
             title={`${translate.takePhoto}...`}
             onPress={this.selectFromCamera}
           />
-          <Button
-            buttonStyle={styles.buttonStyle}
-            titleStyle={styles.buttonTitle}
-            type='outline'
-            title={`${translate.chooseGallery}...`}
-            onPress={this.selectFromGallery}
-          />
         </ButtonsContainer>
         <FlexRow>
           <Button
@@ -94,6 +87,7 @@ class UploadPhotos extends Component {
             loadingProps={{color: secondary}}
           />
         </FlexRow>
+        <Camera />
       </Container>
     )
   }
@@ -160,48 +154,9 @@ class UploadPhotos extends Component {
     }
   }
 
-  selectFromGallery () {
-    ImagePicker.openPicker({
-      multiple: true
-    }).then(images => {
-      const { descriptionJob } = this.props
-      if (descriptionJob.description !== 'Inspection') {
-        Alert.alert(
-          translate.savePhotoAlertTitle,
-          translate.savePhotoAlertMessage,
-          [
-            {text: translate.before, onPress: () => this.savePhoto(images, 'before')},
-            {text: translate.inProgress, onPress: () => this.savePhoto(images, 'in_progress')},
-            {text: translate.after, onPress: () => this.savePhoto(images, 'after')}
-          ], {cancelable: false}
-        )
-      } else {
-        this.savePhoto(images, 'property')
-      }
-    })
-  }
-
   selectFromCamera () {
-    ImagePicker.openCamera({
-    }).then(image => {
-      const { descriptionJob } = this.props
-      const splitted_url = image.path.split('/')
-      const filename = splitted_url[splitted_url.length - 1]
-      image['filename'] = filename
-      if (descriptionJob.description !== 'Inspection') {
-        Alert.alert(
-          translate.savePhotoAlertTitle,
-          translate.savePhotoAlertMessage,
-          [
-            {text: translate.before, onPress: () => this.savePhoto(image, 'before')},
-            {text: translate.inProgress, onPress: () => this.savePhoto(image, 'in_progress')},
-            {text: translate.after, onPress: () => this.savePhoto(image, 'after')}
-          ], {cancelable: false}
-        )
-      } else {
-        this.savePhoto(image, 'property')
-      }
-    })
+    const { changeCamera } = this.props
+    changeCamera(true)
   }
 
   deletePhoto (index) {
@@ -213,7 +168,8 @@ class UploadPhotos extends Component {
 
 const mapDispatchToProps = dispatch => ({
   uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId)),
-  changeUploading: isUploading => dispatch(changeUploading(isUploading))
+  changeUploading: isUploading => dispatch(changeUploading(isUploading)),
+  changeCamera: isOpen => dispatch(changeCamera(isOpen))
 })
 
 const mapStateToProp = ({ user, settings }) => ({
