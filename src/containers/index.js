@@ -6,6 +6,7 @@ import EditUser from './EditUser'
 import Login from './Login'
 import Orders from './Orders'
 import Documents from './Documents'
+import Camera from './Camera'
 
 export {
   WorkOrder,
@@ -15,5 +16,6 @@ export {
   EditUser,
   Login,
   Orders,
-  Documents
+  Documents,
+  Camera
 }
