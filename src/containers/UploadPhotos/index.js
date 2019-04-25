@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
-  Platform
+  Alert
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -11,7 +11,6 @@ import {
   Badge,
   Icon
 } from 'react-native-elements'
-import _ from 'lodash'
 import {
   Container,
   FlexRow,
@@ -25,7 +24,8 @@ import { translate } from '../../helpers/localization'
 import { uploadPhotos } from '../../helpers/orders'
 import {
   changeUploading,
-  changeCamera
+  changeCamera,
+  deletePhoto
 } from '../../actions/settings'
 import {
   white,
@@ -36,16 +36,17 @@ class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      photos: [],
-      isVisible: props.isVisible
+      isVisible: props.isVisible,
+      saveAs: ''
     }
     this.handleClose = this.handleClose.bind(this)
     this.selectFromCamera = this.selectFromCamera.bind(this)
     this.handleSave = this.handleSave.bind(this)
+    this.openCamera = this.openCamera.bind(this)
   }
   render () {
-    const { photos } = this.state
-    const { isUploading } = this.props.settings
+    const { saveAs } = this.state
+    const { isUploading, photos } = this.props.settings
     return (
       <Container>
         <Text h4>{translate.photos}</Text>
@@ -87,13 +88,14 @@ class UploadPhotos extends Component {
             loadingProps={{color: secondary}}
           />
         </FlexRow>
-        <Camera />
+        <Camera saveAs={saveAs} />
       </Container>
     )
   }
 
   handleSave () {
-    const { photos, isVisible } = this.state
+    const { isVisible } = this.state
+    const { photos } = this.props.settings
     const { user, uploadPhotos, orderId, changeVisibility, changeUploading } = this.props
     changeUploading(true)
     setTimeout(() => {
@@ -109,14 +111,13 @@ class UploadPhotos extends Component {
   }
 
   renderImages () {
-    const { photos } = this.state
-    const isAndroid = Platform.OS === 'android'
+    const { photos } = this.props.settings
     return photos.map((photo, index) => {
-      const { sourceURL, path } = photo
+      const { uri } = photo
       return (
         <ImageBox key={index}>
           <Avatar
-            source={{uri: isAndroid ? path : sourceURL || path}}
+            source={{uri}}
             size='large'
             containerStyle={styles.avatarContainer}
           />
@@ -138,38 +139,40 @@ class UploadPhotos extends Component {
     })
   }
 
-  savePhoto (images, type) {
-    const { photos } = this.state
-    if (_.isArray(images)) {
-      images = images.map(image => {
-        image.type = type
-        return image
-      })
-      const newPhotosArray = [...photos, ...images]
-      this.setState({photos: newPhotosArray})
+  selectFromCamera () {
+    const { descriptionJob } = this.props
+    if (descriptionJob.description !== 'Inspection') {
+      Alert.alert(
+        translate.savePhotoAlertTitle,
+        translate.savePhotoAlertMessage,
+        [
+          {text: translate.before, onPress: () => this.openCamera('before')},
+          {text: translate.inProgress, onPress: () => this.openCamera('in_progress')},
+          {text: translate.after, onPress: () => this.openCamera('after')}
+        ], {cancelable: false}
+      )
     } else {
-      images['type'] = type
-      const newPhotosArray = [...photos, images]
-      this.setState({photos: newPhotosArray})
+      this.openCamera('property')
     }
   }
 
-  selectFromCamera () {
+  openCamera (type) {
     const { changeCamera } = this.props
+    this.setState({saveAs: type})
     changeCamera(true)
   }
 
   deletePhoto (index) {
-    let { photos } = this.state
-    photos.splice(index, 1)
-    this.setState({photos})
+    const { deletePhoto, settings } = this.props
+    deletePhoto(settings.photos, index)
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId)),
   changeUploading: isUploading => dispatch(changeUploading(isUploading)),
-  changeCamera: isOpen => dispatch(changeCamera(isOpen))
+  changeCamera: isOpen => dispatch(changeCamera(isOpen)),
+  deletePhoto: (photos, index) => dispatch(deletePhoto(photos, index))
 })
 
 const mapStateToProp = ({ user, settings }) => ({
