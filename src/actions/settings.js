@@ -25,3 +25,24 @@ export function changeCamera (isOpen) {
     payload: isOpen
   }
 }
+
+export function addPhoto (photo) {
+  return {
+    type: 'ADD_PHOTO',
+    payload: photo
+  }
+}
+
+export function cleanPhotos () {
+  return {
+    type: 'CLEAN_PHOTOS'
+  }
+}
+
+export function deletePhoto (photos, index) {
+  photos.splice(index, 1)
+  return {
+    type: 'DELETE_PHOTO',
+    payload: photos
+  }
+}
