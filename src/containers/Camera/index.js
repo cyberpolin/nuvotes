@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { Modal } from 'react-native'
+import {
+  Modal,
+  Alert
+} from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
 import { Icon } from 'react-native-elements'
 import {
-  changeCamera,
-  addPhoto
+  toggleCamera,
+  addPhotos
 } from '../../actions/settings'
 import {
   Container,
@@ -15,16 +18,19 @@ import {
 } from './styled'
 import RF from '../../utils/responsiveFont'
 import { getFilename } from '../../helpers/orders'
+import { translate } from '../../helpers/localization'
 
 class Camera extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      flashOn: false
+      flashOn: false,
+      photos: []
     }
-    this.changeVisibility = this.changeVisibility.bind(this)
     this.takePhoto = this.takePhoto.bind(this)
     this.toggleFlash = this.toggleFlash.bind(this)
+    this.handleSave = this.handleSave.bind(this)
+    this.closeCamera = this.closeCamera.bind(this)
   }
   render () {
     const { flashOn } = this.state
@@ -51,10 +57,11 @@ class Camera extends Component {
                 type='font-awesome'
                 name='times'
                 size={RF(7)}
-                onPress={this.changeVisibility}
-                color='rgba(255, 255, 255, 0.6)'
+                onPress={this.handleSave}
+                color='rgba(255, 255, 255, 0.8)'
                 containerStyle={styles.backIcon}
                 underlayColor='transparent'
+                reverseColor='rgba(255, 255, 255, 0.4)'
               />
             </IconContainer>
             <IconContainer>
@@ -62,9 +69,10 @@ class Camera extends Component {
                 type='font-awesome'
                 name='camera'
                 size={RF(7)}
-                color='rgba(255, 255, 255, 0.6)'
+                color='rgba(255, 255, 255, 0.8)'
                 onPress={this.takePhoto}
                 underlayColor='transparent'
+                reverseColor='rgba(255, 255, 255, 0.4)'
               />
             </IconContainer>
             <IconContainer alignRight>
@@ -72,9 +80,10 @@ class Camera extends Component {
                 type='material'
                 name={flashOn ? 'flash-on' : 'flash-off'}
                 size={RF(7)}
-                color='rgba(255, 255, 255, 0.6)'
+                color='rgba(255, 255, 255, 0.8)'
                 underlayColor='transparent'
                 onPress={this.toggleFlash}
+                reverseColor='rgba(255, 255, 255, 0.4)'
               />
             </IconContainer>
           </Options>
@@ -89,21 +98,47 @@ class Camera extends Component {
   }
 
   async takePhoto () {
-    const { saveAs, addPhoto } = this.props
+    const { photos } = this.state
     if (this.camera) {
-      var data = await this.camera.takePictureAsync()
+      var data = await this.camera.takePictureAsync({skipProcessing: true})
       const uri = data.uri
       const filename = getFilename(uri)
       data['filename'] = filename
       data['mime'] = 'image/jpg'
-      data['type'] = saveAs
-      addPhoto(data)
+      this.setState({ photos: [...photos, data] })
     }
   }
 
-  changeVisibility () {
-    const { changeCamera } = this.props
-    changeCamera(false)
+  handleSave () {
+    const { photos } = this.state
+    const { type, toggleCamera } = this.props
+    if (photos.length > 0) {
+      if (type !== 'Inspection') {
+        Alert.alert(
+          translate.savePhotoAlertTitle,
+          translate.savePhotoAlertMessage,
+          [
+            {text: translate.before, onPress: () => this.closeCamera(photos, 'before')},
+            {text: translate.inProgress, onPress: () => this.closeCamera(photos, 'in_progress')},
+            {text: translate.after, onPress: () => this.closeCamera(photos, 'after')}
+          ], {cancelable: false}
+        )
+      } else {
+        this.closeCamera(photos, 'property')
+      }
+    } else {
+      toggleCamera(false)
+    }
+  }
+
+  closeCamera (photos, type) {
+    const { toggleCamera, addPhotos } = this.props
+    const sortedPhotos = photos.map(photo => {
+      photo['type'] = type
+      return photo
+    })
+    addPhotos(sortedPhotos, type)
+    toggleCamera(false)
   }
 }
 
@@ -112,8 +147,8 @@ const mapStateToProps = ({ settings }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  changeCamera: isOpen => dispatch(changeCamera(isOpen)),
-  addPhoto: photo => dispatch(addPhoto(photo))
+  toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
+  addPhotos: photo => dispatch(addPhotos(photo))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Camera)
