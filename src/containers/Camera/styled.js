@@ -1,4 +1,17 @@
 import styled from 'styled-components/native'
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from '../../utils/layout'
+
+export const styles = {
+  camera: {
+    flex: 1
+  },
+  backIcon: {
+    marginLeft: wp(2)
+  }
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -16,8 +29,13 @@ export const Options = styled.View`
 export const IconContainer = styled.View`
   flex: 1;
   background-color: transparent;
+  padding-bottom: ${hp(1)};
   ${({ alignLeft }) => alignLeft && `
     justify-content: flex-start;
+    flex-direction: row;
+  `}
+  ${({ alignRight }) => alignRight && `
+    justify-content: flex-end;
     flex-direction: row;
   `}
 `
