@@ -24,7 +24,7 @@ import { translate } from '../../helpers/localization'
 import { uploadPhotos } from '../../helpers/orders'
 import {
   changeUploading,
-  changeCamera,
+  toggleCamera,
   deletePhoto
 } from '../../actions/settings'
 import {
@@ -40,12 +40,12 @@ class UploadPhotos extends Component {
       saveAs: ''
     }
     this.handleClose = this.handleClose.bind(this)
-    this.selectFromCamera = this.selectFromCamera.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.openCamera = this.openCamera.bind(this)
   }
   render () {
     const { saveAs } = this.state
+    const { descriptionJob } = this.props
     const { isUploading, photos } = this.props.settings
     return (
       <Container>
@@ -66,7 +66,7 @@ class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title={`${translate.takePhoto}...`}
-            onPress={this.selectFromCamera}
+            onPress={this.openCamera}
           />
         </ButtonsContainer>
         <FlexRow>
@@ -88,7 +88,7 @@ class UploadPhotos extends Component {
             loadingProps={{color: secondary}}
           />
         </FlexRow>
-        <Camera saveAs={saveAs} />
+        <Camera type={descriptionJob.description} />
       </Container>
     )
   }
@@ -139,27 +139,9 @@ class UploadPhotos extends Component {
     })
   }
 
-  selectFromCamera () {
-    const { descriptionJob } = this.props
-    if (descriptionJob.description !== 'Inspection') {
-      Alert.alert(
-        translate.savePhotoAlertTitle,
-        translate.savePhotoAlertMessage,
-        [
-          {text: translate.before, onPress: () => this.openCamera('before')},
-          {text: translate.inProgress, onPress: () => this.openCamera('in_progress')},
-          {text: translate.after, onPress: () => this.openCamera('after')}
-        ], {cancelable: false}
-      )
-    } else {
-      this.openCamera('property')
-    }
-  }
-
-  openCamera (type) {
-    const { changeCamera } = this.props
-    this.setState({saveAs: type})
-    changeCamera(true)
+  openCamera () {
+    const { toggleCamera } = this.props
+    toggleCamera(true)
   }
 
   deletePhoto (index) {
@@ -171,7 +153,7 @@ class UploadPhotos extends Component {
 const mapDispatchToProps = dispatch => ({
   uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId)),
   changeUploading: isUploading => dispatch(changeUploading(isUploading)),
-  changeCamera: isOpen => dispatch(changeCamera(isOpen)),
+  toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
   deletePhoto: (photos, index) => dispatch(deletePhoto(photos, index))
 })
 
