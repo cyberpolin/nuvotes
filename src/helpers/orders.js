@@ -1,4 +1,3 @@
-import { Platform } from 'react-native'
 import _ from 'lodash'
 import moment from 'moment'
 import { showMessage } from 'react-native-flash-message'
@@ -6,8 +5,6 @@ import Config from 'react-native-config'
 import { getMessage } from './messages'
 
 const { URL } = Config
-
-const isIOS = Platform.OS === 'ios'
 
 const ordersByDate = orders => {
   const sortedOrders = _.orderBy(orders, ['end_date'], ['asc'])
@@ -124,12 +121,12 @@ const photoFormData = (photos, orderId) => {
   let after = []
   photos.map((photo, index) => {
     const { type } = photo
-    const filename = isIOS ? photo.filename : getFilename(photo.path)
+    const filename = photo.filename
     type === 'before' ? before.push(filename)
       : type === 'in_progress' ? inProgress.push(filename)
         : type === 'after' && after.push(filename)
     data.append(`photo${index}`, {
-      uri: !isIOS ? photo.path : photo.sourceURL || photo.path,
+      uri: photo.uri,
       type: photo.mime,
       name: filename
     })
@@ -164,6 +161,7 @@ export const uploadPhotos = (token, photos, orderId) => {
           const { photos } = jsonResponse
           dispatch({ type: 'UPDATE_PHOTOS', payload: { orderId, photos } })
           dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+          dispatch({ type: 'CLEAN_PHOTOS' })
           const message = getMessage('SUCCESS_UPLOAD')
           showMessage(message)
         } else {
