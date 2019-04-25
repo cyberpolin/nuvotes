@@ -2,7 +2,8 @@ const initialState = {
   isLoading: false,
   isUploading: false,
   isDownloading: false,
-  cameraOpen: false
+  cameraOpen: false,
+  photos: []
 }
 
 const settings = (state = initialState, { type, payload }) => {
@@ -26,6 +27,21 @@ const settings = (state = initialState, { type, payload }) => {
       return {
         ...state,
         cameraOpen: payload
+      }
+    case 'ADD_PHOTO':
+      return {
+        ...state,
+        photos: [...state.photos, payload]
+      }
+    case 'CLEAN_PHOTOS':
+      return {
+        ...state,
+        photos: initialState.photos
+      }
+    case 'DELETE_PHOTO':
+      return {
+        ...state,
+        photos: payload
       }
     default:
       return state
