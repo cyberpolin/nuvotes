@@ -139,6 +139,7 @@ class Camera extends Component {
     })
     addPhotos(sortedPhotos, type)
     toggleCamera(false)
+    this.setState({ photos: [] })
   }
 }
 
