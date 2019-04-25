@@ -19,17 +19,17 @@ export function changeDownload (isDownloading) {
   }
 }
 
-export function changeCamera (isOpen) {
+export function toggleCamera (isOpen) {
   return {
     type: 'CHANGE_CAMERA',
     payload: isOpen
   }
 }
 
-export function addPhoto (photo) {
+export function addPhotos (photos) {
   return {
-    type: 'ADD_PHOTO',
-    payload: photo
+    type: 'ADD_PHOTOS',
+    payload: photos
   }
 }
 
