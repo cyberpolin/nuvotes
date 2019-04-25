@@ -28,10 +28,10 @@ const settings = (state = initialState, { type, payload }) => {
         ...state,
         cameraOpen: payload
       }
-    case 'ADD_PHOTO':
+    case 'ADD_PHOTOS':
       return {
         ...state,
-        photos: [...state.photos, payload]
+        photos: [...state.photos, ...payload]
       }
     case 'CLEAN_PHOTOS':
       return {
