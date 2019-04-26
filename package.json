@@ -23,6 +23,7 @@
     "react-native-gesture-handler": "^1.0.15",
     "react-native-image-crop-picker": "^0.22.0",
     "react-native-image-picker": "^0.28.0",
+    "react-native-image-view": "^2.1.4",
     "react-native-interactive-image-gallery": "^0.1.2",
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
