@@ -12,6 +12,7 @@ import { getLogin } from '../../helpers/user'
 import { getMessage } from '../../helpers/messages'
 import { getOrders } from '../../helpers/orders'
 import { getSearch } from '../../actions/search'
+import { toggleCamera, cleanPhotos } from '../../actions/settings'
 import {
   Container,
   LoginBox,
@@ -35,7 +36,9 @@ class Login extends Component {
   }
 
   componentWillMount () {
-    const { user, navigation, getOrders, getSearch } = this.props
+    const { user, navigation, getOrders, getSearch, toggleCamera } = this.props
+    this.props.cleanPhotos()
+    toggleCamera(false)
     if (!_.isEmpty(user)) {
       const { id, token } = user
       navigation.navigate('Home')
@@ -121,7 +124,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation)),
     getOrders: (token, userId) => dispatch(getOrders(token, userId)),
-    getSearch: search => dispatch(getSearch(search))
+    getSearch: search => dispatch(getSearch(search)),
+    toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
+    cleanPhotos: () => dispatch(cleanPhotos())
   }
 }
 
