@@ -31,6 +31,12 @@ export const styles = {
     position: 'absolute',
     right: 4,
     top: 0
+  },
+  disabledStyle: {
+    backgroundColor: 'lightgray'
+  },
+  disabledText: {
+    color: black
   }
 }
 

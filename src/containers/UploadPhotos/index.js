@@ -8,6 +8,7 @@ import {
   Badge,
   Icon
 } from 'react-native-elements'
+import ImageView from 'react-native-image-view'
 import {
   Container,
   FlexRow,
@@ -33,13 +34,18 @@ class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isVisible: props.isVisible
+      isVisible: props.isVisible,
+      viewerVisible: false,
+      selectedIndex: 0
     }
     this.handleClose = this.handleClose.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.openCamera = this.openCamera.bind(this)
+    this.openViewer = this.openViewer.bind(this)
+    this.closeViewer = this.closeViewer.bind(this)
   }
   render () {
+    const { viewerVisible, selectedIndex } = this.state
     const { descriptionJob } = this.props
     const { isUploading, photos } = this.props.settings
     return (
@@ -81,9 +87,20 @@ class UploadPhotos extends Component {
             disabled={isUploading || photos.length < 1}
             loading={isUploading}
             loadingProps={{color: secondary}}
+            disabledTitleStyle={styles.disabledText}
+            disabledStyle={styles.disabledStyle}
           />
         </FlexRow>
         <Camera type={descriptionJob.description} />
+        {photos.length > 0 &&
+          <ImageView
+            isVisible={viewerVisible}
+            imageIndex={selectedIndex}
+            onClose={this.closeViewer}
+            animationType='fade'
+            images={photos}
+          />
+        }
       </Container>
     )
   }
@@ -115,6 +132,7 @@ class UploadPhotos extends Component {
             source={{uri}}
             size='large'
             containerStyle={styles.avatarContainer}
+            onPress={() => this.openViewer(index)}
           />
           <Badge
             value={
@@ -131,6 +149,17 @@ class UploadPhotos extends Component {
           />
         </ImageBox>
       )
+    })
+  }
+
+  closeViewer () {
+    this.setState({ viewerVisible: false })
+  }
+
+  openViewer (index) {
+    this.setState({
+      viewerVisible: true,
+      selectedIndex: index
     })
   }
 
