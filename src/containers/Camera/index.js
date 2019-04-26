@@ -112,8 +112,12 @@ class Camera extends Component {
   async takePhoto () {
     const { photos } = this.state
     this.setState({ isLoading: true })
+    const options = {
+      orientation: 'portrait',
+      width: 720
+    }
     if (this.camera) {
-      var data = await this.camera.takePictureAsync({skipProcessing: true})
+      var data = await this.camera.takePictureAsync(options)
       const uri = data.uri
       const filename = getFilename(uri)
       data['filename'] = filename
