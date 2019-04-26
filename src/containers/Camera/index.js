@@ -122,6 +122,9 @@ class Camera extends Component {
       const filename = getFilename(uri)
       data['filename'] = filename
       data['mime'] = 'image/jpg'
+      data['source'] = {
+        uri
+      }
       this.setState({ photos: [...photos, data] })
       this.setState({ isLoading: false })
     }
