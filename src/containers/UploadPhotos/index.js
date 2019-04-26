@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import {
-  ScrollView,
-  Alert
-} from 'react-native'
+import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import {
   Text,
@@ -36,15 +33,13 @@ class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isVisible: props.isVisible,
-      saveAs: ''
+      isVisible: props.isVisible
     }
     this.handleClose = this.handleClose.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.openCamera = this.openCamera.bind(this)
   }
   render () {
-    const { saveAs } = this.state
     const { descriptionJob } = this.props
     const { isUploading, photos } = this.props.settings
     return (
