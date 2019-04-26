@@ -114,7 +114,7 @@ class Camera extends Component {
     this.setState({ isLoading: true })
     const options = {
       orientation: 'portrait',
-      width: 720
+      width: 560
     }
     if (this.camera) {
       var data = await this.camera.takePictureAsync(options)
