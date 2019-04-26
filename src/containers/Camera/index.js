@@ -5,7 +5,10 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
-import { Icon } from 'react-native-elements'
+import {
+  Icon,
+  Button
+} from 'react-native-elements'
 import {
   toggleCamera,
   addPhotos
@@ -25,7 +28,8 @@ class Camera extends Component {
     super(props)
     this.state = {
       flashOn: false,
-      photos: []
+      photos: [],
+      isLoading: false
     }
     this.takePhoto = this.takePhoto.bind(this)
     this.toggleFlash = this.toggleFlash.bind(this)
@@ -33,13 +37,14 @@ class Camera extends Component {
     this.closeCamera = this.closeCamera.bind(this)
   }
   render () {
-    const { flashOn } = this.state
+    const { flashOn, isLoading } = this.state
     const { cameraOpen } = this.props.settings
     return (
       <Modal
         animationType='slide'
         transparent={false}
         visible={cameraOpen}
+        onRequestClose={this.handleSave}
       >
         <Container>
           <RNCamera
@@ -65,15 +70,22 @@ class Camera extends Component {
               />
             </IconContainer>
             <IconContainer>
-              <Icon
-                type='font-awesome'
-                name='camera'
-                size={RF(7)}
-                color='rgba(255, 255, 255, 0.8)'
-                onPress={this.takePhoto}
-                underlayColor='transparent'
-                reverseColor='rgba(255, 255, 255, 0.4)'
-              />
+              {isLoading
+                ? <Button
+                  loading={isLoading}
+                  disabled={isLoading}
+                  disabledStyle={{backgroundColor: 'transparent'}}
+                />
+                : <Icon
+                  type='font-awesome'
+                  name='camera'
+                  size={RF(7)}
+                  color='rgba(255, 255, 255, 0.8)'
+                  onPress={this.takePhoto}
+                  underlayColor='transparent'
+                  reverseColor='rgba(255, 255, 255, 0.4)'
+                />
+              }
             </IconContainer>
             <IconContainer alignRight>
               <Icon
@@ -99,6 +111,7 @@ class Camera extends Component {
 
   async takePhoto () {
     const { photos } = this.state
+    this.setState({ isLoading: true })
     if (this.camera) {
       var data = await this.camera.takePictureAsync({skipProcessing: true})
       const uri = data.uri
@@ -106,6 +119,7 @@ class Camera extends Component {
       data['filename'] = filename
       data['mime'] = 'image/jpg'
       this.setState({ photos: [...photos, data] })
+      this.setState({ isLoading: false })
     }
   }
 
