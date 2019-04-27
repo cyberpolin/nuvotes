@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
-import {
-  Keyboard,
-  Alert
-} from 'react-native'
+import { Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import ImagePicker from 'react-native-image-picker'
 import {
   Icon,
   Input,
@@ -16,11 +12,10 @@ import _ from 'lodash'
 import { Loading } from '../../components'
 import {
   Label,
-  ImageContainer,
   CircleImage,
-  InfoContainer,
   FlexRow,
   InputContainer,
+  InfoContainer,
   styles
 } from './styled'
 import { translate } from '../../helpers/localization'
@@ -45,7 +40,6 @@ class EditUser extends Component {
       password: '',
       updates: {}
     }
-    this.showImagePicker = this.showImagePicker.bind(this)
     this.onChangeText = this.onChangeText.bind(this)
     this.handleSave = this.handleSave.bind(this)
   }
@@ -59,14 +53,6 @@ class EditUser extends Component {
         keyboardShouldPersistTaps='always'
         keyboardDismissMode='on-drag'
       >
-        {/* <ImageContainer onPress={this.showImagePicker}>
-          {this.renderAvatar()}
-          <Icon
-            type='font-awesome'
-            name='edit'
-            containerStyle={styles.editIconStyle}
-          />
-        </ImageContainer> */}
         <InfoContainer>
           <FlexRow>
             <InputContainer width={40}>
@@ -228,23 +214,6 @@ class EditUser extends Component {
     } else {
       editUserData(user.token, updates, navigation)
     }
-  }
-
-  showImagePicker () {
-    const options = {
-      title: translate.selectAvatar,
-      takePhotoButtonTitle: `${translate.takePhoto}...`,
-      chooseFromLibraryButtonTitle: `${translate.chooseGallery}...`,
-      cancelButtonTitle: translate.cancel
-    }
-    ImagePicker.showImagePicker(options, (response) => {
-      if (response.error) {
-        Alert.alert(translate.uploadError)
-      } else {
-        const { uri } = response
-        this.setState({image: uri})
-      }
-    })
   }
 }
 
