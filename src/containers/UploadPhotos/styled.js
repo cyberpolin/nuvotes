@@ -3,11 +3,9 @@ import {
   black,
   primary
 } from '../../colorPalette'
+import { heightPercentageToDP as hp } from '../../utils/layout'
 
 export const styles = {
-  avatarContainer: {
-    marginBottom: 5
-  },
   buttonStyle: {
     alignSelf: 'center',
     height: 36,
@@ -43,6 +41,7 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: space-between;
+  padding-top: 5px;
 `
 
 export const FlexRow = styled.View`
@@ -61,8 +60,16 @@ export const ImagesContainer = styled.View`
   width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
+  padding-horizontal: 5px;
 `
 
 export const ImageBox = styled.View`
-  flex-basis: 33.3%;
+  flex-basis: 49%;
+`
+
+export const Photo = styled.Image`
+  width: 100%;
+  height: ${hp(28)};
+  margin-bottom: 5px;
 `
