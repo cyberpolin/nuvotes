@@ -24,8 +24,7 @@ export const styles = {
     marginBottom: 15
   },
   scrollViewContainer: {
-    flexDirection: 'row',
-    flex: 1
+    flexDirection: 'row'
   },
   badgeStyle: {
     position: 'absolute',
