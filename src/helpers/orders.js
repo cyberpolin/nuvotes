@@ -183,3 +183,44 @@ export const updateOrderPhotos = (orders, orderId, newPhotos) => {
   orders[orderIndex].photos.push(...newPhotos)
   return orders
 }
+
+export const completeOrder = (token, orderId, userId, navigation) => {
+  return dispatch => {
+    dispatch({ type: 'CHANGE_UPLOAD', payload: true })
+    return fetch(`${URL}complete-order/`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'user_id': userId,
+        'order_id': orderId
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+      })
+      .then(jsonResponse => {
+        const { message } = jsonResponse
+        dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+        if (message === 'SUCCESS') {
+          dispatch(getOrders(token, userId))
+          const flashMessage = getMessage('SUCCESS_COMPLETE')
+          showMessage(flashMessage)
+          setTimeout(() => {
+            navigation.goBack()
+          })
+        }
+      })
+      .catch(error => {
+        dispatch({ type: 'CHANGE_UPLOAD', payload: false })
+        const message = getMessage(`${error}`)
+        showMessage(message)
+      })
+  }
+}

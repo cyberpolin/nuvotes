@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert
 } from 'react-native'
 import {
   Button,
@@ -29,7 +30,10 @@ import {
   Text
 } from './styled'
 import { translate } from '../../helpers/localization'
-import { sortPhotos } from '../../helpers/orders'
+import {
+  sortPhotos,
+  completeOrder
+} from '../../helpers/orders'
 import { secondary } from '../../colorPalette'
 
 class WorkOrder extends Component {
@@ -43,6 +47,7 @@ class WorkOrder extends Component {
     this.changeVisibility = this.changeVisibility.bind(this)
     this.showModal = this.showModal.bind(this)
     this.changeVisibility = this.changeVisibility.bind(this)
+    this.handleCompleteOrder = this.handleCompleteOrder.bind(this)
   }
   render () {
     const { isCollapsed } = this.state
@@ -132,6 +137,18 @@ class WorkOrder extends Component {
                 loadingProps={{color: secondary}}
               />
             </ButtonContainer>
+            {formattedStatus !== 'Pending Completion' &&
+              <ButtonContainer>
+                <Button
+                  title={translate.completeOrder}
+                  titleStyle={styles.buttonTitle}
+                  buttonStyle={styles.buttonStyle}
+                  disabled={settings.isUploading}
+                  loading={settings.isUploading}
+                  loadingProps={{color: secondary}}
+                  onPress={() => this.handleCompleteOrder(id)}
+                />
+              </ButtonContainer>}
             {this.renderModal(order['description_job'], order.id)}
           </InfoContainer>
         </ScrollContainer>
@@ -226,6 +243,29 @@ class WorkOrder extends Component {
       )
     }
   }
+
+  handleCompleteOrder () {
+    const { completeOrder, user: { id, token }, navigation } = this.props
+    const order = navigation.getParam('order', {})
+    const { id: orderId, photos } = order
+    var photosCompleted
+    if (order['description_job'].description === 'Inspection') {
+      photosCompleted = photos.length > 0
+    } else {
+      const inProgress = sortPhotos(photos, 'In Progress')
+      const after = sortPhotos(photos, 'After')
+      const before = sortPhotos(photos, 'Before')
+      photosCompleted = inProgress.length > 0 && after.length > 0 && before.length > 0
+    }
+    Alert.alert(
+      translate.completeOrder,
+      photosCompleted ? translate.completeOrderAlt : translate.completeOrderDescription,
+      [
+        {text: translate.cancel, style: 'cancel'},
+        {text: 'Ok', onPress: () => completeOrder(token, orderId, id, navigation)}
+      ]
+    )
+  }
 }
 
 const mapStateToProps = ({ user, settings }) => ({
@@ -233,4 +273,8 @@ const mapStateToProps = ({ user, settings }) => ({
   settings
 })
 
-export default connect(mapStateToProps, null)(WorkOrder)
+const mapDispatchToProps = dispatch => ({
+  completeOrder: (token, orderId, userId, navigation) => dispatch(completeOrder(token, orderId, userId, navigation))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkOrder)

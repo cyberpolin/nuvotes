@@ -112,5 +112,12 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
+    case 'SUCCESS_COMPLETE':
+      return {
+        message: translate.successComplete,
+        type: 'success',
+        icon: 'success',
+        duration: 2000
+      }
   }
 }

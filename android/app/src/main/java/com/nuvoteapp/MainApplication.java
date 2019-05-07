@@ -7,10 +7,7 @@ import org.reactnative.camera.RNCameraPackage;
 import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
-import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
-import com.imagepicker.ImagePickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -37,10 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFileViewerPackage(),
             new RNFetchBlobPackage(),
             new ReactNativeConfigPackage(),
-            new ReactNativeDocumentPicker(),
-            new PickerPackage(),
             new ReactNativeLocalizationPackage(),
-            new ImagePickerPackage(),
             new RNGestureHandlerPackage(),
             new VectorIconsPackage()
       );
