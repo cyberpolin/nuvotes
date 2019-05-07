@@ -184,7 +184,7 @@ export const updateOrderPhotos = (orders, orderId, newPhotos) => {
   return orders
 }
 
-export const completeOrder = (token, orderId, userId) => {
+export const completeOrder = (token, orderId, userId, navigation) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_UPLOAD', payload: true })
     return fetch(`${URL}complete-order/`, {
@@ -212,6 +212,9 @@ export const completeOrder = (token, orderId, userId) => {
           dispatch(getOrders(token, userId))
           const flashMessage = getMessage('SUCCESS_COMPLETE')
           showMessage(flashMessage)
+          setTimeout(() => {
+            navigation.goBack()
+          })
         }
       })
       .catch(error => {

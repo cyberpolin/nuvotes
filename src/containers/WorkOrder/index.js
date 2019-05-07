@@ -262,7 +262,7 @@ class WorkOrder extends Component {
       photosCompleted ? translate.completeOrderAlt : translate.completeOrderDescription,
       [
         {text: translate.cancel, style: 'cancel'},
-        {text: 'Ok', onPress: () => completeOrder(token, orderId, id)}
+        {text: 'Ok', onPress: () => completeOrder(token, orderId, id, navigation)}
       ]
     )
   }
@@ -274,7 +274,7 @@ const mapStateToProps = ({ user, settings }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  completeOrder: (token, orderId, userId) => dispatch(completeOrder(token, orderId, userId))
+  completeOrder: (token, orderId, userId, navigation) => dispatch(completeOrder(token, orderId, userId, navigation))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkOrder)
