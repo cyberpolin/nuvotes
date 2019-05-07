@@ -85,7 +85,11 @@ const en = {
   startUploadMessage: 'Upload started',
   startUploadDescription: 'This may take a while.',
   fileErrorMessage: 'File error',
-  fileErrorDescription: 'An error has ocurred when opening the file.'
+  fileErrorDescription: 'An error has ocurred when opening the file.',
+  completeOrder: 'Complete Order',
+  completeOrderAlt: 'Do you want to complete the order?',
+  completeOrderDescription: 'Do you want to complete the order? (Some photos need to be uploaded)',
+  successComplete: 'The order is successfully complete'
 }
 
 export default en

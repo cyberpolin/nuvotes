@@ -88,7 +88,11 @@ const es = {
   usedUsernameMessage: 'Usuario en uso',
   usedUsernameDescription: 'Escoga otro usuario para registrar',
   fileErrorMessage: 'Error de archivo',
-  fileErrorDescription: 'Ha ocurrido un error al abrir el archivo.'
+  fileErrorDescription: 'Ha ocurrido un error al abrir el archivo.',
+  completeOrder: 'Completar Orden',
+  completeOrderAlt: '¿Desea completar la orden?',
+  completeOrderDescription: '¿Desea completar la orden? (Algunas fotos necesitan ser subidas.)',
+  successComplete: 'La orden ha sido completada exitosamente'
 }
 
 export default es
