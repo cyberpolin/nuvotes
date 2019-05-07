@@ -60,7 +60,7 @@ class Camera extends Component {
             <IconContainer alignLeft>
               <Icon
                 type='font-awesome'
-                name='times'
+                name='arrow-left'
                 size={RF(7)}
                 onPress={this.handleSave}
                 color='rgba(255, 255, 255, 0.8)'
