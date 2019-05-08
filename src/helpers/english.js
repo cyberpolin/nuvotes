@@ -89,7 +89,9 @@ const en = {
   completeOrder: 'Complete Order',
   completeOrderAlt: 'Do you want to complete the order?',
   completeOrderDescription: 'Do you want to complete the order? (Some photos need to be uploaded)',
-  successComplete: 'The order is successfully complete'
+  successComplete: 'The order is successfully complete',
+  lowFreeSpace: 'Low free disk storage',
+  lowFreeSpaceDescription: 'Keep in mind that some photos may not be taked'
 }
 
 export default en

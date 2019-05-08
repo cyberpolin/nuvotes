@@ -92,7 +92,9 @@ const es = {
   completeOrder: 'Completar Orden',
   completeOrderAlt: '¿Desea completar la orden?',
   completeOrderDescription: '¿Desea completar la orden? (Algunas fotos necesitan ser subidas.)',
-  successComplete: 'La orden ha sido completada exitosamente'
+  successComplete: 'La orden ha sido completada exitosamente',
+  lowFreeSpace: 'Poco espacio de almacenamiento',
+  lowFreeSpaceDescription: 'Tenga en mente que algunas fotos pueden no ser tomadas.'
 }
 
 export default es
