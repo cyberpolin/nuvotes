@@ -39,3 +39,12 @@ export const IconContainer = styled.View`
     flex-direction: row;
   `}
 `
+
+export const MessageContainer = styled.TouchableOpacity`
+  background-color: #EEA345;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+`

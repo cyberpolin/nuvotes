@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import {
   Modal,
-  Alert
+  Alert,
+  Text
 } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
+import DeviceInfo from 'react-native-device-info'
 import {
   Icon,
   Button
@@ -17,6 +19,7 @@ import {
   Container,
   Options,
   IconContainer,
+  MessageContainer,
   styles
 } from './styled'
 import RF from '../../utils/responsiveFont'
@@ -29,12 +32,15 @@ class Camera extends Component {
     this.state = {
       flashOn: false,
       photos: [],
-      isLoading: false
+      isLoading: false,
+      showMessage: true
     }
     this.takePhoto = this.takePhoto.bind(this)
     this.toggleFlash = this.toggleFlash.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.closeCamera = this.closeCamera.bind(this)
+    this.closeMessage = this.closeMessage.bind(this)
+    this.lowStorage = this.lowStorage.bind(this)
   }
   render () {
     const { flashOn, isLoading } = this.state
@@ -47,6 +53,7 @@ class Camera extends Component {
         onRequestClose={this.handleSave}
       >
         <Container>
+          {this.lowStorage()}
           <RNCamera
             style={styles.camera}
             type='back'
@@ -102,6 +109,23 @@ class Camera extends Component {
         </Container>
       </Modal>
     )
+  }
+  lowStorage () {
+    const { showMessage } = this.state
+    const freeDiskStorage = DeviceInfo.getFreeDiskStorage()
+    const megabytes = ((freeDiskStorage / 1024) / 1024)
+    if (megabytes < 200 && showMessage) {
+      return (
+        <MessageContainer onPress={this.closeMessage}>
+          <Text>{translate.lowFreeSpace}</Text>
+          <Text>{translate.lowFreeSpaceDescription}</Text>
+        </MessageContainer>
+      )
+    }
+  }
+
+  closeMessage () {
+    this.setState({ showMessage: false })
   }
 
   toggleFlash () {
