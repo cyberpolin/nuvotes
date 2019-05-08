@@ -13,7 +13,8 @@ import {
   Login,
   Documents,
   ViewUser,
-  EditUser
+  EditUser,
+  UploadPhotos
 } from '../containers'
 import {
   Drawer,
@@ -83,6 +84,12 @@ const StackNavigator = createStackNavigator({
     screen: Documents,
     navigationOptions: {
       title: 'Documents'
+    }
+  },
+  Upload: {
+    screen: UploadPhotos,
+    navigationOptions: {
+      title: 'Upload Photos'
     }
   }
 }, {

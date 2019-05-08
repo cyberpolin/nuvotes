@@ -6,14 +6,10 @@ import {
 } from 'react-native'
 import {
   Button,
-  Icon,
-  Overlay
+  Icon
 } from 'react-native-elements'
 import { connect } from 'react-redux'
 import _ from 'lodash'
-import {
-  UploadPhotos
-} from '../../containers'
 import { Collapsable } from '../../components'
 import {
   Container,
@@ -44,9 +40,6 @@ class WorkOrder extends Component {
       isVisible: false
     }
     this.handleCollapse = this.handleCollapse.bind(this)
-    this.changeVisibility = this.changeVisibility.bind(this)
-    this.showModal = this.showModal.bind(this)
-    this.changeVisibility = this.changeVisibility.bind(this)
     this.handleCompleteOrder = this.handleCompleteOrder.bind(this)
   }
   render () {
@@ -131,7 +124,7 @@ class WorkOrder extends Component {
                 title={translate.uploadPhotos}
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
-                onPress={this.showModal}
+                onPress={() => navigation.navigate('Upload', {descriptionJob: order['description_job'], id})}
                 disabled={settings.isUploading}
                 loading={settings.isUploading}
                 loadingProps={{color: secondary}}
@@ -149,42 +142,10 @@ class WorkOrder extends Component {
                   onPress={() => this.handleCompleteOrder(id)}
                 />
               </ButtonContainer>}
-            {this.renderModal(order['description_job'], order.id)}
           </InfoContainer>
         </ScrollContainer>
       </Container>
     )
-  }
-  showModal () {
-    const { isVisible } = this.state
-    this.setState({isVisible: !isVisible})
-  }
-
-  renderModal (descriptionJob, orderId) {
-    const { isVisible } = this.state
-    return (
-      <Overlay
-        isVisible={isVisible}
-        windowBackgroundColor='rgba(0, 0, 0, .4)'
-        overlayBackgroundColor='#FFF'
-        onBackdropPress={this.changeVisibility}
-        animationType='fade'
-        overlayStyle={styles.overlayStyle}
-        height='65%'
-      >
-        <UploadPhotos
-          isVisible={isVisible}
-          changeVisibility={this.changeVisibility}
-          descriptionJob={descriptionJob}
-          orderId={orderId}
-        />
-      </Overlay>
-    )
-  }
-
-  changeVisibility () {
-    const { isVisible } = this.state
-    this.setState({isVisible: !isVisible})
   }
 
   handleCollapse () {

@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import {
-  Text,
   Button,
-  Avatar,
   Badge,
-  Icon
+  Icon,
+  Image
 } from 'react-native-elements'
 import ImageView from 'react-native-image-view'
 import {
@@ -15,7 +14,8 @@ import {
   ButtonsContainer,
   ImagesContainer,
   ImageBox,
-  styles
+  styles,
+  Photo
 } from './styled'
 import { Camera } from '../index'
 import { translate } from '../../helpers/localization'
@@ -29,16 +29,15 @@ import {
   white,
   secondary
 } from '../../colorPalette'
+import { heightPercentageToDP as hp } from '../../utils/layout'
 
 class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isVisible: props.isVisible,
       viewerVisible: false,
       selectedIndex: 0
     }
-    this.handleClose = this.handleClose.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.openCamera = this.openCamera.bind(this)
     this.openViewer = this.openViewer.bind(this)
@@ -46,15 +45,16 @@ class UploadPhotos extends Component {
   }
   render () {
     const { viewerVisible, selectedIndex } = this.state
-    const { descriptionJob } = this.props
+    const { navigation } = this.props
     const { isUploading, photos } = this.props.settings
+    const descriptionJob = navigation.getParam('descriptionJob', '')
     return (
       <Container>
-        <Text h4>{translate.photos}</Text>
         {photos.length > 0 &&
           <ScrollView
             bounces={false}
             contentContainerStyle={styles.scrollViewContainer}
+            showsVerticalScrollIndicator={false}
           >
             <ImagesContainer>
               {this.renderImages()}
@@ -71,13 +71,6 @@ class UploadPhotos extends Component {
           />
         </ButtonsContainer>
         <FlexRow>
-          <Button
-            buttonStyle={styles.buttonStyle}
-            titleStyle={styles.buttonTitle}
-            type='outline'
-            title={translate.cancel}
-            onPress={this.handleClose}
-          />
           <Button
             buttonStyle={styles.buttonStyle}
             titleStyle={styles.buttonTitle}
@@ -106,20 +99,13 @@ class UploadPhotos extends Component {
   }
 
   handleSave () {
-    const { isVisible } = this.state
     const { photos } = this.props.settings
-    const { user, uploadPhotos, orderId, changeVisibility, changeUploading } = this.props
+    const { user, uploadPhotos, changeUploading, navigation } = this.props
+    const orderId = navigation.getParam('id', 0)
     changeUploading(true)
     setTimeout(() => {
-      changeVisibility(!isVisible)
       uploadPhotos(user.token, photos, orderId)
     }, 1000)
-  }
-
-  handleClose () {
-    const { changeVisibility } = this.props
-    const { isVisible } = this.state
-    changeVisibility(!isVisible)
   }
 
   renderImages () {
@@ -128,10 +114,8 @@ class UploadPhotos extends Component {
       const { uri } = photo
       return (
         <ImageBox key={index}>
-          <Avatar
+          <Photo
             source={{uri}}
-            size='large'
-            containerStyle={styles.avatarContainer}
             onPress={() => this.openViewer(index)}
           />
           <Badge
