@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard } from 'react-native'
 import {
   Input,
   Button
@@ -110,6 +111,7 @@ class Login extends Component {
       const message = getMessage('EMPTY_FIELDS')
       showMessage(message)
     } else {
+      Keyboard.dismiss()
       getLogin(username, password, navigation)
     }
   }
