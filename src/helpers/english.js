@@ -91,7 +91,11 @@ const en = {
   completeOrderDescription: 'Do you want to complete the order? (Some photos need to be uploaded)',
   successComplete: 'The order is successfully complete',
   lowFreeSpace: 'Low free disk storage',
-  lowFreeSpaceDescription: 'Keep in mind that some photos may not be taked'
+  lowFreeSpaceDescription: 'Keep in mind that some photos may not be taked',
+  selectAll: 'Select all',
+  delete: 'Delete',
+  deletePhotos: 'Delete photos',
+  deletePhotosDescription: 'Do you want to delete the selected photos?'
 }
 
 export default en
