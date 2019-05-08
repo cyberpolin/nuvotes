@@ -119,5 +119,13 @@ export const getMessage = type => {
         icon: 'success',
         duration: 2000
       }
+    case 'LOW_FREE_SPACE':
+      return {
+        message: translate.lowFreeSpace,
+        description: translate.lowFreeSpaceDescription,
+        type: 'warning',
+        icon: 'warning',
+        duration: 2000
+      }
   }
 }
