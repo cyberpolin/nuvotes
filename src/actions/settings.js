@@ -46,3 +46,7 @@ export function deletePhoto (photos, index) {
     payload: photos
   }
 }
+
+export const resetSettings = () => ({
+  type: 'RESET_SETTINGS'
+})
