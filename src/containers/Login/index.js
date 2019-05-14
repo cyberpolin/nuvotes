@@ -6,6 +6,7 @@ import {
 } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
+import Clear from 'react-native-clear-app-cache'
 import _ from 'lodash'
 import { Loading } from '../../components'
 import { translate } from '../../helpers/localization'
@@ -50,6 +51,9 @@ class Login extends Component {
       resetSettings,
       cleanPhotos
     } = this.props
+    Clear.clearAppCache(() => {
+      console.log('DID CLEAR')
+    })
     cleanPhotos()
     toggleCamera(false)
     resetSettings()

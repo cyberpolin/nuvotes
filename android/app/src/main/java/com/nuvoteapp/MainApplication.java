@@ -3,6 +3,7 @@ package com.nuvoteapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnta.clear.ClearCachePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.reactnative.camera.RNCameraPackage;
 import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ClearCachePackage(),
             new RNDeviceInfo(),
             new RNCameraPackage(),
             new RNFileViewerPackage(),
