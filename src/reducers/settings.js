@@ -43,6 +43,8 @@ const settings = (state = initialState, { type, payload }) => {
         ...state,
         photos: payload
       }
+    case 'RESET_SETTINGS':
+      return initialState
     default:
       return state
   }
