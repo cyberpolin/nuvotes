@@ -1,6 +1,7 @@
 import { Platform } from 'react-native'
 import { Image } from 'react-native-elements'
 import styled from 'styled-components/native'
+import RF from '../../utils/responsiveFont'
 
 const isIOS = Platform.OS === 'ios'
 
@@ -16,7 +17,8 @@ export const InfoContainer = styled.View`
 `
 
 export const Label = styled.Text`
-  font-size: 18px;
+  font-size: ${RF(2.5)};
+  font-weight: 500;
 `
 
 export const Text = styled.Text`

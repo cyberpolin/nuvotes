@@ -14,6 +14,7 @@ import {
   ImageContainer,
   InfoContainer
 } from './styled'
+import RF from '../../utils/responsiveFont'
 
 class ViewUser extends Component {
   render () {
@@ -27,7 +28,7 @@ class ViewUser extends Component {
               resizeMode='contain'
               PlaceholderContent={<ActivityIndicator />}
             />
-            : <Icon name='user-circle' type='font-awesome' size={150} />
+            : <Icon name='user-circle' type='font-awesome' size={RF(20)} />
           }
         </ImageContainer>
         <InfoContainer>
