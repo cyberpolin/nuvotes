@@ -146,8 +146,8 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-clear-app-cache')
-    compile project(':react-native-device-info')
+    implementation project(':react-native-clear-app-cache')
+    implementation project(':react-native-device-info')
     implementation project(':react-native-camera')
     implementation project(':react-native-file-viewer')
     implementation project(':rn-fetch-blob')
