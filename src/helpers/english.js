@@ -92,7 +92,8 @@ const en = {
   successComplete: 'The order is successfully complete',
   lowFreeSpace: 'Low free disk storage',
   lowFreeSpaceDescription: 'Keep in mind that some photos may not be taked',
-  downloadError: 'Download error'
+  downloadError: 'Download error',
+  photoTaked: 'Photo taked'
 }
 
 export default en

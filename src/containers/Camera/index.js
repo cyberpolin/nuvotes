@@ -11,6 +11,7 @@ import {
   Icon,
   Button
 } from 'react-native-elements'
+import Toast from 'react-native-easy-toast'
 import {
   toggleCamera,
   addPhotos
@@ -106,6 +107,11 @@ class Camera extends Component {
               />
             </IconContainer>
           </Options>
+          <Toast
+            ref={ref => {
+              this.toast = ref
+            }}
+          />
         </Container>
       </Modal>
     )
@@ -142,6 +148,7 @@ class Camera extends Component {
     }
     if (this.camera) {
       var data = await this.camera.takePictureAsync(options)
+      this.toast.show(translate.photoTaked)
       const uri = data.uri
       const filename = getFilename(uri)
       data['filename'] = filename
