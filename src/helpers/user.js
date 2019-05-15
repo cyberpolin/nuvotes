@@ -60,9 +60,9 @@ export const getLogin = (username, password, navigation) => {
           showMessage(message)
         }
       })
-      .catch(error => {
+      .catch(() => {
         dispatch({ type: 'CHANGE_LOADING', payload: false })
-        const message = getMessage(`${error}`)
+        const message = getMessage('FAILED_CONNECTION')
         showMessage(message)
       })
   }

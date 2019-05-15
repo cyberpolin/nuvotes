@@ -127,5 +127,13 @@ export const getMessage = type => {
         icon: 'warning',
         duration: 2000
       }
+    case 'FAILED_CONNECTION':
+      return {
+        message: translate.connectionErrorMessage,
+        description: translate.connectionErrorDescription,
+        type: 'error',
+        icon: 'error',
+        duration: 2000
+      }
   }
 }
