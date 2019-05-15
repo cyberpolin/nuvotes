@@ -94,7 +94,8 @@ const es = {
   completeOrderDescription: '¿Desea completar la orden? (Algunas fotos necesitan ser subidas.)',
   successComplete: 'La orden ha sido completada exitosamente',
   lowFreeSpace: 'Poco espacio de almacenamiento',
-  lowFreeSpaceDescription: 'Tenga en mente que algunas fotos pueden no ser tomadas.'
+  lowFreeSpaceDescription: 'Tenga en mente que algunas fotos pueden no ser tomadas.',
+  downloadError: 'Error al descargar'
 }
 
 export default es

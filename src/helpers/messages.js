@@ -131,8 +131,15 @@ export const getMessage = type => {
       return {
         message: translate.connectionErrorMessage,
         description: translate.connectionErrorDescription,
-        type: 'error',
-        icon: 'error',
+        type: 'danger',
+        icon: 'danger',
+        duration: 2000
+      }
+    case 'DOWNLOAD_ERROR':
+      return {
+        message: translate.downloadError,
+        type: 'danger',
+        icon: 'danger',
         duration: 2000
       }
   }

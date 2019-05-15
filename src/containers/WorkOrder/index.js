@@ -126,6 +126,7 @@ class WorkOrder extends Component {
                 </GalleryButton>
               </View>
             </Collapsable>
+            {formattedStatus !== 'Completed' &&
             <ButtonContainer>
               <Button
                 title={translate.uploadPhotos}
@@ -136,8 +137,8 @@ class WorkOrder extends Component {
                 loading={settings.isUploading}
                 loadingProps={{color: secondary}}
               />
-            </ButtonContainer>
-            {formattedStatus !== 'Pending Completion' &&
+            </ButtonContainer>}
+            {(formattedStatus !== 'Pending Completion' && formattedStatus !== 'Completed') &&
               <ButtonContainer>
                 <Button
                   title={translate.completeOrder}

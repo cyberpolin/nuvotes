@@ -112,6 +112,7 @@ class Download extends Component {
         }
       })
       .then((res) => {
+        console.log('HERE', res)
         const status = res.info().status
         if (status === 200) {
           if (isIOS) {
@@ -124,10 +125,17 @@ class Download extends Component {
                 showMessage(message)
               })
           }
+        } else {
+          const message = getMessage('DOWNLOAD_ERROR')
+          showMessage(message)
+          this.setState({ didDownload: false })
+          this.setState({ downloadSuccess: false })
         }
-      }).catch((error, status) => {
-        console.log('ERROR', error)
-        console.log('STATUS', status)
+      }).catch(() => {
+        const message = getMessage('DOWNLOAD_ERROR')
+        showMessage(message)
+        this.setState({ didDownload: false })
+        this.setState({ downloadSuccess: false })
       })
   }
 }

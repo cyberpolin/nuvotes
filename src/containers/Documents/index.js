@@ -1,23 +1,16 @@
 import React, { Component } from 'react'
 import {
   ListItem,
-  Text,
-  Icon
+  Text
 } from 'react-native-elements'
 import _ from 'lodash'
 import { Download } from '../../components'
 import {
   Container,
-  ScrollContainer,
-  FlexRow,
-  styles
+  ScrollContainer
 } from './styled'
 import { translate } from '../../helpers/localization'
-import {
-  getFilename,
-  downloadFile
-} from '../../helpers/orders'
-import { primary } from '../../colorPalette'
+import { getFilename } from '../../helpers/orders'
 
 export default class Documents extends Component {
   render () {
@@ -46,19 +39,5 @@ export default class Documents extends Component {
         />
       )
     })
-  }
-
-  renderRightItem (fileURL, filename) {
-    return (
-      <FlexRow>
-        <Icon
-          name='download'
-          type='font-awesome'
-          iconStyle={styles.iconStyle}
-          onPress={() => downloadFile(fileURL, filename)}
-          color={primary}
-        />
-      </FlexRow>
-    )
   }
 }
