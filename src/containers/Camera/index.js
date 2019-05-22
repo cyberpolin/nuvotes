@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   Modal,
   Alert,
-  Text
+  Text,
+  CameraRoll
 } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
@@ -151,6 +152,7 @@ class Camera extends Component {
       this.toast.show(translate.photoTaked)
       const uri = data.uri
       const filename = getFilename(uri)
+      CameraRoll.saveToCameraRoll(uri)
       data['filename'] = filename
       data['mime'] = 'image/jpg'
       data['source'] = {
