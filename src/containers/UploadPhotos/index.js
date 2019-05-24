@@ -3,7 +3,7 @@ import {
   ScrollView,
   Alert,
   View,
-  Text
+  TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -22,9 +22,9 @@ import {
   Photo,
   ButtonsBar,
   Flex,
-  IconText,
   PhotoButton,
-  CenterContainer
+  CenterContainer,
+  PhotoButtonContainer
 } from './styled'
 import { Camera } from '../index'
 import { translate } from '../../helpers/localization'
@@ -94,15 +94,16 @@ class UploadPhotos extends Component {
         <ButtonsBar style={style}>
           <Flex />
           <CenterContainer>
-            <PhotoButton onPress={this.openCamera}>
-              <Icon
-                type='font-awesome'
-                name='camera'
-                underlayColor='transparent'
-                size={30}
-              />
-            </PhotoButton>
-            <IconText>{translate.takePhoto}</IconText>
+            <PhotoButtonContainer>
+              <TouchableOpacity onPress={this.openCamera}>
+                <Icon
+                  type='font-awesome'
+                  name='camera'
+                  underlayColor='transparent'
+                  size={30}
+                />
+              </TouchableOpacity>
+            </PhotoButtonContainer>
           </CenterContainer>
           <Flex>
             {photos.length > 0 &&

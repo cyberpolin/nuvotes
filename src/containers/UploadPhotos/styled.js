@@ -1,18 +1,19 @@
 import styled from 'styled-components/native'
 import {
   black,
-  primary
+  primary,
+  white
 } from '../../colorPalette'
 import { heightPercentageToDP as hp } from '../../utils/layout'
 
 export const styles = {
   buttonStyle: {
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     height: '100%',
-    backgroundColor: primary,
-    borderWidth: 0,
-    borderRadius: 13,
-    paddingHorizontal: 15
+    width: '80%',
+    backgroundColor: 'transparent',
+    paddingHorizontal: 15,
+    borderWidth: 0
   },
   buttonTitle: {
     color: black,
@@ -86,7 +87,7 @@ export const Photo = styled.Image`
 export const ButtonsBar = styled.View`
   width: 100%;
   flex-direction: row;
-  background-color: #5BA891;
+  background-color: ${primary};
   height: 45px;
 `
 
@@ -94,18 +95,16 @@ export const Flex = styled.View`
   flex: ${({ flex }) => flex || '1'};
 `
 
-export const PhotoButton = styled.TouchableOpacity`
+export const PhotoButtonContainer = styled.View`
   background-color: ${primary};
   position: absolute;
-  bottom: 20;
-  width: 60px;
-  height: 60px;
+  bottom: 10;
+  width: 76px;
+  height: 76px;
   justify-content: center;
-  border-radius: 30px;
-
-`
-
-export const IconText = styled.Text`
+  border-color: ${white};
+  border-width: 8px;
+  border-radius: 38px;
 `
 
 export const CenterContainer = styled.View`
