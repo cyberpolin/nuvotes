@@ -45,7 +45,8 @@ export const getLogin = (username, password, navigation) => {
           getUserData(token).then(response => {
             if (response) {
               const { id } = response.user
-              dispatch({ type: 'POPULATE_USER', payload: {...response.user, token} })
+              const { type } = response
+              dispatch({ type: 'POPULATE_USER', payload: {...response.user, token, type} })
               navigation.navigate('Home')
               dispatch(getOrders(token, id))
             } else {
