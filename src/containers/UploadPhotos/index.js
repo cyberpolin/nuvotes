@@ -8,7 +8,6 @@ import {
 import { connect } from 'react-redux'
 import {
   Button,
-  Badge,
   Icon,
   CheckBox
 } from 'react-native-elements'
@@ -22,9 +21,9 @@ import {
   Photo,
   ButtonsBar,
   Flex,
-  PhotoButton,
   CenterContainer,
-  PhotoButtonContainer
+  PhotoButtonContainer,
+  DeleteButtonBar
 } from './styled'
 import { Camera } from '../index'
 import { translate } from '../../helpers/localization'
@@ -35,10 +34,7 @@ import {
   deletePhoto,
   deleteSelectedPhotos
 } from '../../actions/settings'
-import {
-  white,
-  secondary
-} from '../../colorPalette'
+import { secondary } from '../../colorPalette'
 import { widthPercentageToDP as wp } from '../../utils/layout'
 
 class UploadPhotos extends Component {
@@ -92,7 +88,20 @@ class UploadPhotos extends Component {
           />
         }
         <ButtonsBar style={style}>
-          <Flex />
+          <Flex>
+            <Button
+              buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
+              titleStyle={styles.buttonTitle}
+              type='outline'
+              title={translate.delete}
+              onPress={this.toggleMode}
+              disabled={isUploading || photos.length === 0}
+              loading={isUploading}
+              loadingProps={{color: secondary}}
+              disabledTitleStyle={styles.disabledText}
+              disabledStyle={styles.disabledStyle}
+            />
+          </Flex>
           <CenterContainer>
             <PhotoButtonContainer>
               <TouchableOpacity onPress={this.openCamera}>
@@ -106,23 +115,22 @@ class UploadPhotos extends Component {
             </PhotoButtonContainer>
           </CenterContainer>
           <Flex>
-            {photos.length > 0 &&
-              <Button
-                buttonStyle={styles.buttonStyle}
-                titleStyle={styles.buttonTitle}
-                type='outline'
-                title={translate.save}
-                onPress={this.handleSave}
-                disabled={isUploading}
-                loading={isUploading}
-                loadingProps={{color: secondary}}
-                disabledTitleStyle={styles.disabledText}
-                disabledStyle={styles.disabledStyle}
-              />}
+            <Button
+              buttonStyle={styles.buttonStyle}
+              titleStyle={styles.buttonTitle}
+              type='outline'
+              title={translate.save}
+              // onPress={this.handleSave}
+              disabled={isUploading || photos.length === 0}
+              loading={isUploading}
+              loadingProps={{color: secondary}}
+              disabledTitleStyle={styles.disabledText}
+              disabledStyle={styles.disabledStyle}
+            />
           </Flex>
         </ButtonsBar>
         <Collapsable collapsed={!deleteMode} onAnimationEnd={!deleteMode ? this.animationEnd : undefined}>
-          <View style={{backgroundColor: 'red', height: 50, width: wp(100), flexDirection: 'row'}}>
+          <DeleteButtonBar>
             <Flex>
               <Button
                 title={translate.cancel}
@@ -142,7 +150,7 @@ class UploadPhotos extends Component {
                 onPress={this.selectAll}
               />
             </Flex>
-          </View>
+          </DeleteButtonBar>
         </Collapsable>
       </Container>
     )
@@ -174,28 +182,13 @@ class UploadPhotos extends Component {
           onLongPress={!deleteMode ? this.toggleMode : undefined}
         >
           <Photo source={{uri}} />
-          {deleteMode
-            ? <CheckBox
+          {deleteMode &&
+            <CheckBox
               containerStyle={styles.checkboxContainer}
               checked={selected[index]}
               onPress={() => this.selectDelete(index)}
               checkedColor='red'
-            />
-            : <Badge
-              value={
-                <Icon
-                  type='font-awesome'
-                  name='times'
-                  size={20}
-                  color={white}
-                />
-              }
-              containerStyle={styles.badgeStyle}
-              badgeStyle={styles.badgeContainer}
-              status='error'
-              onPress={() => this.deletePhoto(index)}
-            />
-          }
+            />}
         </ImageBox>
       )
     })
