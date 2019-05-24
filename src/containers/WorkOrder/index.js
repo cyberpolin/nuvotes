@@ -51,18 +51,9 @@ class WorkOrder extends Component {
   }
   render () {
     const { isCollapsed } = this.state
-    const { navigation, user, settings } = this.props
+    const { navigation, settings } = this.props
     const order = navigation.getParam('order', {})
-    const { id, status, avatar, address, coordinator } = order
-    const formattedAddress = `${_.capitalize(address.state.description)}, ${address.address}`
-    const formattedCoordinator = `${_.capitalize(coordinator['first_name'])} ${_.capitalize(coordinator['last_name'])}`
-    const formattedDescriptonJob = order['description_job'].description === 'Other Repair'
-      ? translate.otherRepair : order['description_job'].description === 'Inspection'
-        ? translate.inspection : translate.insurance
-    const formattedStatus = status.description === 'Pending Completion'
-      ? translate.pending : status.description === 'In Progress'
-        ? translate.inProgress : status.description
-    const formattedVendor = `${_.capitalize(user['first_name'])} ${_.capitalize(user['last_name'])}`
+    const { id, status, avatar, address, coordinator, vendor } = order
     return (
       <Container>
         <ScrollContainer>
@@ -76,23 +67,23 @@ class WorkOrder extends Component {
           <InfoContainer>
             <Row>
               <Label>{translate.type}:</Label>
-              <Text>{formattedDescriptonJob}</Text>
+              <Text>{this.getOrderType(order['description_job'])}</Text>
             </Row>
             <Row>
               <Label>{translate.state}:</Label>
-              <Text>{formattedStatus}</Text>
+              <Text>{this.getStatus(status)}</Text>
             </Row>
             <Row>
               <Label>{translate.address}:</Label>
-              <Text>{formattedAddress}</Text>
+              <Text>{this.getAddress(address)}</Text>
             </Row>
             <Row>
               <Label>{translate.vendor}:</Label>
-              <Text>{formattedVendor}</Text>
+              <Text>{this.getFormattedName(vendor)}</Text>
             </Row>
             <Row>
               <Label>{translate.coordinator}:</Label>
-              <Text>{formattedCoordinator}</Text>
+              <Text>{this.getFormattedName(coordinator)}</Text>
             </Row>
             <FlexRow>
               <View>
@@ -126,7 +117,7 @@ class WorkOrder extends Component {
                 </GalleryButton>
               </View>
             </Collapsable>
-            {formattedStatus !== 'Completed' &&
+            {this.getStatus(status) !== 'Completed' &&
             <ButtonContainer>
               <Button
                 title={translate.uploadPhotos}
@@ -138,7 +129,7 @@ class WorkOrder extends Component {
                 loadingProps={{color: secondary}}
               />
             </ButtonContainer>}
-            {(formattedStatus !== 'Pending Completion' && formattedStatus !== 'Completed') &&
+            {(this.getStatus(status) !== 'Pending Completion' && this.getStatus(status) !== 'Completed') &&
               <ButtonContainer>
                 <Button
                   title={translate.completeOrder}
@@ -181,6 +172,31 @@ class WorkOrder extends Component {
         />
       </Overlay>
     )
+  }
+
+  getAddress (address) {
+    const formattedAddress = `${_.capitalize(address.state.description)}, ${address.address}`
+    return formattedAddress
+  }
+
+  getOrderType (description) {
+    const formattedDescriptionJob = description.description === 'Other Repair'
+      ? translate.otherRepair : description.description === 'Inspection'
+        ? translate.inspection : translate.insurance
+    return formattedDescriptionJob
+  }
+
+  getStatus (status) {
+    const { description } = status
+    const formattedStatus = description === 'Pending Completion'
+      ? translate.pending : description === 'In Progress'
+        ? translate.inProgress : description
+    return formattedStatus
+  }
+
+  getFormattedName (person) {
+    const name = `${_.capitalize(person['first_name'])} ${_.capitalize(person['last_name'])}`
+    return name
   }
 
   changeVisibility () {
