@@ -4,7 +4,10 @@ import {
   primary,
   white
 } from '../../colorPalette'
-import { heightPercentageToDP as hp } from '../../utils/layout'
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp
+} from '../../utils/layout'
 
 export const styles = {
   buttonStyle: {
@@ -14,6 +17,9 @@ export const styles = {
     backgroundColor: 'transparent',
     paddingHorizontal: 15,
     borderWidth: 0
+  },
+  leftButtonStyle: {
+    alignSelf: 'flex-start'
   },
   buttonTitle: {
     color: black,
@@ -35,10 +41,10 @@ export const styles = {
     width: 22
   },
   disabledStyle: {
-    backgroundColor: 'lightgray'
+    backgroundColor: 'transparent'
   },
   disabledText: {
-    color: black
+    color: 'gray'
   },
   checkboxContainer: {
     position: 'absolute',
@@ -103,7 +109,7 @@ export const PhotoButtonContainer = styled.View`
   height: 76px;
   justify-content: center;
   border-color: ${white};
-  border-width: 8px;
+  border-width: 6px;
   border-radius: 38px;
 `
 
@@ -114,4 +120,8 @@ export const CenterContainer = styled.View`
 `
 
 export const DeleteButtonBar = styled.View`
+  background-color: crimson;
+  height: 45px;
+  width: ${wp(100)};
+  flex-direction: row;
 `
