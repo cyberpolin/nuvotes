@@ -7,6 +7,7 @@ import {
 import Collapsable from './Collapsable'
 import Loading from './Loading'
 import Download from './Download'
+import SafeArea from './SafeArea'
 
 export {
   Drawer,
@@ -16,5 +17,6 @@ export {
   TabTitle,
   EditButton,
   Loading,
-  Download
+  Download,
+  SafeArea
 }
