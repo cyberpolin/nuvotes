@@ -25,6 +25,7 @@ import {
   Touchable
 } from './styled'
 import { Camera } from '../index'
+import { SafeArea } from '../../components'
 import { translate } from '../../helpers/localization'
 import { uploadPhotos } from '../../helpers/orders'
 import {
@@ -32,7 +33,7 @@ import {
   toggleCamera,
   deleteSelectedPhotos
 } from '../../actions/settings'
-import { secondary } from '../../colorPalette'
+import { primary, secondary } from '../../colorPalette'
 
 class UploadPhotos extends Component {
   constructor (props) {
@@ -58,110 +59,112 @@ class UploadPhotos extends Component {
     const descriptionJob = navigation.getParam('descriptionJob', '')
     const haveSelection = Object.values(selected).includes(true)
     return (
-      <Container>
-        {photos.length > 0 &&
-          <ScrollView
-            bounces={false}
-            contentContainerStyle={styles.scrollViewContainer}
-            showsVerticalScrollIndicator={false}
-          >
-            <ImagesContainer>
-              {this.renderImages()}
-            </ImagesContainer>
-          </ScrollView>
-        }
-        <Camera type={descriptionJob.description} />
-        {photos.length > 0 &&
-          <ImageView
-            isVisible={viewerVisible}
-            imageIndex={selectedIndex}
-            onClose={this.closeViewer}
-            animationType='fade'
-            images={photos}
-          />
-        }
-        {deleteMode
-          ? <DeleteButtonBar>
-            <Flex>
-              <Button
-                buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
-                titleStyle={styles.buttonTitle}
-                type='outline'
-                title={translate.cancel}
-                onPress={this.toggleMode}
-              />
-            </Flex>
-            <CenterContainer>
-              <DeleteButtonContainer>
-                <Touchable
-                  onPress={this.deleteSelection}
-                  disabled={!haveSelection}
-                >
-                  <Icon
-                    type='font-awesome'
-                    name='trash'
-                    underlayColor='transparent'
-                    size={30}
-                    color={haveSelection ? 'black' : 'gray'}
-                  />
-                </Touchable>
-              </DeleteButtonContainer>
-            </CenterContainer>
-            <Flex>
-              <Button
-                buttonStyle={styles.buttonStyle}
-                titleStyle={styles.buttonTitle}
-                type='outline'
-                title={translate.selectAll}
-                onPress={this.selectAll}
-              />
-            </Flex>
-          </DeleteButtonBar>
-          : <ButtonsBar>
-            <Flex>
-              <Button
-                buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
-                titleStyle={styles.buttonTitle}
-                type='outline'
-                title={translate.delete}
-                onPress={this.toggleMode}
-                disabled={isUploading || photos.length === 0}
-                loading={isUploading}
-                loadingProps={{color: secondary}}
-                disabledTitleStyle={styles.disabledText}
-                disabledStyle={styles.disabledStyle}
-              />
-            </Flex>
-            <CenterContainer>
-              <PhotoButtonContainer>
-                <Touchable
-                  onPress={this.openCamera}
-                >
-                  <Icon
-                    type='font-awesome'
-                    name='camera'
-                    underlayColor='transparent'
-                    size={30}
-                  />
-                </Touchable>
-              </PhotoButtonContainer>
-            </CenterContainer>
-            <Flex>
-              <Button
-                buttonStyle={styles.buttonStyle}
-                titleStyle={styles.buttonTitle}
-                type='outline'
-                title={translate.save}
-                onPress={this.handleSave}
-                disabled={isUploading || photos.length === 0}
-                loading={isUploading}
-                loadingProps={{color: secondary}}
-                disabledTitleStyle={styles.disabledText}
-                disabledStyle={styles.disabledStyle}
-              />
-            </Flex>
-          </ButtonsBar>}
-      </Container>
+      <SafeArea color={deleteMode ? 'crimson' : primary}>
+        <Container>
+          {photos.length > 0 &&
+            <ScrollView
+              bounces={false}
+              contentContainerStyle={styles.scrollViewContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              <ImagesContainer>
+                {this.renderImages()}
+              </ImagesContainer>
+            </ScrollView>
+          }
+          <Camera type={descriptionJob.description} />
+          {photos.length > 0 &&
+            <ImageView
+              isVisible={viewerVisible}
+              imageIndex={selectedIndex}
+              onClose={this.closeViewer}
+              animationType='fade'
+              images={photos}
+            />
+          }
+          {deleteMode
+            ? <DeleteButtonBar>
+              <Flex>
+                <Button
+                  buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
+                  titleStyle={styles.buttonTitle}
+                  type='outline'
+                  title={translate.cancel}
+                  onPress={this.toggleMode}
+                />
+              </Flex>
+              <Flex>
+                <Button
+                  buttonStyle={{...styles.buttonStyle, ...styles.rightButtonStyle}}
+                  titleStyle={styles.buttonTitle}
+                  type='outline'
+                  title={translate.selectAll}
+                  onPress={this.selectAll}
+                />
+              </Flex>
+              <CenterContainer>
+                <DeleteButtonContainer>
+                  <Touchable
+                    onPress={this.deleteSelection}
+                    disabled={!haveSelection}
+                  >
+                    <Icon
+                      type='font-awesome'
+                      name='trash'
+                      underlayColor='transparent'
+                      size={30}
+                      color={haveSelection ? 'black' : 'gray'}
+                    />
+                  </Touchable>
+                </DeleteButtonContainer>
+              </CenterContainer>
+            </DeleteButtonBar>
+            : <ButtonsBar>
+              <Flex>
+                <Button
+                  buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
+                  titleStyle={styles.buttonTitle}
+                  type='outline'
+                  title={translate.delete}
+                  onPress={this.toggleMode}
+                  disabled={isUploading || photos.length === 0}
+                  loading={isUploading}
+                  loadingProps={{color: secondary}}
+                  disabledTitleStyle={styles.disabledText}
+                  disabledStyle={styles.disabledStyle}
+                />
+              </Flex>
+              <Flex>
+                <Button
+                  buttonStyle={{...styles.buttonStyle, ...styles.rightButtonStyle}}
+                  titleStyle={styles.buttonTitle}
+                  type='outline'
+                  title={translate.save}
+                  onPress={this.handleSave}
+                  disabled={isUploading || photos.length === 0}
+                  loading={isUploading}
+                  loadingProps={{color: secondary}}
+                  disabledTitleStyle={styles.disabledText}
+                  disabledStyle={styles.disabledStyle}
+                />
+              </Flex>
+              <CenterContainer>
+                <PhotoButtonContainer>
+                  <Touchable
+                    onPress={this.openCamera}
+                  >
+                    <Icon
+                      type='font-awesome'
+                      name='camera'
+                      underlayColor='transparent'
+                      size={30}
+                    />
+                  </Touchable>
+                </PhotoButtonContainer>
+              </CenterContainer>
+            </ButtonsBar>}
+        </Container>
+      </SafeArea>
     )
   }
 
