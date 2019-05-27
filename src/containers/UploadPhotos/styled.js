@@ -1,4 +1,5 @@
 import styled from 'styled-components/native'
+import { isIphoneX } from 'react-native-iphone-x-helper'
 import {
   black,
   primary,
@@ -11,12 +12,13 @@ import {
 
 export const styles = {
   buttonStyle: {
-    alignSelf: 'flex-end',
     height: '100%',
     width: '80%',
     backgroundColor: 'transparent',
-    paddingHorizontal: 15,
     borderWidth: 0
+  },
+  rightButtonStyle: {
+    alignSelf: 'flex-end'
   },
   leftButtonStyle: {
     alignSelf: 'flex-start'
@@ -65,11 +67,17 @@ export const styles = {
   }
 }
 
+export const SafeArea = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${primary};
+`
+
 export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: flex-end;
   padding-top: 5px;
+  background-color: ${white};
 `
 
 export const ImagesContainer = styled.View`
@@ -107,6 +115,7 @@ export const PhotoButtonContainer = styled.View`
   bottom: 10;
   width: 76px;
   height: 76px;
+  right: ${wp(39.5)}
   justify-content: center;
   border-color: ${white};
   border-width: 6px;
@@ -126,13 +135,12 @@ export const CenterContainer = styled.View`
 
 export const Touchable = styled.TouchableOpacity`
   height: 100%;
+  width: 100%;
   justify-content: center;
   border-radius: 38px;
 `
 
-export const DeleteButtonBar = styled.View`
+export const DeleteButtonBar = styled(ButtonsBar)`
   background-color: crimson;
-  height: 45px;
   width: ${wp(100)};
-  flex-direction: row;
 `
