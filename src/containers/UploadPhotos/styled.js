@@ -113,10 +113,21 @@ export const PhotoButtonContainer = styled.View`
   border-radius: 38px;
 `
 
+export const DeleteButtonContainer = styled(PhotoButtonContainer)`
+  background-color: crimson;
+  position: absolute;
+`
+
 export const CenterContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+`
+
+export const Touchable = styled.TouchableOpacity`
+  height: 100%;
+  justify-content: center;
+  border-radius: 38px;
 `
 
 export const DeleteButtonBar = styled.View`
