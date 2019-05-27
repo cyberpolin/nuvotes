@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
-  Alert,
-  View,
-  TouchableOpacity
+  Alert
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -12,7 +10,6 @@ import {
   CheckBox
 } from 'react-native-elements'
 import ImageView from 'react-native-image-view'
-import Collapsable from 'react-native-collapsible'
 import {
   Container,
   ImagesContainer,
@@ -23,7 +20,9 @@ import {
   Flex,
   CenterContainer,
   PhotoButtonContainer,
-  DeleteButtonBar
+  DeleteButtonBar,
+  DeleteButtonContainer,
+  Touchable
 } from './styled'
 import { Camera } from '../index'
 import { translate } from '../../helpers/localization'
@@ -31,11 +30,9 @@ import { uploadPhotos } from '../../helpers/orders'
 import {
   changeUploading,
   toggleCamera,
-  deletePhoto,
   deleteSelectedPhotos
 } from '../../actions/settings'
 import { secondary } from '../../colorPalette'
-import { widthPercentageToDP as wp } from '../../utils/layout'
 
 class UploadPhotos extends Component {
   constructor (props) {
@@ -44,13 +41,9 @@ class UploadPhotos extends Component {
       viewerVisible: false,
       selectedIndex: 0,
       deleteMode: false,
-      selected: {},
-      style: {
-        display: 'flex'
-      }
+      selected: {}
     }
     this.deleteSelection = this.deleteSelection.bind(this)
-    this.animationEnd = this.animationEnd.bind(this)
     this.closeViewer = this.closeViewer.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.openCamera = this.openCamera.bind(this)
@@ -59,7 +52,7 @@ class UploadPhotos extends Component {
     this.selectAll = this.selectAll.bind(this)
   }
   render () {
-    const { viewerVisible, selectedIndex, deleteMode, selected, style } = this.state
+    const { viewerVisible, selectedIndex, deleteMode, selected } = this.state
     const { navigation } = this.props
     const { isUploading, photos } = this.props.settings
     const descriptionJob = navigation.getParam('descriptionJob', '')
@@ -87,77 +80,89 @@ class UploadPhotos extends Component {
             images={photos}
           />
         }
-        <ButtonsBar style={style}>
-          <Flex>
-            <Button
-              buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
-              titleStyle={styles.buttonTitle}
-              type='outline'
-              title={translate.delete}
-              onPress={this.toggleMode}
-              disabled={isUploading || photos.length === 0}
-              loading={isUploading}
-              loadingProps={{color: secondary}}
-              disabledTitleStyle={styles.disabledText}
-              disabledStyle={styles.disabledStyle}
-            />
-          </Flex>
-          <CenterContainer>
-            <PhotoButtonContainer>
-              <TouchableOpacity onPress={this.openCamera}>
-                <Icon
-                  type='font-awesome'
-                  name='camera'
-                  underlayColor='transparent'
-                  size={30}
-                />
-              </TouchableOpacity>
-            </PhotoButtonContainer>
-          </CenterContainer>
-          <Flex>
-            <Button
-              buttonStyle={styles.buttonStyle}
-              titleStyle={styles.buttonTitle}
-              type='outline'
-              title={translate.save}
-              // onPress={this.handleSave}
-              disabled={isUploading || photos.length === 0}
-              loading={isUploading}
-              loadingProps={{color: secondary}}
-              disabledTitleStyle={styles.disabledText}
-              disabledStyle={styles.disabledStyle}
-            />
-          </Flex>
-        </ButtonsBar>
-        <Collapsable collapsed={!deleteMode} onAnimationEnd={!deleteMode ? this.animationEnd : undefined}>
-          <DeleteButtonBar>
+        {deleteMode
+          ? <DeleteButtonBar>
             <Flex>
               <Button
+                buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
+                titleStyle={styles.buttonTitle}
+                type='outline'
                 title={translate.cancel}
                 onPress={this.toggleMode}
               />
             </Flex>
+            <CenterContainer>
+              <DeleteButtonContainer>
+                <Touchable
+                  onPress={this.deleteSelection}
+                  disabled={!haveSelection}
+                >
+                  <Icon
+                    type='font-awesome'
+                    name='trash'
+                    underlayColor='transparent'
+                    size={30}
+                    color={haveSelection ? 'black' : 'gray'}
+                  />
+                </Touchable>
+              </DeleteButtonContainer>
+            </CenterContainer>
             <Flex>
               <Button
-                title={translate.delete}
-                disabled={!haveSelection}
-                onPress={this.deleteSelection}
-              />
-            </Flex>
-            <Flex>
-              <Button
+                buttonStyle={styles.buttonStyle}
+                titleStyle={styles.buttonTitle}
+                type='outline'
                 title={translate.selectAll}
                 onPress={this.selectAll}
               />
             </Flex>
           </DeleteButtonBar>
-        </Collapsable>
+          : <ButtonsBar>
+            <Flex>
+              <Button
+                buttonStyle={{...styles.buttonStyle, ...styles.leftButtonStyle}}
+                titleStyle={styles.buttonTitle}
+                type='outline'
+                title={translate.delete}
+                onPress={this.toggleMode}
+                disabled={isUploading || photos.length === 0}
+                loading={isUploading}
+                loadingProps={{color: secondary}}
+                disabledTitleStyle={styles.disabledText}
+                disabledStyle={styles.disabledStyle}
+              />
+            </Flex>
+            <CenterContainer>
+              <PhotoButtonContainer>
+                <Touchable
+                  onPress={this.openCamera}
+                >
+                  <Icon
+                    type='font-awesome'
+                    name='camera'
+                    underlayColor='transparent'
+                    size={30}
+                  />
+                </Touchable>
+              </PhotoButtonContainer>
+            </CenterContainer>
+            <Flex>
+              <Button
+                buttonStyle={styles.buttonStyle}
+                titleStyle={styles.buttonTitle}
+                type='outline'
+                title={translate.save}
+                onPress={this.handleSave}
+                disabled={isUploading || photos.length === 0}
+                loading={isUploading}
+                loadingProps={{color: secondary}}
+                disabledTitleStyle={styles.disabledText}
+                disabledStyle={styles.disabledStyle}
+              />
+            </Flex>
+          </ButtonsBar>}
       </Container>
     )
-  }
-
-  animationEnd () {
-    this.setState({ style: { display: 'flex' } })
   }
 
   handleSave () {
@@ -231,7 +236,7 @@ class UploadPhotos extends Component {
 
   toggleMode () {
     const { deleteMode } = this.state
-    this.setState({ deleteMode: !deleteMode, style: { display: 'none' } })
+    this.setState({ deleteMode: !deleteMode })
   }
 
   closeViewer () {
@@ -249,18 +254,12 @@ class UploadPhotos extends Component {
     const { toggleCamera } = this.props
     toggleCamera(true)
   }
-
-  deletePhoto (index) {
-    const { deletePhoto, settings } = this.props
-    deletePhoto(settings.photos, index)
-  }
 }
 
 const mapDispatchToProps = dispatch => ({
   uploadPhotos: (token, photos, orderId) => dispatch(uploadPhotos(token, photos, orderId)),
   changeUploading: isUploading => dispatch(changeUploading(isUploading)),
   toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
-  deletePhoto: (photos, index) => dispatch(deletePhoto(photos, index)),
   deleteSelection: (photos, selection) => dispatch(deleteSelectedPhotos(photos, selection))
 })
 
