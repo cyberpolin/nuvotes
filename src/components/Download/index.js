@@ -9,10 +9,13 @@ import ProgressCircle from 'react-native-progress-circle'
 import RNFetchBlob from 'rn-fetch-blob'
 import { showMessage } from 'react-native-flash-message'
 import FileViewer from 'react-native-file-viewer'
+import Config from 'react-native-config'
 import { getMessage } from '../../helpers/messages'
 import { changeDownload } from '../../actions/settings'
 import { primary } from '../../colorPalette'
 import { styles } from './styled'
+
+const { URL } = Config
 
 const isIOS = Platform.OS === 'ios'
 
@@ -71,71 +74,102 @@ class Download extends Component {
   }
 
   handleDownload () {
-    const { url, filename } = this.props
+    const { fileId, filename } = this.props
     const { changeDownload } = this.props
     if (isIOS) {
       this.setState({ didDownload: true })
       changeDownload(true)
     }
-    this.downloadFile(url, filename).then()
+    this.downloadFile(fileId, filename)
   }
 
-  downloadFile (url, filename) {
+  downloadFile (fileId, filename) {
     const { changeDownload } = this.props
     const dirs = RNFetchBlob.fs.dirs
-    return RNFetchBlob
-      .config({
-        addAndroidDownloads: {
-          useDownloadManager: true,
-          description: 'File downloaded from Nuvote',
-          notification: true,
-          mediaScannable: true,
-          path: dirs.DownloadDir + '/' + filename
-        },
-        fileCache: true,
-        path: dirs.DocumentDir + '/' + filename
+    const data = new FormData()
+    data.append('fileId', fileId)
+    return fetch(`${URL}get-file-url/`, {
+      method: 'POST',
+      body: data
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        this.setState({ didDownload: false, downloadSuccess: false })
+        changeDownload(false)
       })
-      .fetch('GET', url)
-      .progress({interval: 5}, (received, total) => {
-        if (isIOS) {
-          var progress = Math.round((received / total) * 100)
-          this.setState({ progress })
-          if (progress >= 99) {
-            this.setState({ progress: 0 })
-            this.setState({ downloadSuccess: true })
+      .then(jsonResponse => {
+        const { url } = jsonResponse
+        return RNFetchBlob
+          .config({
+            addAndroidDownloads: {
+              useDownloadManager: true,
+              description: 'File downloaded from Nuvote',
+              notification: true,
+              mediaScannable: true,
+              path: dirs.DownloadDir + '/' + filename
+            },
+            fileCache: true,
+            path: dirs.DocumentDir + '/' + filename
+          })
+          .fetch('GET', url)
+          .progress({interval: 5}, (received, total) => {
+            if (isIOS) {
+              var progress = Math.round((received / total) * 100)
+              this.setState({ progress })
+              if (progress >= 99) {
+                this.setState({ progress: 0 })
+                this.setState({ downloadSuccess: true })
+                changeDownload(false)
+                setTimeout(() => {
+                  this.setState({ didDownload: false })
+                  this.setState({ downloadSuccess: false })
+                }, 2000)
+              }
+            }
+          })
+          .then((res) => {
+            const status = res.info().status
+            if (status === 200) {
+              if (isIOS) {
+                const path = res.path()
+                FileViewer.open(path, { showOpenWithDialog: true })
+                  .then(() => {
+                    this.setState({
+                      progress: 0,
+                      downloadSuccess: false,
+                      didDownload: false
+                    })
+                    changeDownload(false)
+                  })
+                  .catch(() => {
+                    const message = getMessage('FILE_ERROR')
+                    showMessage(message)
+                  })
+              }
+            } else {
+              const message = getMessage('DOWNLOAD_ERROR')
+              showMessage(message)
+              this.setState({
+                didDownload: false,
+                downloadSuccess: false
+              })
+              changeDownload(false)
+            }
+          }).catch(() => {
+            const message = getMessage('DOWNLOAD_ERROR')
+            showMessage(message)
+            this.setState({
+              didDownload: false,
+              downloadSuccess: false
+            })
             changeDownload(false)
-            setTimeout(() => {
-              this.setState({ didDownload: false })
-              this.setState({ downloadSuccess: false })
-            }, 2000)
-          }
-        }
+          })
       })
-      .then((res) => {
-        console.log('HERE', res)
-        const status = res.info().status
-        if (status === 200) {
-          if (isIOS) {
-            const path = res.path()
-            FileViewer.open(path, { showOpenWithDialog: true })
-              .then(() => {
-              })
-              .catch(() => {
-                const message = getMessage('FILE_ERROR')
-                showMessage(message)
-              })
-          }
-        } else {
-          const message = getMessage('DOWNLOAD_ERROR')
-          showMessage(message)
-          this.setState({ didDownload: false })
-          this.setState({ downloadSuccess: false })
-        }
-      }).catch(() => {
-        const message = getMessage('DOWNLOAD_ERROR')
-        showMessage(message)
-        this.setState({ didDownload: false })
-        this.setState({ downloadSuccess: false })
+      .catch(() => {
+        this.setState({ didDownload: false, downloadSuccess: false })
+        changeDownload(false)
       })
   }
 }
