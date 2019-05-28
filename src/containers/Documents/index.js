@@ -27,14 +27,15 @@ export default class Documents extends Component {
 
   renderFiles (files) {
     return files.map((file, index) => {
-      const { id, document } = file
+      const { document } = file
       const fileURL = document.document
       const filename = getFilename(fileURL)
+      const id = document.id
       return (
         <ListItem
           key={index}
           leftIcon={{name: 'file-o', type: 'font-awesome'}}
-          rightElement={<Download fileId={id} />}
+          rightElement={<Download fileId={id} filename={filename} />}
           title={filename}
           bottomDivider
         />
