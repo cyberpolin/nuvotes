@@ -7,6 +7,7 @@ import Login from './Login'
 import Orders from './Orders'
 import Documents from './Documents'
 import Camera from './Camera'
+import NuvoteWeb from './NuvoteWeb'
 
 export {
   WorkOrder,
@@ -17,5 +18,6 @@ export {
   Login,
   Orders,
   Documents,
-  Camera
+  Camera,
+  NuvoteWeb
 }
