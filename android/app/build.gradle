@@ -109,9 +109,9 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         vectorDrawables.useSupportLibrary = true
-        versionCode 1
+        versionCode 3
         missingDimensionStrategy 'react-native-camera', 'general'
-        versionName "1.0"
+        versionName "1.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
