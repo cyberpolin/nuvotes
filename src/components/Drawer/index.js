@@ -45,6 +45,15 @@ class Drawer extends Component {
             />
             <ItemText>{translate.profile}</ItemText>
           </DrawerItem>
+          <DrawerItem noFlex onPress={() => navigation.navigate('WebPage')}>
+            <Icon
+              type='font-awesome'
+              name='user-circle'
+              size={responsiveFont(7)}
+              color={gray}
+            />
+            <ItemText>{translate.profile}</ItemText>
+          </DrawerItem>
         </DrawerTop>
         <DrawerBottom>
           <DrawerItem onPress={this.languageAlert}>
