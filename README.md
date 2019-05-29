@@ -29,34 +29,48 @@ The env files are used to avoid the unnecesary task to change url endpoints. You
 - .env.staging = Nuvote testing URL
 - .env.local = Local machine server URL(if properly configured with django)
 
+## Routes
 
-# Components
+For better understanding, this app routing was made using react navigation, it consists in a starting switch navigator, and an enclosing stack navigator that contains a drawer and tab icons.
 
-## Collapsable
+Refer to Routes docs for more information.
+
+[Routes](./src/routes/docs.md)
+
+
+## Components
+
+### Collapsable
 
 ![Collapsable](./src/components/Collapsable/img/Collapsable.png)
 
 [Collapsable](./src/components/Collapsable/docs.md)
 
-## Header
+### Header
 
 ![Header](./src/components/Header/img/Header.png)
 
 [Header](./src/components/Header/docs.md)
 
-## Drawer
+### Drawer
 ![Drawer](./src/components/Drawer/img/Drawer.png)
 
 [Drawer](./src/components/Drawer/docs.md)
 
-## Loading
+### Loading
 
 ![Loading](./src/components/Loading/img/Loading.png)
 
 [Loading](./src/components/Loading/docs.md)
 
-## TabNav
+### TabNav
 
 ![TabNav](./src/components/TabNav/img/TabNav.png)
 
 [TabNav](./src/components/TabNav/docs.md)
+
+### Download
+
+![Download](./src/components/Download/img/Icon.png)
+
+[Download](./src/components/Download/docs.md)
