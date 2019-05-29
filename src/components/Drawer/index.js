@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Alert } from 'react-native'
+import {
+  Alert,
+  Platform
+} from 'react-native'
 import { connect } from 'react-redux'
 import {
   StackActions,
   NavigationActions
 } from 'react-navigation'
 import { Icon } from 'react-native-elements'
+import _ from 'lodash'
 import { changeLanguage } from '../../actions/language'
 import {
   translate,
@@ -23,6 +27,8 @@ import {
 import responsiveFont from '../../utils/responsiveFont'
 import { gray } from '../../colorPalette'
 
+const isIOS = Platform.OS === 'ios'
+
 class Drawer extends Component {
   constructor (props) {
     super(props)
@@ -32,10 +38,12 @@ class Drawer extends Component {
     this.resetNavigation = this.resetNavigation.bind(this)
   }
   render () {
-    const { navigation } = this.props
+    const { navigation, user } = this.props
+    const noUser = _.isEmpty(user)
     return (
       <Container>
         <DrawerTop>
+          {!noUser &&
           <DrawerItem noFlex onPress={() => navigation.navigate('Profile')}>
             <Icon
               type='font-awesome'
@@ -44,17 +52,23 @@ class Drawer extends Component {
               color={gray}
             />
             <ItemText>{translate.profile}</ItemText>
-          </DrawerItem>
-          <DrawerItem noFlex onPress={() => navigation.navigate('WebPage')}>
+          </DrawerItem>}
+          {isIOS && noUser &&
+          <DrawerItem
+            noFlex
+            onPress={() => navigation.navigate('WebPage')}
+            marginTop={10}
+          >
             <Icon
               type='font-awesome'
-              name='user-circle'
+              name='globe'
               size={responsiveFont(7)}
               color={gray}
             />
-            <ItemText>{translate.profile}</ItemText>
-          </DrawerItem>
+            <ItemText>{translate.website}</ItemText>
+          </DrawerItem>}
         </DrawerTop>
+        {!noUser &&
         <DrawerBottom>
           <DrawerItem onPress={this.languageAlert}>
             <Icon
@@ -74,7 +88,7 @@ class Drawer extends Component {
             />
             <ItemText>{translate.signOut}</ItemText>
           </DrawerItem>
-        </DrawerBottom>
+        </DrawerBottom>}
       </Container>
     )
   }
@@ -115,6 +129,10 @@ class Drawer extends Component {
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  user
+})
+
 const mapDispatchToProps = dispatch => ({
   changeLanguage: language => {
     dispatch(changeLanguage(language))
@@ -127,4 +145,4 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export default connect(null, mapDispatchToProps)(Drawer)
+export default connect(mapStateToProps, mapDispatchToProps)(Drawer)
