@@ -15,6 +15,7 @@ export const DrawerItem = styled.TouchableOpacity`
   flex-direction: row;
   ${({noFlex}) => !noFlex && 'flex: 1'};
   align-items: center;
+  ${({ marginTop }) => marginTop && `margin-top: ${marginTop}px`};
 `
 
 export const DrawerTop = styled.View`
