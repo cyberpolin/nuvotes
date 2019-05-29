@@ -16,6 +16,8 @@ target 'nuvoteApp' do
     pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
     pod 'React', :path => '../node_modules/react-native'
     pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+    pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   end
 
   target 'nuvoteAppTests' do
