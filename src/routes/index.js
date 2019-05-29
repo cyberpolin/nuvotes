@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform } from 'react-native'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -23,7 +24,12 @@ import {
   TabTitle,
   EditButton
 } from '../components'
-import { black, primary, gray } from '../colorPalette'
+import {
+  primary,
+  gray
+} from '../colorPalette'
+
+const isIOS = Platform.OS === 'ios'
 
 const TabAppNavigator = createBottomTabNavigator({
   Orders: {
@@ -96,11 +102,28 @@ const StackNavigator = createStackNavigator({
   }
 })
 
-const SwitchNavigator = createSwitchNavigator({
-  Login: Login,
-  Home: StackNavigator
+const LoginDrawer = createDrawerNavigator({
+  LoginScreen: Login
 }, {
-  initialRouteName: 'Login'
+  contentComponent: Drawer
 })
+
+var SwitchNavigator
+
+if (isIOS) {
+  SwitchNavigator = createSwitchNavigator({
+    Login: LoginDrawer,
+    Home: StackNavigator
+  }, {
+    initialRouteName: 'Login'
+  })
+} else {
+  SwitchNavigator = createSwitchNavigator({
+    Login: Login,
+    Home: StackNavigator
+  }, {
+    initialRouteName: 'Login'
+  })
+}
 
 export default createAppContainer(SwitchNavigator)
