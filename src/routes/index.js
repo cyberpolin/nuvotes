@@ -13,7 +13,8 @@ import {
   Login,
   Documents,
   ViewUser,
-  EditUser
+  EditUser,
+  NuvoteWeb
 } from '../containers'
 import {
   Drawer,
@@ -84,6 +85,9 @@ const StackNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Documents'
     }
+  },
+  WebPage: {
+    screen: NuvoteWeb
   }
 }, {
   headerBackTitleVisible: false,
