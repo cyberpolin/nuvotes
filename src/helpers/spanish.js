@@ -96,7 +96,8 @@ const es = {
   lowFreeSpace: 'Poco espacio de almacenamiento',
   lowFreeSpaceDescription: 'Tenga en mente que algunas fotos pueden no ser tomadas.',
   downloadError: 'Error al descargar',
-  photoTaked: 'Foto tomada.'
+  photoTaked: 'Foto tomada.',
+  website: 'Sitio Web'
 }
 
 export default es

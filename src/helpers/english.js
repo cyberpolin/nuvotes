@@ -93,7 +93,8 @@ const en = {
   lowFreeSpace: 'Low free disk storage',
   lowFreeSpaceDescription: 'Keep in mind that some photos may not be taked',
   downloadError: 'Download error',
-  photoTaked: 'Photo taked'
+  photoTaked: 'Photo taked',
+  website: 'Web Site'
 }
 
 export default en
