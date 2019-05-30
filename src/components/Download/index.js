@@ -73,6 +73,7 @@ class Download extends Component {
     )
   }
 
+  // Method to handle download.
   handleDownload () {
     const { fileId, filename } = this.props
     const { changeDownload } = this.props
@@ -86,8 +87,10 @@ class Download extends Component {
   downloadFile (fileId, filename) {
     const { changeDownload } = this.props
     const dirs = RNFetchBlob.fs.dirs
+    // Creates a form data that will contain a selected file Id
     const data = new FormData()
     data.append('fileId', fileId)
+    // Start a fetch to get an url with permissions to download the file
     return fetch(`${URL}get-file-url/`, {
       method: 'POST',
       body: data
@@ -101,6 +104,7 @@ class Download extends Component {
       })
       .then(jsonResponse => {
         const { url } = jsonResponse
+        // If the fetch was successfully completed, start a download from the obtained url
         return RNFetchBlob
           .config({
             addAndroidDownloads: {
@@ -115,6 +119,9 @@ class Download extends Component {
           })
           .fetch('GET', url)
           .progress({interval: 5}, (received, total) => {
+            // Progress RNFetchBlob method to get the download progress
+            // The progress download it's only shown in iOS devices
+            // For android devices, the download is handled by Android download manager
             if (isIOS) {
               var progress = Math.round((received / total) * 100)
               this.setState({ progress })
@@ -132,6 +139,7 @@ class Download extends Component {
           .then((res) => {
             const status = res.info().status
             if (status === 200) {
+              // If success and the device is iOS a file viewer is show with the selected file
               if (isIOS) {
                 const path = res.path()
                 FileViewer.open(path, { showOpenWithDialog: true })
