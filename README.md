@@ -29,6 +29,11 @@ The env files are used to avoid the unnecesary task to change url endpoints. You
 - .env.staging = Nuvote testing URL
 - .env.local = Local machine server URL(if properly configured with django)
 
+Test server users:
+
+- Vendor: bob:password123
+- Coordinator: jonathan:password123
+
 ## Routes
 
 For better understanding, this app routing was made using react navigation, it consists in a starting switch navigator, and an enclosing stack navigator that contains a drawer and tab icons.
