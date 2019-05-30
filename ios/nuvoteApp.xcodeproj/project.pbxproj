@@ -70,6 +70,8 @@
 		E12AB1D7DEEE4A918F6F5047 /* libRNFileViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B56B60604184B429F84C201 /* libRNFileViewer.a */; };
 		FC42B2B91A344DE898F1A5D4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87F40277D64E40289F9E48F1 /* Octicons.ttf */; };
 		FDC06429DBEAD6F8191C456C /* libPods-nuvoteApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E39D3ED5E02D9F10FE66720A /* libPods-nuvoteApp.a */; };
+		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
+		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -538,6 +540,8 @@
 		F34F9D84FD0CC1089D7A2F20 /* Pods-nuvoteApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nuvoteApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-nuvoteApp/Pods-nuvoteApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F5A82B49D649480FB03C7026 /* libAppCenterReactNativeAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNativeAnalytics.a; sourceTree = "<group>"; };
 		FFC27A6A150641889F64A906 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,6 +558,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				6A46EA5F229ED8E300DC5FD3 /* libRNCWebView.a in Frameworks */,
 				6A3E876E22960ABE00F62DC1 /* libRCTCameraRoll.a in Frameworks */,
 				6A2A98AD228259540048E521 /* libRNDeviceInfo.a in Frameworks */,
@@ -587,6 +592,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */,
 				2D02E4C21E0B4AEC006451C7 /* libRCTAnimation.a in Frameworks */,
 				2D02E4C31E0B4AEC006451C7 /* libRCTImage-tvOS.a in Frameworks */,
@@ -722,6 +728,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				E39D3ED5E02D9F10FE66720A /* libPods-nuvoteApp.a */,
 				EEDCEEB58DC22A45C63B3C57 /* libPods-nuvoteApp-tvOSTests.a */,
