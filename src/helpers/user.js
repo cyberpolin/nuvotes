@@ -5,7 +5,10 @@ import { getOrders } from './orders'
 
 const { URL } = Config
 
-const getUserData = (token) => {
+/**
+ * Fetch function to get user data using his token
+ */
+const getUserData = token => {
   return fetch(`${URL}login/`, {
     method: 'POST',
     headers: {
@@ -24,6 +27,7 @@ const getUserData = (token) => {
     })
 }
 
+// Fetch function to get user data and token using his credentials.
 export const getLogin = (username, password, navigation) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_LOADING', payload: true })
@@ -69,6 +73,7 @@ export const getLogin = (username, password, navigation) => {
   }
 }
 
+// Fetch function to update user data.
 export const editUserData = (token, updates, navigation) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_LOADING', payload: true })
@@ -100,8 +105,7 @@ export const editUserData = (token, updates, navigation) => {
           showMessage(message)
         }
       })
-      .catch(error => {
-        console.log('ERROR', error)
+      .catch(() => {
         dispatch({ type: 'CHANGE_LOADING', payload: false })
         const message = getMessage('ERROR')
         showMessage(message)
@@ -109,11 +113,13 @@ export const editUserData = (token, updates, navigation) => {
   }
 }
 
+// Regular expression to valide password
 export const invalidPassword = password => {
   const regex = new RegExp('^[0-9]*$')
   return regex.test(password)
 }
 
+// Regular expression to validate email
 export const validEmail = email => {
   const regex = /^\w+([\.-]?\w+)+@\w+([\.:]?\w+)+(\.[a-zA-Z0-9]{2,3})+$/
   return regex.test(email)

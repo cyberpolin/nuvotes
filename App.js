@@ -8,6 +8,7 @@ import STORE from './src/store'
 import { checkLanguage } from './src/helpers/localization'
 const { store, persistor } = STORE
 
+// Disable Font Scaling
 if (Text.defaultProps == null) Text.defaultProps = {}
 Text.defaultProps.allowFontScaling = false
 

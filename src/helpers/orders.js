@@ -6,11 +6,13 @@ import { getMessage } from './messages'
 
 const { URL } = Config
 
+// Sort orders by end date in ascended order.
 const ordersByDate = orders => {
   const sortedOrders = _.orderBy(orders, ['end_date'], ['asc'])
   return sortedOrders
 }
 
+// Filter orders by the selected screen(active orders, pending, all orders)
 export const filterOrders = (orders, orderType) => {
   if (orderType === 'Pending') {
     const filteredOrders = orders.filter(order => {
@@ -28,6 +30,7 @@ export const filterOrders = (orders, orderType) => {
   return ordersByDate(orders)
 }
 
+// Filter orders by a search and order type.
 export const filterOrderBySearch = (orders, search, orderType) => {
   if (orderType === 'Pending') {
     const filteredOrders = orders.filter(order => {
@@ -63,6 +66,7 @@ export const filterOrderBySearch = (orders, search, orderType) => {
   })
 }
 
+// Get the difference between two dates, today and a given date.
 export const getDateDiff = date => {
   const today = moment()
   const momentDate = moment(date, 'YYYY-MM-DD')
@@ -70,6 +74,7 @@ export const getDateDiff = date => {
   return daysDiff
 }
 
+// Sort photos by type
 export const sortPhotos = (photos, type) => {
   return photos.filter(photo => {
     const { description } = photo.status
@@ -77,6 +82,7 @@ export const sortPhotos = (photos, type) => {
   })
 }
 
+// Fetch function to get orders
 export const getOrders = (token, userId) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_LOADING', payload: true })
@@ -109,11 +115,13 @@ export const getOrders = (token, userId) => {
   }
 }
 
+// Get the filename of a give path
 export const getFilename = path => {
   const splitted = path.split('/')
   return splitted[splitted.length - 1]
 }
 
+// Creates a form data to insert the photos
 const photoFormData = (photos, orderId) => {
   const data = new FormData()
   let before = []
@@ -139,6 +147,7 @@ const photoFormData = (photos, orderId) => {
   return data
 }
 
+// Fetch function to upload photos
 export const uploadPhotos = (token, photos, orderId) => {
   return dispatch => {
     const message = getMessage('START_UPLOAD')
@@ -178,12 +187,14 @@ export const uploadPhotos = (token, photos, orderId) => {
   }
 }
 
+// Insert new photos to a given order
 export const updateOrderPhotos = (orders, orderId, newPhotos) => {
   const orderIndex = _.findIndex(orders, { 'id': orderId })
   orders[orderIndex].photos.push(...newPhotos)
   return orders
 }
 
+// Fetch function to complete an order.
 export const completeOrder = (token, orderId, userId, navigation) => {
   return dispatch => {
     dispatch({ type: 'CHANGE_UPLOAD', payload: true })
