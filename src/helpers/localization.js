@@ -3,6 +3,7 @@ import STORE from '../store'
 import en from './english'
 import es from './spanish'
 
+// Translation configuration
 export const translate = new LocalizedStrings({
   en,
   es
