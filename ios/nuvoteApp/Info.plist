@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
@@ -44,7 +44,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Nuvote would like to use your camera to take work order photos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Nuvote would like to save your photos in your gallery.</string>
+	<string>Nuvote would like to save your photos into your gallery.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Nuvote would like to access your photo library to save your photos.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
