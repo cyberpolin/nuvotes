@@ -34,6 +34,9 @@ Test server users:
 - Vendor: bob:password123
 - Coordinator: jonathan:password123
 
+Production server users:
+Ask for a test user to the current project manager of Nuvote.
+
 ## Routes
 
 For better understanding, this app routing was made using react navigation, it consists in a starting switch navigator, and an enclosing stack navigator that contains a drawer and tab icons.
@@ -42,6 +45,11 @@ Refer to Routes docs for more information.
 
 [Routes](./src/routes/docs.md)
 
+## Localization
+
+This app contains two languages to translate, english and spanish. The default language is english, but it can be changed anytime to spanish once the user has logged in.
+
+Refer to translation docs for more information: [Localization](./src/helpers/localization.md)
 
 ## Components
 
