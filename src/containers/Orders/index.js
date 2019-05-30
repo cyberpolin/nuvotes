@@ -50,6 +50,7 @@ class Orders extends Component {
     )
   }
 
+  // Handles refresh gesture to update orders
   onRefresh () {
     const { user: { id, token }, getOrders } = this.props
     this.setState({isRefresing: true})
@@ -57,6 +58,7 @@ class Orders extends Component {
     this.setState({isRefresing: false})
   }
 
+  // Renders orders as items.
   renderListItem (order) {
     const { navigation } = this.props
     const { number, id, status } = order
@@ -78,12 +80,15 @@ class Orders extends Component {
     )
   }
 
+  // Renders a flatlist to show current orders.
   renderList () {
     const { navigation, search, orders } = this.props
     const { isRefresing } = this.state
     const orderType = navigation.state.routeName
+    // Get order by the selected screen.
     let filteredOrders = filterOrders(orders, orderType)
     if (search !== '') {
+      // If there's a search, show the search using the selected screen
       filteredOrders = filterOrderBySearch(orders, search, orderType)
     }
     if (_.isEmpty(filteredOrders)) {

@@ -25,6 +25,7 @@ export default class Documents extends Component {
     )
   }
 
+  // Renders an item with a file info to download.
   renderFiles (files) {
     return files.map((file, index) => {
       const { document } = file

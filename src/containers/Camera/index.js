@@ -117,6 +117,8 @@ class Camera extends Component {
       </Modal>
     )
   }
+
+  // Shows a Message if internal storage is less than 200MB
   lowStorage () {
     const { showMessage } = this.state
     const freeDiskStorage = DeviceInfo.getFreeDiskStorage()
@@ -140,6 +142,7 @@ class Camera extends Component {
     this.setState({ flashOn: !flashOn })
   }
 
+  // async method to take a photo
   async takePhoto () {
     const { photos } = this.state
     this.setState({ isLoading: true })
@@ -163,6 +166,7 @@ class Camera extends Component {
     }
   }
 
+  // Shows an alert to choose how to save the photos.
   handleSave () {
     const { photos } = this.state
     const { type, toggleCamera } = this.props
@@ -185,6 +189,7 @@ class Camera extends Component {
     }
   }
 
+  // Method to save the photos to the reducer with an assigned type
   closeCamera (photos, type) {
     const { toggleCamera, addPhotos } = this.props
     const sortedPhotos = photos.map(photo => {

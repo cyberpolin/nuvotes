@@ -51,12 +51,15 @@ class Login extends Component {
       resetSettings,
       cleanPhotos
     } = this.props
+    // Clears app cache, like temporal photos.
     Clear.clearAppCache(() => {
       console.log('DID CLEAR')
     })
+    // Clean photos reducer, and reset the settings reducer to default values.
     cleanPhotos()
     toggleCamera(false)
     resetSettings()
+    // If there's an user info in the reducer, moves to Home screen.
     if (!_.isEmpty(user)) {
       const { id, token } = user
       navigation.navigate('Home')
@@ -139,15 +142,13 @@ const mapStateToProps = ({ settings, user }) => ({
   user
 })
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation)),
-    getOrders: (token, userId) => dispatch(getOrders(token, userId)),
-    getSearch: search => dispatch(getSearch(search)),
-    toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
-    cleanPhotos: () => dispatch(cleanPhotos()),
-    resetSettings: () => dispatch(resetSettings())
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getLogin: (username, password, navigation) => dispatch(getLogin(username, password, navigation)),
+  getOrders: (token, userId) => dispatch(getOrders(token, userId)),
+  getSearch: search => dispatch(getSearch(search)),
+  toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
+  cleanPhotos: () => dispatch(cleanPhotos()),
+  resetSettings: () => dispatch(resetSettings())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
