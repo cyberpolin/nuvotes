@@ -146,3 +146,13 @@ const fontSize = responsiveFont(2)
 ![Download](./src/components/Download/img/Icon.png)
 
 [Download](./src/components/Download/docs.md)
+
+## Troubleshooting
+
+### Android
+
+#### Errors on syncing
+
+- Invalidate Cache if not syncing properly
+
+- React-native-localization: on it's library build.gradle, change compile to implementation
