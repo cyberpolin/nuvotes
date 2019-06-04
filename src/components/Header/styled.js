@@ -7,7 +7,8 @@ import {
   gray
 } from '../../colorPalette'
 import {
-  heightPercentageToDP as hp
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp
 } from '../../utils/layout'
 import responsiveFont from '../../utils/responsiveFont'
 import { isIphoneX } from 'react-native-iphone-x-helper'
@@ -80,4 +81,8 @@ export const ButtonContainer = styled.TouchableOpacity`
 export const EditTitle = styled.Text`
   font-size: 18px;
   font-weight: 600;
+`
+
+export const EmptyBox = styled.View`
+  width: ${wp(11)};
 `

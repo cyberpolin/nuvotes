@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Animated } from 'react-native'
+import { Animated, View } from 'react-native'
 import { connect } from 'react-redux'
 import {
   Icon,
@@ -13,7 +13,8 @@ import {
   SearchButton,
   styles,
   ButtonContainer,
-  EditTitle
+  EditTitle,
+  EmptyBox
 } from './styled'
 import { translate } from '../../helpers/localization'
 import { getSearch } from '../../actions/search'
@@ -50,7 +51,8 @@ class Header extends Component {
         {isVisible
           ? this.renderSearchInput()
           : <HeaderTitle>{formattedName || ''}</HeaderTitle>}
-        <SearchButton onPress={this.toggleInput}>
+        <EmptyBox />
+        {/* <SearchButton onPress={this.toggleInput}>
           <Icon
             type='font-awesome'
             name='caret-left'
@@ -63,7 +65,7 @@ class Header extends Component {
             name='search'
             color={gray}
           />
-        </SearchButton>
+        </SearchButton> */}
       </HeaderContainer>
     )
   }
