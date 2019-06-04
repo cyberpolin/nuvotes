@@ -3,10 +3,12 @@ import responsiveFont from '../../utils/responsiveFont'
 
 export const styles = {
   titleStyle: {
-    fontSize: responsiveFont(2.6)
+    fontSize: responsiveFont(2.3),
+    fontWeight: '400'
   },
   subtitleStyle: {
-    fontSize: responsiveFont(2.3)
+    fontSize: responsiveFont(2.3),
+    fontWeight: '400'
   },
   listItemContainer: {
     width: '100%',

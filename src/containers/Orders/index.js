@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux'
 import { ListItem } from 'react-native-elements'
 import _ from 'lodash'
+import moment from 'moment'
 import { Loading } from '../../components'
 import {
   Container,
@@ -61,23 +62,27 @@ class Orders extends Component {
   // Renders orders as items.
   renderListItem (order) {
     const { navigation } = this.props
-    const { number, id, status } = order
+    const { number, id, address } = order
     const daysToDueDate = getDateDiff(order['end_date'])
-    const isCompleted = status.description === 'Completed'
-    const color = isCompleted ? primary : daysToDueDate < 3 ? red : daysToDueDate < 16 ? orange : primary
+    const color = daysToDueDate < 1 ? red : daysToDueDate === 1 ? orange : '#000'
     return (
       <ListItem
         key={id}
         chevron
-        title={`#${id} - ${number}`}
-        subtitle={`Vendor Due Date: ${order['end_date']}`}
+        title={this.orderTitle(order['end_date'], number)}
+        subtitle={address.address}
         containerStyle={styles.listItemContainer}
         titleStyle={{...styles.titleStyle, color}}
-        subtitleStyle={styles.subtitleStyle}
+        subtitleStyle={{...styles.subtitleStyle, color}}
         onPress={() => navigation.navigate('WorkOrder', {order})}
         bottomDivider
       />
     )
+  }
+
+  orderTitle (date, orderNumber) {
+    const dueDate = moment(date)
+    return `Due: ${dueDate.format('MM/DD')} - WO#: ${orderNumber}`
   }
 
   // Renders a flatlist to show current orders.
