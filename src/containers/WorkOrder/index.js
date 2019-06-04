@@ -175,7 +175,7 @@ class WorkOrder extends Component {
   }
 
   getAddress (address) {
-    const formattedAddress = `${_.capitalize(address.state.description)}, ${address.address}`
+    const formattedAddress = address.address
     return formattedAddress
   }
 
