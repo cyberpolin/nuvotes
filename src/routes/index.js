@@ -38,10 +38,10 @@ const TabAppNavigator = createBottomTabNavigator({
   },
   Pending: {
     screen: Orders
-  },
-  Search: {
-    screen: Orders
   }
+  // Search: {
+  //   screen: Orders
+  // }
 }, {
   tabBarOptions: {
     activeTintColor: primary,
