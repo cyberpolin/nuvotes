@@ -147,6 +147,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-background-upload')
     implementation project(':react-native-clear-app-cache')
     implementation project(':react-native-device-info')
     implementation project(':react-native-camera')
