@@ -54,6 +54,7 @@
 		6A61E225221B5D2200D0E2A7 /* libReactNativeLocalization.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A61E222221B5D0900D0E2A7 /* libReactNativeLocalization.a */; };
 		6A9366AF225BF36F00907B77 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9366AB225BF33B00907B77 /* libRNFetchBlob.a */; };
 		6A9B05F4225B9A4900843453 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9B05EC225B9A2C00843453 /* libReactNativeConfig.a */; };
+		6AB08CC522B7FDB0004085DA /* libVydiaRNFileUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AB08CC422B7FD9B004085DA /* libVydiaRNFileUploader.a */; };
 		6ACE4AE0220CDD80004284A7 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ACE4ADF220CDD35004284A7 /* libRNGestureHandler.a */; };
 		6AF0C0B22270E74500A7EDC8 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF0C0AB2270E6F800A7EDC8 /* libRNCamera.a */; };
 		6F711CD674D649E3B3E9A448 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3DE9FD4E13DA4186BF6355EA /* Foundation.ttf */; };
@@ -390,6 +391,13 @@
 			remoteGlobalIDString = 3DF7F6AC203AA09B00D0EAB7;
 			remoteInfo = "ReactNativeConfig-tvOS";
 		};
+		6AB08CC322B7FD9B004085DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6AB08C8B22B7FD9B004085DA /* VydiaRNFileUploader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = VydiaRNFileUploader;
+		};
 		6ACE4ADE220CDD35004284A7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6ACE4AB5220CDD35004284A7 /* RNGestureHandler.xcodeproj */;
@@ -511,6 +519,7 @@
 		6A61E1F8221B5D0800D0E2A7 /* ReactNativeLocalization.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeLocalization.xcodeproj; path = "../node_modules/react-native-localization/ReactNativeLocalization.xcodeproj"; sourceTree = "<group>"; };
 		6A936679225BF33A00907B77 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		6A9B05BD225B9A2B00843453 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
+		6AB08C8B22B7FD9B004085DA /* VydiaRNFileUploader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VydiaRNFileUploader.xcodeproj; path = "../node_modules/react-native-background-upload/ios/VydiaRNFileUploader.xcodeproj"; sourceTree = "<group>"; };
 		6ACE4AB5220CDD35004284A7 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		6AF0C07A2270E6F800A7EDC8 /* RNCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
 		6AF28EC3221631B000A460EA /* nuvoteApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = nuvoteApp.entitlements; path = nuvoteApp/nuvoteApp.entitlements; sourceTree = "<group>"; };
@@ -558,6 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AB08CC522B7FDB0004085DA /* libVydiaRNFileUploader.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				6A46EA5F229ED8E300DC5FD3 /* libRNCWebView.a in Frameworks */,
 				6A3E876E22960ABE00F62DC1 /* libRCTCameraRoll.a in Frameworks */,
@@ -848,6 +858,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6AB08C8C22B7FD9B004085DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6AB08CC422B7FD9B004085DA /* libVydiaRNFileUploader.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6ACE4AB6220CDD35004284A7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -921,6 +939,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6AB08C8B22B7FD9B004085DA /* VydiaRNFileUploader.xcodeproj */,
 				6A46EA25229ED8C400DC5FD3 /* RNCWebView.xcodeproj */,
 				6A3E876822960AAE00F62DC1 /* RCTCameraRoll.xcodeproj */,
 				6A2A9874228259490048E521 /* RNDeviceInfo.xcodeproj */,
@@ -1221,6 +1240,10 @@
 				{
 					ProductGroup = 6AFA8EC2221399FD00610C03 /* Products */;
 					ProjectRef = 65446386BF654CFB906C8AA9 /* RNIKInteractiveImageLibrary.xcodeproj */;
+				},
+				{
+					ProductGroup = 6AB08C8C22B7FD9B004085DA /* Products */;
+					ProjectRef = 6AB08C8B22B7FD9B004085DA /* VydiaRNFileUploader.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1533,6 +1556,13 @@
 			fileType = archive.ar;
 			path = "libReactNativeConfig-tvOS.a";
 			remoteRef = 6A9B05ED225B9A2C00843453 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6AB08CC422B7FD9B004085DA /* libVydiaRNFileUploader.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libVydiaRNFileUploader.a;
+			remoteRef = 6AB08CC322B7FD9B004085DA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		6ACE4ADF220CDD35004284A7 /* libRNGestureHandler.a */ = {
