@@ -188,40 +188,62 @@ class UploadPhotos extends Component {
     if (totalPhotos === 0) {
       this.setState({ totalPhotos: photos.length })
     }
-    const toUpload = photos[0]
-    toUpload['uri'] = toUpload['uri'].replace('file://', '')
-    const options = {
-      url: `${URL}single-photo-upload/`,
-      path: toUpload['uri'],
-      method: 'POST',
-      type: 'multipart',
-      field: 'photo',
-      headers: {
-        Authorization: `Token ${user.token}`,
-        'photo-type': toUpload.type,
-        'order-id': orderNumber === 0 ? orderId : orderNumber
+    if (photos.length > 0) {
+      const toUpload = photos[0]
+      toUpload['uri'] = toUpload['uri'].replace('file://', '')
+      const options = {
+        url: `${URL}single-photo-upload/`,
+        path: toUpload['uri'],
+        method: 'POST',
+        type: 'multipart',
+        field: 'photo',
+        headers: {
+          Authorization: `Token ${user.token}`,
+          'photo-type': toUpload.type,
+          'order-id': orderNumber === 0 ? orderId : orderNumber
+        }
       }
-    }
-    const messageOptions = {
-      message: translate.uploadMessage,
-      description: `${completed}/${totalPhotos === 0 ? photos.length : totalPhotos} ${translate.uploadDescription}`,
-      type: 'success',
-      autoHide: false
-    }
-    if (!isUploading) {
-      changeUploading(true)
-      const message = getMessage('START_UPLOAD')
-      showMessage(message)
-    }
-    BackgroundUpload.startUpload(options).then(uploadId => {
-      BackgroundUpload.addListener('error', uploadId, data => {
-        if (data.responseCode === 200) {
+      const messageOptions = {
+        message: translate.uploadMessage,
+        description: `${completed}/${totalPhotos === 0 ? photos.length : totalPhotos} ${translate.uploadDescription}`,
+        type: 'success',
+        autoHide: false
+      }
+      if (!isUploading) {
+        changeUploading(true)
+        const message = getMessage('START_UPLOAD')
+        showMessage(message)
+      }
+      BackgroundUpload.startUpload(options).then(uploadId => {
+        BackgroundUpload.addListener('error', uploadId, data => {
+          if (data.responseCode === 200) {
+            const totalCompleted = completed + 1
+            this.setState({ completed: totalCompleted })
+            deletePhoto(photos, 0)
+            showMessage(messageOptions)
+            if (photos.length > 0) {
+              this.handleBackgroundSave()
+            } else {
+              changeUploading(false)
+              this.setState({
+                totalPhotos: 0,
+                completed: 1
+              })
+              const message = getMessage('SUCCESS_UPLOAD')
+              showMessage(message)
+            }
+          } else {
+            const message = getMessage('UPLOAD_ERROR')
+            showMessage(message)
+          }
+        })
+        BackgroundUpload.addListener('completed', uploadId, data => {
           const totalCompleted = completed + 1
           this.setState({ completed: totalCompleted })
           deletePhoto(photos, 0)
-          showMessage(messageOptions)
+          this.handleBackgroundSave()
           if (photos.length > 0) {
-            this.handleBackgroundSave()
+            showMessage(messageOptions)
           } else {
             changeUploading(false)
             this.setState({
@@ -231,29 +253,9 @@ class UploadPhotos extends Component {
             const message = getMessage('SUCCESS_UPLOAD')
             showMessage(message)
           }
-        } else {
-          const message = getMessage('UPLOAD_ERROR')
-          showMessage(message)
-        }
+        })
       })
-      BackgroundUpload.addListener('completed', uploadId, data => {
-        const totalCompleted = completed + 1
-        this.setState({ completed: totalCompleted })
-        deletePhoto(photos, 0)
-        this.handleBackgroundSave()
-        if (photos.length > 0) {
-          showMessage(messageOptions)
-        } else {
-          changeUploading(false)
-          this.setState({
-            totalPhotos: 0,
-            completed: 1
-          })
-          const message = getMessage('SUCCESS_UPLOAD')
-          showMessage(message)
-        }
-      })
-    })
+    }
   }
 
   handleSave () {
