@@ -9,6 +9,8 @@ import {
   Icon
 } from 'react-native-elements'
 import ImageView from 'react-native-image-view'
+import Config from 'react-native-config'
+import BackgroundUpload from 'react-native-background-upload'
 import {
   Container,
   FlexRow,
@@ -30,24 +32,30 @@ import {
   secondary
 } from '../../colorPalette'
 
+const { URL } = Config
+
 class UploadPhotos extends Component {
   constructor (props) {
     super(props)
     this.state = {
       isVisible: props.isVisible,
       viewerVisible: false,
-      selectedIndex: 0
+      selectedIndex: 0,
+      totalPhotos: 0,
+      completed: 0
     }
     this.handleClose = this.handleClose.bind(this)
     this.handleSave = this.handleSave.bind(this)
     this.openCamera = this.openCamera.bind(this)
     this.openViewer = this.openViewer.bind(this)
     this.closeViewer = this.closeViewer.bind(this)
+    this.handleBackgroundSave = this.handleBackgroundSave.bind(this)
   }
   render () {
     const { viewerVisible, selectedIndex } = this.state
     const { descriptionJob } = this.props
     const { isUploading, photos } = this.props.settings
+    console.log('STATE', this.state)
     return (
       <Container>
         <Text h4>{translate.photos}</Text>
@@ -83,7 +91,7 @@ class UploadPhotos extends Component {
             titleStyle={styles.buttonTitle}
             type='outline'
             title={translate.save}
-            onPress={this.handleSave}
+            onPress={this.handleBackgroundSave}
             disabled={isUploading || photos.length < 1}
             loading={isUploading}
             loadingProps={{color: secondary}}
@@ -103,6 +111,46 @@ class UploadPhotos extends Component {
         }
       </Container>
     )
+  }
+
+  async handleBackgroundSave () {
+    const { totalPhotos, completed, isVisible } = this.state
+    const { photos } = this.props.settings
+    const { user, deletePhoto, changeVisibility, changeUploading } = this.props
+    console.log('PHOTOS', photos)
+    if (totalPhotos === 0) {
+      this.setState({ totalPhotos: photos.length })
+    }
+    const toUpload = photos[0]
+    toUpload['uri'] = toUpload['uri'].replace('file://', '')
+    const options = {
+      url: `${URL}upload-photo/`,
+      path: toUpload['uri'],
+      method: 'POST',
+      type: 'multipart',
+      field: 'photo',
+      headers: {
+        Authorization: `Token ${user.token}`
+      }
+    }
+    changeUploading(true)
+    // changeVisibility(!isVisible)
+    BackgroundUpload.startUpload(options).then(uploadId => {
+      BackgroundUpload.addListener('progress', uploadId, data => {
+        console.log('PROGRESS DATA', data.progress)
+      })
+      BackgroundUpload.addListener('error', uploadId, data => {
+        console.log('ERROR', data.error)
+      })
+      BackgroundUpload.addListener('completed', uploadId, data => {
+        const totalCompleted = completed + 1
+        this.setState({ completed: totalCompleted })
+        deletePhoto(photos, 0)
+        if (photos.length > 0) {
+          this.handleBackgroundSave()
+        }
+      })
+    })
   }
 
   handleSave () {
