@@ -1,5 +1,5 @@
 import Drawer from './Drawer'
-import Header, { EditButton } from './Header'
+import Header, { EditButton, BackButton } from './Header'
 import {
   TabIcons,
   TabTitle
@@ -18,5 +18,6 @@ export {
   EditButton,
   Loading,
   Download,
-  SafeArea
+  SafeArea,
+  BackButton
 }
