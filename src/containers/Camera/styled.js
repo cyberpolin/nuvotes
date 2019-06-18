@@ -1,3 +1,4 @@
+import { isIphoneX } from 'react-native-iphone-x-helper'
 import styled from 'styled-components/native'
 import {
   widthPercentageToDP as wp,
@@ -24,6 +25,7 @@ export const Options = styled.View`
   background-color: transparent;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: ${isIphoneX() ? '20px' : '0'};
 `
 
 export const IconContainer = styled.View`

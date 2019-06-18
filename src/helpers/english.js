@@ -94,7 +94,15 @@ const en = {
   lowFreeSpaceDescription: 'Keep in mind that some photos may not be taked',
   downloadError: 'Download error',
   photoTaked: 'Photo taked',
-  website: 'Web Site'
+  website: 'Web Site',
+  selectAll: 'Select all',
+  delete: 'Delete',
+  deletePhotos: 'Delete photos',
+  deletePhotosDescription: 'Do you want to delete the selected photos?',
+  backMessage: 'Go Back?',
+  backDescription: 'If you go back the uploading might cancel.',
+  uploadMessage: 'Upload progress',
+  uploadDescription: 'photos completed...'
 }
 
 export default en

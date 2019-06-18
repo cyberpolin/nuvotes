@@ -97,7 +97,15 @@ const es = {
   lowFreeSpaceDescription: 'Tenga en mente que algunas fotos pueden no ser tomadas.',
   downloadError: 'Error al descargar',
   photoTaked: 'Foto tomada.',
-  website: 'Sitio Web'
+  website: 'Sitio Web',
+  selectAll: 'Seleccionar todo',
+  delete: 'Borrar',
+  deletePhotos: 'Borrar fotos',
+  deletePhotosDescription: '¿Desea borrar las fotos seleccionadas?',
+  backMessage: '¿Regresar?',
+  backDescription: 'Si sales de esta ventana la carga de fotos puede cancelarse.',
+  uploadMessage: 'Progreso',
+  uploadDescription: 'fotos completadas...'
 }
 
 export default es

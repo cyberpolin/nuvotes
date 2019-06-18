@@ -50,3 +50,16 @@ export function deletePhoto (photos, index) {
 export const resetSettings = () => ({
   type: 'RESET_SETTINGS'
 })
+
+export function deleteSelectedPhotos (photos, photosToDelete) {
+  const selectionKeys = Object.keys(photosToDelete)
+  const filteredPhotos = photos.filter((photo, index) => {
+    if (!selectionKeys.includes(index) && !photosToDelete[index] === true) {
+      return photo
+    }
+  })
+  return {
+    type: 'DELETE_PHOTO',
+    payload: filteredPhotos
+  }
+}

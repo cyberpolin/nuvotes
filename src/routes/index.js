@@ -1,5 +1,4 @@
 import React from 'react'
-import { Platform } from 'react-native'
 import {
   createAppContainer,
   createBottomTabNavigator,
@@ -15,21 +14,20 @@ import {
   Documents,
   ViewUser,
   EditUser,
-  NuvoteWeb
+  UploadPhotos
 } from '../containers'
 import {
   Drawer,
   Header,
   TabIcons,
   TabTitle,
-  EditButton
+  EditButton,
+  BackButton
 } from '../components'
 import {
   primary,
   gray
 } from '../colorPalette'
-
-const isIOS = Platform.OS === 'ios'
 
 // Tab Navigator
 const TabAppNavigator = createBottomTabNavigator({
@@ -96,8 +94,12 @@ const StackNavigator = createStackNavigator({
       title: 'Documents'
     }
   },
-  WebPage: {
-    screen: NuvoteWeb
+  Upload: {
+    screen: UploadPhotos,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Upload Photos',
+      headerLeft: <BackButton navigation={navigation} />
+    })
   }
 }, {
   headerBackTitleVisible: false,
@@ -106,31 +108,13 @@ const StackNavigator = createStackNavigator({
   }
 })
 
-// A drawer that shows a link with a webview.
-const LoginDrawer = createDrawerNavigator({
-  LoginScreen: Login
-}, {
-  contentComponent: Drawer
-})
-
 // Declare an empty SwitchNavigator
-var SwitchNavigator
-// Condition to create a switch navigator if is iOS it will have a drawer.
 // Home Screen is a Stack Navigator that will contains all screen with backwards functionality
-if (isIOS) {
-  SwitchNavigator = createSwitchNavigator({
-    Login: LoginDrawer,
-    Home: StackNavigator
-  }, {
-    initialRouteName: 'Login'
-  })
-} else {
-  SwitchNavigator = createSwitchNavigator({
-    Login: Login,
-    Home: StackNavigator
-  }, {
-    initialRouteName: 'Login'
-  })
-}
+const SwitchNavigator = createSwitchNavigator({
+  Login: Login,
+  Home: StackNavigator
+}, {
+  initialRouteName: 'Login'
+})
 
 export default createAppContainer(SwitchNavigator)
