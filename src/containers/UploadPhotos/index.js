@@ -192,7 +192,8 @@ class UploadPhotos extends Component {
       type: 'multipart',
       field: 'photo',
       headers: {
-        Authorization: `Token ${user.token}`
+        Authorization: `Token ${user.token}`,
+        type: toUpload.type
       }
     }
     const messageOptions = {
