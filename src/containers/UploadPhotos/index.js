@@ -320,6 +320,9 @@ class UploadPhotos extends Component {
 
   toggleMode () {
     const { deleteMode } = this.state
+    if (deleteMode) {
+      this.setState({ selected: {} })
+    }
     this.setState({ deleteMode: !deleteMode })
   }
 
