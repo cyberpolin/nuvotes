@@ -51,7 +51,8 @@ class UploadPhotos extends Component {
       totalPhotos: 0,
       completed: 1,
       deleteMode: false,
-      selected: {}
+      selected: {},
+      orderNumber: 0
     }
     this.handleBackgroundSave = this.handleBackgroundSave.bind(this)
     this.deleteSelection = this.deleteSelection.bind(this)
@@ -67,6 +68,7 @@ class UploadPhotos extends Component {
     const { navigation } = this.props
     const { isUploading, photos } = this.props.settings
     const descriptionJob = navigation.getParam('descriptionJob', '')
+    const id = navigation.getParam('id', 0)
     const haveSelection = Object.values(selected).includes(true)
     return (
       <SafeArea color={deleteMode ? 'crimson' : primary}>
@@ -149,7 +151,7 @@ class UploadPhotos extends Component {
                   titleStyle={styles.buttonTitle}
                   type='outline'
                   title={translate.save}
-                  onPress={this.handleBackgroundSave}
+                  onPress={() => this.handleBackgroundSave(id)}
                   disabled={isUploading || photos.length === 0}
                   loadingProps={{color: secondary}}
                   disabledTitleStyle={styles.disabledText}
@@ -176,24 +178,28 @@ class UploadPhotos extends Component {
     )
   }
 
-  handleBackgroundSave () {
-    const { totalPhotos, completed } = this.state
+  handleBackgroundSave (orderId) {
+    const { totalPhotos, completed, orderNumber } = this.state
     const { photos, isUploading } = this.props.settings
     const { user, deletePhoto, changeUploading } = this.props
+    if (orderNumber === 0) {
+      this.setState({ orderNumber: orderId })
+    }
     if (totalPhotos === 0) {
       this.setState({ totalPhotos: photos.length })
     }
     const toUpload = photos[0]
     toUpload['uri'] = toUpload['uri'].replace('file://', '')
     const options = {
-      url: `${URL}upload-photo/`,
+      url: `${URL}single-photo-upload/`,
       path: toUpload['uri'],
       method: 'POST',
       type: 'multipart',
       field: 'photo',
       headers: {
         Authorization: `Token ${user.token}`,
-        type: toUpload.type
+        'photo-type': toUpload.type,
+        'order-id': orderNumber === 0 ? orderId : orderNumber
       }
     }
     const messageOptions = {
