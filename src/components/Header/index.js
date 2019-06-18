@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
-import { Animated, View } from 'react-native'
+import {
+  Animated,
+  View,
+  Platform,
+  Alert
+} from 'react-native'
 import { connect } from 'react-redux'
 import {
   Icon,
   SearchBar
 } from 'react-native-elements'
 import _ from 'lodash'
+import { HeaderBackButton } from 'react-navigation'
 import {
   DrawerIconButton,
   HeaderContainer,
@@ -141,5 +147,32 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getSearch(search))
   }
 })
+
+const CustomBackButton = props => {
+  const { isUploading, navigation } = props
+  return (
+    <HeaderBackButton
+      tintColor='black'
+      onPress={() => {
+        isUploading
+          ? Alert.alert(
+            translate.backMessage,
+            translate.backDescription,
+            [
+              {text: translate.cancel},
+              {text: 'Ok', onPress: () => navigation.goBack()}
+            ]
+          )
+          : navigation.goBack()
+      }}
+    />
+  )
+}
+
+const mapStateToPropsBackButton = ({ settings }) => ({
+  isUploading: settings.isUploading
+})
+
+export const BackButton = connect(mapStateToPropsBackButton, null)(CustomBackButton)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
