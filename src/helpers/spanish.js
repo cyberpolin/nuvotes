@@ -105,7 +105,10 @@ const es = {
   backMessage: '¿Regresar?',
   backDescription: 'Si sales de esta ventana la carga de fotos puede cancelarse.',
   uploadMessage: 'Progreso',
-  uploadDescription: 'fotos completadas...'
+  uploadDescription: 'fotos completadas...',
+  storagePermission: 'Permisos del Almacenamiento Externo',
+  storagePermissionDescription: 'Nuvote necesita acceder tu permiso para poder guardar las fotos que tomes.',
+  askLater: 'Pregúntame Luego'
 }
 
 export default es

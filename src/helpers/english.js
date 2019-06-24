@@ -102,7 +102,10 @@ const en = {
   backMessage: 'Go Back?',
   backDescription: 'If you go back the uploading might cancel.',
   uploadMessage: 'Upload progress',
-  uploadDescription: 'photos completed...'
+  uploadDescription: 'photos completed...',
+  storagePermission: 'Nuvote External Storage Permission',
+  storagePermissionDescription: 'Nuvote needs to access to your storage to save your photos',
+  askLater: 'Ask Me Later'
 }
 
 export default en
