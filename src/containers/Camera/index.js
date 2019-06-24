@@ -3,7 +3,8 @@ import {
   Modal,
   Alert,
   Text,
-  CameraRoll
+  CameraRoll,
+  PermissionsAndroid
 } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
@@ -47,6 +48,7 @@ class Camera extends Component {
   render () {
     const { flashOn, isLoading } = this.state
     const { cameraOpen } = this.props.settings
+    this.requestCameraPermission()
     return (
       <Modal
         animationType='slide'
@@ -115,6 +117,19 @@ class Camera extends Component {
           />
         </Container>
       </Modal>
+    )
+  }
+
+  async requestCameraPermission () {
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      {
+        title: translate.storagePermission,
+        message: translate.storagePermissionDescription,
+        buttonNeutral: translate.askLater,
+        buttonNegative: 'No',
+        buttonPositive: 'OK'
+      }
     )
   }
 
