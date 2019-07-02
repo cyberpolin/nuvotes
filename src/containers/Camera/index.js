@@ -4,7 +4,8 @@ import {
   Alert,
   Text,
   CameraRoll,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Platform
 } from 'react-native'
 import { connect } from 'react-redux'
 import { RNCamera } from 'react-native-camera'
@@ -28,6 +29,8 @@ import {
 import RF from '../../utils/responsiveFont'
 import { getFilename } from '../../helpers/orders'
 import { translate } from '../../helpers/localization'
+
+const isAndroid = Platform.OS === 'android'
 
 class Camera extends Component {
   constructor (props) {
@@ -121,16 +124,18 @@ class Camera extends Component {
   }
 
   async requestCameraPermission () {
-    PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      {
-        title: translate.storagePermission,
-        message: translate.storagePermissionDescription,
-        buttonNeutral: translate.askLater,
-        buttonNegative: 'No',
-        buttonPositive: 'OK'
-      }
-    )
+    if (isAndroid) {
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+        {
+          title: translate.storagePermission,
+          message: translate.storagePermissionDescription,
+          buttonNeutral: translate.askLater,
+          buttonNegative: 'No',
+          buttonPositive: 'OK'
+        }
+      )
+    }
   }
 
   // Shows a Message if internal storage is less than 200MB
