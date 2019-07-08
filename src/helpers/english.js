@@ -82,6 +82,7 @@ const en = {
   usedUsernameDescription: 'Enter another username to register.',
   successModify: 'Successful update',
   successUploadMessage: 'Successful upload',
+  successUploadDescription: 'You will back to the home screen.',
   startUploadMessage: 'Upload started',
   startUploadDescription: 'This may take a while.',
   fileErrorMessage: 'File error',
@@ -105,7 +106,8 @@ const en = {
   uploadDescription: 'photos completed...',
   storagePermission: 'Nuvote External Storage Permission',
   storagePermissionDescription: 'Nuvote needs to access to your storage to save your photos',
-  askLater: 'Ask Me Later'
+  askLater: 'Ask Me Later',
+
 }
 
 export default en

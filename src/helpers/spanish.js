@@ -79,6 +79,7 @@ const es = {
   invalidEmailDescription: 'Favor de usar un correo válido',
   successModify: 'Datos actualizados',
   successUploadMessage: 'Carga exitosa',
+  successUploadDescription: 'Regresará a la pantalla principal.',
   startUploadMessage: 'Carga iniciada',
   startUploadDescription: 'Esto puede tomar un tiempo.',
   genericErrorMessage: 'Error',
