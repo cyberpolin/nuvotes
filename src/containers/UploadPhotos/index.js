@@ -31,7 +31,10 @@ import {
 import { Camera } from '../index'
 import { SafeArea } from '../../components'
 import { translate } from '../../helpers/localization'
-import { uploadPhotos } from '../../helpers/orders'
+import {
+  uploadPhotos,
+  getOrders
+} from '../../helpers/orders'
 import { getMessage } from '../../helpers/messages'
 import {
   changeUploading,
@@ -186,7 +189,14 @@ class UploadPhotos extends Component {
   handleBackgroundSave (orderId) {
     const { totalPhotos, completed, orderNumber } = this.state
     const { photos, isUploading } = this.props.settings
-    const { user, deletePhoto, changeUploading } = this.props
+    const {
+      user,
+      deletePhoto,
+      changeUploading,
+      navigation,
+      user: { id, token },
+      getOrders
+    } = this.props
     if (orderNumber === 0) {
       this.setState({ orderNumber: orderId })
     }
@@ -236,6 +246,12 @@ class UploadPhotos extends Component {
               })
               const message = getMessage('SUCCESS_UPLOAD')
               showMessage(message)
+              setTimeout(() => {
+                navigation.navigate({
+                  routeName: 'Orders',
+                  action: getOrders(token, id)
+                })
+              }, 1000)
             }
           } else {
             const message = getMessage('UPLOAD_ERROR')
@@ -257,6 +273,12 @@ class UploadPhotos extends Component {
             })
             const message = getMessage('SUCCESS_UPLOAD')
             showMessage(message)
+            setTimeout(() => {
+              navigation.navigate({
+                routeName: 'Orders',
+                action: getOrders(token, id)
+              })
+            }, 1000)
           }
         })
       })
@@ -362,7 +384,8 @@ const mapDispatchToProps = dispatch => ({
   changeUploading: isUploading => dispatch(changeUploading(isUploading)),
   toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
   deleteSelection: (photos, selection) => dispatch(deleteSelectedPhotos(photos, selection)),
-  deletePhoto: (photos, index) => dispatch(deletePhoto(photos, index))
+  deletePhoto: (photos, index) => dispatch(deletePhoto(photos, index)),
+  getOrders: (token, userId) => dispatch(getOrders(token, userId))
 })
 
 const mapStateToProp = ({ user, settings }) => ({
