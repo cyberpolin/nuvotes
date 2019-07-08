@@ -37,6 +37,7 @@ export const getMessage = type => {
     case 'SUCCESS_UPLOAD':
       return {
         message: translate.successUploadMessage,
+        description: translate.successUploadDescription,
         type: 'success',
         icon: 'success',
         duration: 2000

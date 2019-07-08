@@ -6,6 +6,11 @@ import { getMessage } from './messages'
 
 const { URL } = Config
 
+export const photosByID = photos => {
+  const orderedPhotos = _.orderBy(photos, ['id'], ['desc'])
+  return orderedPhotos
+}
+
 // Sort orders by end date in ascended order.
 const ordersByDate = orders => {
   const sortedOrders = _.orderBy(orders, ['end_date'], ['asc'])
