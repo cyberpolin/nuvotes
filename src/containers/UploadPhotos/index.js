@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import {
   ScrollView,
-  Alert
+  Alert,
+  Platform
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -38,9 +39,13 @@ import {
   deleteSelectedPhotos,
   deletePhoto
 } from '../../actions/settings'
-import { primary, secondary } from '../../colorPalette'
+import {
+  primary,
+  secondary
+} from '../../colorPalette'
 
 const { URL } = Config
+const isAndroid = Platform.OS === 'android'
 
 class UploadPhotos extends Component {
   constructor (props) {
@@ -200,7 +205,7 @@ class UploadPhotos extends Component {
         headers: {
           Authorization: `Token ${user.token}`,
           'photo-type': toUpload.type,
-          'order-id': orderNumber === 0 ? orderId : orderNumber
+          'order-id': orderNumber === 0 ? isAndroid ? String(orderId) : orderId : isAndroid ? String(orderNumber) : orderNumber
         }
       }
       const messageOptions = {
