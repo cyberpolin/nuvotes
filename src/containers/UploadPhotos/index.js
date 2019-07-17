@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
   ScrollView,
   Alert,
-  Platform
+  Platform,
+  AppState
 } from 'react-native'
 import { connect } from 'react-redux'
 import {
@@ -60,9 +61,11 @@ class UploadPhotos extends Component {
       completed: 1,
       deleteMode: false,
       selected: {},
-      orderNumber: 0
+      orderNumber: 0,
+      appState: AppState.currentState
     }
     this.handleBackgroundSave = this.handleBackgroundSave.bind(this)
+    this.handleStateChange = this.handleStateChange.bind(this)
     this.deleteSelection = this.deleteSelection.bind(this)
     this.closeViewer = this.closeViewer.bind(this)
     this.handleSave = this.handleSave.bind(this)
@@ -71,6 +74,15 @@ class UploadPhotos extends Component {
     this.toggleMode = this.toggleMode.bind(this)
     this.selectAll = this.selectAll.bind(this)
   }
+
+  componentDidMount () {
+    AppState.addEventListener('change', this.handleStateChange)
+  }
+
+  componentWillUnmount () {
+    AppState.removeEventListener('change', this.handleStateChange)
+  }
+
   render () {
     const { viewerVisible, selectedIndex, deleteMode, selected } = this.state
     const { navigation } = this.props
@@ -81,7 +93,7 @@ class UploadPhotos extends Component {
     return (
       <SafeArea color={deleteMode ? 'crimson' : primary}>
         <Container>
-          {photos.length > 0 &&
+          {photos && photos.length > 0 &&
             <ScrollView
               bounces={false}
               contentContainerStyle={styles.scrollViewContainer}
@@ -93,7 +105,7 @@ class UploadPhotos extends Component {
             </ScrollView>
           }
           <Camera type={descriptionJob.description} />
-          {photos.length > 0 &&
+          {photos && photos.length > 0 &&
             <ImageView
               isVisible={viewerVisible}
               imageIndex={selectedIndex}
@@ -187,7 +199,7 @@ class UploadPhotos extends Component {
   }
 
   handleBackgroundSave (orderId) {
-    const { totalPhotos, completed, orderNumber } = this.state
+    const { totalPhotos, completed, orderNumber, appState } = this.state
     const { photos, isUploading } = this.props.settings
     const {
       user,
@@ -202,6 +214,16 @@ class UploadPhotos extends Component {
     }
     if (totalPhotos === 0) {
       this.setState({ totalPhotos: photos.length })
+    }
+    if (!isUploading && appState === 'active') {
+      changeUploading(true)
+      const message = getMessage('START_UPLOAD')
+      showMessage(message)
+    }
+    if (appState === 'background') {
+      changeUploading(false)
+      const message = getMessage('WENT_BACKGROUND')
+      showMessage(message)
     }
     if (photos.length > 0) {
       const toUpload = photos[0]
@@ -223,11 +245,6 @@ class UploadPhotos extends Component {
         description: `${completed}/${totalPhotos === 0 ? photos.length : totalPhotos} ${translate.uploadDescription}`,
         type: 'success',
         autoHide: false
-      }
-      if (!isUploading) {
-        changeUploading(true)
-        const message = getMessage('START_UPLOAD')
-        showMessage(message)
       }
       BackgroundUpload.startUpload(options).then(uploadId => {
         BackgroundUpload.addListener('error', uploadId, data => {
@@ -376,6 +393,10 @@ class UploadPhotos extends Component {
   openCamera () {
     const { toggleCamera } = this.props
     toggleCamera(true)
+  }
+
+  handleStateChange (state) {
+    this.setState({ appState: state })
   }
 }
 
