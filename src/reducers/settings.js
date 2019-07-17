@@ -44,7 +44,13 @@ const settings = (state = initialState, { type, payload }) => {
         photos: payload
       }
     case 'RESET_SETTINGS':
-      return initialState
+      return {
+        ...state,
+        isLoading: false,
+        isUploading: false,
+        isDownloading: false,
+        cameraOpen: false
+      }
     default:
       return state
   }
