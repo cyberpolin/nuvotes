@@ -6,7 +6,6 @@ import {
 } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { showMessage } from 'react-native-flash-message'
-import Clear from 'react-native-clear-app-cache'
 import _ from 'lodash'
 import { Loading } from '../../components'
 import { translate } from '../../helpers/localization'
@@ -48,15 +47,10 @@ class Login extends Component {
       getOrders,
       getSearch,
       toggleCamera,
-      resetSettings,
-      cleanPhotos
+      resetSettings
     } = this.props
     // Clears app cache, like temporal photos.
-    Clear.clearAppCache(() => {
-      console.log('DID CLEAR')
-    })
     // Clean photos reducer, and reset the settings reducer to default values.
-    cleanPhotos()
     toggleCamera(false)
     resetSettings()
     // If there's an user info in the reducer, moves to Home screen.
