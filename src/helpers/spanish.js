@@ -109,7 +109,9 @@ const es = {
   uploadDescription: 'fotos completadas...',
   storagePermission: 'Permisos del Almacenamiento Externo',
   storagePermissionDescription: 'Nuvote necesita acceder tu permiso para poder guardar las fotos que tomes.',
-  askLater: 'Pregúntame Luego'
+  askLater: 'Pregúntame Luego',
+  wentBackground: 'La aplicación estuvo en segundo plano',
+  wentBackgroundDescription: 'Reanude la carga, por favor.'
 }
 
 export default es

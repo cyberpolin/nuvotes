@@ -107,7 +107,8 @@ const en = {
   storagePermission: 'Nuvote External Storage Permission',
   storagePermissionDescription: 'Nuvote needs to access to your storage to save your photos',
   askLater: 'Ask Me Later',
-
+  wentBackground: 'The app went background',
+  wentBackgroundDescription: 'You must resume the uploading'
 }
 
 export default en

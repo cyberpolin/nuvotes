@@ -143,5 +143,13 @@ export const getMessage = type => {
         icon: 'danger',
         duration: 2000
       }
+    case 'WENT_BACKGROUND':
+      return {
+        message: translate.wentBackground,
+        description: translate.wentBackground,
+        type: 'warning',
+        icon: 'warning',
+        autoHide: false
+      }
   }
 }
