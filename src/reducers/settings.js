@@ -3,7 +3,8 @@ const initialState = {
   isUploading: false,
   isDownloading: false,
   cameraOpen: false,
-  photos: []
+  photos: [],
+  photosForOrder: ''
 }
 
 const settings = (state = initialState, { type, payload }) => {
@@ -39,9 +40,21 @@ const settings = (state = initialState, { type, payload }) => {
         photos: initialState.photos
       }
     case 'DELETE_PHOTO':
+      if (payload.length === 0) {
+        return {
+          ...state,
+          photos: payload,
+          photosForOrder: ''
+        }
+      }
       return {
         ...state,
         photos: payload
+      }
+    case 'SET_ORDER_NUMBER':
+      return {
+        ...state,
+        photosForOrder: payload
       }
     case 'RESET_SETTINGS':
       return {

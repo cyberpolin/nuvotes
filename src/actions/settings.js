@@ -63,3 +63,8 @@ export function deleteSelectedPhotos (photos, photosToDelete) {
     payload: filteredPhotos
   }
 }
+
+export const setOrderNumber = orderNumber => ({
+  type: 'SET_ORDER_NUMBER',
+  payload: orderNumber
+})
