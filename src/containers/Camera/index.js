@@ -17,7 +17,8 @@ import {
 import Toast from 'react-native-easy-toast'
 import {
   toggleCamera,
-  addPhotos
+  addPhotos,
+  setOrderNumber
 } from '../../actions/settings'
 import {
   Container,
@@ -164,7 +165,12 @@ class Camera extends Component {
 
   // async method to take a photo
   async takePhoto () {
+    const { setOrderNumber, order, settings: { photosForOrder } } = this.props
     const { photos } = this.state
+    if (photosForOrder === '') {
+      const { number } = order
+      setOrderNumber(number)
+    }
     this.setState({ isLoading: true })
     const options = {
       orientation: 'portrait',
@@ -228,7 +234,8 @@ const mapStateToProps = ({ settings }) => ({
 
 const mapDispatchToProps = dispatch => ({
   toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
-  addPhotos: photo => dispatch(addPhotos(photo))
+  addPhotos: photo => dispatch(addPhotos(photo)),
+  setOrderNumber: orderNumber => dispatch(setOrderNumber(orderNumber))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Camera)
