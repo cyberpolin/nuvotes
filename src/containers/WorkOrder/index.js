@@ -46,7 +46,7 @@ class WorkOrder extends Component {
     const { isCollapsed } = this.state
     const { navigation, settings } = this.props
     const order = navigation.getParam('order', {})
-    const { id, status, avatar, address, coordinator, vendor } = order
+    const { id, status, avatar, address, coordinator, vendor, lockbox } = order
     return (
       <Container>
         <ScrollContainer>
@@ -58,10 +58,16 @@ class WorkOrder extends Component {
             />
           </PhotoContainer>
           <InfoContainer>
-            <Row>
-              <Label>{translate.type}:</Label>
-              <Text>{this.getOrderType(order['description_job'])}</Text>
-            </Row>
+            <FlexRow>
+              <View>
+                <Label>{translate.type}:</Label>
+                <Text>{this.getOrderType(order['description_job'])}</Text>
+              </View>
+              <View style={{ alignItems: 'flex-end' }}>
+                <Label>{translate.lockbox}:</Label>
+                <Text>{lockbox}</Text>
+              </View>
+            </FlexRow>
             <Row>
               <Label>{translate.state}:</Label>
               <Text>{this.getStatus(status)}</Text>
@@ -116,7 +122,7 @@ class WorkOrder extends Component {
                 title={translate.uploadPhotos}
                 titleStyle={styles.buttonTitle}
                 buttonStyle={styles.buttonStyle}
-                onPress={() => navigation.navigate('Upload', {descriptionJob: order['description_job'], id})}
+                onPress={() => navigation.navigate('Upload', {descriptionJob: order['description_job'], order})}
                 disabled={settings.isUploading}
                 loading={settings.isUploading}
                 loadingProps={{color: secondary}}
