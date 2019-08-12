@@ -1,5 +1,4 @@
 import styled from 'styled-components/native'
-import { isIphoneX } from 'react-native-iphone-x-helper'
 import {
   black,
   primary,
@@ -9,6 +8,7 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp
 } from '../../utils/layout'
+import RF from '../../utils/responsiveFont'
 
 export const styles = {
   buttonStyle: {
@@ -143,4 +143,16 @@ export const Touchable = styled.TouchableOpacity`
 export const DeleteButtonBar = styled(ButtonsBar)`
   background-color: crimson;
   width: ${wp(100)};
+`
+
+export const MessageContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+`
+
+export const MessageText = styled.Text`
+  font-size: ${RF(2.5)};
+  text-align: center;
 `

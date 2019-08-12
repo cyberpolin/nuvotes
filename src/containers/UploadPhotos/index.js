@@ -27,7 +27,9 @@ import {
   PhotoButtonContainer,
   DeleteButtonBar,
   DeleteButtonContainer,
-  Touchable
+  Touchable,
+  MessageContainer,
+  MessageText
 } from './styled'
 import { Camera } from '../index'
 import { SafeArea } from '../../components'
@@ -41,7 +43,8 @@ import {
   changeUploading,
   toggleCamera,
   deleteSelectedPhotos,
-  deletePhoto
+  deletePhoto,
+  setOrderNumber
 } from '../../actions/settings'
 import {
   primary,
@@ -86,15 +89,17 @@ class UploadPhotos extends Component {
   render () {
     const { viewerVisible, selectedIndex, deleteMode, selected } = this.state
     const { navigation } = this.props
-    const { isUploading, photos } = this.props.settings
+    const { isUploading, photos, photosForOrder } = this.props.settings
     const descriptionJob = navigation.getParam('descriptionJob', '')
-    const id = navigation.getParam('id', 0)
+    const order = navigation.getParam('order', {})
+    const { id, number } = order
     const haveSelection = Object.values(selected).includes(true)
+    const enableButtons = photosForOrder === '' || photosForOrder === number
     return (
       <SafeArea color={deleteMode ? 'crimson' : primary}>
         <Container>
-          {photos && photos.length > 0 &&
-            <ScrollView
+          {photos && photos.length > 0 && enableButtons
+            ? <ScrollView
               bounces={false}
               contentContainerStyle={styles.scrollViewContainer}
               showsVerticalScrollIndicator={false}
@@ -103,8 +108,15 @@ class UploadPhotos extends Component {
                 {this.renderImages()}
               </ImagesContainer>
             </ScrollView>
+            : !enableButtons && <MessageContainer>
+              <MessageText>{translate.pendingPhotos}:</MessageText>
+              <MessageText style={{ fontWeight: '600' }}>{photosForOrder}</MessageText>
+            </MessageContainer>
           }
-          <Camera type={descriptionJob.description} />
+          <Camera
+            type={descriptionJob.description}
+            order={order}
+          />
           {photos && photos.length > 0 &&
             <ImageView
               isVisible={viewerVisible}
@@ -159,7 +171,7 @@ class UploadPhotos extends Component {
                   type='outline'
                   title={translate.delete}
                   onPress={this.toggleMode}
-                  disabled={isUploading || photos.length === 0}
+                  disabled={!enableButtons || isUploading || photos.length === 0}
                   loadingProps={{color: secondary}}
                   disabledTitleStyle={styles.disabledText}
                   disabledStyle={styles.disabledStyle}
@@ -172,7 +184,7 @@ class UploadPhotos extends Component {
                   type='outline'
                   title={translate.save}
                   onPress={() => this.handleBackgroundSave(id)}
-                  disabled={isUploading || photos.length === 0}
+                  disabled={!enableButtons || isUploading || photos.length === 0}
                   loadingProps={{color: secondary}}
                   disabledTitleStyle={styles.disabledText}
                   disabledStyle={styles.disabledStyle}
@@ -182,11 +194,13 @@ class UploadPhotos extends Component {
                 <PhotoButtonContainer>
                   <Touchable
                     onPress={this.openCamera}
+                    disabled={!enableButtons}
                   >
                     <Icon
                       type='font-awesome'
                       name='camera'
                       underlayColor='transparent'
+                      color={enableButtons ? 'black' : 'gray'}
                       size={30}
                     />
                   </Touchable>
@@ -207,7 +221,8 @@ class UploadPhotos extends Component {
       changeUploading,
       navigation,
       user: { id, token },
-      getOrders
+      getOrders,
+      setOrderNumber
     } = this.props
     if (orderNumber === 0) {
       this.setState({ orderNumber: orderId })
@@ -246,8 +261,19 @@ class UploadPhotos extends Component {
         type: 'success',
         autoHide: false
       }
+      var counter = 0
+      var timer = setInterval(() => {
+        counter++
+        if (counter > 30) {
+          clearInterval(timer)
+          changeUploading(false)
+          const message = getMessage('STOPPED_UPLOAD')
+          showMessage(message)
+        }
+      }, 1000)
       BackgroundUpload.startUpload(options).then(uploadId => {
         BackgroundUpload.addListener('error', uploadId, data => {
+          clearInterval(timer)
           if (data.responseCode === 200) {
             const totalCompleted = completed + 1
             this.setState({ completed: totalCompleted })
@@ -256,6 +282,7 @@ class UploadPhotos extends Component {
             if (photos.length > 0) {
               this.handleBackgroundSave()
             } else {
+              setOrderNumber('')
               changeUploading(false)
               this.setState({
                 totalPhotos: 0,
@@ -276,6 +303,7 @@ class UploadPhotos extends Component {
           }
         })
         BackgroundUpload.addListener('completed', uploadId, data => {
+          clearInterval(timer)
           const totalCompleted = completed + 1
           this.setState({ completed: totalCompleted })
           deletePhoto(photos, 0)
@@ -283,6 +311,7 @@ class UploadPhotos extends Component {
           if (photos.length > 0) {
             showMessage(messageOptions)
           } else {
+            setOrderNumber('')
             changeUploading(false)
             this.setState({
               totalPhotos: 0,
@@ -406,7 +435,8 @@ const mapDispatchToProps = dispatch => ({
   toggleCamera: isOpen => dispatch(toggleCamera(isOpen)),
   deleteSelection: (photos, selection) => dispatch(deleteSelectedPhotos(photos, selection)),
   deletePhoto: (photos, index) => dispatch(deletePhoto(photos, index)),
-  getOrders: (token, userId) => dispatch(getOrders(token, userId))
+  getOrders: (token, userId) => dispatch(getOrders(token, userId)),
+  setOrderNumber: orderNumber => dispatch(setOrderNumber(orderNumber))
 })
 
 const mapStateToProp = ({ user, settings }) => ({
