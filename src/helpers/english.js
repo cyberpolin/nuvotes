@@ -108,7 +108,11 @@ const en = {
   storagePermissionDescription: 'Nuvote needs to access to your storage to save your photos',
   askLater: 'Ask Me Later',
   wentBackground: 'The app went background',
-  wentBackgroundDescription: 'You must resume the uploading'
+  wentBackgroundDescription: 'You must resume the uploading',
+  stoppedUpload: 'The upload has stopped.',
+  stoppedUploadDescription: 'There was an error uploading the last photo. Retry in a few seconds.',
+  lockbox: 'Lockbox',
+  pendingPhotos: 'You have photos to upload for work order'
 }
 
 export default en

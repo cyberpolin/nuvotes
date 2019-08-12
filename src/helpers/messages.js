@@ -151,5 +151,13 @@ export const getMessage = type => {
         icon: 'warning',
         autoHide: false
       }
+    case 'STOPPED_UPLOAD':
+      return {
+        message: translate.stoppedUpload,
+        description: translate.stoppedUploadDescription,
+        type: 'warning',
+        icon: 'warning',
+        autoHide: false
+      }
   }
 }

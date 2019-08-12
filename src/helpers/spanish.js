@@ -111,7 +111,11 @@ const es = {
   storagePermissionDescription: 'Nuvote necesita acceder tu permiso para poder guardar las fotos que tomes.',
   askLater: 'Pregúntame Luego',
   wentBackground: 'La aplicación estuvo en segundo plano',
-  wentBackgroundDescription: 'Reanude la carga, por favor.'
+  wentBackgroundDescription: 'Reanude la carga, por favor.',
+  stoppedUpload: 'La carga se ha detenido',
+  stoppedUploadDescription: 'Hubo un error al subir la última foto. Reintente en unos segundos.',
+  lockbox: 'Número de seguridad',
+  pendingPhotos: 'Tienes fotos por subir para la order:'
 }
 
 export default es
