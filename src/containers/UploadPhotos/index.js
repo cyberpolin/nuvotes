@@ -261,19 +261,14 @@ class UploadPhotos extends Component {
         type: 'success',
         autoHide: false
       }
-      var counter = 0
       var timer = setInterval(() => {
-        counter++
-        if (counter > 30) {
-          clearInterval(timer)
-          changeUploading(false)
-          const message = getMessage('STOPPED_UPLOAD')
-          showMessage(message)
-        }
-      }, 1000)
+        changeUploading(false)
+        const message = getMessage('STOPPED_UPLOAD')
+        showMessage(message)
+      }, 30000)
       BackgroundUpload.startUpload(options).then(uploadId => {
         BackgroundUpload.addListener('error', uploadId, data => {
-          clearInterval(timer)
+          clearTimeout(timer)
           if (data.responseCode === 200) {
             const totalCompleted = completed + 1
             this.setState({ completed: totalCompleted })
@@ -303,7 +298,7 @@ class UploadPhotos extends Component {
           }
         })
         BackgroundUpload.addListener('completed', uploadId, data => {
-          clearInterval(timer)
+          clearTimeout(timer)
           const totalCompleted = completed + 1
           this.setState({ completed: totalCompleted })
           deletePhoto(photos, 0)
